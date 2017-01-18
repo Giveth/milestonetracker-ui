@@ -1,8 +1,6 @@
-# React Ethereum Dapp Template 
+# Milestone Tracker User Interface
 
-[![Build Status](https://travis-ci.org/uzyn/react-ethereum-dapp-template.svg?branch=master)](https://travis-ci.org/uzyn/react-ethereum-dapp-template)
-
-Template for React-based Ethereum decentralized app (Dapp). 
+Template for React-based Ethereum decentralized app (Dapp).
 
 This is an **opinionated version** of [ethereum-webpack-example-dapp](https://github.com/uzyn/ethereum-webpack-example-dapp) and largely intended for personal use, unless you share the same opinion as mine.
 
@@ -29,7 +27,7 @@ It is largely a combination of:
   # Using testrpc (recommended)
   testrpc
 
-  # If you are running Geth, 
+  # If you are running Geth,
   # make sure to run in testnet or private net and enable rpc
   geth --testnet --rpc
   ```
