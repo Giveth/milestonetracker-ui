@@ -22,7 +22,7 @@ function App() {
             <Web3Info />
             <GivethDirectory />
 
-            <Tabs index={ this.tabIndex } onChange={ this.handleTabChange }>
+            <Tabs index={ tabIndex } onChange={ handleTabChange }>
                 <Tab label="Primary"><small>Primary content</small></Tab>
                 <Tab label="Secondary"><small>Secondary content</small></Tab>
                 <Tab label="Third" disabled><small>Disabled content</small></Tab>
