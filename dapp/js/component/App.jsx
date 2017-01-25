@@ -3,6 +3,7 @@ import Web3ErrorPopup from "../containers/Web3ErrorPopup";
 import Web3TransactionPopoup from "./Web3TransactionPopoup";
 import Web3LastTransactions from "./Web3LastTransactions";
 import Web3Info from "../containers/Web3Info";
+import GivethDirectory from "../containers/GivethDirectory";
 
 export default function App() {
     return (
@@ -11,6 +12,7 @@ export default function App() {
             <Web3TransactionPopoup />
             <Web3LastTransactions />
             <Web3Info />
+            <GivethDirectory />
         </div>
     );
 }

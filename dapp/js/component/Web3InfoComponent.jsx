@@ -9,9 +9,9 @@ export default function Web3InfoComponent(props) {
         content = <div> Disconnected </div>;
     } else {
         accounts = props.web3state.accounts.map((account) =>
-            (<li key={account.account}>
+            (<li key={account.address}>
                 <div>
-                    {account.account}
+                    {account.address}
                 </div>
                 <div>
                     {account.balance.div(1e18).toNumber().toFixed(2)}

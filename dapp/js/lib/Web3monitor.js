@@ -55,7 +55,7 @@ export default class extends EventEmitter {
 
     _readAccounts(cb) {
         const self = this;
-        let accountList;
+        let addresses;
         const accounts = [];
         async.series([
             (cb1) => {
@@ -64,19 +64,19 @@ export default class extends EventEmitter {
                         cb1(err);
                         return;
                     }
-                    accountList = _accounts;
+                    addresses = _accounts;
                     cb1();
                 });
             },
             (cb1) => {
-                async.eachSeries(accountList, (account, cb2) => {
-                    self.web3.eth.getBalance(account, (err, balance) => {
+                async.eachSeries(addresses, (address, cb2) => {
+                    self.web3.eth.getBalance(address, (err, balance) => {
                         if (err) {
                             cb1(err);
                             return;
                         }
                         accounts.push({
-                            account,
+                            address,
                             balance,
                         });
                         cb2();

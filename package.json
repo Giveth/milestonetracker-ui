@@ -39,7 +39,9 @@
     "webpack-node-externals": "^1.2.0"
   },
   "dependencies": {
+    "async": "^2.1.4",
     "babel-polyfill": "^6.7.4",
+    "givethdirectory": "^0.0.4",
     "react": "^15.0.1",
     "react-dom": "^15.0.1",
     "react-redux": "^5.0.2",
