@@ -34,18 +34,22 @@
     "solc-loader": "1.x",
     "source-map-support": "^0.4.1",
     "web3": "^0.15.3",
-    "web3-loader": "1.x",
+    "web3-loader": "^1.x",
     "webpack": "^1.13.0",
     "webpack-node-externals": "^1.2.0"
   },
   "dependencies": {
     "async": "^2.1.4",
     "babel-polyfill": "^6.7.4",
+    "css-loader": "^0.26.1",
     "givethdirectory": "^0.0.4",
+    "material-design-icons": "^3.0.1",
     "react": "^15.0.1",
     "react-dom": "^15.0.1",
     "react-redux": "^5.0.2",
+    "react-toolbox": "^2.0.0-beta.5",
     "redux": "^3.6.0",
+    "style-loader": "^0.13.1",
     "webpack-dev-server": "^1.14.1"
   }
 }

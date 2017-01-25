@@ -5,7 +5,15 @@ import Web3LastTransactions from "./Web3LastTransactions";
 import Web3Info from "../containers/Web3Info";
 import GivethDirectory from "../containers/GivethDirectory";
 
-export default function App() {
+import { Tab, Tabs } from "react-toolbox";
+
+function App() {
+    let tabIndex = 1;
+
+    let handleTabChange = (index) => {
+        this.tabIndex = index;
+    };
+
     return (
         <div className="app">
             <Web3ErrorPopup />
@@ -13,6 +21,16 @@ export default function App() {
             <Web3LastTransactions />
             <Web3Info />
             <GivethDirectory />
+
+            <Tabs index={ this.tabIndex } onChange={ this.handleTabChange }>
+                <Tab label="Primary"><small>Primary content</small></Tab>
+                <Tab label="Secondary"><small>Secondary content</small></Tab>
+                <Tab label="Third" disabled><small>Disabled content</small></Tab>
+                <Tab label="Fourth" hidden><small>Fourth content hidden</small></Tab>
+                <Tab label="Fifth"><small>Fifth content</small></Tab>
+            </Tabs>
         </div>
     );
 }
+
+export default App;
