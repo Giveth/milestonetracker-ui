@@ -8,9 +8,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = ({
 });
 
-const GivethDirectory = connect(
+const GivethDirectoryContainer = connect(
     mapStateToProps,
     mapDispatchToProps
 )(GivethDirectoryComponent);
 
-export default GivethDirectory;
+export default GivethDirectoryContainer;
