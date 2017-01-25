@@ -14,6 +14,7 @@ import App from "./component/App";
 import AboutComponent from "./component/AboutComponent";
 import MyAccountComponent from "./component/MyAccountComponent";
 import GivethDirectoryContainer from "./containers/GivethDirectoryContainer";
+import SingleCampaignContainer from "./containers/SingleCampaignContainer";
 
 const store = createStore(reducer);
 
@@ -42,12 +43,14 @@ web3monitor.on("newState", (state) => {
 render(
     <Provider store={store}>
         <Router history={hashHistory}>
-            <IndexRoute component={ GivethDirectoryContainer } />
             <Route path="/" component={ App }>
+                <IndexRoute component={ GivethDirectoryContainer } />
+
                 <Route path="/myaccount" component={ MyAccountComponent } />
                 <Route path="/about" component={ AboutComponent } />
+                <Route path="/campaigns" component={ GivethDirectoryContainer } />
+                <Route path="/campaigns/:campaignId" component={ SingleCampaignContainer } />
             </Route>
-            <Route path="/campaigns" component={ GivethDirectoryContainer } />
         </Router>
     </Provider>
     ,
