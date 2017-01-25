@@ -47,4 +47,3 @@ It is largely a combination of:
   Load [http://localhost:8080/](http://localhost:8080/) on your web browser.
 
 1. For deployment, run `npm build` and upload `build/` to your server.
-
