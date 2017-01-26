@@ -12,7 +12,7 @@ import { FormGroup,
         } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 
-export default function GivethDirectoryComponent(props) {
+function GivethDirectoryComponent(props) {
     let campaigns = [ ];
 
     if (props.givethDirectoryState.campaigns) {
@@ -64,3 +64,5 @@ export default function GivethDirectoryComponent(props) {
 GivethDirectoryComponent.propTypes = {
     givethDirectoryState: React.PropTypes.object.isRequired,
 };
+
+export default GivethDirectoryComponent;

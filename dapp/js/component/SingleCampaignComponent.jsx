@@ -1,12 +1,56 @@
+/**
+ *
+ *
+ */
 import React from "react";
 
-import { Grid, Row, Col } from "react-bootstrap";
+import { Grid, Row, Col, Table } from "react-bootstrap";
 
 export default function SingleCampaignComponent(props) {
-    let campaign = "";
+    let campaign = "Loading....";
+    let campaignInfo = "";
     if (props.givethDirectoryState.campaigns &&
         props.givethDirectoryState.campaigns.length >= props.params.campaignId - 1) {
-        campaign = <pre> {JSON.stringify(props.givethDirectoryState.campaigns[ 0 ], null, 2)}</pre>;
+        const currentCampaign = props.givethDirectoryState.campaigns[ 0 ];
+        campaign = (<div>
+            <h2><a href={ currentCampaign.url } target="_blank">{ currentCampaign.name }</a></h2>
+            <p>{ currentCampaign.description }</p>
+            { /* <pre> {JSON.stringify(currentCampaign, null, 2)}</pre> */ }
+        </div>);
+
+        campaignInfo = (
+            <Table striped bordered condensed hover>
+                <tbody>
+                    <tr>
+                        <td>Website</td>
+                        <td>
+                            <a
+                              href={ currentCampaign.url }
+                              target="_blank"
+                            >
+                            { currentCampaign.url }
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>MiniMe Token Address</td>
+                        <td>{ currentCampaign.token }</td>
+                    </tr>
+                    <tr>
+                        <td>Vault Address</td>
+                        <td>{ currentCampaign.vault }</td>
+                    </tr>
+                    <tr>
+                        <td>MilestoneTracker Address</td>
+                        <td>{ currentCampaign.milestoneTracker }</td>
+                    </tr>
+                    <tr>
+                        <td>Status</td>
+                        <td>{ currentCampaign.status }</td>
+                    </tr>
+                </tbody>
+            </Table>
+        );
     }
 
     return (
@@ -15,6 +59,11 @@ export default function SingleCampaignComponent(props) {
                 <Row>
                     <Col>
                         { campaign }
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        { campaignInfo }
                     </Col>
                 </Row>
             </Grid>
