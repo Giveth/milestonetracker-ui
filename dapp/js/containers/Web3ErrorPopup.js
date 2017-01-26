@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import ErrorPopup from "../component/ErrorPopup";
+import ErrorPopupComponent from "../component/ErrorPopupComponent";
 
 const mapStateToProps = (state) => ({
     visible: !state.web3.connected,
@@ -11,6 +11,6 @@ const mapDispatchToProps = ({
 const Web3ErrorPopup = connect(
     mapStateToProps,
     mapDispatchToProps
-)(ErrorPopup);
+)(ErrorPopupComponent);
 
 export default Web3ErrorPopup;

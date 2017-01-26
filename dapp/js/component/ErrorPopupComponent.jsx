@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function ErrorPpopup(props) {
+function ErrorPopupComponent(props) {
     if (!props.visible) return null;
     return (
         <div className="ErrorPpopup">
@@ -9,6 +9,8 @@ export default function ErrorPpopup(props) {
     );
 }
 
-ErrorPpopup.propTypes = {
+ErrorPopupComponent.propTypes = {
     visible: React.PropTypes.bool.isRequired,
 };
+
+export default ErrorPopupComponent;
