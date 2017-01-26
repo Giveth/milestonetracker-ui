@@ -42,7 +42,7 @@
     "async": "^2.1.4",
     "babel-polyfill": "^6.7.4",
     "css-loader": "^0.26.1",
-    "givethdirectory": "^0.0.4",
+    "givethdirectory": "^0.0.5",
     "material-design-icons": "^3.0.1",
     "react": "^15.0.1",
     "react-dom": "^15.0.1",
