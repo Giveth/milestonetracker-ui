@@ -9,6 +9,13 @@ import { GivethDirectory } from "givethdirectory";
 import Web3monitor from "./lib/Web3monitor";
 import { newWeb3State, newGivethDirectoryState } from "./actions";
 
+import { Router, Route, hashHistory, IndexRoute } from "react-router";
+import App from "./component/App";
+import AboutComponent from "./component/AboutComponent";
+import MyAccountComponent from "./component/MyAccountComponent";
+import GivethDirectoryContainer from "./containers/GivethDirectoryContainer";
+import SingleCampaignContainer from "./containers/SingleCampaignContainer";
+
 const store = createStore(reducer);
 
 let web3;
@@ -26,7 +33,6 @@ web3monitor.on("newState", (state) => {
     store.dispatch(newWeb3State(state));
     givethDirectory.getState((err, givethDirectoryState) => {
         if (err) {
-            console.log(err);
             web3monitor.reset();
             return;
         }
@@ -34,11 +40,18 @@ web3monitor.on("newState", (state) => {
     });
 });
 
-import App from "./component/App";
-
 render(
     <Provider store={store}>
-        <App />
+        <Router history={hashHistory}>
+            <Route path="/" component={ App }>
+                <IndexRoute component={ GivethDirectoryContainer } />
+
+                <Route path="/myaccount" component={ MyAccountComponent } />
+                <Route path="/about" component={ AboutComponent } />
+                <Route path="/campaigns" component={ GivethDirectoryContainer } />
+                <Route path="/campaigns/:campaignId" component={ SingleCampaignContainer } />
+            </Route>
+        </Router>
     </Provider>
     ,
     document.getElementById("root")
