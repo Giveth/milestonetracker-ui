@@ -10,9 +10,8 @@ import Web3monitor from "./lib/Web3monitor";
 import { newWeb3State, newGivethDirectoryState } from "./actions";
 
 import { Router, Route, hashHistory, IndexRoute } from "react-router";
-import App from "./component/App";
-import AboutComponent from "./component/AboutComponent";
-import MyAccountComponent from "./component/MyAccountComponent";
+import { App } from "./components";
+import { MyAccountPage, AboutPage } from "./pages";
 import GivethDirectoryContainer from "./containers/GivethDirectoryContainer";
 import SingleCampaignContainer from "./containers/SingleCampaignContainer";
 
@@ -46,8 +45,8 @@ render(
             <Route path="/" component={ App }>
                 <IndexRoute component={ GivethDirectoryContainer } />
 
-                <Route path="/myaccount" component={ MyAccountComponent } />
-                <Route path="/about" component={ AboutComponent } />
+                <Route path="/myaccount" component={ MyAccountPage } />
+                <Route path="/about" component={ AboutPage } />
                 <Route path="/campaigns" component={ GivethDirectoryContainer } />
                 <Route path="/campaigns/:campaignId" component={ SingleCampaignContainer } />
             </Route>

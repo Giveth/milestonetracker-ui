@@ -2,13 +2,13 @@ import React from "react";
 
 import { Grid, Row, Col } from "react-bootstrap";
 
-function About() {
+function MyAccountPage() {
     return (
         <div>
             <Grid>
                 <Row>
                     <Col>
-                        <h1>About</h1>
+                        <h1>My Account</h1>
                     </Col>
                 </Row>
             </Grid>
@@ -16,4 +16,4 @@ function About() {
     );
 }
 
-export default About;
+export default MyAccountPage;

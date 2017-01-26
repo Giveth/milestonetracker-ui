@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import SingleCampaignComponent from "../component/SingleCampaignComponent";
+import SingleCampaignPage from "../pages/SingleCampaignPage";
 
 const mapStateToProps = (state) => ({
     givethDirectoryState: state.givethDirectory,
@@ -11,6 +11,6 @@ const mapDispatchToProps = ({
 const SingleCampaignContainer = connect(
     mapStateToProps,
     mapDispatchToProps
-)(SingleCampaignComponent);
+)(SingleCampaignPage);
 
 export default SingleCampaignContainer;
