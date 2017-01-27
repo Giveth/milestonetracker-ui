@@ -1,33 +1,27 @@
 import "babel-polyfill";
 import React from "react";
 import { render } from "react-dom";
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import reducer from "./reducers";
-import Web3 from "web3";
-import { GivethDirectory } from "givethdirectory";
+import { web3, givethDirectory } from "./blockchain";
 import Web3monitor from "./lib/Web3monitor";
 import { newWeb3State, newGivethDirectoryState } from "./actions";
+import thunk from "redux-thunk";
 
 import { Router, Route, hashHistory, IndexRoute } from "react-router";
 import { App } from "./components";
-import { AboutPage } from "./pages";
+import AboutPageContainer from "./containers/AboutPageContainer";
 import CampaignsContainer from "./containers/CampaignsContainer";
 import SingleCampaignContainer from "./containers/SingleCampaignContainer";
 import MyAccountContainer from "./containers/MyAccountContainer";
 
-const store = createStore(reducer);
+const middleware = [ thunk ];
 
-let web3;
-if ((window) && (window.web3)) {
-    web3 = new Web3(window.web3.currentProvider);
-} else {
-    // set the provider you want from Web3.providers
-    web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
-}
-
-// const givethDirectory = new GivethDirectory(web3, "0x30e1a463ecf25dbba2f83cb3e4b10045f888e55b");
-const givethDirectory = new GivethDirectory(web3, "0xe78a0f7e598cc8b0bb87894b0f60dd2a88d6a8ab");
+const store = createStore(
+    reducer,
+    applyMiddleware(...middleware),
+);
 const web3monitor = new Web3monitor(web3);
 web3monitor.on("newState", (state) => {
     store.dispatch(newWeb3State(state));
@@ -47,7 +41,7 @@ render(
                 <IndexRoute component={ CampaignsContainer } />
 
                 <Route path="/myaccount" component={ MyAccountContainer } />
-                <Route path="/about" component={ AboutPage } />
+                <Route path="/about" component={ AboutPageContainer } />
                 <Route path="/campaigns" component={ CampaignsContainer } />
                 <Route path="/campaigns/:campaignId" component={ SingleCampaignContainer } />
             </Route>
