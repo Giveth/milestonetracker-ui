@@ -4,8 +4,11 @@
  */
 import React from "react";
 
-import { Grid, Row, Col, Table, Button } from "react-bootstrap";
+import { Grid, Row, Col, Table } from "react-bootstrap";
 import { MilestoneEdit } from "../components";
+import ButtonProposeMilestones from "../containers/ButtonProposeMilestones";
+import ButtonUnproposeMilestones from "../containers/ButtonUnproposeMilestones";
+import ButtonAcceptMilestones from "../containers/ButtonAcceptMilestones";
 
 export default class SingleCampaignPage extends React.Component {
     constructor(props) {
@@ -22,7 +25,26 @@ export default class SingleCampaignPage extends React.Component {
         let campaign = "Loading....";
         let campaignInfo = "";
         let jsonobj = "";
+        let proposeMilestones = "";
+        let unproposeMilestones = "";
+        let acceptMilestones = "";
         let milestoneModalClose = () => this.setState({ milestoneModalShow: false });
+        let milestones = [
+            {
+                description: "Proposal 0",
+                url: "http://url_0",
+                minCompletionDate: 1485536465,
+                maxCompletionDate: 1485709265,
+                reviewer: "0xac622a6d87fcf9a1922ae01919b17f33d2ccf456",
+                milestoneLeadLink: "0xb742329ced9d9a5a140f12cf0c153b4a10370d0b",
+                reviewTime: 172800,
+                paymentSource: "0x090bd3a4cf3ff8ebf41c874d44036fa2a075065c",
+                payDescription: "Proposal 0",
+                payRecipient: "0xaa275222bce2d5a60cd47f709ec7dbba0d8d2f39",
+                payValue: 10,
+                payDelay: 0,
+            },
+        ];
 
         if (this.props.givethDirectoryState.campaigns &&
             this.props.givethDirectoryState.campaigns.length >= this.props.params.campaignId - 1) {
@@ -73,6 +95,22 @@ export default class SingleCampaignPage extends React.Component {
                 </Table>
             );
 
+            proposeMilestones = (<ButtonProposeMilestones
+              milestoneTrackerAddress={ currentCampaign.milestoneTrackerAddress }
+              milestones={ milestones }
+            />);
+            if (currentCampaign.milestoneTracker.changingMilestones) {
+                unproposeMilestones = (<ButtonUnproposeMilestones
+                  milestoneTrackerAddress={ currentCampaign.milestoneTrackerAddress }
+                />);
+            }
+            if (currentCampaign.milestoneTracker.proposedMilestonesHash) {
+                acceptMilestones = (<ButtonAcceptMilestones
+                  milestoneTrackerAddress={ currentCampaign.milestoneTrackerAddress }
+                  proposalHash={ currentCampaign.milestoneTracker.proposedMilestonesHash }
+                />);
+            }
+
             jsonobj = <pre> {JSON.stringify(currentCampaign, null, 2)}</pre>;
         }
 
@@ -87,17 +125,16 @@ export default class SingleCampaignPage extends React.Component {
                     </Row>
                     <Row>
                         <Col>
-                            <Button
-                              bsStyle="primary"
-                              onClick={ () => this.setState({ milestoneModalShow: true })}
-                            >
-                                Add Milestone
-                            </Button>
                             <MilestoneEdit
                               show={this.state.milestoneModalShow}
                               onHide={milestoneModalClose}
                             />
                         </Col>
+                    </Row>
+                    <Row>
+                        <Col>{ proposeMilestones }</Col>
+                        <Col>{ unproposeMilestones }</Col>
+                        <Col>{ acceptMilestones }</Col>
                     </Row>
                     <Row>
                         <Col>{ jsonobj }</Col>
