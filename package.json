@@ -43,7 +43,7 @@
     "async": "^2.1.4",
     "babel-polyfill": "^6.7.4",
     "css-loader": "^0.26.1",
-    "givethdirectory": "^0.0.10",
+    "givethdirectory": "^0.0.13",
     "react": "^15.0.1",
     "react-bootstrap": "^0.30.7",
     "react-dom": "^15.4.2",

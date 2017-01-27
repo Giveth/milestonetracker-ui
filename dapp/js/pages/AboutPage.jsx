@@ -24,6 +24,11 @@ export default function AboutPage(props) {
             ]
         );
     };
+    const handleUnproposeMilestones = () => {
+        props.onUnproposeMilestones(
+            props.givethDirectoryState.campaigns[ 0 ]
+        );
+    };
 
     return (
         <div>
@@ -31,7 +36,8 @@ export default function AboutPage(props) {
                 <Row>
                     <Col>
                         <h1>About</h1>
-                        <Button onClick={ handleProposeMilestones } />
+                        <Button onClick={ handleProposeMilestones }>Propose Milestones</Button>
+                        <Button onClick={ handleUnproposeMilestones }>Unpropose Milestones</Button>
                     </Col>
                 </Row>
             </Grid>
@@ -42,4 +48,5 @@ export default function AboutPage(props) {
 AboutPage.propTypes = {
     givethDirectoryState: React.PropTypes.object.isRequired,
     onProposeMilestones: React.PropTypes.func.isRequired,
+    onUnproposeMilestones: React.PropTypes.func.isRequired,
 };
