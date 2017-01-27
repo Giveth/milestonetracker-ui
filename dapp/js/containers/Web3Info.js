@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import Web3InfoComponent from "../component/Web3InfoComponent";
+import Web3InfoComponent from "../components/Web3InfoComponent";
 
 const mapStateToProps = (state) => ({
     web3state: state.web3,

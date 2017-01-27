@@ -1,3 +1,12 @@
+/**
+ * Component for a campaign to be shown in a list of campaigns
+ *
+ * Expects following properties:
+ * @prop{string} url          Local URL of the app to the campaign
+ * @prop{string} name         Name of the campaign
+ * @prop{string} description  Description of the campaign
+ */
+
 import React from "react";
 
 import { ListGroupItem } from "react-bootstrap";

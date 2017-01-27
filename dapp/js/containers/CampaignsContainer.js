@@ -8,9 +8,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = ({
 });
 
-const GivethDirectoryContainer = connect(
+const CampaignsContainer = connect(
     mapStateToProps,
     mapDispatchToProps
 )(CampaignsPage);
 
-export default GivethDirectoryContainer;
+export default CampaignsContainer;

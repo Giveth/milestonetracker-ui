@@ -1,3 +1,11 @@
+/**
+ * List of campaigns with a search option
+ *
+ * Expects following properties:
+ * @prop{string} campaigns   Array of campaigns
+ * @prop{string} filterText  Text to search in campaigns name and description.
+ *                           Only the one matching should be displayed
+ */
 import React from "react";
 
 import { ListGroup } from "react-bootstrap";

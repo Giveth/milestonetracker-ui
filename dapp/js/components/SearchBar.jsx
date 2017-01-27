@@ -2,9 +2,9 @@
  * Search Bar component with two ways binding
  *
  * Expects following properties:
- * @prop{string} filterText Initial filter text
- * @prop{string} placeholder Placeholder text to be displayed in the input field
- * @prop{func} onUserInput Function to be called when user changes content of the Search Bar
+ * @prop{string} filterText   Initial filter text
+ * @prop{string} placeholder  Placeholder text to be displayed in the input field
+ * @prop{func}   onUserInput  Function to be called when user changes content of the Search Bar
  */
 
 import React from "react";

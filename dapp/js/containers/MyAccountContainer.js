@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { SingleCampaignPage } from "../pages";
+import { MyAccountPage } from "../pages";
 
 const mapStateToProps = (state) => ({
     givethDirectoryState: state.givethDirectory,
@@ -8,9 +8,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = ({
 });
 
-const SingleCampaignContainer = connect(
+const MyAccountContainer = connect(
     mapStateToProps,
     mapDispatchToProps
-)(SingleCampaignPage);
+)(MyAccountPage);
 
-export default SingleCampaignContainer;
+export default MyAccountContainer;
