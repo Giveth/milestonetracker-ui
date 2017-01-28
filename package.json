@@ -12,8 +12,22 @@
     "type": "git",
     "url": "https://github.com/Giveth/milestonetracker-ui.git"
   },
-  "author": "U-Zyn Chua <chua@uzyn.com>",
-  "license": "UNLICENSED",
+  "author": {
+    "name": "Giveth",
+    "email": "info@giveth.io",
+    "url": "http://giveth.io"
+  },
+  "contributors": [
+    {
+      "name": "Jordi Baylina"
+    },
+    {
+      "name": "Vojtech Simetka",
+      "email": "vojtech@simetka.cz",
+      "url": "http://simetka.cz/"
+    }
+  ],
+  "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.7.7",
     "babel-eslint": "^7.1.1",
@@ -45,6 +59,7 @@
     "async": "^2.1.4",
     "babel-polyfill": "^6.7.4",
     "givethdirectory": "^0.0.17",
+    "moment": "^2.17.1",
     "react": "^15.0.1",
     "react-bootstrap": "^0.30.7",
     "react-dom": "^15.4.2",

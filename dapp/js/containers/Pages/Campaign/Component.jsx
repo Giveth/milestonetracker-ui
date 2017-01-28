@@ -1,5 +1,5 @@
 import React from "react";
-import { ProgressBar, Grid, Row, Col, Nav, NavItem } from "react-bootstrap";
+import { ProgressBar, Grid, Row, Col, Nav, NavItem, PageHeader } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 
 export default function Component(props) {
@@ -24,14 +24,14 @@ export default function Component(props) {
 
         content = (
             <div>
-                <h2>
+                <PageHeader>
                     <a
                       href={ currentCampaign.url }
                       target="_blank"
                     >
-                      { currentCampaign.name }
-                    </a>
-                </h2>
+                    { currentCampaign.name }
+                    </a> <small>{ currentCampaign.status }</small>
+                </PageHeader>
                 <Nav bsStyle="pills">
                     <LinkContainer
                       to={ { pathname: `/campaigns/${ props.params.campaignId }/details` } }

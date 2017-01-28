@@ -9,27 +9,11 @@ import React from "react";
 import { Table } from "react-bootstrap";
 import { ButtonProposeMilestones, ButtonUnproposeMilestones,
          ButtonAcceptMilestones } from "../containers/Buttons";
+import Milestones from "./Milestones";
 
 export default function CampaignMilestones(props) {
-    let milestones = [];
-    let proposedMilestonesCont = [];
     let buttons = [];
 
-    for (let i = 0; i < props.milestones.length; ++ i) {
-        milestones.push(
-            <pre key={ i }>
-                {JSON.stringify(props.milestones[ i ], null, 2)}
-            </pre>);
-    }
-
-    if (props.proposedMilestones) {
-        for (let i = 0; i < props.proposedMilestones.length; ++ i) {
-            proposedMilestonesCont.push(
-                <pre key={ i }>
-                    {JSON.stringify(props.proposedMilestones[ i ], null, 2)}
-                </pre>);
-        }
-    }
     const proposedMilestones = [
         {
             description: "Proposal 0",
@@ -101,8 +85,15 @@ export default function CampaignMilestones(props) {
                 </tbody>
             </Table>
             { buttons }
-            { milestones }
-            { proposedMilestonesCont }
+            <Milestones
+              milestones={ props.milestones }
+              approved
+              header="Approved Milestones"
+            />
+            <Milestones
+              milestones={ props.proposedMilestones }
+              header="Proposed Milestones"
+            />
         </div>
     );
 }
