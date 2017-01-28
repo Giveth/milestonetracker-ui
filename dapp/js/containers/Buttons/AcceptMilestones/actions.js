@@ -1,4 +1,4 @@
-import { web3, MilestoneTracker } from "../../blockchain";
+import { web3, MilestoneTracker } from "../../../blockchain";
 
 /**
  *

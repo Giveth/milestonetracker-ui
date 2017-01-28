@@ -24,7 +24,7 @@ export default function Campaigns(props) {
                 campaigns.push(
                     <Campaign
                       key={ i.toString() }
-                      url={ `/campaigns/${ i }` }
+                      url={ `/campaigns/${ i }/details` }
                       name={ props.campaigns[ i ].name }
                       description={ props.campaigns[ i ].description }
                     />

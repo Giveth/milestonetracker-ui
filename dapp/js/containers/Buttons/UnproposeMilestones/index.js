@@ -1,19 +1,19 @@
 import { connect } from "react-redux";
 import Component from "./Component";
-import { proposeMilestones } from "./actions";
+import { unproposeMilestones } from "./actions";
 
 const mapStateToProps = () => ({
 });
 
 const mapDispatchToProps = (
     {
-        onProposeMilestones: proposeMilestones,
+        onUnproposeMilestones: unproposeMilestones,
     }
 );
 
-const ButtonProposeComponent = connect(
+const ButtonUnroposeMilestones = connect(
     mapStateToProps,
     mapDispatchToProps
 )(Component);
 
-export default ButtonProposeComponent;
+export default ButtonUnroposeMilestones;

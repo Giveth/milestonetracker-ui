@@ -6,9 +6,8 @@ import React from "react";
 
 import { Grid, Row, Col, Table } from "react-bootstrap";
 import { MilestoneEdit } from "../components";
-import ButtonProposeMilestones from "../containers/ButtonProposeMilestones";
-import ButtonUnproposeMilestones from "../containers/ButtonUnproposeMilestones";
-import ButtonAcceptMilestones from "../containers/ButtonAcceptMilestones";
+import { ButtonProposeMilestones, ButtonUnproposeMilestones,
+         ButtonAcceptMilestones } from "../containers/Buttons";
 
 export default class SingleCampaignPage extends React.Component {
     constructor(props) {
@@ -76,6 +75,10 @@ export default class SingleCampaignPage extends React.Component {
                             </td>
                         </tr>
                         <tr>
+                            <td>Status</td>
+                            <td>{ currentCampaign.status }</td>
+                        </tr>
+                        <tr>
                             <td>MiniMe Token Address</td>
                             <td>{ currentCampaign.tokenAddress }</td>
                         </tr>
@@ -86,10 +89,6 @@ export default class SingleCampaignPage extends React.Component {
                         <tr>
                             <td>Milestone Tracker Address</td>
                             <td>{ currentCampaign.milestoneTrackerAddress }</td>
-                        </tr>
-                        <tr>
-                            <td>Status</td>
-                            <td>{ currentCampaign.status }</td>
                         </tr>
                     </tbody>
                 </Table>

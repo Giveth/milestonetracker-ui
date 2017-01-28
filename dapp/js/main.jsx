@@ -13,8 +13,11 @@ import { Router, Route, hashHistory, IndexRoute } from "react-router";
 import { App } from "./components";
 import AboutPageContainer from "./containers/AboutPageContainer";
 import CampaignsContainer from "./containers/CampaignsContainer";
-import SingleCampaignContainer from "./containers/SingleCampaignContainer";
+import PageCampaign from "./containers/Pages/Campaign";
+import PageCampaignDetails from "./containers/Pages/CampaignDetails";
+import PageCampaignMilestones from "./containers/Pages/CampaignMilestones";
 import MyAccountContainer from "./containers/MyAccountContainer";
+import Web3Info from "./containers/Web3Info";
 
 const middleware = [ thunk ];
 
@@ -43,7 +46,19 @@ render(
                 <Route path="/myaccount" component={ MyAccountContainer } />
                 <Route path="/about" component={ AboutPageContainer } />
                 <Route path="/campaigns" component={ CampaignsContainer } />
-                <Route path="/campaigns/:campaignId" component={ SingleCampaignContainer } />
+                <Route path="/campaigns/:campaignId" component={ PageCampaign }>
+                    <IndexRoute component={ Web3Info } />
+
+                    <Route
+                      path="/campaigns/:campaignId/details"
+                      component={ PageCampaignDetails }
+                    />
+                    <Route
+                      path="/campaigns/:campaignId/milestones"
+                      component={ PageCampaignMilestones }
+                    />
+                    <Route path="/campaigns/:campaignId/vault" component={ Web3Info } />
+                </Route>
             </Route>
         </Router>
     </Provider>
