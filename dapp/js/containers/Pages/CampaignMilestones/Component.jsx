@@ -7,6 +7,7 @@ export default function Component(props) {
     const id = props.params.campaignId;
     if (props.givethDirectoryState.campaigns &&
         props.givethDirectoryState.campaigns.length >= id - 1) {
+        const currentCampaign = props.givethDirectoryState.campaigns[ id ];
         const milestonesTracker = props.givethDirectoryState.campaigns[ id ].milestoneTracker;
 
         content = (
@@ -18,6 +19,9 @@ export default function Component(props) {
                   changingMilestones={ milestonesTracker.changingMilestones }
                   campaignCanceled={ milestonesTracker.campaignCanceled }
                   milestones={milestonesTracker.milestones}
+                  milestoneTrackerAddress={currentCampaign.milestoneTrackerAddress}
+                  proposedMilestonesHash={milestonesTracker.proposedMilestonesHash}
+                  proposedMilestones={milestonesTracker.proposedMilestones}
                 />
             </Panel>
         );
