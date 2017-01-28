@@ -13,7 +13,7 @@ import moment from "moment";
 export default function Milestone(props) {
     const dn = moment.unix(props.minCompletionDate);
     const dm = moment.unix(props.maxCompletionDate);
-    const rt = moment().add(props.reviewTime * 1000);
+    const rt = moment.duration(props.reviewTime, "seconds");
     return (
         <ListGroup fill>
             <ListGroupItem>{ props.description }</ListGroupItem>
@@ -21,6 +21,10 @@ export default function Milestone(props) {
             <ListGroupItem>
                 <strong>Valid date: </strong>
                 { dn.format("ll") } - { dm.format("ll") }
+            </ListGroupItem>
+            <ListGroupItem>
+                <strong>Time left: </strong>
+                { dm.fromNow() }
             </ListGroupItem>
             <ListGroupItem>
                 <strong>Recipient: </strong>
@@ -32,7 +36,7 @@ export default function Milestone(props) {
             </ListGroupItem>
             <ListGroupItem>
                 <strong>Reviewer time: </strong>
-                { rt.format("ll") }
+                { rt.humanize() }
             </ListGroupItem>
             <ListGroupItem>
                 <strong>Payment source address: </strong>
