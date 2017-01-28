@@ -9,50 +9,52 @@ import React from "react";
 import { Table } from "react-bootstrap";
 
 export default function CampaignMilestones(props) {
+    let milestones = [];
+
+    for (let i = 0; i < props.milestones.length; ++ i) {
+        milestones.push(
+            <pre key={ i }>
+                {JSON.stringify(props.milestones[ i ], null, 2)}
+            </pre>);
+    }
+
     return (
-        <div to={ { pathname: `${ props.url }` } }>
-            <p>{ props.description }</p>
+        <div>
             <Table striped bordered condensed hover>
                 <tbody>
                     <tr>
-                        <td>Website</td>
-                        <td>
-                            <a
-                              href={ props.url }
-                              target="_blank"
-                            >
-                            { props.url }
-                            </a>
-                        </td>
+                        <td>Recipient's Address</td>
+                        <td>{ props.recipient }</td>
                     </tr>
                     <tr>
-                        <td>Status</td>
-                        <td>{ props.status }</td>
+                        <td>Donor's Address</td>
+                        <td>{ props.donor }</td>
                     </tr>
                     <tr>
-                        <td>MiniMe Token Address</td>
-                        <td>{ props.tokenAddress }</td>
+                        <td>Arbitrator's Address</td>
+                        <td>{ props.arbitrator }</td>
                     </tr>
                     <tr>
-                        <td>Vault Address</td>
-                        <td>{ props.vaultAddress }</td>
+                        <td>Milestones to review</td>
+                        <td>{ props.changingMilestones ? "yes" : "no" }</td>
                     </tr>
                     <tr>
-                        <td>Milestone Tracker Address</td>
-                        <td>{ props.milestoneTrackerAddress }</td>
+                        <td>Campaign cancelled</td>
+                        <td>{ props.campaignCanceled ? "yes" : "no" }</td>
                     </tr>
                 </tbody>
             </Table>
+
+            { milestones }
         </div>
     );
 }
 
 CampaignMilestones.propTypes = {
-    url: React.PropTypes.string.isRequired,
-    name: React.PropTypes.string.isRequired,
-    description: React.PropTypes.string.isRequired,
-    status: React.PropTypes.string.isRequired,
-    tokenAddress: React.PropTypes.string.isRequired,
-    vaultAddress: React.PropTypes.string.isRequired,
-    milestoneTrackerAddress: React.PropTypes.string.isRequired,
+    recipient: React.PropTypes.string.isRequired,
+    donor: React.PropTypes.string.isRequired,
+    arbitrator: React.PropTypes.string.isRequired,
+    changingMilestones: React.PropTypes.bool.isRequired,
+    campaignCanceled: React.PropTypes.bool.isRequired,
+    milestones: React.PropTypes.array.isRequired,
 };

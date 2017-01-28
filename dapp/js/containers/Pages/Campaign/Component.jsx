@@ -47,8 +47,6 @@ export default function Component(props) {
                 </Nav>
 
                 { props.children }
-
-                <pre> {JSON.stringify(currentCampaign, null, 2)}</pre>
             </div>
         );
     }

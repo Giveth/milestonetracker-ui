@@ -7,18 +7,17 @@ export default function Component(props) {
     const id = props.params.campaignId;
     if (props.givethDirectoryState.campaigns &&
         props.givethDirectoryState.campaigns.length >= id - 1) {
-        const currentCampaign = props.givethDirectoryState.campaigns[ id ];
+        const milestonesTracker = props.givethDirectoryState.campaigns[ id ].milestoneTracker;
 
         content = (
             <Panel>
                 <CampaignMilestones
-                  url={ currentCampaign.url }
-                  name={ currentCampaign.name }
-                  description={ currentCampaign.description }
-                  status={ currentCampaign.status }
-                  tokenAddress={ currentCampaign.tokenAddress }
-                  vaultAddress={ currentCampaign.vaultAddress }
-                  milestoneTrackerAddress={ currentCampaign.milestoneTrackerAddress }
+                  recipient={ milestonesTracker.recipient }
+                  donor={ milestonesTracker.donor }
+                  arbitrator={ milestonesTracker.arbitrator }
+                  changingMilestones={ milestonesTracker.changingMilestones }
+                  campaignCanceled={ milestonesTracker.campaignCanceled }
+                  milestones={milestonesTracker.milestones}
                 />
             </Panel>
         );
