@@ -2,19 +2,16 @@ import React from "react";
 
 import { Router, Route, hashHistory, IndexRoute } from "react-router";
 import { App } from "./components";
-import PageCampaigns from "./containers/Pages/Campaigns";
-import PageAbout from "./containers/Pages/About";
-import PageCampaign from "./containers/Pages/Campaign";
-import PageCampaignDetails from "./containers/Pages/CampaignDetails";
-import PageCampaignMilestones from "./containers/Pages/CampaignMilestones";
-import PageMyAccount from "./containers/Pages/MyAccount";
+import {
+    PageCampaigns, PageAbout, PageCampaign, PageCampaignDetails, PageCampaignMilestones,
+    PageMyAccount, PageHome,
+} from "./containers/Pages";
 import Web3Info from "./containers/Web3Info";
-import GivethDirectory from "./containers/Pages/GivethDirectory";
 
 const Routes = () =>
     <Router history={hashHistory}>
         <Route path="/" component={ App }>
-            <IndexRoute component={ GivethDirectory } />
+            <IndexRoute component={ PageHome } />
 
             <Route path="/myaccount" component={ PageMyAccount } />
             <Route path="/about" component={ PageAbout } />

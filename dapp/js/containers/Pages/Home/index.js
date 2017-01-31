@@ -5,9 +5,9 @@ const mapStateToProps = (state) => ({
     givethDirectoryState: state.givethDirectory,
 });
 
-const GivethDirectory = connect(
+const PageHome = connect(
     mapStateToProps,
     {}
 )(Component);
 
-export default GivethDirectory;
+export default PageHome;
