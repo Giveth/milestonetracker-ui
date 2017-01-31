@@ -4,7 +4,7 @@
 import React from "react";
 
 import { Grid, Row, Col } from "react-bootstrap";
-import { SearchBar, Campaigns } from "../components";
+import { SearchBar, Campaigns } from "../../../components";
 
 export default class CampaignsPage extends React.Component {
     constructor(props) {

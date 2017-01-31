@@ -1,16 +1,16 @@
 import { connect } from "react-redux";
-import { CampaignsPage } from "../pages";
+import About from "./About";
 
 const mapStateToProps = (state) => ({
     givethDirectoryState: state.givethDirectory,
 });
+const mapDispatchToProps = (
+    {}
+);
 
-const mapDispatchToProps = ({
-});
-
-const CampaignsContainer = connect(
+const PageAbout = connect(
     mapStateToProps,
     mapDispatchToProps
-)(CampaignsPage);
+)(About);
 
-export default CampaignsContainer;
+export default PageAbout;

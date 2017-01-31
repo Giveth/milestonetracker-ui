@@ -6,7 +6,7 @@
 
 import React from "react";
 //
-import { ListGroup, ListGroupItem } from "react-bootstrap";
+import { Table } from "react-bootstrap";
 import moment from "moment";
 // import { LinkContainer } from "react-router-bootstrap";
 
@@ -14,43 +14,66 @@ export default function Milestone(props) {
     const dn = moment.unix(props.minCompletionDate);
     const dm = moment.unix(props.maxCompletionDate);
     const rt = moment.duration(props.reviewTime, "seconds");
+
     return (
-        <ListGroup fill>
-            <ListGroupItem>{ props.description }</ListGroupItem>
-            <ListGroupItem><strong>URL: </strong>{ props.url }</ListGroupItem>
-            <ListGroupItem>
-                <strong>Valid date: </strong>
-                { dn.format("ll") } - { dm.format("ll") }
-            </ListGroupItem>
-            <ListGroupItem>
-                <strong>Time left: </strong>
-                { dm.fromNow() }
-            </ListGroupItem>
-            <ListGroupItem>
-                <strong>Recipient: </strong>
-                { props.milestoneLeadLink }
-            </ListGroupItem>
-            <ListGroupItem>
-                <strong>Reviewer: </strong>
-                { props.reviewer }
-            </ListGroupItem>
-            <ListGroupItem>
-                <strong>Reviewer time: </strong>
-                { rt.humanize() }
-            </ListGroupItem>
-            <ListGroupItem>
-                <strong>Payment source address: </strong>
-                { props.paymentSource }
-            </ListGroupItem>
-            <ListGroupItem>
-                <strong>Status: </strong>
-                { props.status }
-            </ListGroupItem>
-            <ListGroupItem>
-                <strong>Done time: </strong>
-                { props.doneTime }
-            </ListGroupItem>
-        </ListGroup>
+        <div>
+            <p>{ props.description }</p>
+            <Table responsive condensed hover>
+                <tbody>
+                    <tr>
+                        <td><strong>URL: </strong>{ props.url }</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Valid date: </strong>
+                            { dn.format("ll") } - { dm.format("ll") }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Time left: </strong>
+                            { dm.fromNow() }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Recipient: </strong>
+                            { props.milestoneLeadLink }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Reviewer: </strong>
+                            { props.reviewer }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Reviewer time: </strong>
+                            { rt.humanize() }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Payment source address: </strong>
+                            { props.paymentSource }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Status: </strong>
+                            { props.status }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Done time: </strong>
+                            { props.doneTime }
+                        </td>
+                    </tr>
+                </tbody>
+            </Table>
+        </div>
     );
 }
 

@@ -11,13 +11,14 @@ import thunk from "redux-thunk";
 
 import { Router, Route, hashHistory, IndexRoute } from "react-router";
 import { App } from "./components";
-import AboutPageContainer from "./containers/AboutPageContainer";
-import CampaignsContainer from "./containers/CampaignsContainer";
+import PageCampaigns from "./containers/Pages/Campaigns";
+import PageAbout from "./containers/Pages/About";
 import PageCampaign from "./containers/Pages/Campaign";
 import PageCampaignDetails from "./containers/Pages/CampaignDetails";
 import PageCampaignMilestones from "./containers/Pages/CampaignMilestones";
-import MyAccountContainer from "./containers/MyAccountContainer";
+import PageMyAccount from "./containers/Pages/MyAccount";
 import Web3Info from "./containers/Web3Info";
+import GivethDirectory from "./containers/Pages/GivethDirectory";
 
 const middleware = [ thunk ];
 
@@ -41,11 +42,11 @@ render(
     <Provider store={store}>
         <Router history={hashHistory}>
             <Route path="/" component={ App }>
-                <IndexRoute component={ CampaignsContainer } />
+                <IndexRoute component={ GivethDirectory } />
 
-                <Route path="/myaccount" component={ MyAccountContainer } />
-                <Route path="/about" component={ AboutPageContainer } />
-                <Route path="/campaigns" component={ CampaignsContainer } />
+                <Route path="/myaccount" component={ PageMyAccount } />
+                <Route path="/about" component={ PageAbout } />
+                <Route path="/campaigns" component={ PageCampaigns } />
                 <Route path="/campaigns/:campaignId" component={ PageCampaign }>
                     <IndexRoute component={ Web3Info } />
 

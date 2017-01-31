@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import Web3Info from "./Web3Info";
+import CampaignsPage from "./Component";
 
 const mapStateToProps = (state) => ({
     givethDirectoryState: state.givethDirectory,
@@ -8,9 +8,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = ({
 });
 
-const MyAccountContainer = connect(
+const PageCampaigns = connect(
     mapStateToProps,
     mapDispatchToProps
-)(Web3Info);
+)(CampaignsPage);
 
-export default MyAccountContainer;
+export default PageCampaigns;
