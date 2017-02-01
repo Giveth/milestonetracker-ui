@@ -1,7 +1,14 @@
 /**
- *
+ * Shows basic details of the campaign
  *
  * Expects following properties:
+ * @prop{string} url                      URL of the campaign
+ * @prop{string} name                     Campaign's name
+ * @prop{string} description              Campaign's description
+ * @prop{string} status                   Status of the campaign
+ * @prop{string} tokenAddress             Address of the MiniMe Token contract for the campaign
+ * @prop{string} vaultAddress             Address of the Vault contract for this campaign
+ * @prop{string} milestoneTrackerAddress  Address of the milestonetracker contract
  */
 
 import React from "react";

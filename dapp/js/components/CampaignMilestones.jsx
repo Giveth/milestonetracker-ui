@@ -1,7 +1,16 @@
 /**
- *
+ * Show milestones of the campaign and possible action based on access level
  *
  * Expects following properties:
+ * @prop{string} recipient                Address of the recipient for the milestones
+ * @prop{string} donor                    Donor's address
+ * @prop{string} arbitrator               Arbitrator's address
+ * @prop{bool}   changingMilestones       Flag to indicate if there are milestones to be approved
+ * @prop{bool}   campaignCanceled         Flag to indicate if the campaign has been cancelled
+ * @prop{array}  milestones               Array of approved milestones
+ * @prop{string} milestoneTrackerAddress  Address of the MilestoneTracker contract
+ * @prop{string} proposedMilestonesHash   Hash of the milestone proposal
+ * @prop{array}  proposedMilestones       Array of proposed milestones to be approved
  */
 
 import React from "react";
@@ -84,7 +93,6 @@ export default function CampaignMilestones(props) {
                     </tr>
                 </tbody>
             </Table>
-            { buttons }
             <Milestones
               milestones={ props.milestones }
               approved
@@ -94,6 +102,7 @@ export default function CampaignMilestones(props) {
               milestones={ props.proposedMilestones }
               header="Proposed Milestones"
             />
+            { buttons }
         </div>
     );
 }
