@@ -22,9 +22,9 @@ SmartFormComponent.propTypes = {
 const mapStateToProps = () => ({
 });
 
-const mapDispatchToProps = (dispatch) => ({
-    nameInputChange(event) {dispatch(a.onInputChange("name", event.target.value));} }
-);
+const mapDispatchToProps = {
+    nameInputChange: a.onInputChange,
+};
 
 const SmartForm = connect(
     mapStateToProps,

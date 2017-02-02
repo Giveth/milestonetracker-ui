@@ -1,15 +1,20 @@
 import React from "react";
 import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 
-const Text = (props) =>
-    <FormGroup>
-        <ControlLabel>{props.label}</ControlLabel>
-        <FormControl
-          type={props.type}
-          placeholder={props.placeholder}
-          onChange={props.onChange}
-        />
-    </FormGroup>;
+function Text(props) {
+    const change = (event) => props.onChange(props.name, event.target.value);
+
+    return (
+        <FormGroup>
+            <ControlLabel>{props.label}</ControlLabel>
+            <FormControl
+              type={props.type}
+              placeholder={props.placeholder}
+              onChange={change}
+            />
+        </FormGroup>
+    );
+}
 
 Text.propTypes = {
     name: React.PropTypes.string.isRequired,
