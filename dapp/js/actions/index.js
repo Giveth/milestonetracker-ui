@@ -1,12 +1,13 @@
 import { web3, MilestoneTracker } from "../blockchain";
+import * as c from "../constants";
 
 export const newWeb3State = (state) => ({
-    type: "WEB3_NEWSTATE",
+    type: c.WEB3_NEWSTATE,
     state,
 });
 
 export const newGivethDirectoryState = (state) => ({
-    type: "GIVETHDIRECTORY_NEWSTATE",
+    type: c.GIVETHDIRECTORY_NEWSTATE,
     state,
 });
 
@@ -26,3 +27,17 @@ export const unproposeMilestones = (milestoneTrackerAddress) => () => {
             from: web3.eth.accounts[ 6 ],
         });
 };
+
+export function onInputChange(name, value) {
+    return dispatch => dispatch({
+        type: c.FORM_UPDATE_VALUE,
+        name,
+        value,
+    });
+}
+
+export function reset() {
+    return dispatch => dispatch({
+        type: c.FORM_RESET,
+    });
+}

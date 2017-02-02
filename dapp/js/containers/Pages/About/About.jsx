@@ -1,6 +1,7 @@
 import React from "react";
 
 import { Grid, Row, Col } from "react-bootstrap";
+import SmartForm from "../../SmartForm";
 
 const About = () =>
     <div>
@@ -8,6 +9,7 @@ const About = () =>
             <Row>
                 <Col>
                     <h1>About</h1>
+                    <SmartForm />
                 </Col>
             </Row>
         </Grid>
