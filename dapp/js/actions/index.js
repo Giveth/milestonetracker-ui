@@ -28,9 +28,11 @@ export const unproposeMilestones = (milestoneTrackerAddress) => () => {
         });
 };
 
-export function onInputChange(name, value) {
+export function onInputChange(milestoneTrackerAddress, index, name, value) {
     return dispatch => dispatch({
         type: c.FORM_UPDATE_VALUE,
+        milestoneTrackerAddress,
+        index,
         name,
         value,
     });

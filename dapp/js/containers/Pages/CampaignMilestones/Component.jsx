@@ -22,6 +22,7 @@ export default function Component(props) {
                   milestoneTrackerAddress={currentCampaign.milestoneTrackerAddress}
                   proposedMilestonesHash={milestonesTracker.proposedMilestonesHash}
                   proposedMilestones={milestonesTracker.proposedMilestones}
+                  newMilestones={props.formReducer[ currentCampaign.milestoneTrackerAddress ]}
                 />
             </Panel>
         );
@@ -37,4 +38,5 @@ export default function Component(props) {
 Component.propTypes = {
     givethDirectoryState: React.PropTypes.object.isRequired,
     params: React.PropTypes.object.isRequired,
+    formReducer: React.PropTypes.object.isRequired,
 };

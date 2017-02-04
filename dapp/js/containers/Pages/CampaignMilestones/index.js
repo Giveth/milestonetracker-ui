@@ -3,6 +3,7 @@ import Component from "./Component";
 
 const mapStateToProps = (state) => ({
     givethDirectoryState: state.givethDirectory,
+    formReducer: state.formReducer,
 });
 
 const PageCampaignMilestones = connect(

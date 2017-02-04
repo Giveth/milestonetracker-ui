@@ -10,7 +10,7 @@ import { Accordion, Panel } from "react-bootstrap";
 import Milestone from "./Milestone";
 
 export default function Milestones(props) {
-    let content = "There are no milestones";
+    let content = "";
 
     if (props.milestones) {
         let milestones = [];
@@ -38,14 +38,16 @@ export default function Milestones(props) {
                 </Panel>);
         }
         content = (
-            <Accordion>
-                { milestones }
-            </Accordion>);
+            <div>
+                <h2>{ props.header }</h2>
+                <Accordion>
+                    { milestones }
+                </Accordion>
+            </div>);
     }
 
     return (
         <div>
-            <h2>{ props.header }</h2>
             {content}
         </div>
     );
