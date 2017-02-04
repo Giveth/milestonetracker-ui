@@ -22,42 +22,29 @@ import Milestones from "./Milestones";
 import MilestonesFormation from "./MilestonesFormation";
 
 export default function CampaignMilestones(props) {
-    let buttons = [];
-    let milestonesFormation = "";
+    let proposedMilestonesButtons = [];
+    let newMilestonesButtons = [];
 
     if (props.newMilestones && props.newMilestones.milestones) {
-        buttons.push(<ButtonProposeMilestones
+        newMilestonesButtons.push(<ButtonProposeMilestones
           key="proposeMilestones"
           milestoneTrackerAddress={ props.milestoneTrackerAddress }
           milestones={ props.newMilestones.milestones }
         />);
     }
     if (props.changingMilestones) {
-        buttons.push(<ButtonUnproposeMilestones
+        proposedMilestonesButtons.push(<ButtonUnproposeMilestones
           key="unproposeMilestones"
           milestoneTrackerAddress={ props.milestoneTrackerAddress }
         />);
     }
     if (props.proposedMilestonesHash) {
-        buttons.push(<ButtonAcceptMilestones
+        proposedMilestonesButtons.push(<ButtonAcceptMilestones
           key="acceptMilestones"
           milestoneTrackerAddress={ props.milestoneTrackerAddress }
           proposalHash={ props.proposedMilestonesHash }
         />);
     }
-
-    if (props.newMilestones) {
-        milestonesFormation = (
-            <MilestonesFormation
-              newMilestones={ props.newMilestones }
-              milestoneTrackerAddress={ props.milestoneTrackerAddress }
-              header="Milestones to propose"
-            />
-        );
-    }
-    buttons.push(<ButtonAddMilestone
-      milestoneTrackerAddress={ props.milestoneTrackerAddress }
-    />);
 
     return (
         <div>
@@ -101,9 +88,20 @@ export default function CampaignMilestones(props) {
             <Milestones
               milestones={ props.proposedMilestones }
               header="Proposed Milestones"
-            />
-            { milestonesFormation }
-            { buttons }
+            >
+                { proposedMilestonesButtons }
+            </Milestones>
+            <MilestonesFormation
+              newMilestones={ props.newMilestones }
+              milestoneTrackerAddress={ props.milestoneTrackerAddress }
+              header="New milestones to propose"
+            >
+                <ButtonAddMilestone
+                  key="addMilestone"
+                  milestoneTrackerAddress={ props.milestoneTrackerAddress }
+                />
+                {newMilestonesButtons}
+            </MilestonesFormation>
         </div>
     );
 }

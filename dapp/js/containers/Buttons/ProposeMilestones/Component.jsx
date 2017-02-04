@@ -8,7 +8,7 @@ export default function Component(props) {
         );
     };
     return (
-        <Button onClick={ handleProposeMilestones }>Propose Milestones</Button>
+        <Button bsStyle="primary" onClick={ handleProposeMilestones }>Propose Milestones</Button>
     );
 }
 

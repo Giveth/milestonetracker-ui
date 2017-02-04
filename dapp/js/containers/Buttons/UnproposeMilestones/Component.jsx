@@ -6,7 +6,7 @@ export default function Component(props) {
         props.onUnproposeMilestones(props.milestoneTrackerAddress);
     };
     return (
-        <Button onClick={ handleProposeMilestones }>Unpropose Milestones</Button>
+        <Button bsStyle="danger" onClick={ handleProposeMilestones }>Unpropose Milestones</Button>
     );
 }
 

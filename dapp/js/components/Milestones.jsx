@@ -15,8 +15,13 @@ export default function Milestones(props) {
     if (props.milestones) {
         let milestones = [];
         for (let i = 0; i < props.milestones.length; ++ i) {
+            let bsStyle = "";
+            if (props.milestones[ i ].status === "Canceled") {
+                bsStyle = "danger";
+            }
             milestones.push(
                 <Panel
+                  bsStyle={ bsStyle }
                   collapsible
                   defaultExpanded
                   key={ i }
@@ -43,6 +48,8 @@ export default function Milestones(props) {
                 <Accordion>
                     { milestones }
                 </Accordion>
+
+                { props.children }
             </div>);
     }
 

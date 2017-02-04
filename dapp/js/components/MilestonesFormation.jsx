@@ -4,7 +4,7 @@ import { Accordion, Panel } from "react-bootstrap";
 import MilestoneEdit from "../containers/MilestoneEdit";
 
 function MilestonesFormation(props) {
-    let content = "There are no newMilestones";
+    let content = <p>There are no newMilestones</p>;
 
     if (props.newMilestones) {
         let milestones = [];
@@ -47,6 +47,8 @@ function MilestonesFormation(props) {
         <Form>
             <h2>{ props.header }</h2>
             {content}
+
+            { props.children }
         </Form>
     );
 }
