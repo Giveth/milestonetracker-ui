@@ -8,10 +8,10 @@ function MilestonesFormation(props) {
 
     if (props.newMilestones) {
         let milestones = [];
-        for (let i = 0; i < props.newMilestones.length; ++ i) {
-            const header = (props.newMilestones[ i ].payDescription) ?
-                props.newMilestones[ i ].payDescription : `Milestone #${ i + 1 }`;
-
+        const mlstns = props.newMilestones.milestones;
+        for (let i = 0; i < mlstns.length; ++ i) {
+            const header = (mlstns[ i ].payDescription) ?
+                mlstns[ i ].payDescription : `Milestone #${ i + 1 }`;
             milestones.push(
                 <Panel
                   collapsible
@@ -21,18 +21,18 @@ function MilestonesFormation(props) {
                   eventKey={ i }
                 >
                     <MilestoneEdit
-                      description={ props.newMilestones[ i ].description }
-                      url={ props.newMilestones[ i ].url }
-                      maxCompletionDate={ props.newMilestones[ i ].maxCompletionDate }
-                      minCompletionDate={ props.newMilestones[ i ].minCompletionDate }
-                      milestoneLeadLink={ props.newMilestones[ i ].milestoneLeadLink }
-                      reviewer={ props.newMilestones[ i ].reviewer }
-                      reviewTime={ props.newMilestones[ i ].reviewTime }
-                      paymentSource={ props.newMilestones[ i ].paymentSource }
-                      payDescription={ props.newMilestones[ i ].payDescription }
-                      payRecipient={ props.newMilestones[ i ].payRecipient }
-                      payValue={ props.newMilestones[ i ].payValue }
-                      payDelay={ props.newMilestones[ i ].payDelay }
+                      description={ mlstns[ i ].description }
+                      url={ mlstns[ i ].url }
+                      maxCompletionDate={ mlstns[ i ].maxCompletionDate }
+                      minCompletionDate={ mlstns[ i ].minCompletionDate }
+                      milestoneLeadLink={ mlstns[ i ].milestoneLeadLink }
+                      reviewer={ mlstns[ i ].reviewer }
+                      reviewTime={ mlstns[ i ].reviewTime }
+                      paymentSource={ mlstns[ i ].paymentSource }
+                      payDescription={ mlstns[ i ].payDescription }
+                      payRecipient={ mlstns[ i ].payRecipient }
+                      payValue={ mlstns[ i ].payValue }
+                      payDelay={ mlstns[ i ].payDelay }
                       index={ i }
                       milestoneTrackerAddress={ props.milestoneTrackerAddress }
                     />
@@ -53,6 +53,7 @@ function MilestonesFormation(props) {
 
 MilestonesFormation.propTypes = {
     milestoneTrackerAddress: React.PropTypes.string.isRequired,
+    newMilestones: React.PropTypes.object,
 };
 
 export default MilestonesFormation;

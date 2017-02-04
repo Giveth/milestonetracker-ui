@@ -25,11 +25,11 @@ export default function CampaignMilestones(props) {
     let buttons = [];
     let milestonesFormation = "";
 
-    if (props.newMilestones) {
+    if (props.newMilestones && props.newMilestones.milestones) {
         buttons.push(<ButtonProposeMilestones
           key="proposeMilestones"
           milestoneTrackerAddress={ props.milestoneTrackerAddress }
-          milestones={ props.proposedMilestones }
+          milestones={ props.newMilestones.milestones }
         />);
     }
     if (props.changingMilestones) {
@@ -118,5 +118,5 @@ CampaignMilestones.propTypes = {
     milestoneTrackerAddress: React.PropTypes.string.isRequired,
     proposedMilestonesHash: React.PropTypes.string,
     proposedMilestones: React.PropTypes.array,
-    newMilestones: React.PropTypes.array,
+    newMilestones: React.PropTypes.object,
 };
