@@ -1,7 +1,8 @@
 import React from "react";
 import Form from "../components/Form";
-import { Accordion, Panel } from "react-bootstrap";
+import { Accordion, Panel, ButtonGroup } from "react-bootstrap";
 import MilestoneEdit from "../containers/MilestoneEdit";
+import ButtonCloseMilestone from "../containers/Buttons/CloseMilestone";
 
 function MilestonesFormation(props) {
     let content = <p>There are no newMilestones</p>;
@@ -12,12 +13,21 @@ function MilestonesFormation(props) {
         for (let i = 0; i < mlstns.length; ++ i) {
             const header = (mlstns[ i ].payDescription) ?
                 mlstns[ i ].payDescription : `Milestone #${ i + 1 }`;
+            const btns = (<span>
+                {header}
+                <ButtonGroup bsSize="xsmall" className="pull-right">
+                    <ButtonCloseMilestone
+                      milestoneTrackerAddress={ props.milestoneTrackerAddress }
+                      index={ i }
+                    />
+                </ButtonGroup>
+            </span>);
             milestones.push(
                 <Panel
                   collapsible
                   defaultExpanded
                   key={ i }
-                  header={ header }
+                  header={ btns }
                   eventKey={ i }
                 >
                     <MilestoneEdit

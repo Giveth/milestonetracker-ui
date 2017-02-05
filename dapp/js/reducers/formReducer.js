@@ -1,4 +1,5 @@
 import * as c from "../constants";
+import moment from "moment";
 
 const formReducer = (state = {}, action) => {
     switch (action.type) {
@@ -21,6 +22,16 @@ const formReducer = (state = {}, action) => {
         }
         return state;
     }
+    case c.CANCEL_NEW_MILESTONE: {
+        if (state[ action.milestoneTrackerAddress ] &&
+            state[ action.milestoneTrackerAddress ].milestones &&
+            state[ action.milestoneTrackerAddress ].milestones.length > action.index) {
+            const newState = Object.assign({}, state);
+            delete newState[ action.milestoneTrackerAddress ].milestones.splice(action.index, 1);
+            return newState;
+        }
+        return state;
+    }
     // Reset the form
     case c.FORM_RESET: {
         const newState = Object.assign({}, state);
@@ -33,8 +44,8 @@ const formReducer = (state = {}, action) => {
         const newMilestone = {
             description: "",
             url: "",
-            minCompletionDate: "",
-            maxCompletionDate: "",
+            minCompletionDate: moment().unix(),
+            maxCompletionDate: moment().unix(),
             reviewer: "",
             milestoneLeadLink: "",
             reviewTime: "",

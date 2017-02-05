@@ -36,6 +36,10 @@ module.exports = {
         ],
         loaders: [
             {
+                test: /.woff$|.woff2$|.ttf$|.eot$|.svg$/,
+                loader: "url-loader",
+            },
+            {
                 test: /\.sol$/,
                 loaders: [ "solc" ],
             },
@@ -50,17 +54,13 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                loader: 'style-loader'
+                exclude: /\.module\.css$/,
+                loader: "style-loader!css-loader",
             },
             {
-                test: /\.css$/,
-                loader: 'css-loader',
-                query:
-                {
-                    modules: true,
-                    localIdentName: '[name]__[local]___[hash:base64:5]'
-                }
-            }
+                test: /\.module\.css$/,
+                loader: "style-loader!css-loader?modules",
+            },
         ],
     },
 };

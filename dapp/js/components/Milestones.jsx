@@ -15,7 +15,7 @@ export default function Milestones(props) {
     if (props.milestones) {
         let milestones = [];
         for (let i = 0; i < props.milestones.length; ++ i) {
-            let bsStyle = "";
+            let bsStyle = "info";
             if (props.milestones[ i ].status === "Canceled") {
                 bsStyle = "danger";
             }

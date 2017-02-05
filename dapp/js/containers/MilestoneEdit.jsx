@@ -1,5 +1,6 @@
 import React from "react";
 import Input from "../components/Input";
+import InputDate from "../components/InputDate";
 import { connect } from "react-redux";
 import * as a from "../actions";
 
@@ -31,16 +32,14 @@ function MilestoneEditComponent(props) {
               onChange={inputChange}
               value={props.url}
             />
-            <Input
+            <InputDate
               name="minCompletionDate"
-              componentClass="input"
               label="minCompletionDate"
               onChange={inputChange}
               value={props.minCompletionDate}
             />
-            <Input
+            <InputDate
               name="maxCompletionDate"
-              componentClass="input"
               label="maxCompletionDate"
               onChange={inputChange}
               value={props.maxCompletionDate}

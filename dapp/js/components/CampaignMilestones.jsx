@@ -32,17 +32,17 @@ export default function CampaignMilestones(props) {
           milestones={ props.newMilestones.milestones }
         />);
     }
-    if (props.changingMilestones) {
-        proposedMilestonesButtons.push(<ButtonUnproposeMilestones
-          key="unproposeMilestones"
-          milestoneTrackerAddress={ props.milestoneTrackerAddress }
-        />);
-    }
     if (props.proposedMilestonesHash) {
         proposedMilestonesButtons.push(<ButtonAcceptMilestones
           key="acceptMilestones"
           milestoneTrackerAddress={ props.milestoneTrackerAddress }
           proposalHash={ props.proposedMilestonesHash }
+        />);
+    }
+    if (props.changingMilestones) {
+        proposedMilestonesButtons.push(<ButtonUnproposeMilestones
+          key="unproposeMilestones"
+          milestoneTrackerAddress={ props.milestoneTrackerAddress }
         />);
     }
 

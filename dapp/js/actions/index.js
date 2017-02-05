@@ -43,3 +43,11 @@ export function reset() {
         type: c.FORM_RESET,
     });
 }
+
+export function onCancelNewMilestone(milestoneTrackerAddress, index) {
+    return dispatch => dispatch({
+        type: c.CANCEL_NEW_MILESTONE,
+        milestoneTrackerAddress,
+        index,
+    });
+}

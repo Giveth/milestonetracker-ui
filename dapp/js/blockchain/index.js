@@ -11,6 +11,6 @@ if ((window) && (window.web3)) {
 }
 
 // const givethDirectory = new GivethDirectory(web3, "0x30e1a463ecf25dbba2f83cb3e4b10045f888e55b");
-const givethDirectory = new GivethDirectory(web3, "0xd833215cbcc3f914bd1c9ece3ee7bf8b14f841bb");
+const givethDirectory = new GivethDirectory(web3, "0xe78a0f7e598cc8b0bb87894b0f60dd2a88d6a8ab");
 
 export { web3, MilestoneTracker, givethDirectory };

@@ -9,6 +9,7 @@ function Input(props) {
         <FormGroup>
             <ControlLabel>{props.label}</ControlLabel>
             <FormControl
+              name={props.name}
               componentClass={props.componentClass}
               placeholder={props.placeholder}
               onChange={change}
@@ -25,8 +26,6 @@ Input.propTypes = {
     componentClass: React.PropTypes.string,
     onChange: React.PropTypes.func,
     value: React.PropTypes.string,
-    milestoneTrackerAddress: React.PropTypes.string,
-    index: React.PropTypes.number,
 };
 
 export default Input;
