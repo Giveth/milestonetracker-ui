@@ -19,13 +19,14 @@ export default function Milestones(props) {
             if (props.milestones[ i ].status === "Canceled") {
                 bsStyle = "danger";
             }
+            const header = <span>Milestone { i + 1 } <span className="caret"></span></span>;
             milestones.push(
                 <Panel
                   bsStyle={ bsStyle }
                   collapsible
                   defaultExpanded
                   key={ i }
-                  header={ `Milestone #${ i + 1 }` }
+                  header={ header }
                   eventKey={ i }
                 >
                     <Milestone

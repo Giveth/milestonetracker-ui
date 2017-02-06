@@ -1,6 +1,9 @@
 import React from "react";
 import Input from "../components/Input";
+import InputAddress from "../components/InputAddress";
 import InputDate from "../components/InputDate";
+import InputEther from "../components/InputEther";
+import InputDuration from "../components/InputDuration";
 import { connect } from "react-redux";
 import * as a from "../actions";
 
@@ -44,52 +47,49 @@ function MilestoneEditComponent(props) {
               onChange={inputChange}
               value={props.maxCompletionDate}
             />
-            <Input
+            <InputAddress
               name="reviewer"
               componentClass="input"
-              label="reviewer"
+              label="Reviewer"
               onChange={inputChange}
               value={props.reviewer}
             />
-            <Input
+            <InputAddress
               name="milestoneLeadLink"
               componentClass="input"
               label="milestoneLeadLink"
               onChange={inputChange}
               value={props.milestoneLeadLink}
             />
-            <Input
+            <InputDuration
               name="reviewTime"
-              componentClass="input"
-              label="reviewTime"
+              label="Review time"
               onChange={inputChange}
               value={props.reviewTime}
             />
-            <Input
+            <InputAddress
               name="paymentSource"
               componentClass="input"
-              label="paymentSource"
+              label="Payment source"
               onChange={inputChange}
               value={props.paymentSource}
             />
-            <Input
+            <InputAddress
               name="payRecipient"
               componentClass="input"
-              label="payRecipient"
+              label="Payment recipient"
               onChange={inputChange}
               value={props.payRecipient}
             />
-            <Input
+            <InputEther
               name="payValue"
-              componentClass="input"
-              label="payValue"
+              label="Payment amount"
               onChange={inputChange}
               value={props.payValue}
             />
-            <Input
+            <InputDuration
               name="payDelay"
-              componentClass="input"
-              label="payDelay"
+              label="Payment delay"
               onChange={inputChange}
               value={props.payDelay}
             />

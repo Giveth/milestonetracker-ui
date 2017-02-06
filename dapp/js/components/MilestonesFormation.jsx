@@ -11,8 +11,9 @@ function MilestonesFormation(props) {
         let milestones = [];
         const mlstns = props.newMilestones.milestones;
         for (let i = 0; i < mlstns.length; ++ i) {
-            const header = (mlstns[ i ].payDescription) ?
+            const text = (mlstns[ i ].payDescription) ?
                 mlstns[ i ].payDescription : `Milestone #${ i + 1 }`;
+            const header = <span>{ text } <span className="caret"></span></span>;
             const btns = (<span>
                 {header}
                 <ButtonGroup bsSize="xsmall" className="pull-right">
