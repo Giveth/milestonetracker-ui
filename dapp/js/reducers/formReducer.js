@@ -1,5 +1,4 @@
 import * as c from "../constants";
-import moment from "moment";
 
 const formReducer = (state = {}, action) => {
     switch (action.type) {
@@ -44,8 +43,8 @@ const formReducer = (state = {}, action) => {
         const newMilestone = {
             description: "",
             url: "",
-            minCompletionDate: moment().unix(),
-            maxCompletionDate: moment().unix(),
+            minCompletionDate: "",
+            maxCompletionDate: "",
             reviewer: "",
             milestoneLeadLink: "",
             reviewTime: "",

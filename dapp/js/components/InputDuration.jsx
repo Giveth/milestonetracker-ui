@@ -21,17 +21,28 @@ class InputDuration extends React.Component {
             title: timeUnits[ 3 ].title,
             value: props.value,
             valid: false,
+            validationState: null,
         };
-        this.change = this.change.bind(this);
+        this.hangleOnChange = this.hangleOnChange.bind(this);
     }
-    change(event) {
+    hangleOnChange(event) {
+        let newState;
+
         if (isNumeric(event.target.value)) {
-            this.setState({ value: event.target.value });
             this.props.onChange(this.props.name, event.target.value * this.state.unit);
-        } else if (event.target.value === "") {
-            this.setState({ value: "" });
-            this.props.onChange(this.props.name, 0);
+            newState = {
+                value: event.target.value,
+                valid: true,
+                validationState: "success",
+            };
+        } else {
+            newState = {
+                value: event.target.value,
+                valid: false,
+                validationState: "error",
+            };
         }
+        this.setState(newState);
     }
 
     unitChanged(i) {
@@ -53,15 +64,16 @@ class InputDuration extends React.Component {
             >{ timeUnits[ i ].title }</MenuItem>);
         }
         return (
-            <FormGroup>
+            <FormGroup validationState={this.state.validationState}>
                 <ControlLabel>{this.props.label}</ControlLabel>
                 <InputGroup>
                     <FormControl
                       name={this.props.name}
                       placeholder={this.props.placeholder}
-                      onChange={this.change}
+                      onChange={this.hangleOnChange}
                       value={this.state.value}
                     />
+                    <FormControl.Feedback />
                     <DropdownButton
                       componentClass={InputGroup.Button}
                       id="input-dropdown-addon"

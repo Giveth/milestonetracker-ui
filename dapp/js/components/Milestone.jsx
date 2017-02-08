@@ -13,7 +13,37 @@ import moment from "moment";
 export default function Milestone(props) {
     const dn = moment.unix(props.minCompletionDate);
     const dm = moment.unix(props.maxCompletionDate);
-    const rt = moment.duration(props.reviewTime, "seconds");
+    const rt = moment.duration(props.reviewTime, "s");
+
+    function format(duration) {
+        let formatedDuration = "";
+        const days = duration.days();
+        const hours = duration.hours();
+        const minutes = duration.minutes();
+        const seconds = duration.seconds();
+
+        if (days) {
+            const d = days > 1 ? "day" : "days";
+            formatedDuration += `${ days } ${ d }`;
+        }
+
+        if (hours) {
+            const h = hours > 1 ? "hour" : "hours";
+            formatedDuration += `${ hours } ${ h }`;
+        }
+
+        if (minutes) {
+            const m = minutes > 1 ? "minute" : "minutes";
+            formatedDuration += `${ minutes } ${ m }`;
+        }
+
+        if (seconds) {
+            const s = seconds > 1 ? "second" : "seconds";
+            formatedDuration += `${ seconds } ${ s }`;
+        }
+
+        return formatedDuration;
+    }
 
     return (
         <div>
@@ -50,7 +80,7 @@ export default function Milestone(props) {
                     <tr>
                         <td>
                             <strong>Reviewer time: </strong>
-                            { rt.humanize() }
+                            { format(rt) }
                         </td>
                     </tr>
                     <tr>
@@ -84,7 +114,7 @@ Milestone.propTypes = {
     minCompletionDate: React.PropTypes.any.isRequired,
     milestoneLeadLink: React.PropTypes.string.isRequired,
     reviewer: React.PropTypes.string.isRequired,
-    reviewTime: React.PropTypes.any.isRequired,
+    reviewTime: React.PropTypes.number.isRequired,
     paymentSource: React.PropTypes.string.isRequired,
     status: React.PropTypes.string,
     doneTime: React.PropTypes.number,

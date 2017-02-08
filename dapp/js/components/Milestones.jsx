@@ -36,7 +36,7 @@ export default function Milestones(props) {
                       minCompletionDate={ props.milestones[ i ].minCompletionDate }
                       milestoneLeadLink={ props.milestones[ i ].milestoneLeadLink }
                       reviewer={ props.milestones[ i ].reviewer }
-                      reviewTime={ props.milestones[ i ].reviewTime }
+                      reviewTime={ props.milestones[ i ].reviewTime.toNumber() }
                       paymentSource={ props.milestones[ i ].paymentSource }
                       status={ props.milestones[ i ].status }
                       doneTime={ props.milestones[ i ].doneTime }
