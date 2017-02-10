@@ -19,7 +19,11 @@ export default function Milestones(props) {
             if (props.milestones[ i ].status === "Canceled") {
                 bsStyle = "danger";
             }
-            const header = <span>Milestone { i + 1 } <span className="caret"></span></span>;
+            const header = (
+                <span>
+                    { props.milestones[ i ].payDescription }
+                    <span className="caret"></span>
+                </span>);
             milestones.push(
                 <Panel
                   bsStyle={ bsStyle }
@@ -30,6 +34,7 @@ export default function Milestones(props) {
                   eventKey={ i }
                 >
                     <Milestone
+                      title={ props.milestones[ i ].payDescription }
                       description={ props.milestones[ i ].description }
                       url={ props.milestones[ i ].url }
                       maxCompletionDate={ props.milestones[ i ].maxCompletionDate }

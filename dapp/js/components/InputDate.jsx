@@ -9,7 +9,6 @@ class InputDate extends React.Component {
         super(props);
         this.state = {
             value: props.value,
-            valid: false,
             validationState: null,
         };
         this.hangleOnChange = this.hangleOnChange.bind(this);
@@ -21,15 +20,15 @@ class InputDate extends React.Component {
             this.props.onChange(this.props.name, date.unix());
             newState = {
                 value: date,
-                valid: true,
                 validationState: "success",
             };
+            this.props.setValid(this.props.name, true);
         } else {
             newState = {
                 value: date,
-                valid: false,
                 validationState: "error",
             };
+            this.props.setValid(this.props.name, false);
         }
         this.setState(newState);
     }

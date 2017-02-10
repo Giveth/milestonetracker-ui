@@ -8,7 +8,6 @@ import React from "react";
 //
 import { Table } from "react-bootstrap";
 import moment from "moment";
-// import { LinkContainer } from "react-router-bootstrap";
 
 export default function Milestone(props) {
     const dn = moment.unix(props.minCompletionDate);
@@ -23,22 +22,22 @@ export default function Milestone(props) {
         const seconds = duration.seconds();
 
         if (days) {
-            const d = days > 1 ? "day" : "days";
+            const d = days > 1 ? "days" : "day";
             formatedDuration += `${ days } ${ d }`;
         }
 
         if (hours) {
-            const h = hours > 1 ? "hour" : "hours";
+            const h = hours > 1 ? "hours" : "hour";
             formatedDuration += `${ hours } ${ h }`;
         }
 
         if (minutes) {
-            const m = minutes > 1 ? "minute" : "minutes";
+            const m = minutes > 1 ? "minutes" : "minute";
             formatedDuration += `${ minutes } ${ m }`;
         }
 
         if (seconds) {
-            const s = seconds > 1 ? "second" : "seconds";
+            const s = seconds > 1 ? "seconds" : "second";
             formatedDuration += `${ seconds } ${ s }`;
         }
 

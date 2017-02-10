@@ -16,22 +16,13 @@
 import React from "react";
 
 import { Table } from "react-bootstrap";
-import { ButtonProposeMilestones, ButtonUnproposeMilestones,
-         ButtonAcceptMilestones, ButtonAddMilestone } from "../containers/Buttons";
+import { ButtonUnproposeMilestones, ButtonAcceptMilestones } from "../containers/Buttons";
 import Milestones from "./Milestones";
 import MilestonesFormation from "./MilestonesFormation";
 
 export default function CampaignMilestones(props) {
     let proposedMilestonesButtons = [];
-    let newMilestonesButtons = [];
 
-    if (props.newMilestones && props.newMilestones.milestones) {
-        newMilestonesButtons.push(<ButtonProposeMilestones
-          key="proposeMilestones"
-          milestoneTrackerAddress={ props.milestoneTrackerAddress }
-          milestones={ props.newMilestones.milestones }
-        />);
-    }
     if (props.proposedMilestonesHash) {
         proposedMilestonesButtons.push(<ButtonAcceptMilestones
           key="acceptMilestones"
@@ -94,14 +85,7 @@ export default function CampaignMilestones(props) {
             <MilestonesFormation
               newMilestones={ props.newMilestones }
               milestoneTrackerAddress={ props.milestoneTrackerAddress }
-              header="New milestones to propose"
-            >
-                <ButtonAddMilestone
-                  key="addMilestone"
-                  milestoneTrackerAddress={ props.milestoneTrackerAddress }
-                />
-                {newMilestonesButtons}
-            </MilestonesFormation>
+            />
         </div>
     );
 }

@@ -12,12 +12,34 @@ class MilestoneEditComponent extends React.Component {
         super(props);
         this.state = {
             valid: false,
-            inputsValid: [],
+            inputsValidity: {},
         };
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleValidityChange = this.handleValidityChange.bind(this);
     }
     handleInputChange(name, value) {
         this.props.onInputChange(this.props.milestoneTrackerAddress, this.props.index, name, value);
+    }
+
+    handleValidityChange(name, val) {
+        const validationArray = Object.assign({}, this.state.inputsValidity);
+        validationArray[ name ] = val;
+        this.setState({ inputsValidity: validationArray });
+
+        if (val) {
+            for (const key in validationArray) {
+                if (!validationArray[ key ]) {
+                    this.setState({ valid: false });
+                    this.props.handleValidityChange(this.props.index, false);
+                    break;
+                }
+                this.setState({ valid: true });
+                this.props.handleValidityChange(this.props.index, true);
+            }
+        } else {
+            this.setState({ valid: false });
+            this.props.handleValidityChange(this.props.index, false);
+        }
     }
 
     render() {
@@ -28,6 +50,7 @@ class MilestoneEditComponent extends React.Component {
                   componentClass="input"
                   label="Title"
                   onChange={this.handleInputChange}
+                  setValid={this.handleValidityChange}
                   value={this.props.payDescription}
                 />
                 <Input
@@ -35,6 +58,7 @@ class MilestoneEditComponent extends React.Component {
                   componentClass="textarea"
                   label="Description"
                   onChange={this.handleInputChange}
+                  setValid={this.handleValidityChange}
                   value={this.props.description}
                 />
                 <Input
@@ -42,18 +66,21 @@ class MilestoneEditComponent extends React.Component {
                   componentClass="input"
                   label="url"
                   onChange={this.handleInputChange}
+                  setValid={this.handleValidityChange}
                   value={this.props.url}
                 />
                 <InputDate
                   name="minCompletionDate"
                   label="minCompletionDate"
                   onChange={this.handleInputChange}
+                  setValid={this.handleValidityChange}
                   value={this.props.minCompletionDate}
                 />
                 <InputDate
                   name="maxCompletionDate"
                   label="maxCompletionDate"
                   onChange={this.handleInputChange}
+                  setValid={this.handleValidityChange}
                   value={this.props.maxCompletionDate}
                 />
                 <InputAddress
@@ -61,6 +88,7 @@ class MilestoneEditComponent extends React.Component {
                   componentClass="input"
                   label="Reviewer"
                   onChange={this.handleInputChange}
+                  setValid={this.handleValidityChange}
                   value={this.props.reviewer}
                 />
                 <InputAddress
@@ -68,12 +96,14 @@ class MilestoneEditComponent extends React.Component {
                   componentClass="input"
                   label="milestoneLeadLink"
                   onChange={this.handleInputChange}
+                  setValid={this.handleValidityChange}
                   value={this.props.milestoneLeadLink}
                 />
                 <InputDuration
                   name="reviewTime"
                   label="Review time"
                   onChange={this.handleInputChange}
+                  setValid={this.handleValidityChange}
                   value={this.props.reviewTime}
                 />
                 <InputAddress
@@ -81,6 +111,7 @@ class MilestoneEditComponent extends React.Component {
                   componentClass="input"
                   label="Payment source"
                   onChange={this.handleInputChange}
+                  setValid={this.handleValidityChange}
                   value={this.props.paymentSource}
                 />
                 <InputAddress
@@ -88,18 +119,21 @@ class MilestoneEditComponent extends React.Component {
                   componentClass="input"
                   label="Payment recipient"
                   onChange={this.handleInputChange}
+                  setValid={this.handleValidityChange}
                   value={this.props.payRecipient}
                 />
                 <InputEther
                   name="payValue"
                   label="Payment amount"
                   onChange={this.handleInputChange}
+                  setValid={this.handleValidityChange}
                   value={this.props.payValue}
                 />
                 <InputDuration
                   name="payDelay"
                   label="Payment delay"
                   onChange={this.handleInputChange}
+                  setValid={this.handleValidityChange}
                   value={this.props.payDelay}
                 />
             </div>
