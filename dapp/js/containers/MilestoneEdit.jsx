@@ -7,6 +7,9 @@ import InputDuration from "../components/InputDuration";
 import { connect } from "react-redux";
 import * as a from "../actions";
 
+const websiteValidator =
+    RegExp(/(https?:\/\/(?:www\.|(?!www))[^\s\.]+\.[^\s]{2,}|www\.[^\s]+\.[^\s]{2,})/);
+
 class MilestoneEditComponent extends React.Component {
     constructor(props) {
         super(props);
@@ -43,6 +46,16 @@ class MilestoneEditComponent extends React.Component {
     }
 
     render() {
+        const websiteValidate = (value) => websiteValidator.test(value);
+
+        const anyInput = (value) => {
+            if (value) {
+                return true;
+            }
+
+            return false;
+        };
+
         return (
             <div>
                 <Input
@@ -52,6 +65,7 @@ class MilestoneEditComponent extends React.Component {
                   onChange={this.handleInputChange}
                   setValid={this.handleValidityChange}
                   value={this.props.payDescription}
+                  validate={ anyInput }
                 />
                 <Input
                   name="description"
@@ -60,6 +74,7 @@ class MilestoneEditComponent extends React.Component {
                   onChange={this.handleInputChange}
                   setValid={this.handleValidityChange}
                   value={this.props.description}
+                  validate={ anyInput }
                 />
                 <Input
                   name="url"
@@ -68,6 +83,7 @@ class MilestoneEditComponent extends React.Component {
                   onChange={this.handleInputChange}
                   setValid={this.handleValidityChange}
                   value={this.props.url}
+                  validate={ websiteValidate }
                 />
                 <InputDate
                   name="minCompletionDate"
