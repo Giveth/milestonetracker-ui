@@ -20,6 +20,11 @@ class InputAddress extends React.Component {
         };
         this.change = this.change.bind(this);
     }
+
+    componentWillMount() {
+        this.props.setValid(this.props.name, false);
+    }
+
     handleChange(val, convFunction) {
         let account = "";
         let ibanValid = "error";
@@ -29,9 +34,11 @@ class InputAddress extends React.Component {
             if (account.isValid()) {
                 ibanValid = "success";
                 this.props.onChange(this.props.name, `0x${ account.address() }`);
+                this.props.setValid(this.props.name, true);
             }
         } catch (e) {
             console.log(e.msg);
+            this.props.setValid(this.props.name, false);
         }
         this.setState({
             value: val,
@@ -95,6 +102,7 @@ InputAddress.propTypes = {
         React.PropTypes.string,
         React.PropTypes.number,
     ]),
+    setValid: React.PropTypes.func.isRequired,
 };
 
 export default InputAddress;

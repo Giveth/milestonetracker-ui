@@ -6,10 +6,12 @@
 
 import React from "react";
 
-import { Accordion, Panel } from "react-bootstrap";
+import { Accordion, Panel, ButtonGroup } from "react-bootstrap";
+import { ButtonCollectPayment, ButtonMarkMilestoneComplete, RejectCompletedMilestone,
+         ApproveCompletedMilestone } from "../containers/Buttons";
 import Milestone from "./Milestone";
 
-export default function Milestones(props) {
+export default function MilestonesApproved(props) {
     let content = "";
 
     if (props.milestones) {
@@ -24,13 +26,36 @@ export default function Milestones(props) {
                     { props.milestones[ i ].payDescription }
                     <span className="caret"></span>
                 </span>);
+            const btns = (<span>
+                {header}
+                <ButtonGroup bsSize="xsmall" className="pull-right">
+                    <ApproveCompletedMilestone
+                      milestoneID={i}
+                      milestoneTrackerAddress={props.milestoneTrackerAddress}
+                      reviewerAddress={props.milestones[ i ].reviewer}
+                    />
+                    <RejectCompletedMilestone
+                      milestoneID={i}
+                      milestoneTrackerAddress={props.milestoneTrackerAddress}
+                      reviewerAddress={props.milestones[ i ].reviewer}
+                    />
+                    <ButtonMarkMilestoneComplete
+                      milestoneID={i}
+                      milestoneTrackerAddress={props.milestoneTrackerAddress}
+                      fromAddress={props.milestones[ i ].milestoneLeadLink}
+                    />
+                    <ButtonCollectPayment
+                      vaultAddress={ props.vaultAddress }
+                    />
+                </ButtonGroup>
+            </span>);
             milestones.push(
                 <Panel
                   bsStyle={ bsStyle }
                   collapsible
                   defaultExpanded
                   key={ i }
-                  header={ header }
+                  header={ btns }
                   eventKey={ i }
                 >
                     <Milestone
@@ -67,8 +92,10 @@ export default function Milestones(props) {
     );
 }
 
-Milestones.propTypes = {
+MilestonesApproved.propTypes = {
     approved: React.PropTypes.bool,
     milestones: React.PropTypes.array,
     header: React.PropTypes.string.isRequired,
+    vaultAddress: React.PropTypes.string.isRequired,
+    milestoneTrackerAddress: React.PropTypes.string.isRequired,
 };

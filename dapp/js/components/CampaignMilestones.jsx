@@ -16,22 +16,14 @@
 import React from "react";
 
 import { Table } from "react-bootstrap";
-import { ButtonProposeMilestones, ButtonUnproposeMilestones,
-         ButtonAcceptMilestones, ButtonAddMilestone } from "../containers/Buttons";
+import { ButtonUnproposeMilestones, ButtonAcceptMilestones } from "../containers/Buttons";
 import Milestones from "./Milestones";
+import MilestonesApproved from "./MilestonesApproved";
 import MilestonesFormation from "./MilestonesFormation";
 
 export default function CampaignMilestones(props) {
     let proposedMilestonesButtons = [];
-    let newMilestonesButtons = [];
 
-    if (props.newMilestones && props.newMilestones.milestones) {
-        newMilestonesButtons.push(<ButtonProposeMilestones
-          key="proposeMilestones"
-          milestoneTrackerAddress={ props.milestoneTrackerAddress }
-          milestones={ props.newMilestones.milestones }
-        />);
-    }
     if (props.proposedMilestonesHash) {
         proposedMilestonesButtons.push(<ButtonAcceptMilestones
           key="acceptMilestones"
@@ -80,10 +72,11 @@ export default function CampaignMilestones(props) {
                     </tr>
                 </tbody>
             </Table>
-            <Milestones
+            <MilestonesApproved
               milestones={ props.milestones }
-              approved
               header="Approved Milestones"
+              vaultAddress={ props.vaultAddress }
+              milestoneTrackerAddress={ props.milestoneTrackerAddress }
             />
             <Milestones
               milestones={ props.proposedMilestones }
@@ -94,14 +87,7 @@ export default function CampaignMilestones(props) {
             <MilestonesFormation
               newMilestones={ props.newMilestones }
               milestoneTrackerAddress={ props.milestoneTrackerAddress }
-              header="New milestones to propose"
-            >
-                <ButtonAddMilestone
-                  key="addMilestone"
-                  milestoneTrackerAddress={ props.milestoneTrackerAddress }
-                />
-                {newMilestonesButtons}
-            </MilestonesFormation>
+            />
         </div>
     );
 }
@@ -117,4 +103,5 @@ CampaignMilestones.propTypes = {
     proposedMilestonesHash: React.PropTypes.string,
     proposedMilestones: React.PropTypes.array,
     newMilestones: React.PropTypes.object,
+    vaultAddress: React.PropTypes.string.isRequired,
 };

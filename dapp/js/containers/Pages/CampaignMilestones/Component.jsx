@@ -23,6 +23,7 @@ export default function Component(props) {
                   proposedMilestonesHash={milestonesTracker.proposedMilestonesHash}
                   proposedMilestones={milestonesTracker.proposedMilestones}
                   newMilestones={props.formReducer[ currentCampaign.milestoneTrackerAddress ]}
+                  vaultAddress={ currentCampaign.vaultAddress }
                 />
             </Panel>
         );

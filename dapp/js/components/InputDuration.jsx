@@ -16,15 +16,20 @@ const timeUnits = [
 class InputDuration extends React.Component {
     constructor(props) {
         super(props);
+        const val = props.value ? props.value / timeUnits[ 3 ].unit : props.value;
         this.state = {
             unit: timeUnits[ 3 ].unit,
             title: timeUnits[ 3 ].title,
-            value: props.value,
-            valid: false,
+            value: val,
             validationState: null,
         };
         this.hangleOnChange = this.hangleOnChange.bind(this);
     }
+
+    componentWillMount() {
+        this.props.setValid(this.props.name, false);
+    }
+
     hangleOnChange(event) {
         let newState;
 
@@ -32,15 +37,15 @@ class InputDuration extends React.Component {
             this.props.onChange(this.props.name, event.target.value * this.state.unit);
             newState = {
                 value: event.target.value,
-                valid: true,
                 validationState: "success",
             };
+            this.props.setValid(this.props.name, true);
         } else {
             newState = {
                 value: event.target.value,
-                valid: false,
                 validationState: "error",
             };
+            this.props.setValid(this.props.name, false);
         }
         this.setState(newState);
     }
@@ -92,6 +97,7 @@ InputDuration.propTypes = {
     placeholder: React.PropTypes.string,
     label: React.PropTypes.string.isRequired,
     onChange: React.PropTypes.func,
+    setValid: React.PropTypes.func,
     value: React.PropTypes.oneOfType([
         React.PropTypes.string,
         React.PropTypes.number,
