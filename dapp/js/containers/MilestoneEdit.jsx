@@ -1,14 +1,11 @@
 import React from "react";
 import Input from "../components/Input";
-import InputAddress from "../components/InputAddress";
 import InputDate from "../components/InputDate";
 import InputEther from "../components/InputEther";
 import InputDuration from "../components/InputDuration";
 import { connect } from "react-redux";
 import * as a from "../actions";
-
-const websiteValidator =
-    RegExp(/(https?:\/\/(?:www\.|(?!www))[^\s\.]+\.[^\s]{2,}|www\.[^\s]+\.[^\s]{2,})/);
+import * as validator from "../validators";
 
 class MilestoneEditComponent extends React.Component {
     constructor(props) {
@@ -46,16 +43,6 @@ class MilestoneEditComponent extends React.Component {
     }
 
     render() {
-        const websiteValidate = (value) => websiteValidator.test(value);
-
-        const anyInput = (value) => {
-            if (value) {
-                return true;
-            }
-
-            return false;
-        };
-
         return (
             <div>
                 <Input
@@ -65,7 +52,7 @@ class MilestoneEditComponent extends React.Component {
                   onChange={this.handleInputChange}
                   setValid={this.handleValidityChange}
                   value={this.props.payDescription}
-                  validate={ anyInput }
+                  validate={ validator.any }
                 />
                 <Input
                   name="description"
@@ -74,7 +61,7 @@ class MilestoneEditComponent extends React.Component {
                   onChange={this.handleInputChange}
                   setValid={this.handleValidityChange}
                   value={this.props.description}
-                  validate={ anyInput }
+                  validate={ validator.any }
                 />
                 <Input
                   name="url"
@@ -83,7 +70,7 @@ class MilestoneEditComponent extends React.Component {
                   onChange={this.handleInputChange}
                   setValid={this.handleValidityChange}
                   value={this.props.url}
-                  validate={ websiteValidate }
+                  validate={ validator.website }
                 />
                 <InputDate
                   name="minCompletionDate"
@@ -99,21 +86,23 @@ class MilestoneEditComponent extends React.Component {
                   setValid={this.handleValidityChange}
                   value={this.props.maxCompletionDate}
                 />
-                <InputAddress
+                <Input
                   name="reviewer"
                   componentClass="input"
                   label="Reviewer"
                   onChange={this.handleInputChange}
                   setValid={this.handleValidityChange}
                   value={this.props.reviewer}
+                  validate={ validator.ethereumAddress }
                 />
-                <InputAddress
+                <Input
                   name="milestoneLeadLink"
                   componentClass="input"
                   label="milestoneLeadLink"
                   onChange={this.handleInputChange}
                   setValid={this.handleValidityChange}
                   value={this.props.milestoneLeadLink}
+                  validate={ validator.ethereumAddress }
                 />
                 <InputDuration
                   name="reviewTime"
@@ -122,21 +111,23 @@ class MilestoneEditComponent extends React.Component {
                   setValid={this.handleValidityChange}
                   value={this.props.reviewTime}
                 />
-                <InputAddress
+                <Input
                   name="paymentSource"
                   componentClass="input"
                   label="Payment source"
                   onChange={this.handleInputChange}
                   setValid={this.handleValidityChange}
                   value={this.props.paymentSource}
+                  validate={ validator.ethereumAddress }
                 />
-                <InputAddress
+                <Input
                   name="payRecipient"
                   componentClass="input"
                   label="Payment recipient"
                   onChange={this.handleInputChange}
                   setValid={this.handleValidityChange}
                   value={this.props.payRecipient}
+                  validate={ validator.ethereumAddress }
                 />
                 <InputEther
                   name="payValue"
