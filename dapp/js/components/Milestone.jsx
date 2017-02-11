@@ -60,7 +60,7 @@ export default function Milestone(props) {
                     </tr>
                     <tr>
                         <td>
-                            <strong>Time left: </strong>
+                            <strong>Milestone ends: </strong>
                             { dm.fromNow() }
                         </td>
                     </tr>

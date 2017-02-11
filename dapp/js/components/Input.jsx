@@ -11,6 +11,10 @@ class Input extends React.Component {
         this.change = this.change.bind(this);
     }
 
+    componentWillMount() {
+        this.props.setValid(this.props.name, false);
+    }
+
     change(event) {
         if (this.props.validate(event.target.value)) {
             this.props.onChange(this.props.name, event.target.value);

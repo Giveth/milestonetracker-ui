@@ -13,6 +13,11 @@ class InputDate extends React.Component {
         };
         this.hangleOnChange = this.hangleOnChange.bind(this);
     }
+
+    componentWillMount() {
+        this.props.setValid(this.props.name, false);
+    }
+
     hangleOnChange(date) {
         let newState;
 

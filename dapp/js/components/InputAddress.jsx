@@ -20,6 +20,11 @@ class InputAddress extends React.Component {
         };
         this.change = this.change.bind(this);
     }
+
+    componentWillMount() {
+        this.props.setValid(this.props.name, false);
+    }
+
     handleChange(val, convFunction) {
         let account = "";
         let ibanValid = "error";

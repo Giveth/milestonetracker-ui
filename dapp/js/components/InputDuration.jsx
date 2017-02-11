@@ -16,14 +16,20 @@ const timeUnits = [
 class InputDuration extends React.Component {
     constructor(props) {
         super(props);
+        const val = props.value ? props.value / timeUnits[ 3 ].unit : props.value;
         this.state = {
             unit: timeUnits[ 3 ].unit,
             title: timeUnits[ 3 ].title,
-            value: props.value,
+            value: val,
             validationState: null,
         };
         this.hangleOnChange = this.hangleOnChange.bind(this);
     }
+
+    componentWillMount() {
+        this.props.setValid(this.props.name, false);
+    }
+
     hangleOnChange(event) {
         let newState;
 

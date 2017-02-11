@@ -23,14 +23,20 @@ const etherUnits = [
 class InputEther extends React.Component {
     constructor(props) {
         super(props);
+        const val = props.value ? web3.fromWei(props.value, etherUnits[ 5 ].unit) : props.value;
         this.state = {
-            unit: "ether",
-            title: "Ether",
-            value: props.value,
+            unit: etherUnits[ 5 ].unit,
+            title: etherUnits[ 5 ].title,
+            value: val,
             validationState: null,
         };
         this.hangleOnChange = this.hangleOnChange.bind(this);
     }
+
+    componentWillMount() {
+        this.props.setValid(this.props.name, false);
+    }
+
     hangleOnChange(event) {
         let newState;
         if (isNumeric(event.target.value)) {

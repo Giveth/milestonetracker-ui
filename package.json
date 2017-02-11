@@ -60,7 +60,7 @@
     "babel-polyfill": "^6.7.4",
     "bootstrap": "^3.3.7",
     "file-loader": "^0.10.0",
-    "givethdirectory": "^0.0.20",
+    "givethdirectory": "^0.0.21",
     "moment": "^2.17.1",
     "react": "^15.0.1",
     "react-bootstrap": "^0.30.7",
