@@ -18,6 +18,7 @@ import React from "react";
 import { Table } from "react-bootstrap";
 import { ButtonUnproposeMilestones, ButtonAcceptMilestones } from "../containers/Buttons";
 import Milestones from "./Milestones";
+import MilestonesApproved from "./MilestonesApproved";
 import MilestonesFormation from "./MilestonesFormation";
 
 export default function CampaignMilestones(props) {
@@ -71,10 +72,11 @@ export default function CampaignMilestones(props) {
                     </tr>
                 </tbody>
             </Table>
-            <Milestones
+            <MilestonesApproved
               milestones={ props.milestones }
-              approved
               header="Approved Milestones"
+              vaultAddress={ props.vaultAddress }
+              milestoneTrackerAddress={ props.milestoneTrackerAddress }
             />
             <Milestones
               milestones={ props.proposedMilestones }
@@ -101,4 +103,5 @@ CampaignMilestones.propTypes = {
     proposedMilestonesHash: React.PropTypes.string,
     proposedMilestones: React.PropTypes.array,
     newMilestones: React.PropTypes.object,
+    vaultAddress: React.PropTypes.string.isRequired,
 };
