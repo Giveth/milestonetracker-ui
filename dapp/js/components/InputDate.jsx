@@ -63,6 +63,7 @@ InputDate.propTypes = {
         React.PropTypes.string,
         React.PropTypes.number,
     ]),
+    setValid: React.PropTypes.func.isRequired,
 };
 
 export default InputDate;

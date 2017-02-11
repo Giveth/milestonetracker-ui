@@ -96,7 +96,7 @@ class MilestonesFormation extends React.Component {
         }
         return (
             <Form>
-                <h2>{ this.props.header }</h2>
+                <h2>Milestones to be proposed</h2>
                 {content}
 
                 <ButtonAddMilestone
