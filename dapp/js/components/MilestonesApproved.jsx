@@ -42,7 +42,7 @@ export default function MilestonesApproved(props) {
                     <ButtonMarkMilestoneComplete
                       milestoneID={i}
                       milestoneTrackerAddress={props.milestoneTrackerAddress}
-                      reviewerAddress={props.milestones[ i ].reviewer}
+                      fromAddress={props.milestones[ i ].milestoneLeadLink}
                     />
                     <ButtonCollectPayment
                       vaultAddress={ props.vaultAddress }
@@ -65,6 +65,7 @@ export default function MilestonesApproved(props) {
                       maxCompletionDate={ props.milestones[ i ].maxCompletionDate }
                       minCompletionDate={ props.milestones[ i ].minCompletionDate }
                       milestoneLeadLink={ props.milestones[ i ].milestoneLeadLink }
+                      payRecipient={ props.milestones[ i ].payRecipient }
                       reviewer={ props.milestones[ i ].reviewer }
                       reviewTime={ props.milestones[ i ].reviewTime }
                       paymentSource={ props.milestones[ i ].paymentSource }

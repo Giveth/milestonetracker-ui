@@ -66,8 +66,14 @@ export default function Milestone(props) {
                     </tr>
                     <tr>
                         <td>
-                            <strong>Recipient: </strong>
+                            <strong>Milestone Lead Link Address: </strong>
                             { props.milestoneLeadLink }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>Pay Recipient Address: </strong>
+                            { props.payRecipient }
                         </td>
                     </tr>
                     <tr>
@@ -88,18 +94,6 @@ export default function Milestone(props) {
                             { props.paymentSource }
                         </td>
                     </tr>
-                    <tr>
-                        <td>
-                            <strong>Status: </strong>
-                            { props.status }
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <strong>Done time: </strong>
-                            { props.doneTime }
-                        </td>
-                    </tr>
                 </tbody>
             </Table>
         </div>
@@ -117,4 +111,5 @@ Milestone.propTypes = {
     paymentSource: React.PropTypes.string.isRequired,
     status: React.PropTypes.string,
     doneTime: React.PropTypes.number,
+    payRecipient: React.PropTypes.string.isRequired,
 };

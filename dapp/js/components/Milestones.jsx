@@ -40,6 +40,7 @@ export default function Milestones(props) {
                       maxCompletionDate={ props.milestones[ i ].maxCompletionDate }
                       minCompletionDate={ props.milestones[ i ].minCompletionDate }
                       milestoneLeadLink={ props.milestones[ i ].milestoneLeadLink }
+                      payRecipient={ props.milestones[ i ].payRecipient }
                       reviewer={ props.milestones[ i ].reviewer }
                       reviewTime={ props.milestones[ i ].reviewTime }
                       paymentSource={ props.milestones[ i ].paymentSource }

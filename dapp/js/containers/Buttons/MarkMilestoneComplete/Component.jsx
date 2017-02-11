@@ -5,7 +5,7 @@ export default function Component(props) {
     const handleCompleteMilestone = (event) => {
         event.stopPropagation();
         props.onCompleteMilestone(
-            props.milestoneTrackerAddress, props.milestoneID, props.reviewerAddress
+            props.milestoneTrackerAddress, props.milestoneID, props.fromAddress
         );
     };
     return (
@@ -13,7 +13,7 @@ export default function Component(props) {
           bsStyle="info"
           onClick={ handleCompleteMilestone }
         >
-            Complete Milestone
+            Mark Milestone Complete
         </Button>
     );
 }
@@ -22,5 +22,5 @@ Component.propTypes = {
     onCompleteMilestone: React.PropTypes.func.isRequired,
     milestoneTrackerAddress: React.PropTypes.string.isRequired,
     milestoneID: React.PropTypes.number.isRequired,
-    reviewerAddress: React.PropTypes.string.isRequired,
+    fromAddress: React.PropTypes.string.isRequired,
 };
