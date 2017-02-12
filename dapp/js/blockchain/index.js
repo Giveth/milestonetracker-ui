@@ -1,6 +1,6 @@
 import Web3 from "web3";
 import MilestoneTracker from "milestonetracker";
-import GivethDirectory from "givethDirectory";
+import GivethDirectory from "givethdirectory";
 
 let web3;
 if ((window) && (window.web3)) {
