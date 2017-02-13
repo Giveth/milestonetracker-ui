@@ -1,6 +1,7 @@
 import React from "react";
 import { ProgressBar, Grid, Row, Col, Nav, NavItem, PageHeader } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
+import { Donate } from "../../Buttons";
 
 export default function Component(props) {
     let content = (
@@ -31,6 +32,11 @@ export default function Component(props) {
                     >
                     { currentCampaign.name }
                     </a> <small>{ currentCampaign.status }</small>
+                    <span className="pull-right">
+                        <Donate
+                          idCampaign={Number(props.params.campaignId)}
+                        />
+                    </span>
                 </PageHeader>
                 <Nav bsStyle="pills">
                     <LinkContainer

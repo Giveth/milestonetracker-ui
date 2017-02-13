@@ -55,28 +55,37 @@ export default class MilestoneApproved extends React.Component {
                   onClick={ this.preventDefault }
                   id={`milestone_${ this.props.index }_actions`}
                 >
-                    <MenuItem header>Milestone Lead Link</MenuItem>
+                    <MenuItem header>Recipient</MenuItem>
                     <ButtonMarkMilestoneComplete
                       eventKey="1"
                       milestoneID={this.props.index}
                       milestoneTrackerAddress={this.props.milestoneTrackerAddress}
-                      fromAddress={this.props.milestoneLeadLink}
+                      fromAddress={this.props.payRecipient}
                     />
                     <ButtonCollectPayment
                       eventKey="2"
                       milestoneID={this.props.index}
                       vaultAddress={ this.props.vaultAddress }
+                      fromAddress={this.props.payRecipient}
+                    />
+                    <MenuItem divider />
+                    <MenuItem header>Milestone Lead Link</MenuItem>
+                    <ButtonMarkMilestoneComplete
+                      eventKey="3"
+                      milestoneID={this.props.index}
+                      milestoneTrackerAddress={this.props.milestoneTrackerAddress}
+                      fromAddress={this.props.milestoneLeadLink}
                     />
                     <MenuItem divider />
                     <MenuItem header>Reviewer</MenuItem>
                     <ApproveCompletedMilestone
-                      eventKey="3"
+                      eventKey="4"
                       milestoneID={this.props.index}
                       milestoneTrackerAddress={this.props.milestoneTrackerAddress}
                       reviewerAddress={this.props.reviewer}
                     />
                     <RejectCompletedMilestone
-                      eventKey="4"
+                      eventKey="5"
                       milestoneID={ this.props.index }
                       milestoneTrackerAddress={this.props.milestoneTrackerAddress}
                       reviewerAddress={this.props.reviewer}

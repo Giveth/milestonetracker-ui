@@ -6,9 +6,6 @@
 
 import React from "react";
 
-// import { Panel, DropdownButton, ButtonToolbar, MenuItem } from "react-bootstrap";
-// import { ButtonCollectPayment, ButtonMarkMilestoneComplete, RejectCompletedMilestone,
-//          ApproveCompletedMilestone } from "../containers/Buttons";
 import MilestoneApproved from "./MilestoneApproved";
 
 export default function MilestonesApproved(props) {
@@ -17,26 +14,6 @@ export default function MilestonesApproved(props) {
     if (props.milestones) {
         let milestones = [];
         for (let i = 0; i < props.milestones.length; ++ i) {
-            /* <ButtonGroup bsSize="xsmall">
-                <ApproveCompletedMilestone
-                  milestoneID={i}
-                  milestoneTrackerAddress={props.milestoneTrackerAddress}
-                  reviewerAddress={props.milestones[ i ].reviewer}
-                />
-                <RejectCompletedMilestone
-                  milestoneID={i}
-                  milestoneTrackerAddress={props.milestoneTrackerAddress}
-                  reviewerAddress={props.milestones[ i ].reviewer}
-                />
-                <ButtonMarkMilestoneComplete
-                  milestoneID={i}
-                  milestoneTrackerAddress={props.milestoneTrackerAddress}
-                  fromAddress={props.milestones[ i ].milestoneLeadLink}
-                />
-                <ButtonCollectPayment
-                  vaultAddress={ props.vaultAddress }
-                />
-            </ButtonGroup>*/
             milestones.push(
                 <MilestoneApproved
                   key={ i }
