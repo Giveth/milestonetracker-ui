@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "react-bootstrap";
+import { MenuItem } from "react-bootstrap";
 
 export default function Component(props) {
     const handleRejectCompletedMilestone = (event) => {
@@ -9,12 +9,12 @@ export default function Component(props) {
         );
     };
     return (
-        <Button
+        <MenuItem
           bsStyle="danger"
           onClick={ handleRejectCompletedMilestone }
         >
             Reject Completed
-        </Button>
+        </MenuItem>
     );
 }
 

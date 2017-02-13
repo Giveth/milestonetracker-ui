@@ -7,7 +7,7 @@ export const proposeMilestones = (milestoneTrackerAddress, milestones) => () => 
     const milestoneTracker = new MilestoneTracker(web3, milestoneTrackerAddress);
     milestoneTracker.proposeMilestones(
         {
-            newMilestones: milestones,
+            newMilestones: Object.assign({}, milestones),
             from: web3.eth.accounts[ 6 ],
         });
 };

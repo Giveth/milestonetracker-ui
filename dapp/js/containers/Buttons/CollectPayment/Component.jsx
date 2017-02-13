@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "react-bootstrap";
+import { MenuItem } from "react-bootstrap";
 
 export default function Component(props) {
     const handleCollectPayment = (event) => {
@@ -9,7 +9,7 @@ export default function Component(props) {
         );
     };
     return (
-        <Button bsStyle="success" onClick={ handleCollectPayment }>Collect</Button>
+        <MenuItem onClick={ handleCollectPayment }>Collect</MenuItem>
     );
 }
 

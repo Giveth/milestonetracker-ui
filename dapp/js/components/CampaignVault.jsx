@@ -27,7 +27,7 @@ export default function CampaignVault(props) {
                     </tr>
                     <tr>
                         <td>Balance</td>
-                        <td>{ props.balance }</td>
+                        <td>{ JSON.stringify(props.balance, 0, 2) }</td>
                     </tr>
                 </tbody>
             </Table>
@@ -41,6 +41,6 @@ CampaignVault.propTypes = {
     owner: React.PropTypes.string.isRequired,
     escapeCaller: React.PropTypes.string.isRequired,
     escapeDestination: React.PropTypes.string.isRequired,
-    balance: React.PropTypes.number.isRequired,
+    // balance: React.PropTypes.number.isRequired,
     payments: React.PropTypes.array.isRequired,
 };

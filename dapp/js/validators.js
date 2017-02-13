@@ -1,7 +1,12 @@
 import { web3 } from "./blockchain";
 
-const websiteValidator =
-    RegExp(/(https?:\/\/(?:www\.|(?!www))[^\s\.]+\.[^\s]{2,}|www\.[^\s]+\.[^\s]{2,})/);
+const websiteValidator = new RegExp([
+    /^(https?:\/\/)/, // protocol
+    /((([a-z\d]([a-z\d-]*[a-z\d])*)\.)+[a-z]{2,}|((\d{1,3}\.){3}\d{1,3}))/, // OR ip (v4) address
+    /(:\d+)?(\/[-a-z\d%_.~+]*)*/, // port and path
+    /(\?[;&a-z\d%_.~+=-]*)?/, // query string
+    /(#[-a-z\d_]*)?$/, // fragment locater
+].map(r => r.source).join(""));
 
 /**
  * Checks if the value is a website
