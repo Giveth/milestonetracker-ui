@@ -1,14 +1,14 @@
-// import { web3, MilestoneTracker } from "../../../blockchain";
+import { web3, MilestoneTracker } from "../../../blockchain";
 
 /**
  *
  */
-export const collectPayment = () => () => {
-    // const milestoneTracker = new MilestoneTracker(web3, milestoneTrackerAddress);
-    // milestoneTracker.acceptProposedMilestones(
-    //     {
-    //         from: web3.eth.accounts[ 5 ],
-    //         hashProposals: hashOfTheProposal,
-    //     }
-    // );
+export const collectPayment = (milestoneTrackerAddress, fromAddress, milestoneID) => () => {
+    const milestoneTracker = new MilestoneTracker(web3, milestoneTrackerAddress);
+    milestoneTracker.collectMilestone(
+        {
+            from: fromAddress,
+            idMilestone: milestoneID,
+        }
+    );
 };

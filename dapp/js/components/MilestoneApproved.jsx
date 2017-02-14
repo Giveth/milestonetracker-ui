@@ -65,7 +65,7 @@ export default class MilestoneApproved extends React.Component {
                     <ButtonCollectPayment
                       eventKey="2"
                       milestoneID={this.props.index}
-                      vaultAddress={ this.props.vaultAddress }
+                      milestoneTrackerAddress={this.props.milestoneTrackerAddress}
                       fromAddress={this.props.payRecipient}
                     />
                     <MenuItem divider />

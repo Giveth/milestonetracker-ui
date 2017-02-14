@@ -35,6 +35,7 @@ export default function Component(props) {
                     <span className="pull-right">
                         <Donate
                           idCampaign={Number(props.params.campaignId)}
+                          campaignName={currentCampaign.name}
                         />
                     </span>
                 </PageHeader>
