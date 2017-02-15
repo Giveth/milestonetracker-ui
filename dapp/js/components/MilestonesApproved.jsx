@@ -8,6 +8,19 @@ import React from "react";
 
 import MilestoneApproved from "./MilestoneApproved";
 
+const beautifyStatus = (status, paymentInfo) => {
+    switch (status) {
+    case "AcceptedAndInProgress":
+        return "In Progress";
+
+    case "AuthorizedForPayment":
+        return (paymentInfo && paymentInfo.paid) ? "Paid" : "Authorized For Payment";
+
+    default:
+        return status;
+    }
+};
+
 export default function MilestonesApproved(props) {
     let content = "";
 
@@ -27,12 +40,14 @@ export default function MilestonesApproved(props) {
                   reviewer={ props.milestones[ i ].reviewer }
                   reviewTime={ props.milestones[ i ].reviewTime }
                   paymentSource={ props.milestones[ i ].paymentSource }
-                  status={ props.milestones[ i ].status }
+                  status={ beautifyStatus(
+                      props.milestones[ i ].status,
+                      props.milestones[ i ].paymentInfo) }
                   doneTime={ props.milestones[ i ].doneTime }
                   payDescription={ props.milestones[ i ].payDescription }
+                  actions={ props.milestones[ i ].actions }
                   index={ i }
                   milestoneTrackerAddress={ props.milestoneTrackerAddress }
-                  vaultAddress={ props.vaultAddress }
                 />
                 );
         }

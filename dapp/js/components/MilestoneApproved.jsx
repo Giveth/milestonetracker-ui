@@ -31,9 +31,9 @@ export default class MilestoneApproved extends React.Component {
     }
 
     render() {
-        let bsStyle = "info";
+        let additionalStyle = {};
         if (this.props.status === "Canceled") {
-            bsStyle = "danger";
+            additionalStyle.bsStyle = "danger";
         }
         const header = (
             <span>
@@ -96,7 +96,7 @@ export default class MilestoneApproved extends React.Component {
         );
         return (
             <Panel
-              bsStyle={ bsStyle }
+              {...additionalStyle}
               header={ btns }
               expanded={ false }
               onClick={ this.handleOnClick }
@@ -145,5 +145,4 @@ MilestoneApproved.propTypes = {
     payDescription: React.PropTypes.string.isRequired,
     index: React.PropTypes.number.isRequired,
     milestoneTrackerAddress: React.PropTypes.string.isRequired,
-    vaultAddress: React.PropTypes.string.isRequired,
 };

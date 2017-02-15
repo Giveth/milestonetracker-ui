@@ -15,7 +15,7 @@ export default function Component(props) {
                   owner={ vault.owner }
                   escapeCaller={ vault.escapeCaller }
                   escapeDestination={ vault.escapeDestination }
-                  balance={ vault.balance }
+                  balance={ vault.balance.toNumber() }
                   payments={ vault.payments }
                 />
             </Panel>
