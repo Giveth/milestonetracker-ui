@@ -1,14 +1,14 @@
 import React from "react";
 
 import { Grid, Row, Col } from "react-bootstrap";
-import Web3Info from "../../Web3Info";
+import MyAccountContainer from "../../MyAccount";
 
 const MyAccount = () =>
     <div>
         <Grid>
             <Row>
                 <Col>
-                    <Web3Info />
+                    <MyAccountContainer />
                 </Col>
             </Row>
         </Grid>
