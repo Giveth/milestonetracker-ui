@@ -7,7 +7,7 @@ export default function Navigation() {
         <Navbar>
             <Navbar.Header>
                 <Navbar.Brand>
-                    <a href="#">Giveth.io</a>
+                    <a href="http://giveth.netlify.com">Giveth.io</a>
                 </Navbar.Brand>
             </Navbar.Header>
             <Nav>
