@@ -31,8 +31,21 @@ export default class MilestoneApproved extends React.Component {
 
     render() {
         const additionalStyle = {};
-        if (this.props.status === "Canceled") {
+        switch (this.props.status) {
+        case "Canceled":
             additionalStyle.bsStyle = "danger";
+            break;
+
+        case "Paid":
+            additionalStyle.bsStyle = "success";
+            break;
+
+        case "In Progress":
+            additionalStyle.bsStyle = "info";
+            break;
+
+        default:
+            break;
         }
         const header = (
             <span>
