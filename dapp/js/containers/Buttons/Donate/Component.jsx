@@ -70,6 +70,8 @@ class Component extends React.Component {
                 <Button
                   bsStyle="success"
                   onClick={ this.showModal }
+                  bsSize="large"
+                  disabled={ this.props.disabled }
                 >
                     Donate
                 </Button>
@@ -121,6 +123,7 @@ Component.propTypes = {
     onDonate: React.PropTypes.func.isRequired,
     idCampaign: React.PropTypes.number.isRequired,
     campaignName: React.PropTypes.string.isRequired,
+    disabled: React.PropTypes.bool,
 };
 
 export default Component;

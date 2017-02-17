@@ -24,18 +24,22 @@ import MilestonesFormation from "./MilestonesFormation";
 export default function CampaignMilestones(props) {
     let proposedMilestonesButtons = [];
 
-    if (props.proposedMilestonesHash) {
-        proposedMilestonesButtons.push(<ButtonAcceptMilestones
-          key="acceptMilestones"
-          milestoneTrackerAddress={ props.milestoneTrackerAddress }
-          proposalHash={ props.proposedMilestonesHash }
-        />);
-    }
-    if (props.changingMilestones) {
-        proposedMilestonesButtons.push(<ButtonUnproposeMilestones
-          key="unproposeMilestones"
-          milestoneTrackerAddress={ props.milestoneTrackerAddress }
-        />);
+    if (props.actions) {
+        if (props.actions.acceptProposedMilestones) {
+            proposedMilestonesButtons.push(<ButtonAcceptMilestones
+              key="acceptMilestones"
+              milestoneTrackerAddress={ props.milestoneTrackerAddress }
+              proposalHash={ props.proposedMilestonesHash }
+              action= { props.actions.acceptProposedMilestones }
+            />);
+        }
+        if (props.actions.unproposeMilestones) {
+            proposedMilestonesButtons.push(<ButtonUnproposeMilestones
+              key="unproposeMilestones"
+              milestoneTrackerAddress={ props.milestoneTrackerAddress }
+              action= { props.actions.unproposeMilestones }
+            />);
+        }
     }
 
     return (
@@ -62,31 +66,23 @@ export default function CampaignMilestones(props) {
                         <td>Campaign cancelled</td>
                         <td>{ props.campaignCanceled ? "yes" : "no" }</td>
                     </tr>
-                    <tr>
-                        <td>Accepted milestones</td>
-                        <td>{ props.milestones.length }</td>
-                    </tr>
-                    <tr>
-                        <td>Proposed milestones</td>
-                        <td>{ props.proposedMilestones ? props.proposedMilestones.length : 0 }</td>
-                    </tr>
                 </tbody>
             </Table>
             <MilestonesApproved
               milestones={ props.milestones }
               header="Approved Milestones"
-              vaultAddress={ props.vaultAddress }
               milestoneTrackerAddress={ props.milestoneTrackerAddress }
             />
             <Milestones
               milestones={ props.proposedMilestones }
               header="Proposed Milestones"
             >
-                { proposedMilestonesButtons }
+                <div className="padding">{ proposedMilestonesButtons }</div>
             </Milestones>
             <MilestonesFormation
               newMilestones={ props.newMilestones }
               milestoneTrackerAddress={ props.milestoneTrackerAddress }
+              recipient = {props.recipient}
             />
         </div>
     );
@@ -104,4 +100,5 @@ CampaignMilestones.propTypes = {
     proposedMilestones: React.PropTypes.array,
     newMilestones: React.PropTypes.object,
     vaultAddress: React.PropTypes.string.isRequired,
+    actions: React.PropTypes.object,
 };

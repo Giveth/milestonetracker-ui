@@ -17,6 +17,15 @@ class MilestoneEditComponent extends React.Component {
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleValidityChange = this.handleValidityChange.bind(this);
     }
+
+    componentDidMount() {
+        this.props.handleValidityChange(this.props.index, false);
+    }
+
+    componentWillUnmount() {
+        this.props.removeValidityCheck(this.props.index);
+    }
+
     handleInputChange(name, value) {
         this.props.onInputChange(this.props.milestoneTrackerAddress, this.props.index, name, value);
     }

@@ -13,14 +13,19 @@ class MilestonesFormation extends React.Component {
             inputsValidity: {},
         };
         this.handleValidityChange = this.handleValidityChange.bind(this);
+        this.removeValidityCheck = this.removeValidityCheck.bind(this);
+        this.validate = this.validate.bind(this);
     }
 
     handleValidityChange(name, val) {
         const validationArray = Object.assign({}, this.state.inputsValidity);
         validationArray[ name ] = val;
         this.setState({ inputsValidity: validationArray });
+        this.validate(validationArray, val);
+    }
 
-        if (val) {
+    validate(validationArray, val) {
+        if (val === true || val === undefined) {
             for (const key in validationArray) {
                 if (!validationArray[ key ]) {
                     this.setState({ valid: false });
@@ -32,13 +37,23 @@ class MilestonesFormation extends React.Component {
             this.setState({ valid: false });
         }
     }
+
+    removeValidityCheck(index) {
+        const newInputValidity = Object.assign({}, this.state.inputsValidity);
+        delete newInputValidity[ index ];
+        this.setState({ inputsValidity: newInputValidity });
+        this.validate(newInputValidity);
+    }
+
     render() {
         let content = <p>There are no newMilestones</p>;
         const newMilestonesButtons = [];
 
-        if (this.props.newMilestones && this.props.newMilestones.milestones) {
+        if (this.props.newMilestones &&
+            this.props.newMilestones.milestones) {
             newMilestonesButtons.push(<ButtonProposeMilestones
               key="proposeMilestones"
+              action={[ { account: this.props.recipient } ]}
               milestoneTrackerAddress={ this.props.milestoneTrackerAddress }
               milestones={ this.props.newMilestones.milestones }
               disabled={ !this.state.valid }
@@ -86,6 +101,7 @@ class MilestonesFormation extends React.Component {
                           index={ i }
                           milestoneTrackerAddress={ this.props.milestoneTrackerAddress }
                           handleValidityChange={ this.handleValidityChange }
+                          removeValidityCheck={ this.removeValidityCheck }
                         />
                     </Panel>);
             }
@@ -99,11 +115,13 @@ class MilestonesFormation extends React.Component {
                 <h2>Milestones to be proposed</h2>
                 {content}
 
-                <ButtonAddMilestone
-                  key="addMilestone"
-                  milestoneTrackerAddress={ this.props.milestoneTrackerAddress }
-                />
-                {newMilestonesButtons}
+                <div className="padding">
+                    <ButtonAddMilestone
+                      key="addMilestone"
+                      milestoneTrackerAddress={ this.props.milestoneTrackerAddress }
+                    />
+                    {newMilestonesButtons}
+                </div>
             </Form>
         );
     }
@@ -112,6 +130,7 @@ class MilestonesFormation extends React.Component {
 MilestonesFormation.propTypes = {
     milestoneTrackerAddress: React.PropTypes.string.isRequired,
     newMilestones: React.PropTypes.object,
+    actions: React.PropTypes.object,
 };
 
 export default MilestonesFormation;

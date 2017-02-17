@@ -24,6 +24,7 @@ export default function Component(props) {
                   proposedMilestones={milestonesTracker.proposedMilestones}
                   newMilestones={props.formReducer[ currentCampaign.milestoneTrackerAddress ]}
                   vaultAddress={ currentCampaign.vaultAddress }
+                  actions={milestonesTracker.actions}
                 />
             </Panel>
         );

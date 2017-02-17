@@ -3,9 +3,8 @@
  */
 
 import React from "react";
-import { Panel, SplitButton, ButtonToolbar, MenuItem } from "react-bootstrap";
-import { ButtonCollectPayment, ButtonMarkMilestoneComplete, RejectCompletedMilestone,
-         ApproveCompletedMilestone } from "../containers/Buttons";
+import { Panel, ButtonToolbar } from "react-bootstrap";
+import MilestoneButtons from "./MilestoneButtons";
 import Milestone from "./Milestone";
 
 export default class MilestoneApproved extends React.Component {
@@ -31,7 +30,7 @@ export default class MilestoneApproved extends React.Component {
     }
 
     render() {
-        let additionalStyle = {};
+        const additionalStyle = {};
         if (this.props.status === "Canceled") {
             additionalStyle.bsStyle = "danger";
         }
@@ -43,54 +42,19 @@ export default class MilestoneApproved extends React.Component {
                     <span className="caret"></span>
                 }
             </span>);
+
         const btns = (<span>
             {header}
             <ButtonToolbar
               className="pull-right"
               onClick={ this.preventDefault }
             >
-                <SplitButton
-                  bsSize="xsmall"
-                  title={ this.props.status }
-                  onClick={ this.preventDefault }
-                  id={`milestone_${ this.props.index }_actions`}
-                >
-                    <MenuItem header>Recipient</MenuItem>
-                    <ButtonMarkMilestoneComplete
-                      eventKey="1"
-                      milestoneID={this.props.index}
-                      milestoneTrackerAddress={this.props.milestoneTrackerAddress}
-                      fromAddress={this.props.payRecipient}
-                    />
-                    <ButtonCollectPayment
-                      eventKey="2"
-                      milestoneID={this.props.index}
-                      milestoneTrackerAddress={this.props.milestoneTrackerAddress}
-                      fromAddress={this.props.payRecipient}
-                    />
-                    <MenuItem divider />
-                    <MenuItem header>Milestone Lead Link</MenuItem>
-                    <ButtonMarkMilestoneComplete
-                      eventKey="3"
-                      milestoneID={this.props.index}
-                      milestoneTrackerAddress={this.props.milestoneTrackerAddress}
-                      fromAddress={this.props.milestoneLeadLink}
-                    />
-                    <MenuItem divider />
-                    <MenuItem header>Reviewer</MenuItem>
-                    <ApproveCompletedMilestone
-                      eventKey="4"
-                      milestoneID={this.props.index}
-                      milestoneTrackerAddress={this.props.milestoneTrackerAddress}
-                      reviewerAddress={this.props.reviewer}
-                    />
-                    <RejectCompletedMilestone
-                      eventKey="5"
-                      milestoneID={ this.props.index }
-                      milestoneTrackerAddress={this.props.milestoneTrackerAddress}
-                      reviewerAddress={this.props.reviewer}
-                    />
-                </SplitButton>
+                <MilestoneButtons
+                  status={ this.props.status }
+                  milestoneID={ this.props.index }
+                  actions={ this.props.actions }
+                  milestoneTrackerAddress={ this.props.milestoneTrackerAddress }
+                />
             </ButtonToolbar>
         </span>
         );
@@ -145,4 +109,5 @@ MilestoneApproved.propTypes = {
     payDescription: React.PropTypes.string.isRequired,
     index: React.PropTypes.number.isRequired,
     milestoneTrackerAddress: React.PropTypes.string.isRequired,
+    actions: React.PropTypes.object,
 };

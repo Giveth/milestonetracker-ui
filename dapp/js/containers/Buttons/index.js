@@ -7,7 +7,9 @@ import ButtonMarkMilestoneComplete from "./MarkMilestoneComplete";
 import RejectCompletedMilestone from "./RejectCompletedMilestone";
 import ApproveCompletedMilestone from "./ApproveCompletedMilestone";
 import Donate from "./Donate";
+import CancelMilestone from "./CancelMilestone";
+import ArbitrateApproveCompletedMilestone from "./ArbitrateApproveCompletedMilestone";
 
 export { ButtonAcceptMilestones, ButtonProposeMilestones, ButtonUnproposeMilestones,
     ButtonAddMilestone, ButtonCollectPayment, ButtonMarkMilestoneComplete, RejectCompletedMilestone,
-    ApproveCompletedMilestone, Donate };
+    ApproveCompletedMilestone, Donate, CancelMilestone, ArbitrateApproveCompletedMilestone };

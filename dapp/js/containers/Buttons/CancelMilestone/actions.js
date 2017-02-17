@@ -3,10 +3,9 @@ import { web3, MilestoneTracker } from "../../../blockchain";
 /**
  *
  */
-export const approveCompletedMilestone =
-(milestoneTrackerAddress, milestoneID, action) => () => {
+export const cancelMilestone = (milestoneTrackerAddress, milestoneID, action) => () => {
     const milestoneTracker = new MilestoneTracker(web3, milestoneTrackerAddress);
-    milestoneTracker.approveCompletedMilestone(
+    milestoneTracker.cancelMilestone(
         {
             idMilestone: milestoneID,
             from: action[ 0 ].account,

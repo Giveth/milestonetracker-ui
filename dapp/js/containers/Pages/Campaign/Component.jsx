@@ -36,22 +36,26 @@ export default function Component(props) {
                         <Donate
                           idCampaign={Number(props.params.campaignId)}
                           campaignName={currentCampaign.name}
+                          disabled={currentCampaign.status !== "Active" ||
+                              currentCampaign.milestoneTracker.changingMilestones === true}
                         />
                     </span>
                 </PageHeader>
-                <Nav bsStyle="pills">
-                    <LinkContainer
-                      to={ { pathname: `/campaigns/${ props.params.campaignId }/details` } }
-                    >
-                        <NavItem>Details</NavItem>
-                    </LinkContainer>
-                    { milestones }
-                    <LinkContainer
-                      to={ { pathname: `/campaigns/${ props.params.campaignId }/vault` } }
-                    >
-                        <NavItem>Vault</NavItem>
-                    </LinkContainer>
-                </Nav>
+                <div className="padding">
+                    <Nav bsStyle="pills">
+                        <LinkContainer
+                          to={ { pathname: `/campaigns/${ props.params.campaignId }/details` } }
+                        >
+                            <NavItem>Details</NavItem>
+                        </LinkContainer>
+                        { milestones }
+                        <LinkContainer
+                          to={ { pathname: `/campaigns/${ props.params.campaignId }/vault` } }
+                        >
+                            <NavItem>Vault</NavItem>
+                        </LinkContainer>
+                    </Nav>
+                </div>
 
                 { props.children }
             </div>

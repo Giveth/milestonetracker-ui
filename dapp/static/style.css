@@ -1,0 +1,8 @@
+div.panel {
+    margin-bottom: 5px;
+}
+
+div.padding button,
+div.padding li {
+    margin: 5px;
+}

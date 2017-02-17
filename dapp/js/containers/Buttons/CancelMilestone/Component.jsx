@@ -2,24 +2,23 @@ import React from "react";
 import { MenuItem } from "react-bootstrap";
 
 export default function Component(props) {
-    const handleRejectCompletedMilestone = (event) => {
+    const handleCancelMilestone = (event) => {
         event.stopPropagation();
-        props.onRejectCompletedMilestone(
+        props.onCancelMilestone(
             props.milestoneTrackerAddress, props.milestoneID, props.action
         );
     };
     return (
         <MenuItem
-          bsStyle="danger"
-          onClick={ handleRejectCompletedMilestone }
+          onClick={ handleCancelMilestone }
         >
-            Reject Completed
+            Cancel
         </MenuItem>
     );
 }
 
 Component.propTypes = {
-    onRejectCompletedMilestone: React.PropTypes.func.isRequired,
+    onCancelMilestone: React.PropTypes.func.isRequired,
     milestoneTrackerAddress: React.PropTypes.string.isRequired,
     milestoneID: React.PropTypes.number.isRequired,
     action: React.PropTypes.array.isRequired,

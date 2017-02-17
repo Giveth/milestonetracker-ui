@@ -19,6 +19,8 @@ export default function Component(props) {
                   tokenAddress={ currentCampaign.tokenAddress }
                   vaultAddress={ currentCampaign.vaultAddress }
                   milestoneTrackerAddress={ currentCampaign.milestoneTrackerAddress }
+                  milestones={currentCampaign.milestoneTracker.milestones}
+                  token={currentCampaign.token}
                 />
             </Panel>
         );

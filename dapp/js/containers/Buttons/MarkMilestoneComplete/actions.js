@@ -3,11 +3,11 @@ import { web3, MilestoneTracker } from "../../../blockchain";
 /**
  *
  */
-export const completeMilestone = (milestoneTrackerAddress, milestoneID, fromAddress) => () => {
+export const completeMilestone = (milestoneTrackerAddress, milestoneID, action) => () => {
     const milestoneTracker = new MilestoneTracker(web3, milestoneTrackerAddress);
     milestoneTracker.markMilestoneComplete(
         {
             idMilestone: milestoneID,
-            from: fromAddress, //recipient or the milestone lead link
+            from: action[ 0 ].account,
         });
 };

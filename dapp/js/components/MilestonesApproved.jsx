@@ -71,6 +71,5 @@ MilestonesApproved.propTypes = {
     approved: React.PropTypes.bool,
     milestones: React.PropTypes.array,
     header: React.PropTypes.string.isRequired,
-    vaultAddress: React.PropTypes.string.isRequired,
     milestoneTrackerAddress: React.PropTypes.string.isRequired,
 };

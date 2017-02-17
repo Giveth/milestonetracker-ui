@@ -4,7 +4,7 @@ import { Button } from "react-bootstrap";
 export default function Component(props) {
     const handleProposeMilestones = () => {
         props.onProposeMilestones(
-            props.milestoneTrackerAddress, props.milestones
+            props.milestoneTrackerAddress, props.milestones, props.action
         );
     };
     return (
@@ -13,7 +13,7 @@ export default function Component(props) {
           onClick={ handleProposeMilestones }
           disabled={ props.disabled }
         >
-            Propose Milestones
+            Propose
         </Button>
     );
 }
@@ -23,4 +23,5 @@ Component.propTypes = {
     milestoneTrackerAddress: React.PropTypes.string.isRequired,
     milestones: React.PropTypes.array.isRequired,
     disabled: React.PropTypes.bool,
+    action: React.PropTypes.array.isRequired,
 };

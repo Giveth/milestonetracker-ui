@@ -4,11 +4,11 @@ import { web3, MilestoneTracker } from "../../../blockchain";
  *
  */
 export const rejectCompletedMilestone =
-(milestoneTrackerAddress, milestoneID, reviewerAddress) => () => {
+(milestoneTrackerAddress, milestoneID, action) => () => {
     const milestoneTracker = new MilestoneTracker(web3, milestoneTrackerAddress);
     milestoneTracker.rejectMilestone(
         {
             idMilestone: milestoneID,
-            from: reviewerAddress,
+            from: action[ 0 ].account,
         });
 };

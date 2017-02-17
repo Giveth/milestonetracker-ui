@@ -14,6 +14,17 @@
 import React from "react";
 
 import { Table } from "react-bootstrap";
+import MilestonesApproved from "./MilestonesApproved";
+
+function calculateTokens(balances) {
+    let owned = 0;
+    for (const key in balances) {
+        if (balances.hasOwnProperty(key)) {
+            owned += balances[ key ];
+        }
+    }
+    return owned;
+}
 
 export default function CampaignDetails(props) {
     return (
@@ -33,23 +44,22 @@ export default function CampaignDetails(props) {
                         </td>
                     </tr>
                     <tr>
-                        <td>Status</td>
-                        <td>{ props.status }</td>
+                        <td>Tokens owned/emitted</td>
+                        <td>{ calculateTokens(props.token.balances) }
+                            /
+                            { props.token.totalSupply }</td>
                     </tr>
                     <tr>
-                        <td>MiniMe Token Address</td>
-                        <td>{ props.tokenAddress }</td>
-                    </tr>
-                    <tr>
-                        <td>Vault Address</td>
-                        <td>{ props.vaultAddress }</td>
-                    </tr>
-                    <tr>
-                        <td>Milestone Tracker Address</td>
-                        <td>{ props.milestoneTrackerAddress }</td>
+                        <td>Tokens name</td>
+                        <td>{ props.token.name }</td>
                     </tr>
                 </tbody>
             </Table>
+            <MilestonesApproved
+              milestones={ props.milestones }
+              header="Approved Milestones"
+              milestoneTrackerAddress={ props.milestoneTrackerAddress }
+            />
         </div>
     );
 }
@@ -58,8 +68,7 @@ CampaignDetails.propTypes = {
     url: React.PropTypes.string.isRequired,
     name: React.PropTypes.string.isRequired,
     description: React.PropTypes.string.isRequired,
-    status: React.PropTypes.string.isRequired,
-    tokenAddress: React.PropTypes.string.isRequired,
-    vaultAddress: React.PropTypes.string.isRequired,
     milestoneTrackerAddress: React.PropTypes.string.isRequired,
+    milestones: React.PropTypes.array,
+    token: React.PropTypes.object.isRequired,
 };
