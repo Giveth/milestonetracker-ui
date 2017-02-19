@@ -1,44 +1,48 @@
 # Milestone Tracker User Interface
 
-Template for React-based Ethereum decentralized app (Dapp).
+The MilestoneTracker UI is a user interface for the [MilestoneTracker](https://github.com/Giveth/milestonetracker) contract and in future will be extended to cover the whole functionality of [Giveth DCO](https://github.com/Giveth/MVP) (Decantralised Charitable Organisation).
 
-This is an **opinionated version** of [ethereum-webpack-example-dapp](https://github.com/uzyn/ethereum-webpack-example-dapp) and largely intended for personal use, unless you share the same opinion as mine.
+The application is written in React, interfaces directly with the Ethereum blockchain and the Giveth smart contracts. You can find the production version of this decentralized application (Dapp) and more information on the [Giveth website](https://giveth.io).
 
-It is largely a combination of:
+## How to run developer version
+### Installing dependencies
+1. Make sure you have installed [Node.js](https://nodejs.org/en/)
+2. If not already, install Ethereum [testrpc](https://github.com/ethereumjs/testrpc)
+    ```
+    npm install -g ethereumjs-testrpc
+    ```
+3. Clone the repository
+    ```
+    # Clone the MilestoneTracker UI repository
+    git clone git@github.com:Giveth/milestonetracker-ui.git
 
-- [react-webpack-airbnbjs-boilerplate](https://github.com/uzyn/react-webpack-airbnbjs-boilerplate), and
-- [ethereum-webpack-example-dapp](https://github.com/uzyn/ethereum-webpack-example-dapp)
+    cd milestonetracker-ui
+    ```
+4. Install dependencies
+    ```
+    npm install
+    ```
 
-## What does this include
-
-- Webpack build script with Webpack dev server
-- ES2015/ES6
-- ESlint for ES2015 using Airbnb JS style guide
-- React for front-end view
-- Solidity for Ethereum smart contracts
-- Test suite for smart contract testing
-
-
-## How to run
-
-1. Run a local Ethereum node with JSON-RPC listening at port 8545 _(default)_. [testrpc](https://github.com/ethereumjs/testrpc) would be the most straight-forward method.
-
-  ```bash
-  # Using testrpc (recommended)
-  testrpc
-
-  # If you are running Geth,
-  # make sure to run in testnet or private net and enable rpc
-  geth --testnet --rpc
-  ```
-
-1. Install dependencies
+### Running developer version
+1. Run a local Ethereum node with JSON-RPC listening at port 8545 in deterministic mode.
 
   ```bash
-  npm install
+  testrpc --deterministic
   ```
 
-1. Start the dev server, code and enjoy! Browser should automatically refresh if you make any changes to the code.
+2. In new terminal window load the example data.
+
+  ```bash
+  cd node_modules/givethdirectory
+
+  # Start Node.js
+  node
+
+  # Load the env.js script which automatically creates example data in the blockchain
+  .load env.js
+  ```
+
+3. Start the dev server from the milestonetracker-ui directory.
 
   ```bash
   npm start
@@ -46,4 +50,8 @@ It is largely a combination of:
 
   Load [http://localhost:8080/](http://localhost:8080/) on your web browser.
 
-1. For deployment, run `npm build` and upload `build/` to your server.
+### Production deployment
+1. Run `npm build` and upload `build/` to your server.
+
+## Changing campaigns directory contract
+To change the address of the contract listing all the addresses edit the `givethDirectory` constant in  `dapp/js/blockchain`. The official Giveth directory contract on Ethereum Main Network is `0x30e1a463ecf25dbba2f83cb3e4b10045f888e55b` and the automatically deployed test contract for `testrpc` is `0xe78a0f7e598cc8b0bb87894b0f60dd2a88d6a8ab`
