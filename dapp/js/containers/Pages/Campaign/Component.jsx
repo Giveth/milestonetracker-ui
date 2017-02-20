@@ -36,8 +36,7 @@ export default function Component(props) {
                         <Donate
                           idCampaign={Number(props.params.campaignId)}
                           campaignName={currentCampaign.name}
-                          disabled={currentCampaign.status !== "Active" ||
-                              currentCampaign.milestoneTracker.changingMilestones === true}
+                          disabled={currentCampaign.status !== "Active"}
                         />
                     </span>
                 </PageHeader>
