@@ -4,20 +4,20 @@ import { Router, Route, hashHistory, IndexRoute } from "react-router";
 import { App } from "./components";
 import {
     PageCampaigns, PageAbout, PageCampaign, PageCampaignDetails, PageCampaignMilestones,
-    PageCampaignVault, PageMyAccount, // PageHome,
+    PageCampaignVault, PageMyAccount, PageHome,
 } from "./containers/Pages";
-import Web3Info from "./containers/Web3Info";
+// import Web3Info from "./containers/Web3Info";
 
 const Routes = () =>
     <Router history={hashHistory}>
         <Route path="/" component={ App }>
-            <IndexRoute component={ PageCampaigns } />
+            <IndexRoute component={ PageHome } />
 
             <Route path="/myaccount" component={ PageMyAccount } />
             <Route path="/about" component={ PageAbout } />
             <Route path="/campaigns" component={ PageCampaigns } />
             <Route path="/campaigns/:campaignId" component={ PageCampaign }>
-                <IndexRoute component={ Web3Info } />
+                <IndexRoute component={ PageCampaignDetails } />
 
                 <Route
                   path="/campaigns/:campaignId/details"
