@@ -6,3 +6,74 @@ div.padding button,
 div.padding li {
     margin: 5px;
 }
+
+/*
+CAMPAIGN DEPLOYER STYLES
+*/
+
+.main {
+    margin-top: 20px;
+}
+
+.masthead {
+  margin-bottom: 40px;
+}
+
+.logo-giveth {
+    background-image: url(/img/logo_giveth.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 200px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.padded-vertical {
+  padding: 10px 0px;
+}
+
+.padded-horizontal {
+  padding: 0px 10px;
+}
+
+.campaign-form {
+  padding: 20px 0px;
+}
+
+.progress-spinner {
+  background-image: url(/img/spinner.gif);
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 100px;
+}
+
+.spinner {
+  width: 30px;
+  height: 30px;
+}
+
+.progress {
+  margin: 20px 0px;
+}
+
+.cancel-confirmation {
+  margin-top: 20px;
+}
+
+.button-bar {
+  padding-top: 20px;
+}
+
+.button-bar .btn {
+  margin: 0px 10px;
+}
+
+.deployment-results {
+  margin-top: 20px;
+}
+
+.next-steps {
+  margin-top: 20px;
+}
