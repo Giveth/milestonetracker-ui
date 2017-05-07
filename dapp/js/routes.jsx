@@ -4,7 +4,7 @@ import { Router, Route, hashHistory, IndexRoute } from "react-router";
 import { App } from "./components";
 import {
     PageCampaigns, PageAbout, PageCampaign, PageCampaignDetails, PageCampaignMilestones,
-    PageCampaignVault, PageMyAccount, PageHome,
+    PageCampaignVault, PageMyAccount, PageHome, CampaignDeployer,
 } from "./containers/Pages";
 // import Web3Info from "./containers/Web3Info";
 
@@ -14,6 +14,7 @@ const Routes = () =>
             <IndexRoute component={ PageHome } />
 
             <Route path="/myaccount" component={ PageMyAccount } />
+            <Route path="/campaigndeployer" component={ CampaignDeployer } />
             <Route path="/about" component={ PageAbout } />
             <Route path="/campaigns" component={ PageCampaigns } />
             <Route path="/campaigns/:campaignId" component={ PageCampaign }>
