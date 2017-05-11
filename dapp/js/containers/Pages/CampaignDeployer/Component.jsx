@@ -279,7 +279,7 @@ export default class Deployer extends Component {
                         You will be prompted to Accept each transaction.
                         Each transaction may take a minute or more to be mined.  Please be patient.
                         Navigating away from this page will cancel the deployment process, and all progress will be lost.
-                        If you have an issue deploying, confirm you are on the Main Ethereum Network and refresh the page.
+                        If you have an issue deploying, confirm Metamask is set to the Main Ethereum Network and refresh the page.
                       </Alert>
                     </Col>
                   </Row>
