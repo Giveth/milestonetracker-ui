@@ -5,8 +5,8 @@ import DeploymentResults from '../../../components/DeploymentResults';
 import Field from '../../../components/Field';
 import { deploymentActions } from '../../../constants';
 import { Form, FormGroup, ControlLabel, FormControl, Col, Row, Button, ProgressBar, Alert } from 'react-bootstrap';
-
-const w3 = require("Web3");
+import w3 from 'web3';
+//const w3 = require("Web3");
 
 const provider_endpoint = process.argv[2] ? process.argv[2].substr(2) : "http://localhost:8545";
 let web3;
