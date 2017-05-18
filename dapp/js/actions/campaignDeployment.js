@@ -1,5 +1,5 @@
 /* eslint-disable */
-const w3 = require('Web3');
+import w3 from 'web3';
 import { deploymentActions } from '../constants';
 
 let web3;

@@ -5,8 +5,7 @@ import DeploymentResults from '../../../components/DeploymentResults';
 import Field from '../../../components/Field';
 import { deploymentActions } from '../../../constants';
 import { Form, FormGroup, ControlLabel, FormControl, Col, Row, Button, ProgressBar, Alert } from 'react-bootstrap';
-
-const w3 = require("Web3");
+import w3 from 'web3';
 
 const provider_endpoint = process.argv[2] ? process.argv[2].substr(2) : "http://localhost:8545";
 let web3;
@@ -280,6 +279,7 @@ export default class Deployer extends Component {
                         You will be prompted to Accept each transaction.
                         Each transaction may take a minute or more to be mined.  Please be patient.
                         Navigating away from this page will cancel the deployment process, and all progress will be lost.
+                        If you have an issue deploying, confirm Metamask is set to the Main Ethereum Network and refresh the page.
                       </Alert>
                     </Col>
                   </Row>
