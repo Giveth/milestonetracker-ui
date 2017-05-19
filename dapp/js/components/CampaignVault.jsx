@@ -3,6 +3,7 @@
  *
  * Expects following properties:
  */
+/*eslint-disable*/
 
 import React from "react";
 import { Table, Panel, Accordion, ListGroup, ListGroupItem } from "react-bootstrap";
@@ -43,7 +44,7 @@ export default function CampaignVault(props) {
                 <tbody>
                     <tr>
                         <td>Owner</td>
-                        <td>{ props.owner }</td>
+                        <td><a href={ `${ props.domain }address/${ props.owner }` } target="_blank">{ props.owner }</a></td>
                     </tr>
                     <tr>
                         <td>Escape Caller's Address</td>
