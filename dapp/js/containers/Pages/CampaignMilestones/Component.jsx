@@ -1,6 +1,7 @@
 import React from "react";
 import { Panel } from "react-bootstrap";
 import CampaignMilestones from "../../../components/CampaignMilestones";
+import { domain } from "../../../blockchain";
 
 export default function Component(props) {
     let content = "";
@@ -25,6 +26,7 @@ export default function Component(props) {
                   newMilestones={props.formReducer[ currentCampaign.milestoneTrackerAddress ]}
                   vaultAddress={ currentCampaign.vaultAddress }
                   actions={milestonesTracker.actions}
+                  domain={domain}
                 />
             </Panel>
         );
