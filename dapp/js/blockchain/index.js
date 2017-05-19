@@ -10,6 +10,10 @@ if ((window) && (window.web3)) {
     web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 }
 
+if (!web3.isConnected()) {
+    web3 = new Web3(new Web3.providers.HttpProvider("http://giveth.psdev.io:8545"));
+}
+
 const givethDirectory = new GivethDirectory(web3, "0x30e1a463ecf25dbba2f83cb3e4b10045f888e55b");
 // const givethDirectory = new GivethDirectory(web3, "0xe78a0f7e598cc8b0bb87894b0f60dd2a88d6a8ab");
 

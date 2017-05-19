@@ -12,13 +12,19 @@ import store from "./store";
 
 const web3monitor = new Web3monitor(web3);
 web3monitor.on("newState", (state) => {
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
     store.dispatch(newWeb3State(state));
     givethDirectory.getState((err, givethDirectoryState) => {
         if (err) {
-            web3monitor.reset();
-            return;
+            sleep(10000).then(() => {
+                web3monitor.reset();
+            });
+        } else {
+            store.dispatch(newGivethDirectoryState(givethDirectoryState));
         }
-        store.dispatch(newGivethDirectoryState(givethDirectoryState));
     });
 });
 
