@@ -22,6 +22,7 @@ web3monitor.on("newState", (state) => {
     });
 });
 
+// Render the dapp
 render(
     <Provider store={store}>
         <Routes />
