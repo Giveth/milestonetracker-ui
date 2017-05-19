@@ -11,6 +11,10 @@ if ((window) && (window.web3)) {
     web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 }
 
+if (!web3.isConnected()) {
+    web3 = new Web3(new Web3.providers.HttpProvider("https://giveth.psdev.io:8545"));
+}
+
 //MAIN
 const givethDirectory = new GivethDirectory(web3, "0x30e1a463ecf25dbba2f83cb3e4b10045f888e55b");
 //ROPSTEN
