@@ -5,6 +5,8 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 module.exports = {
     entry: path.resolve(__dirname, "dapp/js/main"),
     devServer: {
+        host: '0.0.0.0',
+        disableHostCheck: true,
         outputPath: path.join(__dirname, "build"),
     },
     resolve: {
