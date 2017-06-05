@@ -1,6 +1,7 @@
 import React from "react";
 import { Panel } from "react-bootstrap";
 import CampaignDetails from "../../../components/CampaignDetails";
+import { domain } from "../../../blockchain";
 
 export default function Component(props) {
     let content = "";
@@ -12,6 +13,7 @@ export default function Component(props) {
         content = (
             <Panel>
                 <CampaignDetails
+                  campaign={currentCampaign.token.controller}
                   url={ currentCampaign.url }
                   name={ currentCampaign.name }
                   description={ currentCampaign.description }
@@ -21,6 +23,7 @@ export default function Component(props) {
                   milestoneTrackerAddress={ currentCampaign.milestoneTrackerAddress }
                   milestones={currentCampaign.milestoneTracker.milestones}
                   token={currentCampaign.token}
+                  domain={domain}
                 />
             </Panel>
         );

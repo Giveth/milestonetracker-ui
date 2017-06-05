@@ -7,7 +7,10 @@ export default function Navigation() {
         <Navbar>
             <Navbar.Header>
                 <Navbar.Brand>
-                    <a href="http://giveth.netlify.com">Giveth.io</a>
+                    <a href="/">Giveth.io</a>
+                    {/* <LinkContainer to={ { pathname: "/" } }>
+                        <NavItem>Giveth.io</NavItem>
+                    </LinkContainer> */}
                 </Navbar.Brand>
             </Navbar.Header>
             <Nav>
@@ -16,6 +19,9 @@ export default function Navigation() {
                 </LinkContainer>
                 <LinkContainer to={ { pathname: "/myaccount" } }>
                     <NavItem>My Account</NavItem>
+                </LinkContainer>
+                <LinkContainer to={ { pathname: "/campaigndeployer" } }>
+                    <NavItem>Campaign Deployer</NavItem>
                 </LinkContainer>
                 <LinkContainer to={ { pathname: "/about" } }>
                     <NavItem href="#">About</NavItem>

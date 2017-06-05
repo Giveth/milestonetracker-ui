@@ -1,6 +1,7 @@
 import React from "react";
 import { Panel } from "react-bootstrap";
 import CampaignVault from "../../../components/CampaignVault";
+import { domain } from "../../../blockchain";
 
 export default function Component(props) {
     let content = "";
@@ -17,6 +18,7 @@ export default function Component(props) {
                   escapeDestination={ vault.escapeDestination }
                   balance={ vault.balance.toNumber() }
                   payments={ vault.payments }
+                  domain={domain}
                 />
             </Panel>
         );

@@ -12,7 +12,7 @@
  * @prop{string} proposedMilestonesHash   Hash of the milestone proposal
  * @prop{array}  proposedMilestones       Array of proposed milestones to be approved
  */
-
+/* eslint-disable */
 import React from "react";
 
 import { Table } from "react-bootstrap";
@@ -48,15 +48,15 @@ export default function CampaignMilestones(props) {
                 <tbody>
                     <tr>
                         <td>Recipient's Address</td>
-                        <td>{ props.recipient }</td>
+                        <td><a href={ `${ props.domain }address/${ props.recipient }` } target="_blank">{ props.recipient }</a></td>
                     </tr>
                     <tr>
                         <td>Donor's Address</td>
-                        <td>{ props.donor }</td>
+                        <td><a href={ `${ props.domain }address/${ props.donor }` } target="_blank">{ props.donor }</a></td>
                     </tr>
                     <tr>
                         <td>Arbitrator's Address</td>
-                        <td>{ props.arbitrator }</td>
+                        <td><a href={ `${ props.domain }address/${ props.arbitrator }` } target="_blank">{ props.arbitrator }</a></td>
                     </tr>
                     <tr>
                         <td>Milestones to review</td>

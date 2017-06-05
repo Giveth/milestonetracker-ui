@@ -24,7 +24,7 @@ export default class CampaignsPage extends React.Component {
     render() {
         let content = (
             <div>
-                <h2>Loading data from blockchain...</h2>
+                <h2>Loading data from blockchain... This may take a minute or two.</h2>
                 <ProgressBar active now={100} />
             </div>
         );
