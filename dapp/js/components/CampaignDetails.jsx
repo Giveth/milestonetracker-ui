@@ -18,7 +18,10 @@ import { Table } from "react-bootstrap";
 import MilestonesApproved from "./MilestonesApproved";
 
 function calculateTokens(balances) {
-    return balances.reduce((total, value) => total + value, 0);
+    if (Array.isArray(balances)) {
+        return balances.reduce((total, value) => total + value, 0);
+    }
+    return 0;
 }
 
 export default function CampaignDetails(props) {

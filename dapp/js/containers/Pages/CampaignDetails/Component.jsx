@@ -5,7 +5,7 @@ import CampaignDetails from "../../../components/CampaignDetails";
 
 export default function Component(props) {
     let content = "";
-    const id = props.params.campaignId;
+    const id = props.match.params.campaignId;
     if (props.givethDirectoryState.campaigns &&
         props.givethDirectoryState.campaigns.length >= id - 1) {
         const currentCampaign = props.givethDirectoryState.campaigns[ id ];

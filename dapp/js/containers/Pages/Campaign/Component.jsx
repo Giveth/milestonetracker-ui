@@ -11,14 +11,14 @@ export default function Component(props) {
             <ProgressBar active now={100} />
         </div>
     );
-    const id = props.params.campaignId;
+    const id = props.match.params.campaignId;
     if (props.givethDirectoryState.campaigns &&
         props.givethDirectoryState.campaigns.length >= id - 1) {
         const currentCampaign = props.givethDirectoryState.campaigns[ id ];
 
         const milestones = (
             <LinkContainer
-              to={{ pathname: `/campaigns/${ props.params.campaignId }/milestones` }}
+              to={{ pathname: `/campaigns/${ props.match.params.campaignId }/milestones` }}
             >
                 <NavItem>Milestones</NavItem>
             </LinkContainer>
@@ -36,7 +36,7 @@ export default function Component(props) {
                     </a> <small>{ currentCampaign.status }</small>
                     <span className="pull-right">
                         <Donate
-                          idCampaign={Number(props.params.campaignId)}
+                          idCampaign={Number(props.match.params.campaignId)}
                           campaignName={currentCampaign.name}
                           disabled={currentCampaign.status !== "Active"}
                         />
@@ -45,13 +45,13 @@ export default function Component(props) {
                 <div className="padding">
                     <Nav bsStyle="pills">
                         <LinkContainer
-                          to={{ pathname: `/campaigns/${ props.params.campaignId }/details` }}
+                          to={{ pathname: `/campaigns/${ props.match.params.campaignId }/details` }}
                         >
                             <NavItem>Details</NavItem>
                         </LinkContainer>
                         { milestones }
                         <LinkContainer
-                          to={{ pathname: `/campaigns/${ props.params.campaignId }/vault` }}
+                          to={{ pathname: `/campaigns/${ props.match.params.campaignId }/vault` }}
                         >
                             <NavItem>Vault</NavItem>
                         </LinkContainer>

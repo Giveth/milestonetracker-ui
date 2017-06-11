@@ -5,7 +5,7 @@ import CampaignVault from "../../../components/CampaignVault";
 
 export default function Component(props) {
     let content = "";
-    const id = props.params.campaignId;
+    const id = props.match.params.campaignId;
     if (props.givethDirectoryState.campaigns &&
         props.givethDirectoryState.campaigns.length >= id - 1) {
         const vault = props.givethDirectoryState.campaigns[ id ].vault;
