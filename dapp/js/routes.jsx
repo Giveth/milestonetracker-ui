@@ -1,15 +1,14 @@
 import React from "react";
-
-import { Router, Route, hashHistory, IndexRoute } from "react-router";
+import { HashRouter, Route, IndexRoute } from "react-router-dom";
 import { App } from "./components";
 import {
     PageCampaigns, PageAbout, PageCampaign, PageCampaignDetails, PageCampaignMilestones,
-    PageCampaignVault, PageMyAccount/* , PageHome */, CampaignDeployer,
+    PageCampaignVault, PageMyAccount, CampaignDeployer,
 } from "./containers/Pages";
 // import Web3Info from "./containers/Web3Info";
 
 const Routes = () => (
-    <Router history={hashHistory}>
+    <HashRouter>
         <Route path="/" component={App}>
             <IndexRoute component={PageCampaigns} />
 
@@ -34,6 +33,6 @@ const Routes = () => (
                 />
             </Route>
         </Route>
-    </Router>);
+    </HashRouter>);
 
 export default Routes;

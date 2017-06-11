@@ -9,4 +9,5 @@ import PageCampaigns from "./Campaigns";
 import CampaignDeployer from "./CampaignDeployer";
 
 export { PageAbout, PageCampaign, PageCampaignDetails, PageCampaignMilestones, PageCampaignVault,
-    PageCampaigns, PageMyAccount, PageHome, CampaignDeployer };
+    PageCampaigns, PageMyAccount, PageHome, CampaignDeployer,
+};
