@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import { Panel } from "react-bootstrap";
 import CampaignMilestones from "../../../components/CampaignMilestones";
 
@@ -14,17 +14,17 @@ export default function Component(props) {
         content = (
             <Panel>
                 <CampaignMilestones
-                  recipient={ milestonesTracker.recipient }
-                  donor={ milestonesTracker.donor }
-                  arbitrator={ milestonesTracker.arbitrator }
-                  changingMilestones={ milestonesTracker.changingMilestones }
-                  campaignCanceled={ milestonesTracker.campaignCanceled }
+                  recipient={milestonesTracker.recipient}
+                  donor={milestonesTracker.donor}
+                  arbitrator={milestonesTracker.arbitrator}
+                  changingMilestones={milestonesTracker.changingMilestones}
+                  campaignCanceled={milestonesTracker.campaignCanceled}
                   milestones={milestonesTracker.milestones}
                   milestoneTrackerAddress={currentCampaign.milestoneTrackerAddress}
                   proposedMilestonesHash={milestonesTracker.proposedMilestonesHash}
                   proposedMilestones={milestonesTracker.proposedMilestones}
                   newMilestones={props.formReducer[ currentCampaign.milestoneTrackerAddress ]}
-                  vaultAddress={ currentCampaign.vaultAddress }
+                  vaultAddress={currentCampaign.vaultAddress}
                   actions={milestonesTracker.actions}
                 />
             </Panel>
@@ -39,7 +39,7 @@ export default function Component(props) {
 }
 
 Component.propTypes = {
-    givethDirectoryState: PropTypes.object.isRequired,
-    params: PropTypes.object.isRequired,
-    formReducer: PropTypes.object.isRequired,
+    // givethDirectoryState: PropTypes.object.isRequired,
+    // params: PropTypes.object.isRequired,
+    // formReducer: PropTypes.object.isRequired,
 };

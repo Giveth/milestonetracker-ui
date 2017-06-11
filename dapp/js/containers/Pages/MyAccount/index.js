@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import MyAccount from "./MyAccount";
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
     givethDirectoryState: state.givethDirectory,
 });
 
@@ -10,7 +10,7 @@ const mapDispatchToProps = ({
 
 const PageMyAccount = connect(
     mapStateToProps,
-    mapDispatchToProps
+    mapDispatchToProps,
 )(MyAccount);
 
 export default PageMyAccount;

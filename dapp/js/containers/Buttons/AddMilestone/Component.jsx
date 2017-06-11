@@ -5,11 +5,11 @@ import { Button } from "react-bootstrap";
 export default function Component(props) {
     const handleAddMilestone = () => {
         props.onAddMilestone(
-            props.milestoneTrackerAddress
+            props.milestoneTrackerAddress,
         );
     };
     return (
-        <Button onClick={ handleAddMilestone }>Add Milestone</Button>
+        <Button onClick={handleAddMilestone}>Add Milestone</Button>
     );
 }
 

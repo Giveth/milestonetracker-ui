@@ -38,7 +38,6 @@ class InputAddress extends React.Component {
                 this.props.setValid(this.props.name, true);
             }
         } catch (e) {
-            console.log(e.msg);
             this.props.setValid(this.props.name, false);
         }
         this.setState({
@@ -63,10 +62,10 @@ class InputAddress extends React.Component {
 
     render() {
         const accButtons = [ ];
-        for (let i = 0; i < accountsConversions.length; ++i) {
+        for (let i = 0; i < accountsConversions.length; i += 1) {
             accButtons.push(<MenuItem
               key={i}
-              onClick={ this.unitChanged(i) }
+              onClick={this.unitChanged(i)}
             >{ accountsConversions[ i ].title }</MenuItem>);
         }
 
@@ -84,7 +83,7 @@ class InputAddress extends React.Component {
                     <DropdownButton
                       componentClass={InputGroup.Button}
                       id="input-dropdown-addon"
-                      title={ this.state.title }
+                      title={this.state.title}
                     >
                         { accButtons }
                     </DropdownButton>
@@ -96,13 +95,13 @@ class InputAddress extends React.Component {
 
 InputAddress.propTypes = {
     name: PropTypes.string.isRequired,
-    placeholder: PropTypes.string,
+    // placeholder: PropTypes.string,
     label: PropTypes.string.isRequired,
-    onChange: PropTypes.func,
-    value: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.number,
-    ]),
+    // onChange: PropTypes.func,
+    // value: PropTypes.oneOfType([
+    //     PropTypes.string,
+    //     PropTypes.number,
+    // ]),
     setValid: PropTypes.func.isRequired,
 };
 

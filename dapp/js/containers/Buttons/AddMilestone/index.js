@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import Component from "./Component";
-import { addMilestone } from "./actions";
+import addMilestone from "./actions";
 
 const mapStateToProps = () => ({
 });
@@ -13,7 +13,7 @@ const mapDispatchToProps = (
 
 const ButtonAddMilestone = connect(
     mapStateToProps,
-    mapDispatchToProps
+    mapDispatchToProps,
 )(Component);
 
 export default ButtonAddMilestone;

@@ -70,10 +70,10 @@ class InputEther extends React.Component {
 
     render() {
         const unitsButtons = [ ];
-        for (let i = 0; i < etherUnits.length; ++i) {
+        for (let i = 0; i < etherUnits.length; i += 1) {
             unitsButtons.push(<MenuItem
               key={i}
-              onClick={ this.unitChanged(i) }
+              onClick={this.unitChanged(i)}
             >{ etherUnits[ i ].title }</MenuItem>);
         }
 
@@ -91,7 +91,7 @@ class InputEther extends React.Component {
                     <DropdownButton
                       componentClass={InputGroup.Button}
                       id="input-dropdown-addon"
-                      title={ this.state.title }
+                      title={this.state.title}
                     >
                         { unitsButtons }
                     </DropdownButton>
@@ -103,14 +103,14 @@ class InputEther extends React.Component {
 
 InputEther.propTypes = {
     name: PropTypes.string.isRequired,
-    placeholder: PropTypes.string,
+    // placeholder: PropTypes.string,
     label: PropTypes.string.isRequired,
-    onChange: PropTypes.func,
-    setValid: PropTypes.func,
-    value: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.number,
-    ]),
+    // onChange: PropTypes.func,
+    // setValid: PropTypes.func,
+    // value: PropTypes.oneOfType([
+    //     PropTypes.string,
+    //     PropTypes.number,
+    // ]),
 };
 
 export default InputEther;

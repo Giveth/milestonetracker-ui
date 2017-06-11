@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import { Panel } from "react-bootstrap";
 import CampaignVault from "../../../components/CampaignVault";
 
@@ -13,11 +13,11 @@ export default function Component(props) {
         content = (
             <Panel>
                 <CampaignVault
-                  owner={ vault.owner }
-                  escapeCaller={ vault.escapeCaller }
-                  escapeDestination={ vault.escapeDestination }
-                  balance={ vault.balance.toNumber() }
-                  payments={ vault.payments }
+                  owner={vault.owner}
+                  escapeCaller={vault.escapeCaller}
+                  escapeDestination={vault.escapeDestination}
+                  balance={vault.balance.toNumber()}
+                  payments={vault.payments}
                 />
             </Panel>
         );
@@ -31,6 +31,6 @@ export default function Component(props) {
 }
 
 Component.propTypes = {
-    givethDirectoryState: PropTypes.object.isRequired,
-    params: PropTypes.object.isRequired,
+    // givethDirectoryState: PropTypes.object.isRequired,
+    // params: PropTypes.object.isRequired,
 };

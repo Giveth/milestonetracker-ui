@@ -1,10 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
+
 import Input from "../components/Input";
 import InputDate from "../components/InputDate";
 import InputEther from "../components/InputEther";
 import InputDuration from "../components/InputDuration";
-import { connect } from "react-redux";
 import * as a from "../actions";
 import * as validator from "../validators";
 
@@ -37,15 +38,16 @@ class MilestoneEditComponent extends React.Component {
         this.setState({ inputsValidity: validationArray });
 
         if (val) {
-            for (const key in validationArray) {
+            validationArray.forEach((key) => {
                 if (!validationArray[ key ]) {
                     this.setState({ valid: false });
                     this.props.handleValidityChange(this.props.index, false);
-                    break;
+                    return;
                 }
+
                 this.setState({ valid: true });
                 this.props.handleValidityChange(this.props.index, true);
-            }
+            });
         } else {
             this.setState({ valid: false });
             this.props.handleValidityChange(this.props.index, false);
@@ -62,7 +64,7 @@ class MilestoneEditComponent extends React.Component {
                   onChange={this.handleInputChange}
                   setValid={this.handleValidityChange}
                   value={this.props.payDescription}
-                  validate={ validator.any }
+                  validate={validator.any}
                 />
                 <Input
                   name="description"
@@ -71,7 +73,7 @@ class MilestoneEditComponent extends React.Component {
                   onChange={this.handleInputChange}
                   setValid={this.handleValidityChange}
                   value={this.props.description}
-                  validate={ validator.any }
+                  validate={validator.any}
                 />
                 <Input
                   name="url"
@@ -80,7 +82,7 @@ class MilestoneEditComponent extends React.Component {
                   onChange={this.handleInputChange}
                   setValid={this.handleValidityChange}
                   value={this.props.url}
-                  validate={ validator.website }
+                  validate={validator.website}
                 />
                 <InputDate
                   name="minCompletionDate"
@@ -103,7 +105,7 @@ class MilestoneEditComponent extends React.Component {
                   onChange={this.handleInputChange}
                   setValid={this.handleValidityChange}
                   value={this.props.reviewer}
-                  validate={ validator.ethereumAddress }
+                  validate={validator.ethereumAddress}
                 />
                 <Input
                   name="milestoneLeadLink"
@@ -112,7 +114,7 @@ class MilestoneEditComponent extends React.Component {
                   onChange={this.handleInputChange}
                   setValid={this.handleValidityChange}
                   value={this.props.milestoneLeadLink}
-                  validate={ validator.ethereumAddress }
+                  validate={validator.ethereumAddress}
                 />
                 <InputDuration
                   name="reviewTime"
@@ -128,7 +130,7 @@ class MilestoneEditComponent extends React.Component {
                   onChange={this.handleInputChange}
                   setValid={this.handleValidityChange}
                   value={this.props.paymentSource}
-                  validate={ validator.ethereumAddress }
+                  validate={validator.ethereumAddress}
                 />
                 <Input
                   name="payRecipient"
@@ -137,7 +139,7 @@ class MilestoneEditComponent extends React.Component {
                   onChange={this.handleInputChange}
                   setValid={this.handleValidityChange}
                   value={this.props.payRecipient}
-                  validate={ validator.ethereumAddress }
+                  validate={validator.ethereumAddress}
                 />
                 <InputEther
                   name="payValue"
@@ -159,7 +161,6 @@ class MilestoneEditComponent extends React.Component {
 }
 
 MilestoneEditComponent.propTypes = {
-    nameInputChange: PropTypes.func.isRequired,
     milestoneTrackerAddress: PropTypes.string.isRequired,
     handleValidityChange: PropTypes.func.isRequired,
     index: PropTypes.number.isRequired,
@@ -188,7 +189,7 @@ const mapDispatchToProps = {
 
 const MilestoneEdit = connect(
     mapStateToProps,
-    mapDispatchToProps
+    mapDispatchToProps,
 )(MilestoneEditComponent);
 
 export default MilestoneEdit;

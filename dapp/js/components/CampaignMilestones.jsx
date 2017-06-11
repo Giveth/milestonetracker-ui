@@ -23,22 +23,22 @@ import MilestonesApproved from "./MilestonesApproved";
 import MilestonesFormation from "./MilestonesFormation";
 
 export default function CampaignMilestones(props) {
-    let proposedMilestonesButtons = [];
+    const proposedMilestonesButtons = [];
 
     if (props.actions) {
         if (props.actions.acceptProposedMilestones) {
             proposedMilestonesButtons.push(<ButtonAcceptMilestones
               key="acceptMilestones"
-              milestoneTrackerAddress={ props.milestoneTrackerAddress }
-              proposalHash={ props.proposedMilestonesHash }
-              action= { props.actions.acceptProposedMilestones }
+              milestoneTrackerAddress={props.milestoneTrackerAddress}
+              proposalHash={props.proposedMilestonesHash}
+              action={props.actions.acceptProposedMilestones}
             />);
         }
         if (props.actions.unproposeMilestones) {
             proposedMilestonesButtons.push(<ButtonUnproposeMilestones
               key="unproposeMilestones"
-              milestoneTrackerAddress={ props.milestoneTrackerAddress }
-              action= { props.actions.unproposeMilestones }
+              milestoneTrackerAddress={props.milestoneTrackerAddress}
+              action={props.actions.unproposeMilestones}
             />);
         }
     }
@@ -48,15 +48,15 @@ export default function CampaignMilestones(props) {
             <Table striped bordered condensed hover>
                 <tbody>
                     <tr>
-                        <td>Recipient's Address</td>
+                        <td>Recipient&apos;s Address</td>
                         <td>{ props.recipient }</td>
                     </tr>
                     <tr>
-                        <td>Donor's Address</td>
+                        <td>Donor&apos;s Address</td>
                         <td>{ props.donor }</td>
                     </tr>
                     <tr>
-                        <td>Arbitrator's Address</td>
+                        <td>Arbitrator&apos;s Address</td>
                         <td>{ props.arbitrator }</td>
                     </tr>
                     <tr>
@@ -70,20 +70,20 @@ export default function CampaignMilestones(props) {
                 </tbody>
             </Table>
             <MilestonesApproved
-              milestones={ props.milestones }
+              milestones={props.milestones}
               header="Approved Milestones"
-              milestoneTrackerAddress={ props.milestoneTrackerAddress }
+              milestoneTrackerAddress={props.milestoneTrackerAddress}
             />
             <Milestones
-              milestones={ props.proposedMilestones }
+              milestones={props.proposedMilestones}
               header="Proposed Milestones"
             >
                 <div className="padding">{ proposedMilestonesButtons }</div>
             </Milestones>
             <MilestonesFormation
-              newMilestones={ props.newMilestones }
-              milestoneTrackerAddress={ props.milestoneTrackerAddress }
-              recipient = {props.recipient}
+              newMilestones={props.newMilestones}
+              milestoneTrackerAddress={props.milestoneTrackerAddress}
+              recipient={props.recipient}
             />
         </div>
     );
@@ -95,11 +95,11 @@ CampaignMilestones.propTypes = {
     arbitrator: PropTypes.string.isRequired,
     changingMilestones: PropTypes.bool.isRequired,
     campaignCanceled: PropTypes.bool.isRequired,
-    milestones: PropTypes.array.isRequired,
+//    milestones: PropTypes.array.isRequired,
     milestoneTrackerAddress: PropTypes.string.isRequired,
-    proposedMilestonesHash: PropTypes.string,
-    proposedMilestones: PropTypes.array,
-    newMilestones: PropTypes.object,
-    vaultAddress: PropTypes.string.isRequired,
-    actions: PropTypes.object,
+//    proposedMilestonesHash: PropTypes.string,
+//    proposedMilestones: PropTypes.array,
+//    newMilestones: PropTypes.object,
+//    vaultAddress: PropTypes.string.isRequired,
+//    actions: PropTypes.object,
 };

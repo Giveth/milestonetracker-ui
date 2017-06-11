@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import { Panel } from "react-bootstrap";
 import CampaignDetails from "../../../components/CampaignDetails";
 
@@ -13,13 +13,13 @@ export default function Component(props) {
         content = (
             <Panel>
                 <CampaignDetails
-                  url={ currentCampaign.url }
-                  name={ currentCampaign.name }
-                  description={ currentCampaign.description }
-                  status={ currentCampaign.status }
-                  tokenAddress={ currentCampaign.tokenAddress }
-                  vaultAddress={ currentCampaign.vaultAddress }
-                  milestoneTrackerAddress={ currentCampaign.milestoneTrackerAddress }
+                  url={currentCampaign.url}
+                  name={currentCampaign.name}
+                  description={currentCampaign.description}
+                  status={currentCampaign.status}
+                  tokenAddress={currentCampaign.tokenAddress}
+                  vaultAddress={currentCampaign.vaultAddress}
+                  milestoneTrackerAddress={currentCampaign.milestoneTrackerAddress}
                   milestones={currentCampaign.milestoneTracker.milestones}
                   token={currentCampaign.token}
                 />
@@ -35,6 +35,6 @@ export default function Component(props) {
 }
 
 Component.propTypes = {
-    givethDirectoryState: PropTypes.object.isRequired,
-    params: PropTypes.object.isRequired,
+    // givethDirectoryState: PropTypes.object.isRequired,
+    // params: PropTypes.object.isRequired,
 };

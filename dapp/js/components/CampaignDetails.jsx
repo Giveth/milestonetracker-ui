@@ -18,18 +18,12 @@ import { Table } from "react-bootstrap";
 import MilestonesApproved from "./MilestonesApproved";
 
 function calculateTokens(balances) {
-    let owned = 0;
-    for (const key in balances) {
-        if (balances.hasOwnProperty(key)) {
-            owned += balances[ key ];
-        }
-    }
-    return owned;
+    return balances.reduce((total, value) => total + value, 0);
 }
 
 export default function CampaignDetails(props) {
     return (
-        <div to={ { pathname: `${ props.url }` } }>
+        <div to={{ pathname: `${ props.url }` }}>
             <p>{ props.description }</p>
             <Table striped bordered condensed hover>
                 <tbody>
@@ -37,10 +31,11 @@ export default function CampaignDetails(props) {
                         <td>Website</td>
                         <td>
                             <a
-                              href={ props.url }
+                              href={props.url}
                               target="_blank"
+                              rel="noopener noreferrer"
                             >
-                            { props.url }
+                                {props.url}
                             </a>
                         </td>
                     </tr>
@@ -57,9 +52,9 @@ export default function CampaignDetails(props) {
                 </tbody>
             </Table>
             <MilestonesApproved
-              milestones={ props.milestones }
+              milestones={props.milestones}
               header="Approved Milestones"
-              milestoneTrackerAddress={ props.milestoneTrackerAddress }
+              milestoneTrackerAddress={props.milestoneTrackerAddress}
             />
         </div>
     );
@@ -70,6 +65,9 @@ CampaignDetails.propTypes = {
     name: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     milestoneTrackerAddress: PropTypes.string.isRequired,
-    milestones: PropTypes.array,
-    token: PropTypes.object.isRequired,
+    token: PropTypes.shape({
+        totalSupply: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+        balances: PropTypes.object.isRequired,
+    }).isRequired,
 };

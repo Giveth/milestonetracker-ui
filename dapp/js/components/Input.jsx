@@ -51,11 +51,11 @@ class Input extends React.Component {
 
 Input.propTypes = {
     name: PropTypes.string.isRequired,
-    placeholder: PropTypes.string,
+    // placeholder: PropTypes.string,
     label: PropTypes.string.isRequired,
-    componentClass: PropTypes.string,
+    // componentClass: PropTypes.string,
     onChange: PropTypes.func.isRequired,
-    value: PropTypes.string,
+    // value: PropTypes.string,
     setValid: PropTypes.func.isRequired,
     validate: PropTypes.func.isRequired,
 };

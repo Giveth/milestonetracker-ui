@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import { ProgressBar, Grid, Row, Col, Nav, NavItem, PageHeader } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { Donate } from "../../Buttons";
@@ -18,7 +18,7 @@ export default function Component(props) {
 
         const milestones = (
             <LinkContainer
-              to={ { pathname: `/campaigns/${ props.params.campaignId }/milestones` } }
+              to={{ pathname: `/campaigns/${ props.params.campaignId }/milestones` }}
             >
                 <NavItem>Milestones</NavItem>
             </LinkContainer>
@@ -28,10 +28,11 @@ export default function Component(props) {
             <div>
                 <PageHeader>
                     <a
-                      href={ currentCampaign.url }
+                      href={currentCampaign.url}
                       target="_blank"
+                      rel="noopener noreferrer"
                     >
-                    { currentCampaign.name }
+                        {currentCampaign.name}
                     </a> <small>{ currentCampaign.status }</small>
                     <span className="pull-right">
                         <Donate
@@ -44,13 +45,13 @@ export default function Component(props) {
                 <div className="padding">
                     <Nav bsStyle="pills">
                         <LinkContainer
-                          to={ { pathname: `/campaigns/${ props.params.campaignId }/details` } }
+                          to={{ pathname: `/campaigns/${ props.params.campaignId }/details` }}
                         >
                             <NavItem>Details</NavItem>
                         </LinkContainer>
                         { milestones }
                         <LinkContainer
-                          to={ { pathname: `/campaigns/${ props.params.campaignId }/vault` } }
+                          to={{ pathname: `/campaigns/${ props.params.campaignId }/vault` }}
                         >
                             <NavItem>Vault</NavItem>
                         </LinkContainer>
@@ -72,6 +73,6 @@ export default function Component(props) {
 }
 
 Component.propTypes = {
-    givethDirectoryState: PropTypes.object.isRequired,
-    params: PropTypes.object.isRequired,
+    // givethDirectoryState: PropTypes.object.isRequired,
+    // params: PropTypes.object.isRequired,
 };

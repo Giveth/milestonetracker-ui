@@ -15,7 +15,7 @@ export default function Milestones(props) {
 
     if (props.milestones) {
         let milestones = [];
-        for (let i = 0; i < props.milestones.length; ++ i) {
+        for (let i = 0; i < props.milestones.length; i += 1) {
             let bsStyle = "info";
             if (props.milestones[ i ].status === "Canceled") {
                 bsStyle = "danger";
@@ -23,30 +23,30 @@ export default function Milestones(props) {
             const header = (
                 <span>
                     { props.milestones[ i ].payDescription }
-                    <span className="caret"></span>
+                    <span className="caret" />
                 </span>);
             milestones.push(
                 <Panel
-                  bsStyle={ bsStyle }
+                  bsStyle={bsStyle}
                   collapsible
                   defaultExpanded
-                  key={ i }
-                  header={ header }
-                  eventKey={ i }
+                  key={i}
+                  header={header}
+                  eventKey={i}
                 >
                     <Milestone
-                      title={ props.milestones[ i ].payDescription }
-                      description={ props.milestones[ i ].description }
-                      url={ props.milestones[ i ].url }
-                      maxCompletionDate={ props.milestones[ i ].maxCompletionDate }
-                      minCompletionDate={ props.milestones[ i ].minCompletionDate }
-                      milestoneLeadLink={ props.milestones[ i ].milestoneLeadLink }
-                      payRecipient={ props.milestones[ i ].payRecipient }
-                      reviewer={ props.milestones[ i ].reviewer }
-                      reviewTime={ props.milestones[ i ].reviewTime }
-                      paymentSource={ props.milestones[ i ].paymentSource }
-                      status={ props.milestones[ i ].status }
-                      doneTime={ props.milestones[ i ].doneTime }
+                      title={props.milestones[ i ].payDescription}
+                      description={props.milestones[ i ].description}
+                      url={props.milestones[ i ].url}
+                      maxCompletionDate={props.milestones[ i ].maxCompletionDate}
+                      minCompletionDate={props.milestones[ i ].minCompletionDate}
+                      milestoneLeadLink={props.milestones[ i ].milestoneLeadLink}
+                      payRecipient={props.milestones[ i ].payRecipient}
+                      reviewer={props.milestones[ i ].reviewer}
+                      reviewTime={props.milestones[ i ].reviewTime}
+                      paymentSource={props.milestones[ i ].paymentSource}
+                      status={props.milestones[ i ].status}
+                      doneTime={props.milestones[ i ].doneTime}
                     />
                 </Panel>);
         }
@@ -69,7 +69,7 @@ export default function Milestones(props) {
 }
 
 Milestones.propTypes = {
-    approved: PropTypes.bool,
-    milestones: PropTypes.array,
+    // approved: PropTypes.bool,
+    // milestones: PropTypes.array,
     header: PropTypes.string.isRequired,
 };

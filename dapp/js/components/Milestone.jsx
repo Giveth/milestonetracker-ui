@@ -103,13 +103,13 @@ export default function Milestone(props) {
 Milestone.propTypes = {
     description: PropTypes.string.isRequired,
     url: PropTypes.string.isRequired,
-    maxCompletionDate: PropTypes.any.isRequired,
-    minCompletionDate: PropTypes.any.isRequired,
+    // maxCompletionDate: PropTypes.any.isRequired,
+    // minCompletionDate: PropTypes.any.isRequired,
     milestoneLeadLink: PropTypes.string.isRequired,
     reviewer: PropTypes.string.isRequired,
     reviewTime: PropTypes.number.isRequired,
     paymentSource: PropTypes.string.isRequired,
-    status: PropTypes.string,
-    doneTime: PropTypes.number,
+    // status: PropTypes.string,
+    // doneTime: PropTypes.number,
     payRecipient: PropTypes.string.isRequired,
 };

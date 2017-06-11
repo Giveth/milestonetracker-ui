@@ -13,7 +13,7 @@ export default class extends EventEmitter {
     }
 
     // Starts a background monitor to check the sync.
-    _registerSync(cb) {
+    registerSync(cb) {
         const self = this;
         let timeout = null;
 
@@ -53,7 +53,7 @@ export default class extends EventEmitter {
         }, 200);
     }
 
-    _readAccounts(cb) {
+    readAccounts(cb) {
         const self = this;
         let addresses;
         const accounts = [];
@@ -102,20 +102,20 @@ export default class extends EventEmitter {
                     return;
                 }
                 if (bn !== self.st.block.number) {
-                    self._invalidateBlock();
+                    self.invalidateBlock();
                 }
             });
         }, 1000);
 
         async.series([
             (cb1) => {
-                self._registerSync(cb1);
+                self.registerSync(cb1);
             },
             (cb1) => {
-                self._readAccounts(cb1);
+                self.readAccounts(cb1);
             },
             (cb1) => {
-                self._invalidateBlock();
+                self.invalidateBlock();
                 cb1();
             },
         ], cb);
@@ -168,12 +168,12 @@ export default class extends EventEmitter {
                 });
             },
             (cb1) => {
-                self._readAccounts(cb1);
+                self.readAccounts(cb1);
             },
         ], cb);
     }
 
-    _invalidateBlock() {
+    invalidateBlock() {
         const self = this;
         self.invalidBlock = true;
         if (!self.processingBlock) {
@@ -182,7 +182,7 @@ export default class extends EventEmitter {
             self.processBlock(() => {
                 self.processingBlock = false;
                 if (self.invalidBlock) {
-                    self._invalidateBlock();
+                    self.invalidateBlock();
                 } else {
                     self.updateState();
                 }

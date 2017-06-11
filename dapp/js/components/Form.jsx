@@ -1,17 +1,17 @@
 import React from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 
-const Form = ({ children }) =>
+const Form = ({ children }) => (
     <form>
         {children}
-    </form>;
+    </form>);
 
 Form.propTypes = {
-    children: PropTypes.node,
-    values: PropTypes.object,
-    update: PropTypes.func,
-    reset: PropTypes.func,
-    onSubmit: PropTypes.func,
+    // children: PropTypes.node,
+    // values: PropTypes.object,
+    // update: PropTypes.func,
+    // reset: PropTypes.func,
+    // onSubmit: PropTypes.func,
 };
 
 export default Form;

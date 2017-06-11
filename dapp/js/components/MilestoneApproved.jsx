@@ -8,6 +8,11 @@ import { Panel, ButtonToolbar } from "react-bootstrap";
 import MilestoneButtons from "./MilestoneButtons";
 import Milestone from "./Milestone";
 
+const preventDefault = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+};
+
 export default class MilestoneApproved extends React.Component {
     constructor(props) {
         super(props);
@@ -23,11 +28,6 @@ export default class MilestoneApproved extends React.Component {
      */
     handleOnClick() {
         this.setState({ visible: !this.state.visible });
-    }
-
-    preventDefault(event) {
-        event.preventDefault();
-        event.stopPropagation();
     }
 
     render() {
@@ -52,8 +52,8 @@ export default class MilestoneApproved extends React.Component {
             <span>
                 { `${ this.props.payDescription } ` }
                 { this.state.visible ?
-                    <span className="dropup"><span className="caret"></span></span> :
-                    <span className="caret"></span>
+                    <span className="dropup"><span className="caret" /></span> :
+                    <span className="caret" />
                 }
             </span>);
 
@@ -61,13 +61,13 @@ export default class MilestoneApproved extends React.Component {
             {header}
             <ButtonToolbar
               className="pull-right"
-              onClick={ this.preventDefault }
+              onClick={preventDefault}
             >
                 <MilestoneButtons
-                  status={ this.props.status }
-                  milestoneID={ this.props.index }
-                  actions={ this.props.actions }
-                  milestoneTrackerAddress={ this.props.milestoneTrackerAddress }
+                  status={this.props.status}
+                  milestoneID={this.props.index}
+                  actions={this.props.actions}
+                  milestoneTrackerAddress={this.props.milestoneTrackerAddress}
                 />
             </ButtonToolbar>
         </span>
@@ -75,28 +75,30 @@ export default class MilestoneApproved extends React.Component {
         return (
             <Panel
               {...additionalStyle}
-              header={ btns }
-              expanded={ false }
-              onClick={ this.handleOnClick }
+              header={btns}
+              expanded={false}
+              onClick={this.handleOnClick}
             >
                 {
                     (this.state.visible) ? (
                         <div
-                          onClick={ this.preventDefault }
+                          onClick={preventDefault}
+                          role="button"
+                          tabIndex={0}
                         >
                             <Milestone
-                              title={ this.props.payDescription }
-                              description={ this.props.description }
-                              url={ this.props.url }
-                              maxCompletionDate={ this.props.maxCompletionDate }
-                              minCompletionDate={ this.props.minCompletionDate }
-                              milestoneLeadLink={ this.props.milestoneLeadLink }
-                              payRecipient={ this.props.payRecipient }
-                              reviewer={ this.props.reviewer }
-                              reviewTime={ this.props.reviewTime }
-                              paymentSource={ this.props.paymentSource }
-                              status={ this.props.status }
-                              doneTime={ this.props.doneTime }
+                              title={this.props.payDescription}
+                              description={this.props.description}
+                              url={this.props.url}
+                              maxCompletionDate={this.props.maxCompletionDate}
+                              minCompletionDate={this.props.minCompletionDate}
+                              milestoneLeadLink={this.props.milestoneLeadLink}
+                              payRecipient={this.props.payRecipient}
+                              reviewer={this.props.reviewer}
+                              reviewTime={this.props.reviewTime}
+                              paymentSource={this.props.paymentSource}
+                              status={this.props.status}
+                              doneTime={this.props.doneTime}
                             />
                         </div>
                     )
@@ -111,17 +113,17 @@ export default class MilestoneApproved extends React.Component {
 MilestoneApproved.propTypes = {
     description: PropTypes.string.isRequired,
     url: PropTypes.string.isRequired,
-    maxCompletionDate: PropTypes.any.isRequired,
-    minCompletionDate: PropTypes.any.isRequired,
+    // maxCompletionDate: PropTypes.any.isRequired,
+    // minCompletionDate: PropTypes.any.isRequired,
     milestoneLeadLink: PropTypes.string.isRequired,
     reviewer: PropTypes.string.isRequired,
     reviewTime: PropTypes.number.isRequired,
     paymentSource: PropTypes.string.isRequired,
-    status: PropTypes.string,
-    doneTime: PropTypes.number,
+    // status: PropTypes.string,
+    // doneTime: PropTypes.number,
     payRecipient: PropTypes.string.isRequired,
     payDescription: PropTypes.string.isRequired,
     index: PropTypes.number.isRequired,
     milestoneTrackerAddress: PropTypes.string.isRequired,
-    actions: PropTypes.object,
+    // actions: PropTypes.object,
 };

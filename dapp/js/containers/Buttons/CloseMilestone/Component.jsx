@@ -6,11 +6,11 @@ export default function Component(props) {
     const handleCancelMilestone = (event) => {
         event.stopPropagation();
         props.cancelMilestone(
-            props.milestoneTrackerAddress, props.index
+            props.milestoneTrackerAddress, props.index,
         );
     };
     return (
-        <Button bsStyle="danger" onClick={ handleCancelMilestone }>x</Button>
+        <Button bsStyle="danger" onClick={handleCancelMilestone}>x</Button>
     );
 }
 
