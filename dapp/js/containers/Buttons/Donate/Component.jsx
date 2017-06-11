@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Button, Modal } from "react-bootstrap";
 import InputEther from "../../../components/InputEther";
 import InputMyAddresses from "../../InputMyAddresses";
@@ -120,10 +121,10 @@ class Component extends React.Component {
 }
 
 Component.propTypes = {
-    onDonate: React.PropTypes.func.isRequired,
-    idCampaign: React.PropTypes.number.isRequired,
-    campaignName: React.PropTypes.string.isRequired,
-    disabled: React.PropTypes.bool,
+    onDonate: PropTypes.func.isRequired,
+    idCampaign: PropTypes.number.isRequired,
+    campaignName: PropTypes.string.isRequired,
+    disabled: PropTypes.bool,
 };
 
 export default Component;

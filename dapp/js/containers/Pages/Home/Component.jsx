@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Grid, Row } from "react-bootstrap";
 
 const Component = ({ fullState }) =>
@@ -10,7 +11,7 @@ const Component = ({ fullState }) =>
     </Grid>;
 
 Component.propTypes = {
-    fullState: React.PropTypes.object.isRequired,
+    fullState: PropTypes.object.isRequired,
 };
 
 export default Component;

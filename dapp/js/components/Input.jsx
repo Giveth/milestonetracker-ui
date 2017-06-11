@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 
 class Input extends React.Component {
@@ -49,14 +50,14 @@ class Input extends React.Component {
 }
 
 Input.propTypes = {
-    name: React.PropTypes.string.isRequired,
-    placeholder: React.PropTypes.string,
-    label: React.PropTypes.string.isRequired,
-    componentClass: React.PropTypes.string,
-    onChange: React.PropTypes.func.isRequired,
-    value: React.PropTypes.string,
-    setValid: React.PropTypes.func.isRequired,
-    validate: React.PropTypes.func.isRequired,
+    name: PropTypes.string.isRequired,
+    placeholder: PropTypes.string,
+    label: PropTypes.string.isRequired,
+    componentClass: PropTypes.string,
+    onChange: PropTypes.func.isRequired,
+    value: PropTypes.string,
+    setValid: PropTypes.func.isRequired,
+    validate: PropTypes.func.isRequired,
 };
 
 export default Input;

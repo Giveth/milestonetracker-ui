@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { FormGroup, FormControl, ControlLabel, DropdownButton,
          MenuItem, InputGroup } from "react-bootstrap";
 
@@ -93,14 +94,14 @@ class InputDuration extends React.Component {
 }
 
 InputDuration.propTypes = {
-    name: React.PropTypes.string.isRequired,
-    placeholder: React.PropTypes.string,
-    label: React.PropTypes.string.isRequired,
-    onChange: React.PropTypes.func,
-    setValid: React.PropTypes.func,
-    value: React.PropTypes.oneOfType([
-        React.PropTypes.string,
-        React.PropTypes.number,
+    name: PropTypes.string.isRequired,
+    placeholder: PropTypes.string,
+    label: PropTypes.string.isRequired,
+    onChange: PropTypes.func,
+    setValid: PropTypes.func,
+    value: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number,
     ]),
 };
 

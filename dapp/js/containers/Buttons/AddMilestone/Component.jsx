@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Button } from "react-bootstrap";
 
 export default function Component(props) {
@@ -13,6 +14,6 @@ export default function Component(props) {
 }
 
 Component.propTypes = {
-    onAddMilestone: React.PropTypes.func.isRequired,
-    milestoneTrackerAddress: React.PropTypes.string.isRequired,
+    onAddMilestone: PropTypes.func.isRequired,
+    milestoneTrackerAddress: PropTypes.string.isRequired,
 };

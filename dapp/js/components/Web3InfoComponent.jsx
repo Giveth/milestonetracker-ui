@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 export default function Web3InfoComponent(props) {
     let content;
@@ -46,5 +47,5 @@ export default function Web3InfoComponent(props) {
 }
 
 Web3InfoComponent.propTypes = {
-    web3state: React.PropTypes.object.isRequired,
+    web3state: PropTypes.object.isRequired,
 };

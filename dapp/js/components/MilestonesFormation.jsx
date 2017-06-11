@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Form from "../components/Form";
 import { Accordion, Panel, ButtonGroup } from "react-bootstrap";
 import MilestoneEdit from "../containers/MilestoneEdit";
@@ -128,9 +129,10 @@ class MilestonesFormation extends React.Component {
 }
 
 MilestonesFormation.propTypes = {
-    milestoneTrackerAddress: React.PropTypes.string.isRequired,
-    newMilestones: React.PropTypes.object,
-    actions: React.PropTypes.object,
+    milestoneTrackerAddress: PropTypes.string.isRequired,
+    newMilestones: PropTypes.object,
+    actions: PropTypes.object,
+    recipient: PropTypes.string.isRequired,
 };
 
 export default MilestonesFormation;

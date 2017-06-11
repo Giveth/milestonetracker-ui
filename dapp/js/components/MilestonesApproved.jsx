@@ -5,6 +5,7 @@
  */
 
 import React from "react";
+import PropTypes from "prop-types";
 
 import MilestoneApproved from "./MilestoneApproved";
 
@@ -68,8 +69,8 @@ export default function MilestonesApproved(props) {
 }
 
 MilestonesApproved.propTypes = {
-    approved: React.PropTypes.bool,
-    milestones: React.PropTypes.array,
-    header: React.PropTypes.string.isRequired,
-    milestoneTrackerAddress: React.PropTypes.string.isRequired,
+    approved: PropTypes.bool,
+    milestones: PropTypes.array,
+    header: PropTypes.string.isRequired,
+    milestoneTrackerAddress: PropTypes.string.isRequired,
 };

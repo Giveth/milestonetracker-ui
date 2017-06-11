@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Button } from "react-bootstrap";
 
 export default function Component(props) {
@@ -15,8 +16,8 @@ export default function Component(props) {
 }
 
 Component.propTypes = {
-    onAcceptMilestones: React.PropTypes.func.isRequired,
-    milestoneTrackerAddress: React.PropTypes.string.isRequired,
-    proposalHash: React.PropTypes.string.isRequired,
-    action: React.PropTypes.array.isRequired,
+    onAcceptMilestones: PropTypes.func.isRequired,
+    milestoneTrackerAddress: PropTypes.string.isRequired,
+    proposalHash: PropTypes.string.isRequired,
+    action: PropTypes.array.isRequired,
 };

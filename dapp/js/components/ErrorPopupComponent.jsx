@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 function ErrorPopupComponent(props) {
     if (!props.visible) return null;
@@ -10,7 +11,7 @@ function ErrorPopupComponent(props) {
 }
 
 ErrorPopupComponent.propTypes = {
-    visible: React.PropTypes.bool.isRequired,
+    visible: PropTypes.bool.isRequired,
 };
 
 export default ErrorPopupComponent;

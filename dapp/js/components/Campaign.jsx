@@ -8,6 +8,7 @@
  */
 
 import React from "react";
+import PropTypes from "prop-types";
 
 import { ListGroupItem } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
@@ -23,7 +24,7 @@ export default function Campaign(props) {
 }
 
 Campaign.propTypes = {
-    url: React.PropTypes.string.isRequired,
-    name: React.PropTypes.string.isRequired,
-    description: React.PropTypes.string.isRequired,
+    url: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
 };

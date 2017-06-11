@@ -1,5 +1,6 @@
 /* eslint-disable */
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import fileDownload from 'react-file-download';
 import DeploymentResults from '../../../components/DeploymentResults';
 import Field from '../../../components/Field';

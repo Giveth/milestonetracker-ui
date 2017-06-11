@@ -7,10 +7,7 @@ export default function Navigation() {
         <Navbar>
             <Navbar.Header>
                 <Navbar.Brand>
-                    <a href="/">Giveth.io</a>
-                    {/* <LinkContainer to={ { pathname: "/" } }>
-                        <NavItem>Giveth.io</NavItem>
-                    </LinkContainer> */}
+                    <a href="https://giveth.io">Giveth.io</a>
                 </Navbar.Brand>
             </Navbar.Header>
             <Nav>

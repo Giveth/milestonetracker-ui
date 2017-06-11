@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { MenuItem } from "react-bootstrap";
 
 export default function Component(props) {
@@ -18,8 +19,8 @@ export default function Component(props) {
 }
 
 Component.propTypes = {
-    onCancelMilestone: React.PropTypes.func.isRequired,
-    milestoneTrackerAddress: React.PropTypes.string.isRequired,
-    milestoneID: React.PropTypes.number.isRequired,
-    action: React.PropTypes.array.isRequired,
+    onCancelMilestone: PropTypes.func.isRequired,
+    milestoneTrackerAddress: PropTypes.string.isRequired,
+    milestoneID: PropTypes.number.isRequired,
+    action: PropTypes.array.isRequired,
 };

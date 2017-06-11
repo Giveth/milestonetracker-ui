@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import { connect } from "react-redux";
 
@@ -18,7 +19,6 @@ class Component extends React.Component {
     change(event) {
         const val = event.target.value;
         if (val >= 0 && val < this.props.accounts.length) {
-            console.log(this.props.accounts[ val ]);
             this.props.onChange(this.props.name, this.props.accounts[ val ]);
             this.props.setValid(this.props.name, true);
 
@@ -61,14 +61,14 @@ class Component extends React.Component {
 }
 
 Component.propTypes = {
-    name: React.PropTypes.string.isRequired,
-    placeholder: React.PropTypes.string,
-    label: React.PropTypes.string.isRequired,
-    componentClass: React.PropTypes.string,
-    onChange: React.PropTypes.func.isRequired,
-    value: React.PropTypes.string,
-    setValid: React.PropTypes.func.isRequired,
-    accounts: React.PropTypes.array.isRequired,
+    name: PropTypes.string.isRequired,
+    placeholder: PropTypes.string,
+    label: PropTypes.string.isRequired,
+    componentClass: PropTypes.string,
+    onChange: PropTypes.func.isRequired,
+    value: PropTypes.string,
+    setValid: PropTypes.func.isRequired,
+    accounts: PropTypes.array.isRequired,
 };
 
 const mapStateToProps = (state) => ({

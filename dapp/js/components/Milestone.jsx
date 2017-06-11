@@ -5,7 +5,7 @@
  */
 
 import React from "react";
-//
+import PropTypes from "prop-types";
 import { Table } from "react-bootstrap";
 import moment from "moment";
 
@@ -101,15 +101,15 @@ export default function Milestone(props) {
 }
 
 Milestone.propTypes = {
-    description: React.PropTypes.string.isRequired,
-    url: React.PropTypes.string.isRequired,
-    maxCompletionDate: React.PropTypes.any.isRequired,
-    minCompletionDate: React.PropTypes.any.isRequired,
-    milestoneLeadLink: React.PropTypes.string.isRequired,
-    reviewer: React.PropTypes.string.isRequired,
-    reviewTime: React.PropTypes.number.isRequired,
-    paymentSource: React.PropTypes.string.isRequired,
-    status: React.PropTypes.string,
-    doneTime: React.PropTypes.number,
-    payRecipient: React.PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    url: PropTypes.string.isRequired,
+    maxCompletionDate: PropTypes.any.isRequired,
+    minCompletionDate: PropTypes.any.isRequired,
+    milestoneLeadLink: PropTypes.string.isRequired,
+    reviewer: PropTypes.string.isRequired,
+    reviewTime: PropTypes.number.isRequired,
+    paymentSource: PropTypes.string.isRequired,
+    status: PropTypes.string,
+    doneTime: PropTypes.number,
+    payRecipient: PropTypes.string.isRequired,
 };

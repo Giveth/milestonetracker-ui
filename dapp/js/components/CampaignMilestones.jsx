@@ -14,6 +14,7 @@
  */
 
 import React from "react";
+import PropTypes from "prop-types";
 
 import { Table } from "react-bootstrap";
 import { ButtonUnproposeMilestones, ButtonAcceptMilestones } from "../containers/Buttons";
@@ -89,16 +90,16 @@ export default function CampaignMilestones(props) {
 }
 
 CampaignMilestones.propTypes = {
-    recipient: React.PropTypes.string.isRequired,
-    donor: React.PropTypes.string.isRequired,
-    arbitrator: React.PropTypes.string.isRequired,
-    changingMilestones: React.PropTypes.bool.isRequired,
-    campaignCanceled: React.PropTypes.bool.isRequired,
-    milestones: React.PropTypes.array.isRequired,
-    milestoneTrackerAddress: React.PropTypes.string.isRequired,
-    proposedMilestonesHash: React.PropTypes.string,
-    proposedMilestones: React.PropTypes.array,
-    newMilestones: React.PropTypes.object,
-    vaultAddress: React.PropTypes.string.isRequired,
-    actions: React.PropTypes.object,
+    recipient: PropTypes.string.isRequired,
+    donor: PropTypes.string.isRequired,
+    arbitrator: PropTypes.string.isRequired,
+    changingMilestones: PropTypes.bool.isRequired,
+    campaignCanceled: PropTypes.bool.isRequired,
+    milestones: PropTypes.array.isRequired,
+    milestoneTrackerAddress: PropTypes.string.isRequired,
+    proposedMilestonesHash: PropTypes.string,
+    proposedMilestones: PropTypes.array,
+    newMilestones: PropTypes.object,
+    vaultAddress: PropTypes.string.isRequired,
+    actions: PropTypes.object,
 };

@@ -7,6 +7,7 @@
  *                           Only the one matching should be displayed
  */
 import React from "react";
+import PropTypes from "prop-types";
 
 import { ListGroup } from "react-bootstrap";
 import { Campaign } from "./";
@@ -41,6 +42,6 @@ export default function Campaigns(props) {
 }
 
 Campaigns.propTypes = {
-    campaigns: React.PropTypes.array,
-    filterText: React.PropTypes.string.isRequired,
+    campaigns: PropTypes.array,
+    filterText: PropTypes.string.isRequired,
 };

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Input from "../components/Input";
 import InputDate from "../components/InputDate";
 import InputEther from "../components/InputEther";
@@ -158,8 +159,24 @@ class MilestoneEditComponent extends React.Component {
 }
 
 MilestoneEditComponent.propTypes = {
-    nameInputChange: React.PropTypes.func,
-    milestoneTrackerAddress: React.PropTypes.string.isRequired,
+    nameInputChange: PropTypes.func.isRequired,
+    milestoneTrackerAddress: PropTypes.string.isRequired,
+    handleValidityChange: PropTypes.func.isRequired,
+    index: PropTypes.number.isRequired,
+    removeValidityCheck: PropTypes.func.isRequired,
+    onInputChange: PropTypes.func.isRequired,
+    payDescription: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    url: PropTypes.string.isRequired,
+    minCompletionDate: PropTypes.number.isRequired,
+    maxCompletionDate: PropTypes.number.isRequired,
+    reviewer: PropTypes.string.isRequired,
+    milestoneLeadLink: PropTypes.string.isRequired,
+    reviewTime: PropTypes.number.isRequired,
+    paymentSource: PropTypes.string.isRequired,
+    payRecipient: PropTypes.string.isRequired,
+    payValue: PropTypes.number.isRequired,
+    payDelay: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = () => ({

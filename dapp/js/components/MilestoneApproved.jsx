@@ -3,6 +3,7 @@
  */
 
 import React from "react";
+import PropTypes from "prop-types";
 import { Panel, ButtonToolbar } from "react-bootstrap";
 import MilestoneButtons from "./MilestoneButtons";
 import Milestone from "./Milestone";
@@ -108,19 +109,19 @@ export default class MilestoneApproved extends React.Component {
 }
 
 MilestoneApproved.propTypes = {
-    description: React.PropTypes.string.isRequired,
-    url: React.PropTypes.string.isRequired,
-    maxCompletionDate: React.PropTypes.any.isRequired,
-    minCompletionDate: React.PropTypes.any.isRequired,
-    milestoneLeadLink: React.PropTypes.string.isRequired,
-    reviewer: React.PropTypes.string.isRequired,
-    reviewTime: React.PropTypes.number.isRequired,
-    paymentSource: React.PropTypes.string.isRequired,
-    status: React.PropTypes.string,
-    doneTime: React.PropTypes.number,
-    payRecipient: React.PropTypes.string.isRequired,
-    payDescription: React.PropTypes.string.isRequired,
-    index: React.PropTypes.number.isRequired,
-    milestoneTrackerAddress: React.PropTypes.string.isRequired,
-    actions: React.PropTypes.object,
+    description: PropTypes.string.isRequired,
+    url: PropTypes.string.isRequired,
+    maxCompletionDate: PropTypes.any.isRequired,
+    minCompletionDate: PropTypes.any.isRequired,
+    milestoneLeadLink: PropTypes.string.isRequired,
+    reviewer: PropTypes.string.isRequired,
+    reviewTime: PropTypes.number.isRequired,
+    paymentSource: PropTypes.string.isRequired,
+    status: PropTypes.string,
+    doneTime: PropTypes.number,
+    payRecipient: PropTypes.string.isRequired,
+    payDescription: PropTypes.string.isRequired,
+    index: PropTypes.number.isRequired,
+    milestoneTrackerAddress: PropTypes.string.isRequired,
+    actions: PropTypes.object,
 };

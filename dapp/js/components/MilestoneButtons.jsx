@@ -3,6 +3,7 @@
  */
 
 import React from "react";
+import PropTypes from "prop-types";
 import { SplitButton, Button } from "react-bootstrap";
 import { ButtonCollectPayment, ButtonMarkMilestoneComplete, RejectCompletedMilestone,
          ApproveCompletedMilestone, CancelMilestone, ArbitrateApproveCompletedMilestone,
@@ -105,10 +106,10 @@ const MilestoneButtons = (props) => {
 };
 
 MilestoneButtons.propTypes = {
-    actions: React.PropTypes.object.isRequired,
-    milestoneID: React.PropTypes.number.isRequired,
-    status: React.PropTypes.string.isRequired,
-    milestoneTrackerAddress: React.PropTypes.string.isRequired,
+    actions: PropTypes.object.isRequired,
+    milestoneID: PropTypes.number.isRequired,
+    status: PropTypes.string.isRequired,
+    milestoneTrackerAddress: PropTypes.string.isRequired,
 };
 
 export default MilestoneButtons;

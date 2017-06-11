@@ -5,6 +5,7 @@
  */
 
 import React from "react";
+import PropTypes from "prop-types";
 
 import { Accordion, Panel } from "react-bootstrap";
 import Milestone from "./Milestone";
@@ -68,7 +69,7 @@ export default function Milestones(props) {
 }
 
 Milestones.propTypes = {
-    approved: React.PropTypes.bool,
-    milestones: React.PropTypes.array,
-    header: React.PropTypes.string.isRequired,
+    approved: PropTypes.bool,
+    milestones: PropTypes.array,
+    header: PropTypes.string.isRequired,
 };

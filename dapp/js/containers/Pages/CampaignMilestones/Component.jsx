@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { Panel } from "react-bootstrap";
 import CampaignMilestones from "../../../components/CampaignMilestones";
 
@@ -38,7 +39,7 @@ export default function Component(props) {
 }
 
 Component.propTypes = {
-    givethDirectoryState: React.PropTypes.object.isRequired,
-    params: React.PropTypes.object.isRequired,
-    formReducer: React.PropTypes.object.isRequired,
+    givethDirectoryState: PropTypes.object.isRequired,
+    params: PropTypes.object.isRequired,
+    formReducer: PropTypes.object.isRequired,
 };

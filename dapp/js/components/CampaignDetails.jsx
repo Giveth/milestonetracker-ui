@@ -12,6 +12,7 @@
  */
 
 import React from "react";
+import PropTypes from "prop-types";
 
 import { Table } from "react-bootstrap";
 import MilestonesApproved from "./MilestonesApproved";
@@ -65,10 +66,10 @@ export default function CampaignDetails(props) {
 }
 
 CampaignDetails.propTypes = {
-    url: React.PropTypes.string.isRequired,
-    name: React.PropTypes.string.isRequired,
-    description: React.PropTypes.string.isRequired,
-    milestoneTrackerAddress: React.PropTypes.string.isRequired,
-    milestones: React.PropTypes.array,
-    token: React.PropTypes.object.isRequired,
+    url: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    milestoneTrackerAddress: PropTypes.string.isRequired,
+    milestones: PropTypes.array,
+    token: PropTypes.object.isRequired,
 };

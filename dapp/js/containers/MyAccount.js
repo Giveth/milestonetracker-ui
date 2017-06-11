@@ -1,5 +1,6 @@
 import { connect } from "react-redux";
 import React from "react";
+import PropTypes from "prop-types";
 import { Table } from "react-bootstrap";
 import { web3 } from "../blockchain";
 
@@ -36,7 +37,7 @@ function Component(props) {
 }
 
 Component.propTypes = {
-    web3state: React.PropTypes.object.isRequired,
+    web3state: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({

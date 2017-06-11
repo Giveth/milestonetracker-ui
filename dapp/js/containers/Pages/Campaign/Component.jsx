@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { ProgressBar, Grid, Row, Col, Nav, NavItem, PageHeader } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { Donate } from "../../Buttons";
@@ -71,6 +72,6 @@ export default function Component(props) {
 }
 
 Component.propTypes = {
-    givethDirectoryState: React.PropTypes.object.isRequired,
-    params: React.PropTypes.object.isRequired,
+    givethDirectoryState: PropTypes.object.isRequired,
+    params: PropTypes.object.isRequired,
 };

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { FormGroup, ControlLabel } from "react-bootstrap";
 import DateTimeField from "react-datetime";
 import moment from "moment";
@@ -55,15 +56,15 @@ class InputDate extends React.Component {
 }
 
 InputDate.propTypes = {
-    name: React.PropTypes.string.isRequired,
-    placeholder: React.PropTypes.string,
-    label: React.PropTypes.string.isRequired,
-    onChange: React.PropTypes.func,
-    value: React.PropTypes.oneOfType([
-        React.PropTypes.string,
-        React.PropTypes.number,
+    name: PropTypes.string.isRequired,
+    placeholder: PropTypes.string,
+    label: PropTypes.string.isRequired,
+    onChange: PropTypes.func,
+    value: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number,
     ]),
-    setValid: React.PropTypes.func.isRequired,
+    setValid: PropTypes.func.isRequired,
 };
 
 export default InputDate;

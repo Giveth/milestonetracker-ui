@@ -2,6 +2,7 @@
  *
  */
 import React from "react";
+import PropTypes from "prop-types";
 
 import { Grid, Row, Col, ProgressBar } from "react-bootstrap";
 import { SearchBar, Campaigns } from "../../../components";
@@ -58,5 +59,5 @@ export default class CampaignsPage extends React.Component {
 }
 
 CampaignsPage.propTypes = {
-    givethDirectoryState: React.PropTypes.object.isRequired,
+    givethDirectoryState: PropTypes.object.isRequired,
 };

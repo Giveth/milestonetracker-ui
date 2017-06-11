@@ -5,6 +5,7 @@
  */
 
 import React from "react";
+import PropTypes from "prop-types";
 import { Table, Panel, Accordion, ListGroup, ListGroupItem } from "react-bootstrap";
 import { web3 } from "../blockchain";
 import moment from "moment";
@@ -66,9 +67,9 @@ export default function CampaignVault(props) {
 }
 
 CampaignVault.propTypes = {
-    owner: React.PropTypes.string.isRequired,
-    escapeCaller: React.PropTypes.string.isRequired,
-    escapeDestination: React.PropTypes.string.isRequired,
-    balance: React.PropTypes.number.isRequired,
-    payments: React.PropTypes.array.isRequired,
+    owner: PropTypes.string.isRequired,
+    escapeCaller: PropTypes.string.isRequired,
+    escapeDestination: PropTypes.string.isRequired,
+    balance: PropTypes.number.isRequired,
+    payments: PropTypes.array.isRequired,
 };
