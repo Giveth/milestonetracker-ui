@@ -3,9 +3,9 @@
   "version": "0.0.3",
   "description": "Milestone Tracker User Interface",
   "scripts": {
-    "start": "webpack-dev-server --inline --content-base build/",
+    "start": "NODE_ENV=dev webpack --progress --colors --watch & webpack-dev-server --inline --content-base build/",
     "lint": "eslint --ext=js --ext=jsx --ignore-path .gitignore .",
-    "build": "webpack",
+    "build": "NODE_ENV=production webpack --progress --colors -p --config webpack.config.js",
     "test": "mocha-webpack"
   },
   "repository": {

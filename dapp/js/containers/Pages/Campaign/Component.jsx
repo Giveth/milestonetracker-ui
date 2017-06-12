@@ -3,6 +3,7 @@ import React from "react";
 import { ProgressBar, Grid, Row, Col, Nav, NavItem, PageHeader } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { Donate } from "../../Buttons";
+import { PageCampaignDetails /* , PageCampaignMilestones, PageCampaignVault */ } from "../";
 
 export default function Component(props) {
     let content = (
@@ -58,7 +59,11 @@ export default function Component(props) {
                     </Nav>
                 </div>
 
-                { props.children }
+                <PageCampaignDetails />
+                {
+                  // <PageCampaignMilestones />
+                  // <PageCampaignVault />
+                }
             </div>
         );
     }
