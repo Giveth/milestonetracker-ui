@@ -3,8 +3,7 @@ import { givethDirectory } from "../../../blockchain";
 /**
  *
  */
-export const donate =
-(campaignID, ownr, val) => () => {
+export default (campaignID, ownr, val) => () => {
     givethDirectory.donate(
         {
             idCampaign: campaignID,

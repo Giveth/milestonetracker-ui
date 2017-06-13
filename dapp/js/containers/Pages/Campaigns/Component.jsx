@@ -2,7 +2,7 @@
  *
  */
 import React from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 
 import { Grid, Row, Col, ProgressBar } from "react-bootstrap";
 import { SearchBar, Campaigns } from "../../../components";
@@ -25,7 +25,7 @@ export default class CampaignsPage extends React.Component {
     render() {
         let content = (
             <div>
-                <h2>Loading data from blockchain...</h2>
+                <h2>Loading data from blockchain... This may take a minute or two.</h2>
                 <ProgressBar active now={100} />
             </div>
         );
@@ -34,13 +34,13 @@ export default class CampaignsPage extends React.Component {
                 <div>
                     <p>Are you ready to make a change?</p>
                     <SearchBar
-                      filterText={ this.state.filterText }
-                      onUserInput={ this.handleUserInput }
+                      filterText={this.state.filterText}
+                      onUserInput={this.handleUserInput}
                       placeholder="Search in campaigns"
                     />
                     <Campaigns
-                      campaigns={ this.props.givethDirectoryState.campaigns }
-                      filterText={ this.state.filterText}
+                      campaigns={this.props.givethDirectoryState.campaigns}
+                      filterText={this.state.filterText}
                     />
                 </div>);
         }
@@ -59,5 +59,5 @@ export default class CampaignsPage extends React.Component {
 }
 
 CampaignsPage.propTypes = {
-    givethDirectoryState: PropTypes.object.isRequired,
+    // givethDirectoryState: PropTypes.object.isRequired,
 };

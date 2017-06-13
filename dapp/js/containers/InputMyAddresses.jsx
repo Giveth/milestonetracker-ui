@@ -35,13 +35,13 @@ class Component extends React.Component {
 
     render() {
         const accounts = [ <option key="-1" value="-1">Choose an account</option> ];
-        for (let i = 0; i < this.props.accounts.length; ++i) {
+        for (let i = 0; i < this.props.accounts.length; i += 1) {
             accounts.push(
                 <option
                   key={i}
                   value={i}
                 >
-                  {this.props.accounts[ i ].address}
+                    {this.props.accounts[ i ].address}
                 </option>);
         }
         return (
@@ -62,16 +62,16 @@ class Component extends React.Component {
 
 Component.propTypes = {
     name: PropTypes.string.isRequired,
-    placeholder: PropTypes.string,
+    // placeholder: PropTypes.string,
     label: PropTypes.string.isRequired,
-    componentClass: PropTypes.string,
+    // componentClass: PropTypes.string,
     onChange: PropTypes.func.isRequired,
-    value: PropTypes.string,
+    // value: PropTypes.string,
     setValid: PropTypes.func.isRequired,
-    accounts: PropTypes.array.isRequired,
+    // accounts: PropTypes.array.isRequired,
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
     accounts: state.web3.accounts,
 });
 
@@ -82,7 +82,7 @@ const mapDispatchToProps = (
 
 const InputMyAddresses = connect(
     mapStateToProps,
-    mapDispatchToProps
+    mapDispatchToProps,
 )(Component);
 
 export default InputMyAddresses;

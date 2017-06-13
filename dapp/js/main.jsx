@@ -1,9 +1,10 @@
 import "babel-polyfill";
 import "bootstrap/dist/css/bootstrap.css";
-import "../static/style.css";
 import React from "react";
 import { render } from "react-dom";
 import { Provider } from "react-redux";
+
+import "../static/style.css";
 import { web3, givethDirectory } from "./blockchain";
 import Web3monitor from "./lib/Web3monitor";
 import { newWeb3State, newGivethDirectoryState } from "./actions";
@@ -28,5 +29,5 @@ render(
         <Routes />
     </Provider>
     ,
-    document.getElementById("root")
+    document.getElementById("root"),
 );

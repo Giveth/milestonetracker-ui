@@ -1,40 +1,29 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Panel } from "react-bootstrap";
 import CampaignDetails from "../../../components/CampaignDetails";
+import { domain } from "../../../blockchain";
 
-export default function Component(props) {
-    let content = "";
-    const id = props.params.campaignId;
-    if (props.givethDirectoryState.campaigns &&
-        props.givethDirectoryState.campaigns.length >= id - 1) {
-        const currentCampaign = props.givethDirectoryState.campaigns[ id ];
-
-        content = (
-            <Panel>
-                <CampaignDetails
-                  url={ currentCampaign.url }
-                  name={ currentCampaign.name }
-                  description={ currentCampaign.description }
-                  status={ currentCampaign.status }
-                  tokenAddress={ currentCampaign.tokenAddress }
-                  vaultAddress={ currentCampaign.vaultAddress }
-                  milestoneTrackerAddress={ currentCampaign.milestoneTrackerAddress }
-                  milestones={currentCampaign.milestoneTracker.milestones}
-                  token={currentCampaign.token}
-                />
-            </Panel>
-        );
-    }
-
-    return (
-        <div>
-            { content }
-        </div>
-    );
-}
+const Component = props => (
+    <Panel>
+        <CampaignDetails
+          campaign={props.campaign.token.controller}
+          url={props.campaign.url}
+          name={props.campaign.name}
+          description={props.campaign.description}
+          status={props.campaign.status}
+          tokenAddress={props.campaign.tokenAddress}
+          vaultAddress={props.campaign.vaultAddress}
+          milestoneTrackerAddress={props.campaign.milestoneTrackerAddress}
+          milestones={props.campaign.milestoneTracker.milestones}
+          token={props.campaign.token}
+          domain={domain}
+        />
+    </Panel>
+  );
 
 Component.propTypes = {
-    givethDirectoryState: PropTypes.object.isRequired,
-    params: PropTypes.object.isRequired,
+    // givethDirectoryState: PropTypes.object.isRequired,
+    // params: PropTypes.object.isRequired,
 };
+
+export default Component;

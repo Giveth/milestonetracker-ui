@@ -13,7 +13,7 @@ const mapDispatchToProps = (
 
 const ButtonCancelMilestone = connect(
     mapStateToProps,
-    mapDispatchToProps
+    mapDispatchToProps,
 )(Component);
 
 export default ButtonCancelMilestone;

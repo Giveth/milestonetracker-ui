@@ -11,8 +11,8 @@ import { ButtonCollectPayment, ButtonMarkMilestoneComplete, RejectCompletedMiles
 
 const MilestoneButtons = (props) => {
     const buttons = [];
-    for (const propName in props.actions) {
-        if (props.actions.hasOwnProperty(propName)) {
+    if (Array.isArray(props.actions)) {
+        props.actions.forEach((propName) => {
             switch (propName) {
             case "markMilestoneComplete":
                 buttons.push(
@@ -21,7 +21,7 @@ const MilestoneButtons = (props) => {
                       milestoneID={props.milestoneID}
                       milestoneTrackerAddress={props.milestoneTrackerAddress}
                       action={props.actions[ propName ]}
-                    />
+                    />,
                 );
                 break;
 
@@ -32,7 +32,7 @@ const MilestoneButtons = (props) => {
                       milestoneID={props.milestoneID}
                       milestoneTrackerAddress={props.milestoneTrackerAddress}
                       action={props.actions[ propName ]}
-                    />
+                    />,
                 );
                 break;
 
@@ -43,7 +43,7 @@ const MilestoneButtons = (props) => {
                       milestoneID={props.milestoneID}
                       milestoneTrackerAddress={props.milestoneTrackerAddress}
                       action={props.actions[ propName ]}
-                    />
+                    />,
                 );
                 break;
 
@@ -54,7 +54,7 @@ const MilestoneButtons = (props) => {
                       milestoneID={props.milestoneID}
                       milestoneTrackerAddress={props.milestoneTrackerAddress}
                       action={props.actions[ propName ]}
-                    />
+                    />,
                 );
                 break;
 
@@ -65,7 +65,7 @@ const MilestoneButtons = (props) => {
                       milestoneID={props.milestoneID}
                       milestoneTrackerAddress={props.milestoneTrackerAddress}
                       action={props.actions[ propName ]}
-                    />
+                    />,
                 );
                 break;
 
@@ -76,20 +76,20 @@ const MilestoneButtons = (props) => {
                       milestoneID={props.milestoneID}
                       milestoneTrackerAddress={props.milestoneTrackerAddress}
                       action={props.actions[ propName ]}
-                    />
+                    />,
                 );
                 break;
             default:
                 break;
             }
-        }
+        });
     }
 
     return (
         Object.keys(props.actions).length ? (
             <SplitButton
               bsSize="xsmall"
-              title={ props.status }
+              title={props.status}
               id={`milestone_${ props.milestoneID }_actions`}
             >
                 { buttons }
@@ -106,10 +106,9 @@ const MilestoneButtons = (props) => {
 };
 
 MilestoneButtons.propTypes = {
-    actions: PropTypes.object.isRequired,
+    // actions: PropTypes.object.isRequired,
     milestoneID: PropTypes.number.isRequired,
     status: PropTypes.string.isRequired,
-    milestoneTrackerAddress: PropTypes.string.isRequired,
 };
 
 export default MilestoneButtons;

@@ -8,7 +8,7 @@ export default function Component(props) {
         props.onCollectPayment(props.milestoneTrackerAddress, props.milestoneID, props.action);
     };
     return (
-        <MenuItem onClick={ handleCollectPayment }>Collect</MenuItem>
+        <MenuItem onClick={handleCollectPayment}>Collect</MenuItem>
     );
 }
 
@@ -16,5 +16,5 @@ Component.propTypes = {
     onCollectPayment: PropTypes.func.isRequired,
     milestoneTrackerAddress: PropTypes.string.isRequired,
     milestoneID: PropTypes.number.isRequired,
-    action: PropTypes.array.isRequired,
+    // action: PropTypes.array.isRequired,
 };

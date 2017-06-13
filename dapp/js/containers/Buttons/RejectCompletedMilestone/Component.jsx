@@ -6,13 +6,13 @@ export default function Component(props) {
     const handleRejectCompletedMilestone = (event) => {
         event.stopPropagation();
         props.onRejectCompletedMilestone(
-            props.milestoneTrackerAddress, props.milestoneID, props.action
+            props.milestoneTrackerAddress, props.milestoneID, props.action,
         );
     };
     return (
         <MenuItem
           bsStyle="danger"
-          onClick={ handleRejectCompletedMilestone }
+          onClick={handleRejectCompletedMilestone}
         >
             Reject Completed
         </MenuItem>
@@ -23,5 +23,5 @@ Component.propTypes = {
     onRejectCompletedMilestone: PropTypes.func.isRequired,
     milestoneTrackerAddress: PropTypes.string.isRequired,
     milestoneID: PropTypes.number.isRequired,
-    action: PropTypes.array.isRequired,
+    // action: PropTypes.array.isRequired,
 };

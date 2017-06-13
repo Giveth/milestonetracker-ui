@@ -6,26 +6,26 @@
 
 import React from "react";
 import PropTypes from "prop-types";
+import moment from "moment";
 import { Table, Panel, Accordion, ListGroup, ListGroupItem } from "react-bootstrap";
 import { web3 } from "../blockchain";
-import moment from "moment";
 
 export default function CampaignVault(props) {
     const payments = [];
 
-    for (const record of props.payments) {
+    props.payments.forEach((record) => {
         const style = record.paid ? { bsStyle: "success" } : null;
         payments.push(
             <Panel
               {...style}
-              key={ record.idPayment }
-              eventKey={ record.idPayment }
-              header={ record.description }
+              key={record.idPayment}
+              eventKey={record.idPayment}
+              header={record.description}
             >
                 <ListGroup fill>
                     <ListGroupItem>
                         <strong>Amount: </strong>
-                            { web3.fromWei(record.amount, "ether").toNumber() } ETH
+                        {web3.fromWei(record.amount, "ether").toNumber()} ETH
                     </ListGroupItem>
                     <ListGroupItem><strong>Earliest Pay Time: </strong>
                         { moment.unix(record.earliestPayTime).format() }
@@ -34,9 +34,9 @@ export default function CampaignVault(props) {
                         <strong>Executed: </strong>{ (record.paid) ? "yes" : "no" }
                     </ListGroupItem>
                 </ListGroup>
-            </Panel>
+            </Panel>,
         );
-    }
+    });
 
     return (
         <div>
@@ -44,10 +44,18 @@ export default function CampaignVault(props) {
                 <tbody>
                     <tr>
                         <td>Owner</td>
-                        <td>{ props.owner }</td>
+                        <td>
+                            <a
+                              href={`${ props.domain }address/${ props.owner }`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                                {props.owner}
+                            </a>
+                        </td>
                     </tr>
                     <tr>
-                        <td>Escape Caller's Address</td>
+                        <td>Escape Caller&apos;s Address</td>
                         <td>{ props.escapeCaller }</td>
                     </tr>
                     <tr>
@@ -71,5 +79,5 @@ CampaignVault.propTypes = {
     escapeCaller: PropTypes.string.isRequired,
     escapeDestination: PropTypes.string.isRequired,
     balance: PropTypes.number.isRequired,
-    payments: PropTypes.array.isRequired,
+//    payments: PropTypes.array.isRequired,
 };

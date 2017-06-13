@@ -38,8 +38,8 @@ export default class SearchBar extends React.Component {
             <FormGroup>
                 <FormControl
                   type="text"
-                  placeholder={ this.props.placeholder }
-                  value={ this.state.filterText }
+                  placeholder={this.props.placeholder}
+                  value={this.state.filterText}
                   onChange={this.handleChange}
                 />
             </FormGroup>

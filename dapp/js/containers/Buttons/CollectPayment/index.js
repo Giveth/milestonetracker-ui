@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import Component from "./Component";
-import { collectPayment } from "./actions";
+import collectPayment from "./actions";
 
 const mapStateToProps = () => ({
 });
@@ -13,7 +13,7 @@ const mapDispatchToProps = (
 
 const ButtonCollectPayment = connect(
     mapStateToProps,
-    mapDispatchToProps
+    mapDispatchToProps,
 )(Component);
 
 export default ButtonCollectPayment;

@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import About from "./About";
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
     givethDirectoryState: state.givethDirectory,
 });
 const mapDispatchToProps = (
@@ -10,7 +10,7 @@ const mapDispatchToProps = (
 
 const PageAbout = connect(
     mapStateToProps,
-    mapDispatchToProps
+    mapDispatchToProps,
 )(About);
 
 export default PageAbout;

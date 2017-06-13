@@ -1,9 +1,9 @@
 import React from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 
 import { Grid, Row, Col } from "react-bootstrap";
 
-const About = () =>
+const About = () => (
     <div>
         <Grid>
             <Row>
@@ -12,10 +12,10 @@ const About = () =>
                 </Col>
             </Row>
         </Grid>
-    </div>;
+    </div>);
 
 About.propTypes = {
-    givethDirectoryState: PropTypes.object.isRequired,
+    // givethDirectoryState: PropTypes.object.isRequired,
 };
 
 export default About;

@@ -63,10 +63,10 @@ class InputDuration extends React.Component {
 
     render() {
         const durationButtons = [ ];
-        for (let i = 0; i < timeUnits.length; ++i) {
+        for (let i = 0; i < timeUnits.length; i += 1) {
             durationButtons.push(<MenuItem
               key={i}
-              onClick={ this.unitChanged(i) }
+              onClick={this.unitChanged(i)}
             >{ timeUnits[ i ].title }</MenuItem>);
         }
         return (
@@ -83,7 +83,7 @@ class InputDuration extends React.Component {
                     <DropdownButton
                       componentClass={InputGroup.Button}
                       id="input-dropdown-addon"
-                      title={ this.state.title }
+                      title={this.state.title}
                     >
                         { durationButtons }
                     </DropdownButton>
@@ -95,14 +95,14 @@ class InputDuration extends React.Component {
 
 InputDuration.propTypes = {
     name: PropTypes.string.isRequired,
-    placeholder: PropTypes.string,
+    // placeholder: PropTypes.string,
     label: PropTypes.string.isRequired,
-    onChange: PropTypes.func,
-    setValid: PropTypes.func,
-    value: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.number,
-    ]),
+    // onChange: PropTypes.func,
+    // setValid: PropTypes.func,
+    // value: PropTypes.oneOfType([
+    //     PropTypes.string,
+    //     PropTypes.number,
+    // ]),
 };
 
 export default InputDuration;

@@ -57,13 +57,13 @@ class InputDate extends React.Component {
 
 InputDate.propTypes = {
     name: PropTypes.string.isRequired,
-    placeholder: PropTypes.string,
+    // placeholder: PropTypes.string,
     label: PropTypes.string.isRequired,
-    onChange: PropTypes.func,
-    value: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.number,
-    ]),
+    // onChange: PropTypes.func,
+    // value: PropTypes.oneOfType([
+    //     PropTypes.string,
+    //     PropTypes.number,
+    // ]),
     setValid: PropTypes.func.isRequired,
 };
 

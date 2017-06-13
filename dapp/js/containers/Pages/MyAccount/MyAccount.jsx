@@ -1,10 +1,10 @@
 import React from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 
 import { Grid, Row, Col } from "react-bootstrap";
 import MyAccountContainer from "../../MyAccount";
 
-const MyAccount = () =>
+const MyAccount = () => (
     <div>
         <Grid>
             <Row>
@@ -13,10 +13,10 @@ const MyAccount = () =>
                 </Col>
             </Row>
         </Grid>
-    </div>;
+    </div>);
 
 MyAccount.propTypes = {
-    givethDirectoryState: PropTypes.object.isRequired,
+    // givethDirectoryState: PropTypes.object.isRequired,
 };
 
 export default MyAccount;

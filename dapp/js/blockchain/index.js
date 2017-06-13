@@ -18,8 +18,21 @@ if (!web3.isConnected()) {
 //MAIN
 const givethDirectory = new GivethDirectory(web3, "0x30e1a463ecf25dbba2f83cb3e4b10045f888e55b");
 //ROPSTEN
-// const givethDirectory = new GivethDirectory(web3, "0x53fc022DD190F0b37A5501FeE92171Ed1C7CD4Eb");
+//const givethDirectory = new GivethDirectory(web3, "0x53fc022DD190F0b37A5501FeE92171Ed1C7CD4Eb");
 //TESTRPC
 //const givethDirectory = new GivethDirectory(web3, "0xe78a0f7e598cc8b0bb87894b0f60dd2a88d6a8ab");
 
-export { web3, MilestoneTracker, givethDirectory };
+let domain = '';
+const networks = {
+    1: 'Main',
+    2: 'Morden',
+    3: 'Ropsten',
+    4: 'Testrpc'
+};
+
+web3.version.getNetwork((e, result) => {
+    let currentNetwork = result < 4 ? networks[result] : networks[4];
+    domain = currentNetwork == 'Main' ? 'https://etherscan.io/' : currentNetwork == 'Ropsten' ? 'https://ropsten.etherscan.io/' : '';
+});
+
+export { web3, MilestoneTracker, givethDirectory, domain };

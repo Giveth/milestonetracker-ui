@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import CampaignsPage from "./Component";
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
     givethDirectoryState: state.givethDirectory,
 });
 
@@ -10,7 +10,7 @@ const mapDispatchToProps = ({
 
 const PageCampaigns = connect(
     mapStateToProps,
-    mapDispatchToProps
+    mapDispatchToProps,
 )(CampaignsPage);
 
 export default PageCampaigns;

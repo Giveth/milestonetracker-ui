@@ -17,19 +17,16 @@ import PropTypes from "prop-types";
 import { Table } from "react-bootstrap";
 import MilestonesApproved from "./MilestonesApproved";
 
-function calculateTokens(balances) {
-    let owned = 0;
-    for (const key in balances) {
-        if (balances.hasOwnProperty(key)) {
-            owned += balances[ key ];
-        }
-    }
-    return owned;
-}
+// function calculateTokens(balances) {
+//     if (Array.isArray(balances)) {
+//         return balances.reduce((total, value) => total + value, 0);
+//     }
+//     return 0;
+// }
 
 export default function CampaignDetails(props) {
     return (
-        <div to={ { pathname: `${ props.url }` } }>
+        <div to={{ pathname: `${ props.url }` }}>
             <p>{ props.description }</p>
             <Table striped bordered condensed hover>
                 <tbody>
@@ -37,29 +34,20 @@ export default function CampaignDetails(props) {
                         <td>Website</td>
                         <td>
                             <a
-                              href={ props.url }
+                              href={props.url}
                               target="_blank"
+                              rel="noopener noreferrer"
                             >
-                            { props.url }
+                                {props.url}
                             </a>
                         </td>
-                    </tr>
-                    <tr>
-                        <td>Tokens owned/emitted</td>
-                        <td>{ calculateTokens(props.token.balances) }
-                            /
-                            { props.token.totalSupply }</td>
-                    </tr>
-                    <tr>
-                        <td>Tokens name</td>
-                        <td>{ props.token.name }</td>
                     </tr>
                 </tbody>
             </Table>
             <MilestonesApproved
-              milestones={ props.milestones }
+              milestones={props.milestones}
               header="Approved Milestones"
-              milestoneTrackerAddress={ props.milestoneTrackerAddress }
+              milestoneTrackerAddress={props.milestoneTrackerAddress}
             />
         </div>
     );
@@ -67,9 +55,6 @@ export default function CampaignDetails(props) {
 
 CampaignDetails.propTypes = {
     url: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     milestoneTrackerAddress: PropTypes.string.isRequired,
-    milestones: PropTypes.array,
-    token: PropTypes.object.isRequired,
 };

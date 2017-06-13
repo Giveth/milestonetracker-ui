@@ -15,9 +15,9 @@ import { LinkContainer } from "react-router-bootstrap";
 
 export default function Campaign(props) {
     return (
-        <LinkContainer to={ { pathname: `${ props.url }` } }>
-            <ListGroupItem header={ props.name }>
-            { props.description }
+        <LinkContainer to={{ pathname: `${ props.url }` }}>
+            <ListGroupItem header={props.name}>
+                {props.description}
             </ListGroupItem>
         </LinkContainer>
     );

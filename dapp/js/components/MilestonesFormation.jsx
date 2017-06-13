@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
-import Form from "../components/Form";
 import { Accordion, Panel, ButtonGroup } from "react-bootstrap";
+import Form from "../components/Form";
 import MilestoneEdit from "../containers/MilestoneEdit";
 import ButtonCloseMilestone from "../containers/Buttons/CloseMilestone";
 import { ButtonProposeMilestones, ButtonAddMilestone } from "../containers/Buttons";
@@ -27,13 +27,13 @@ class MilestonesFormation extends React.Component {
 
     validate(validationArray, val) {
         if (val === true || val === undefined) {
-            for (const key in validationArray) {
+            validationArray.forEach((key) => {
                 if (!validationArray[ key ]) {
                     this.setState({ valid: false });
-                    break;
+                    return;
                 }
                 this.setState({ valid: true });
-            }
+            });
         } else {
             this.setState({ valid: false });
         }
@@ -55,25 +55,25 @@ class MilestonesFormation extends React.Component {
             newMilestonesButtons.push(<ButtonProposeMilestones
               key="proposeMilestones"
               action={[ { account: this.props.recipient } ]}
-              milestoneTrackerAddress={ this.props.milestoneTrackerAddress }
-              milestones={ this.props.newMilestones.milestones }
-              disabled={ !this.state.valid }
+              milestoneTrackerAddress={this.props.milestoneTrackerAddress}
+              milestones={this.props.newMilestones.milestones}
+              disabled={!this.state.valid}
             />);
         }
 
         if (this.props.newMilestones) {
             let milestones = [];
             const mlstns = this.props.newMilestones.milestones;
-            for (let i = 0; i < mlstns.length; ++ i) {
+            for (let i = 0; i < mlstns.length; i += 1) {
                 const text = (mlstns[ i ].payDescription) ?
                     mlstns[ i ].payDescription : `Milestone #${ i + 1 }`;
-                const header = <span>{ text } <span className="caret"></span></span>;
+                const header = <span>{ text } <span className="caret" /></span>;
                 const btns = (<span>
                     {header}
                     <ButtonGroup bsSize="xsmall" className="pull-right">
                         <ButtonCloseMilestone
-                          milestoneTrackerAddress={ this.props.milestoneTrackerAddress }
-                          index={ i }
+                          milestoneTrackerAddress={this.props.milestoneTrackerAddress}
+                          index={i}
                         />
                     </ButtonGroup>
                 </span>);
@@ -81,28 +81,28 @@ class MilestonesFormation extends React.Component {
                     <Panel
                       collapsible
                       defaultExpanded
-                      key={ i }
-                      header={ btns }
-                      eventKey={ i }
-                      bsStyle={this.state.inputsValidity[ i ] ? "success" : "danger" }
+                      key={i}
+                      header={btns}
+                      eventKey={i}
+                      bsStyle={this.state.inputsValidity[ i ] ? "success" : "danger"}
                     >
                         <MilestoneEdit
-                          description={ mlstns[ i ].description }
-                          url={ mlstns[ i ].url }
-                          maxCompletionDate={ mlstns[ i ].maxCompletionDate }
-                          minCompletionDate={ mlstns[ i ].minCompletionDate }
-                          milestoneLeadLink={ mlstns[ i ].milestoneLeadLink }
-                          reviewer={ mlstns[ i ].reviewer }
-                          reviewTime={ mlstns[ i ].reviewTime }
-                          paymentSource={ mlstns[ i ].paymentSource }
-                          payDescription={ mlstns[ i ].payDescription }
-                          payRecipient={ mlstns[ i ].payRecipient }
-                          payValue={ mlstns[ i ].payValue }
-                          payDelay={ mlstns[ i ].payDelay }
-                          index={ i }
-                          milestoneTrackerAddress={ this.props.milestoneTrackerAddress }
-                          handleValidityChange={ this.handleValidityChange }
-                          removeValidityCheck={ this.removeValidityCheck }
+                          description={mlstns[ i ].description}
+                          url={mlstns[ i ].url}
+                          maxCompletionDate={mlstns[ i ].maxCompletionDate}
+                          minCompletionDate={mlstns[ i ].minCompletionDate}
+                          milestoneLeadLink={mlstns[ i ].milestoneLeadLink}
+                          reviewer={mlstns[ i ].reviewer}
+                          reviewTime={mlstns[ i ].reviewTime}
+                          paymentSource={mlstns[ i ].paymentSource}
+                          payDescription={mlstns[ i ].payDescription}
+                          payRecipient={mlstns[ i ].payRecipient}
+                          payValue={mlstns[ i ].payValue}
+                          payDelay={mlstns[ i ].payDelay}
+                          index={i}
+                          milestoneTrackerAddress={this.props.milestoneTrackerAddress}
+                          handleValidityChange={this.handleValidityChange}
+                          removeValidityCheck={this.removeValidityCheck}
                         />
                     </Panel>);
             }
@@ -119,7 +119,7 @@ class MilestonesFormation extends React.Component {
                 <div className="padding">
                     <ButtonAddMilestone
                       key="addMilestone"
-                      milestoneTrackerAddress={ this.props.milestoneTrackerAddress }
+                      milestoneTrackerAddress={this.props.milestoneTrackerAddress}
                     />
                     {newMilestonesButtons}
                 </div>
@@ -130,8 +130,8 @@ class MilestonesFormation extends React.Component {
 
 MilestonesFormation.propTypes = {
     milestoneTrackerAddress: PropTypes.string.isRequired,
-    newMilestones: PropTypes.object,
-    actions: PropTypes.object,
+    // newMilestones: PropTypes.object,
+    // actions: PropTypes.object,
     recipient: PropTypes.string.isRequired,
 };
 

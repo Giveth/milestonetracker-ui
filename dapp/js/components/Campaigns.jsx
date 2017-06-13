@@ -13,22 +13,22 @@ import { ListGroup } from "react-bootstrap";
 import { Campaign } from "./";
 
 export default function Campaigns(props) {
-    let campaigns = [ ];
+    const campaigns = [ ];
 
     if (props.campaigns) {
         const search = props.filterText.toLowerCase();
 
-        for (let i = 0; i < props.campaigns.length; ++i) {
+        for (let i = 0; i < props.campaigns.length; i += 1) {
             // Add only if the name or the description contains the filtered text
             if (props.campaigns[ i ].name.toLowerCase().indexOf(search) !== -1 ||
                 props.campaigns[ i ].description.toLowerCase().indexOf(search) !== -1) {
                 campaigns.push(
                     <Campaign
-                      key={ i.toString() }
-                      url={ `/campaigns/${ i }/details` }
-                      name={ props.campaigns[ i ].name }
-                      description={ props.campaigns[ i ].description }
-                    />
+                      key={i.toString()}
+                      url={`/campaigns/${ i }`}
+                      name={props.campaigns[ i ].name}
+                      description={props.campaigns[ i ].description}
+                    />,
                 );
             }
         }
@@ -42,6 +42,6 @@ export default function Campaigns(props) {
 }
 
 Campaigns.propTypes = {
-    campaigns: PropTypes.array,
+//    campaigns: PropTypes.array,
     filterText: PropTypes.string.isRequired,
 };

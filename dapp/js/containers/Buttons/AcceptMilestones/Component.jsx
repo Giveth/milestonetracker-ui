@@ -11,7 +11,7 @@ export default function Component(props) {
         );
     };
     return (
-        <Button bsStyle="success" onClick={ handleProposeMilestones }>Accept</Button>
+        <Button bsStyle="success" onClick={handleProposeMilestones}>Accept</Button>
     );
 }
 
@@ -19,5 +19,5 @@ Component.propTypes = {
     onAcceptMilestones: PropTypes.func.isRequired,
     milestoneTrackerAddress: PropTypes.string.isRequired,
     proposalHash: PropTypes.string.isRequired,
-    action: PropTypes.array.isRequired,
+    // action: PropTypes.array.isRequired,
 };

@@ -3,7 +3,7 @@ import { web3, MilestoneTracker } from "../../../blockchain";
 /**
  *
  */
-export const completeMilestone = (milestoneTrackerAddress, milestoneID, action) => () => {
+export default (milestoneTrackerAddress, milestoneID, action) => () => {
     const milestoneTracker = new MilestoneTracker(web3, milestoneTrackerAddress);
     milestoneTracker.markMilestoneComplete(
         {

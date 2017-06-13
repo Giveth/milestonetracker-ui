@@ -25,7 +25,7 @@ class Component extends React.Component {
     handleDonate(event) {
         event.stopPropagation();
         this.props.onDonate(
-            this.props.idCampaign, this.state.from, this.state.amount
+            this.props.idCampaign, this.state.from, this.state.amount,
         );
         this.setState({ amount: "" });
         this.hideModal();
@@ -53,13 +53,13 @@ class Component extends React.Component {
         this.setState({ inputsValidity: validationArray });
 
         if (val) {
-            for (const key in validationArray) {
+            validationArray.forEach((key) => {
                 if (!validationArray[ key ]) {
                     this.setState({ valid: false });
-                    break;
+                    return;
                 }
                 this.setState({ valid: true });
-            }
+            });
         } else {
             this.setState({ valid: false });
         }
@@ -70,9 +70,9 @@ class Component extends React.Component {
             <div>
                 <Button
                   bsStyle="success"
-                  onClick={ this.showModal }
+                  onClick={this.showModal}
                   bsSize="large"
-                  disabled={ this.props.disabled }
+                  disabled={this.props.disabled}
                 >
                     Donate
                 </Button>
@@ -106,13 +106,13 @@ class Component extends React.Component {
                     <Modal.Footer>
                         <Button
                           bsStyle="success"
-                          onClick={ this.handleDonate }
+                          onClick={this.handleDonate}
                           className="pull-left"
-                          disabled={ !this.state.valid }
+                          disabled={!this.state.valid}
                         >
                             Donate
                         </Button>
-                        <Button onClick={ this.hideModal }>Close</Button>
+                        <Button onClick={this.hideModal}>Close</Button>
                     </Modal.Footer>
                 </Modal>
             </div>
@@ -124,7 +124,7 @@ Component.propTypes = {
     onDonate: PropTypes.func.isRequired,
     idCampaign: PropTypes.number.isRequired,
     campaignName: PropTypes.string.isRequired,
-    disabled: PropTypes.bool,
+    // disabled: PropTypes.bool,
 };
 
 export default Component;

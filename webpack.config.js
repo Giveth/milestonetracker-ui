@@ -1,4 +1,5 @@
 const path = require("path");
+const webpack = require("webpack");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 
@@ -10,6 +11,13 @@ module.exports = {
     resolve: {
         extensions: [ "", ".js", ".jsx" ],
     },
+    node: {
+        console: false,
+        fs: "empty",
+        net: "empty",
+        tls: "empty",
+    },
+
     output: {
         path: path.resolve(__dirname, "build/js"),
         publicPath: "/js/",
@@ -17,6 +25,7 @@ module.exports = {
     },
     plugins: [
         new CleanWebpackPlugin([ "build" ]),
+        new webpack.DefinePlugin({ "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV) }),
         new CopyWebpackPlugin([
             {
                 context: path.resolve(__dirname, "dapp/static"),

@@ -1,8 +1,8 @@
 import React from "react";
-import PropTypes from "prop-types";
-import { ProgressBar, Grid, Row, Col, Nav, NavItem, PageHeader } from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
+// import PropTypes from "prop-types";
+import { ProgressBar, Grid, Row, Col, PageHeader } from "react-bootstrap";
 import { Donate } from "../../Buttons";
+import { PageCampaignDetails, PageCampaignMilestones, PageCampaignVault } from "../";
 
 export default function Component(props) {
     let content = (
@@ -11,53 +11,39 @@ export default function Component(props) {
             <ProgressBar active now={100} />
         </div>
     );
-    const id = props.params.campaignId;
+    const id = props.match.params.campaignId;
     if (props.givethDirectoryState.campaigns &&
         props.givethDirectoryState.campaigns.length >= id - 1) {
-        const currentCampaign = props.givethDirectoryState.campaigns[ id ];
-
-        const milestones = (
-            <LinkContainer
-              to={ { pathname: `/campaigns/${ props.params.campaignId }/milestones` } }
-            >
-                <NavItem>Milestones</NavItem>
-            </LinkContainer>
-        );
+        const campaign = props.givethDirectoryState.campaigns[ id ];
 
         content = (
             <div>
                 <PageHeader>
                     <a
-                      href={ currentCampaign.url }
+                      href={campaign.url}
                       target="_blank"
+                      rel="noopener noreferrer"
                     >
-                    { currentCampaign.name }
-                    </a> <small>{ currentCampaign.status }</small>
+                        {campaign.name}
+                    </a> <small>{ campaign.status }</small>
                     <span className="pull-right">
                         <Donate
-                          idCampaign={Number(props.params.campaignId)}
-                          campaignName={currentCampaign.name}
-                          disabled={currentCampaign.status !== "Active"}
+                          idCampaign={Number(props.match.params.campaignId)}
+                          campaignName={campaign.name}
+                          disabled={campaign.status !== "Active"}
                         />
                     </span>
                 </PageHeader>
-                <div className="padding">
-                    <Nav bsStyle="pills">
-                        <LinkContainer
-                          to={ { pathname: `/campaigns/${ props.params.campaignId }/details` } }
-                        >
-                            <NavItem>Details</NavItem>
-                        </LinkContainer>
-                        { milestones }
-                        <LinkContainer
-                          to={ { pathname: `/campaigns/${ props.params.campaignId }/vault` } }
-                        >
-                            <NavItem>Vault</NavItem>
-                        </LinkContainer>
-                    </Nav>
-                </div>
 
-                { props.children }
+                <PageCampaignDetails
+                  campaign={campaign}
+                />
+                <PageCampaignMilestones
+                  campaign={campaign}
+                />
+                <PageCampaignVault
+                  vault={campaign.vault}
+                />
             </div>
         );
     }
@@ -72,6 +58,6 @@ export default function Component(props) {
 }
 
 Component.propTypes = {
-    givethDirectoryState: PropTypes.object.isRequired,
-    params: PropTypes.object.isRequired,
+    // givethDirectoryState: PropTypes.object.isRequired,
+    // params: PropTypes.object.isRequired,
 };

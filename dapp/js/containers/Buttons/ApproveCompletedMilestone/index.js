@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import Component from "./Component";
-import { approveCompletedMilestone } from "./actions";
+import approveCompletedMilestone from "./actions";
 
 const mapStateToProps = () => ({
 });
@@ -13,7 +13,7 @@ const mapDispatchToProps = (
 
 const ApproveCompletedMilestone = connect(
     mapStateToProps,
-    mapDispatchToProps
+    mapDispatchToProps,
 )(Component);
 
 export default ApproveCompletedMilestone;

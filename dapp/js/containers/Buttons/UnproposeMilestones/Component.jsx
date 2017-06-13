@@ -7,12 +7,12 @@ export default function Component(props) {
         props.onUnproposeMilestones(props.milestoneTrackerAddress, props.action);
     };
     return (
-        <Button bsStyle="danger" onClick={ handleProposeMilestones }>Reject</Button>
+        <Button bsStyle="danger" onClick={handleProposeMilestones}>Reject</Button>
     );
 }
 
 Component.propTypes = {
     onUnproposeMilestones: PropTypes.func.isRequired,
     milestoneTrackerAddress: PropTypes.string.isRequired,
-    action: PropTypes.array.isRequired,
+    // action: PropTypes.array.isRequired,
 };

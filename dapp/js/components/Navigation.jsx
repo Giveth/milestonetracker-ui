@@ -11,16 +11,16 @@ export default function Navigation() {
                 </Navbar.Brand>
             </Navbar.Header>
             <Nav>
-                <LinkContainer to={ { pathname: "/campaigns" } }>
+                <LinkContainer to={{ pathname: "/campaigns" }}>
                     <NavItem>Campaigns</NavItem>
                 </LinkContainer>
-                <LinkContainer to={ { pathname: "/myaccount" } }>
+                <LinkContainer to={{ pathname: "/myaccount" }}>
                     <NavItem>My Account</NavItem>
                 </LinkContainer>
-                <LinkContainer to={ { pathname: "/campaigndeployer" } }>
+                <LinkContainer to={{ pathname: "/campaigndeployer" }}>
                     <NavItem>Campaign Deployer</NavItem>
                 </LinkContainer>
-                <LinkContainer to={ { pathname: "/about" } }>
+                <LinkContainer to={{ pathname: "/about" }}>
                     <NavItem href="#">About</NavItem>
                 </LinkContainer>
             </Nav>
