@@ -1,5 +1,5 @@
 import React from "react";
-import { HashRouter, Route, /* IndexRoute */ Switch } from "react-router-dom";
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import { App } from "./components";
 import {
     PageCampaigns, PageAbout, PageCampaign, PageMyAccount, CampaignDeployer,
@@ -7,7 +7,7 @@ import {
 // import Web3Info from "./containers/Web3Info";
 
 const Routes = () => (
-    <HashRouter>
+    <Router>
         <App>
             <Switch>
                 <Route exact path="/" component={PageCampaigns} />
@@ -19,6 +19,6 @@ const Routes = () => (
                 <Route exact path="/campaigns/:campaignId" component={PageCampaign} />
             </Switch>
         </App>
-    </HashRouter>);
+    </Router>);
 
 export default Routes;

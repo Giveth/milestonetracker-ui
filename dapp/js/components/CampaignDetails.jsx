@@ -17,12 +17,12 @@ import PropTypes from "prop-types";
 import { Table } from "react-bootstrap";
 import MilestonesApproved from "./MilestonesApproved";
 
-function calculateTokens(balances) {
-    if (Array.isArray(balances)) {
-        return balances.reduce((total, value) => total + value, 0);
-    }
-    return 0;
-}
+// function calculateTokens(balances) {
+//     if (Array.isArray(balances)) {
+//         return balances.reduce((total, value) => total + value, 0);
+//     }
+//     return 0;
+// }
 
 export default function CampaignDetails(props) {
     return (
@@ -42,16 +42,6 @@ export default function CampaignDetails(props) {
                             </a>
                         </td>
                     </tr>
-                    <tr>
-                        <td>Tokens owned/emitted</td>
-                        <td>{ calculateTokens(props.token.balances) }
-                            /
-                            { props.token.totalSupply }</td>
-                    </tr>
-                    <tr>
-                        <td>Tokens name</td>
-                        <td>{ props.token.name }</td>
-                    </tr>
                 </tbody>
             </Table>
             <MilestonesApproved
@@ -65,12 +55,6 @@ export default function CampaignDetails(props) {
 
 CampaignDetails.propTypes = {
     url: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
     milestoneTrackerAddress: PropTypes.string.isRequired,
-    token: PropTypes.shape({
-        totalSupply: PropTypes.number.isRequired,
-        name: PropTypes.string.isRequired,
-        balances: PropTypes.object.isRequired,
-    }).isRequired,
 };

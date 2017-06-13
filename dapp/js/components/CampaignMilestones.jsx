@@ -12,18 +12,17 @@
  * @prop{string} proposedMilestonesHash   Hash of the milestone proposal
  * @prop{array}  proposedMilestones       Array of proposed milestones to be approved
  */
-
 import React from "react";
 import PropTypes from "prop-types";
-
 import { Table } from "react-bootstrap";
+
 import { ButtonUnproposeMilestones, ButtonAcceptMilestones } from "../containers/Buttons";
 import Milestones from "./Milestones";
 import MilestonesApproved from "./MilestonesApproved";
 import MilestonesFormation from "./MilestonesFormation";
 
 export default function CampaignMilestones(props) {
-    const proposedMilestonesButtons = [];
+    let proposedMilestonesButtons = [];
 
     if (props.actions) {
         if (props.actions.acceptProposedMilestones) {
@@ -49,15 +48,39 @@ export default function CampaignMilestones(props) {
                 <tbody>
                     <tr>
                         <td>Recipient&apos;s Address</td>
-                        <td>{ props.recipient }</td>
+                        <td>
+                            <a
+                              href={`${ props.domain }address/${ props.recipient }`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                                {props.recipient}
+                            </a>
+                        </td>
                     </tr>
                     <tr>
                         <td>Donor&apos;s Address</td>
-                        <td>{ props.donor }</td>
+                        <td>
+                            <a
+                              href={`${ props.domain }address/${ props.donor }`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                                {props.donor}
+                            </a>
+                        </td>
                     </tr>
                     <tr>
                         <td>Arbitrator&apos;s Address</td>
-                        <td>{ props.arbitrator }</td>
+                        <td>
+                            <a
+                              href={`${ props.domain }address/${ props.arbitrator }`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                                {props.arbitrator}
+                            </a>
+                        </td>
                     </tr>
                     <tr>
                         <td>Milestones to review</td>
@@ -95,11 +118,11 @@ CampaignMilestones.propTypes = {
     arbitrator: PropTypes.string.isRequired,
     changingMilestones: PropTypes.bool.isRequired,
     campaignCanceled: PropTypes.bool.isRequired,
-//    milestones: PropTypes.array.isRequired,
+    // milestones: PropTypes.array.isRequired,
     milestoneTrackerAddress: PropTypes.string.isRequired,
-//    proposedMilestonesHash: PropTypes.string,
-//    proposedMilestones: PropTypes.array,
-//    newMilestones: PropTypes.object,
-//    vaultAddress: PropTypes.string.isRequired,
-//    actions: PropTypes.object,
+    // proposedMilestonesHash: PropTypes.string,
+    // proposedMilestones: PropTypes.array,
+    // newMilestones: PropTypes.object,
+    // vaultAddress: PropTypes.string.isRequired,
+    // actions: PropTypes.object,
 };

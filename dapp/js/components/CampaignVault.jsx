@@ -44,7 +44,15 @@ export default function CampaignVault(props) {
                 <tbody>
                     <tr>
                         <td>Owner</td>
-                        <td>{ props.owner }</td>
+                        <td>
+                            <a
+                              href={`${ props.domain }address/${ props.owner }`}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                                {props.owner}
+                            </a>
+                        </td>
                     </tr>
                     <tr>
                         <td>Escape Caller&apos;s Address</td>

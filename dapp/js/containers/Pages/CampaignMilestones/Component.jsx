@@ -2,40 +2,31 @@ import React from "react";
 // import PropTypes from "prop-types";
 import { Panel } from "react-bootstrap";
 import CampaignMilestones from "../../../components/CampaignMilestones";
+import { domain } from "../../../blockchain";
 
 export default function Component(props) {
-    let content = "";
-    const id = props.match.params.campaignId;
-    if (props.givethDirectoryState.campaigns &&
-        props.givethDirectoryState.campaigns.length >= id - 1) {
-        const currentCampaign = props.givethDirectoryState.campaigns[ id ];
-        const milestonesTracker = props.givethDirectoryState.campaigns[ id ].milestoneTracker;
-
-        content = (
+    if (props.campaign.milestonesTracker) {
+        return (
             <Panel>
                 <CampaignMilestones
-                  recipient={milestonesTracker.recipient}
-                  donor={milestonesTracker.donor}
-                  arbitrator={milestonesTracker.arbitrator}
-                  changingMilestones={milestonesTracker.changingMilestones}
-                  campaignCanceled={milestonesTracker.campaignCanceled}
-                  milestones={milestonesTracker.milestones}
-                  milestoneTrackerAddress={currentCampaign.milestoneTrackerAddress}
-                  proposedMilestonesHash={milestonesTracker.proposedMilestonesHash}
-                  proposedMilestones={milestonesTracker.proposedMilestones}
-                  newMilestones={props.formReducer[ currentCampaign.milestoneTrackerAddress ]}
-                  vaultAddress={currentCampaign.vaultAddress}
-                  actions={milestonesTracker.actions}
+                  recipient={props.campaign.milestonesTracker.recipient}
+                  donor={props.campaign.milestonesTracker.donor}
+                  arbitrator={props.campaign.milestonesTracker.arbitrator}
+                  changingMilestones={props.campaign.milestonesTracker.changingMilestones}
+                  campaignCanceled={props.campaign.milestonesTracker.campaignCanceled}
+                  milestones={props.campaign.milestonesTracker.milestones}
+                  milestoneTrackerAddress={props.campaign.campaign.milestoneTrackerAddress}
+                  proposedMilestonesHash={props.campaign.milestonesTracker.proposedMilestonesHash}
+                  proposedMilestones={props.campaign.milestonesTracker.proposedMilestones}
+                  newMilestones={props.formReducer[ props.campaign.milestoneTrackerAddress ]}
+                  vaultAddress={props.campaign.vaultAddress}
+                  actions={props.campaign.milestonesTracker.actions}
+                  domain={domain}
                 />
             </Panel>
         );
     }
-
-    return (
-        <div>
-            { content }
-        </div>
-    );
+    return <div />;
 }
 
 Component.propTypes = {
