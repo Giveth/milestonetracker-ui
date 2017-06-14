@@ -2,7 +2,9 @@ import React from "react";
 // import PropTypes from "prop-types";
 import { ProgressBar, Grid, Row, Col, PageHeader } from "react-bootstrap";
 import { Donate } from "../../Buttons";
-import { PageCampaignDetails, PageCampaignMilestones, PageCampaignVault } from "../";
+import CampaignDetails from "../../../components/CampaignDetails";
+import CampaignVault from "../../../components/CampaignVault";
+import { domain } from "../../../blockchain";
 
 export default function Component(props) {
     let content = (
@@ -28,21 +30,34 @@ export default function Component(props) {
                     </a> <small>{ campaign.status }</small>
                     <span className="pull-right">
                         <Donate
-                          idCampaign={Number(props.match.params.campaignId)}
+                          idCampaign={id}
                           campaignName={campaign.name}
                           disabled={campaign.status !== "Active"}
                         />
                     </span>
                 </PageHeader>
 
-                <PageCampaignDetails
-                  campaign={campaign}
+                <CampaignDetails
+                  campaign={campaign.token.controller}
+                  url={campaign.url}
+                  name={campaign.name}
+                  description={campaign.description}
+                  status={campaign.status}
+                  tokenAddress={campaign.tokenAddress}
+                  vaultAddress={campaign.vaultAddress}
+                  milestoneTrackerAddress={campaign.milestoneTrackerAddress}
+                  milestones={campaign.milestoneTracker.milestones}
+                  token={campaign.token}
+                  domain={domain}
                 />
-                <PageCampaignMilestones
-                  campaign={campaign}
-                />
-                <PageCampaignVault
-                  vault={campaign.vault}
+
+                <CampaignVault
+                  owner={campaign.vault.owner}
+                  escapeCaller={campaign.vault.escapeCaller}
+                  escapeDestination={campaign.vault.escapeDestination}
+                  balance={campaign.vault.balance.toNumber()}
+                  payments={campaign.vault.payments}
+                  domain={domain}
                 />
             </div>
         );
