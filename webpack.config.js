@@ -4,12 +4,13 @@ const CleanWebpackPlugin = require("clean-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
-    entry: path.resolve(__dirname, "dapp/js/main"),
+    context: path.resolve(__dirname, "./dapp"),
+    entry: path.resolve(__dirname, "./dapp/js/main"),
     devServer: {
-        outputPath: path.join(__dirname, "build"),
+        contentBase: path.join(__dirname, "build"),
     },
     resolve: {
-        extensions: [ "", ".js", ".jsx" ],
+        extensions: [ ".js", ".jsx" ],
     },
     node: {
         console: false,
@@ -36,43 +37,49 @@ module.exports = {
     ],
     devtool: "source-map",
     module: {
-        preLoaders: [
+        rules: [
             {
+                enforce: "pre",
                 test: /\.jsx?$/,
                 exclude: /(node_modules|bower_components)/,
-                loaders: [ "eslint" ],
+                loaders: "eslint-loader",
             },
-        ],
-        loaders: [
             {
                 test: /.woff$|.woff2$|.ttf$|.eot$|.svg$/,
-                loader: "url-loader",
+                loaders: "url-loader",
             },
             {
                 test: /\.sol$/,
-                loaders: [ "solc" ],
+                loaders: "solc-loader",
             },
             {
                 test: /\.json$/,
-                loaders: [ "json" ],
+                loaders: "json-loader",
             },
             {
                 test: /\.jsx?$/,
                 exclude: /(node_modules|bower_components)/,
-                loaders: [ "babel" ],
+                loaders: "babel-loader",
             },
             {
                 test: /\.css$/,
                 exclude: /\.module\.css$/,
-                loader: "style-loader!css-loader",
+                use: [
+                    "style-loader",
+                    "css-loader",
+                ],
             },
             {
                 test: /\.module\.css$/,
-                loader: "style-loader!css-loader?modules",
+                use: [
+                    "style-loader",
+                    "css-loader",
+                    "modules",
+                ],
             },
             {
                 test: /\.(gif|png|jpg)$/,
-                loader: "file-loader",
+                loaders: "file-loader",
             },
         ],
     },
