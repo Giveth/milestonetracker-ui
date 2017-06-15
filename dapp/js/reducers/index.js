@@ -10,7 +10,7 @@ import {
   currentDeploymentStep,
   error,
 } from "./deploymentReducer";
-import { userAccount } from "./userReducer";
+import userAccount from "./userReducer";
 
 const reducers = combineReducers({
     formReducer,
