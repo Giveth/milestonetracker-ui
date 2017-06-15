@@ -1,34 +1,6 @@
 /* eslint-disable */
-import w3 from 'web3';
 import { deploymentActions } from '../constants';
-
-let web3;
-if (typeof window.web3 !== 'undefined') {
-  web3 = new w3(window.web3.currentProvider);
-} else {
-  web3 = new w3(new w3.providers.HttpProvider('http://localhost:8545'));
-}
-
-let currentNetwork;
-let _campaignTrackerAddress
-const networks = {
-    1: 'Main',
-    2: 'Morden',
-    3: 'Ropsten',
-    4: 'Testrpc'
-};
-const campaignTrackerContractLocations = {
-    'Main': '0x26104cd17cc77e510ef20adf11ecb682ca7760f0',
-    'Morden': '0x0',
-    'Ropsten': '0x53fc022DD190F0b37A5501FeE92171Ed1C7CD4Eb',
-    'Testrpc': '0xe78a0f7e598cc8b0bb87894b0f60dd2a88d6a8ab'
-};
-
-web3.version.getNetwork((e, result) => {
-    currentNetwork = result < 4 ? networks[result] : networks[4];
-    _campaignTrackerAddress = campaignTrackerContractLocations[currentNetwork];
-    // console.log(`Connected to the ${currentNetwork} network.  Campaign Tracker is at ${_campaignTrackerAddress}`);
-});
+import { web3, network } from "../blockchain";
 
 let fromAccount, _escapeCaller, _escapeDestination, _securityGuard, _arbitrator, _donor, _recipient, _tokenName, _tokenSymbol, _campaignTracker, _campaignName, _campaignDescription, _campaignUrl, _campaignExtra, _gasPrice;
 let instances = {};
@@ -506,7 +478,7 @@ const addCampaignToTracker = (...args) => {
     console.log("ADDING CAMPAIGN TO TRACKER");
     const data = args[0];
     let dispatch = args[1];
-    const campaignTrackerInstance = data.contractAbi.at(_campaignTrackerAddress);
+    const campaignTrackerInstance = data.contractAbi.at(network.campaignTrackerAddress);
     return new Promise((resolve, reject) => {
         campaignTrackerInstance.addCampaign(
             _campaignName,

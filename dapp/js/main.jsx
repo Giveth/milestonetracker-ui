@@ -14,7 +14,6 @@ import store from "./store";
 const web3monitor = new Web3monitor(web3);
 web3monitor.on("newState", (state) => {
     store.dispatch(newWeb3State(state));
-    console.log(network.directory);
     network.directory.getState((err, givethDirectoryState) => {
         if (err) {
             web3monitor.reset();

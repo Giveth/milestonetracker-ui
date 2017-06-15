@@ -4,7 +4,7 @@ import { ProgressBar, Grid, Row, Col, PageHeader } from "react-bootstrap";
 import { Donate } from "../../Buttons";
 import CampaignDetails from "../../../components/CampaignDetails";
 import CampaignVault from "../../../components/CampaignVault";
-import { domain } from "../../../blockchain";
+import { network } from "../../../blockchain";
 
 export default function Component(props) {
     let content = (
@@ -48,7 +48,7 @@ export default function Component(props) {
                   milestoneTrackerAddress={campaign.milestoneTrackerAddress}
                   milestones={campaign.milestoneTracker.milestones}
                   token={campaign.token}
-                  domain={domain}
+                  domain={network.etherscan}
                 />
 
                 <CampaignVault
@@ -57,7 +57,7 @@ export default function Component(props) {
                   escapeDestination={campaign.vault.escapeDestination}
                   balance={campaign.vault.balance.toNumber()}
                   payments={campaign.vault.payments}
-                  domain={domain}
+                  domain={network.etherscan}
                 />
             </div>
         );
