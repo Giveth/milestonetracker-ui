@@ -53,7 +53,7 @@ class Component extends React.Component {
         this.setState({ inputsValidity: validationArray });
 
         if (val) {
-            validationArray.forEach((key) => {
+            Object.keys(validationArray).forEach((key) => {
                 if (!validationArray[ key ]) {
                     this.setState({ valid: false });
                     return;

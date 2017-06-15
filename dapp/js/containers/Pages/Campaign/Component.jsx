@@ -13,7 +13,7 @@ export default function Component(props) {
             <ProgressBar active now={100} />
         </div>
     );
-    const id = props.match.params.campaignId;
+    const id = Number.parseInt(props.match.params.campaignId, 10);
     if (props.givethDirectoryState.campaigns &&
         props.givethDirectoryState.campaigns.length >= id - 1) {
         const campaign = props.givethDirectoryState.campaigns[ id ];

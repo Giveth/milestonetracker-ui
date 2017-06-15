@@ -1,10 +1,10 @@
-import { givethDirectory } from "../../../blockchain";
+import { network } from "../../../blockchain";
 
 /**
  *
  */
 export default (campaignID, ownr, val) => () => {
-    givethDirectory.donate(
+    network.directory.donate(
         {
             idCampaign: campaignID,
             owner: ownr,

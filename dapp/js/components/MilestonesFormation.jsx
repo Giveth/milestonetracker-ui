@@ -27,7 +27,7 @@ class MilestonesFormation extends React.Component {
 
     validate(validationArray, val) {
         if (val === true || val === undefined) {
-            validationArray.forEach((key) => {
+            Object.keys(validationArray).forEach((key) => {
                 if (!validationArray[ key ]) {
                     this.setState({ valid: false });
                     return;

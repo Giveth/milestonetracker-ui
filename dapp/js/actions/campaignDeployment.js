@@ -27,7 +27,7 @@ const campaignTrackerContractLocations = {
 web3.version.getNetwork((e, result) => {
     currentNetwork = result < 4 ? networks[result] : networks[4];
     _campaignTrackerAddress = campaignTrackerContractLocations[currentNetwork];
-    console.log(`Connected to the ${currentNetwork} network.  Campaign Tracker is at ${_campaignTrackerAddress}`);
+    // console.log(`Connected to the ${currentNetwork} network.  Campaign Tracker is at ${_campaignTrackerAddress}`);
 });
 
 let fromAccount, _escapeCaller, _escapeDestination, _securityGuard, _arbitrator, _donor, _recipient, _tokenName, _tokenSymbol, _campaignTracker, _campaignName, _campaignDescription, _campaignUrl, _campaignExtra, _gasPrice;
