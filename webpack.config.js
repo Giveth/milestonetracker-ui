@@ -5,37 +5,12 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
     context: path.resolve(__dirname, "./dapp"),
-    entry: path.resolve(__dirname, "./dapp/js/main"),
     devServer: {
         contentBase: path.join(__dirname, "build"),
     },
-    resolve: {
-        extensions: [ ".js", ".jsx" ],
-    },
-    node: {
-        console: false,
-        fs: "empty",
-        net: "empty",
-        tls: "empty",
-    },
-
-    output: {
-        path: path.resolve(__dirname, "build/js"),
-        publicPath: "/js/",
-        filename: "bundle.js",
-    },
-    plugins: [
-        new CleanWebpackPlugin([ "build" ]),
-        new webpack.DefinePlugin({ "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV) }),
-        new CopyWebpackPlugin([
-            {
-                context: path.resolve(__dirname, "dapp/static"),
-                from: "**/*",
-                to: path.resolve(__dirname, "build"),
-            },
-        ]),
-    ],
     devtool: "source-map",
+    entry: path.resolve(__dirname, "./dapp/js/main"),
+
     module: {
         rules: [
             {
@@ -82,5 +57,31 @@ module.exports = {
                 loaders: "file-loader",
             },
         ],
+    },
+    node: {
+        console: false,
+        fs: "empty",
+        net: "empty",
+        tls: "empty",
+    },
+
+    output: {
+        path: path.resolve(__dirname, "build/js"),
+        publicPath: "/js/",
+        filename: "bundle.js",
+    },
+    plugins: [
+        new CleanWebpackPlugin([ "build" ]),
+        new webpack.DefinePlugin({ "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV) }),
+        new CopyWebpackPlugin([
+            {
+                context: path.resolve(__dirname, "dapp/static"),
+                from: "**/*",
+                to: path.resolve(__dirname, "build"),
+            },
+        ]),
+    ],
+    resolve: {
+        extensions: [ ".js", ".jsx" ],
     },
 };
