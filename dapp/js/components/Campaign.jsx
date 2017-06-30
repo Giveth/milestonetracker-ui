@@ -1,30 +1,61 @@
-/**
- * Component for a campaign to be shown in a list of campaigns
- *
- * Expects following properties:
- * @prop{string} url          Local URL of the app to the campaign
- * @prop{string} name         Name of the campaign
- * @prop{string} description  Description of the campaign
- */
-
 import React from "react";
 import PropTypes from "prop-types";
+import { BlockChainContent, CampaignDetails, CampaignHeader, CampaignVault } from "./";
 
-import { ListGroupItem } from "react-bootstrap";
-import { LinkContainer } from "react-router-bootstrap";
+export default function Component(props) {
+    const id = Number.parseInt(props.match.params.campaignId, 10);
+    let content = (
+        <div>
+            <h2>ERROR:</h2>
+            <p>The campaign you tried to load is not in the Giveth Directory.</p>
+        </div>
+    );
 
-export default function Campaign(props) {
+    if (props.campaigns.length > id) {
+        const campaign = props.campaigns[ id ];
+
+        content = (
+            <div>
+                <CampaignHeader
+                  campaign={campaign}
+                  id={id}
+                />
+
+                <CampaignDetails
+                  campaign={campaign}
+                />
+
+                <CampaignVault
+                  vault={campaign.vault}
+                />
+            </div>
+        );
+    }
+
     return (
-        <LinkContainer to={{ pathname: `${ props.url }` }}>
-            <ListGroupItem header={props.name}>
-                {props.description}
-            </ListGroupItem>
-        </LinkContainer>
+        <BlockChainContent
+          loaded={props.loaded}
+        >
+            { content }
+        </BlockChainContent>
     );
 }
 
-Campaign.propTypes = {
-    url: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
+Component.propTypes = {
+    campaigns: PropTypes.arrayOf(PropTypes.shape({
+        description: PropTypes.string.isRequired,
+        extra: PropTypes.string,
+        url: PropTypes.string,
+        name: PropTypes.string.isRequired,
+    })),
+    match: PropTypes.shape({
+        params: PropTypes.shape({
+            campaignId: PropTypes.string.isRequired,
+        }),
+    }).isRequired,
+    loaded: PropTypes.bool.isRequired,
+};
+
+Component.defaultProps = {
+    campaigns: [],
 };

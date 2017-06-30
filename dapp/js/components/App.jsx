@@ -2,17 +2,22 @@
  * Main App component which includes navigation and the app content
  */
 import React from "react";
+import { Grid, Row, Col } from "react-bootstrap";
 
 import { Navigation } from "./";
 
-function App(props) {
-    return (
-        <div className="app">
-            <Navigation />
+const App = props => (
+    <div className="app">
+        <Navigation />
 
-            { props.children }
-        </div>
-    );
-}
+        <Grid>
+            <Row>
+                <Col>
+                    { props.children }
+                </Col>
+            </Row>
+        </Grid>
+    </div>
+);
 
 export default App;

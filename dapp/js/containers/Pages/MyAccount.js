@@ -1,8 +1,9 @@
 import { connect } from "react-redux";
-import MyAccount from "./MyAccount";
+import { MyAccount } from "../../components";
 
 const mapStateToProps = state => ({
     givethDirectoryState: state.givethDirectory,
+    web3state: state.web3,
 });
 
 const mapDispatchToProps = ({

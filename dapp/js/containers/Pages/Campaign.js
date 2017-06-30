@@ -1,14 +1,14 @@
 import { connect } from "react-redux";
-import Component from "./Component";
+import { Campaign } from "../../components";
 
 const mapStateToProps = state => ({
-    dataLoaded: Object.keys(state.givethDirectory).length !== 0,
+    loaded: Object.keys(state.givethDirectory).length !== 0,
     campaigns: state.givethDirectory.campaigns,
 });
 
 const PageCampaign = connect(
     mapStateToProps,
     {},
-)(Component);
+)(Campaign);
 
 export default PageCampaign;

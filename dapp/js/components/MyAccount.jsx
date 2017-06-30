@@ -1,11 +1,9 @@
-import { connect } from "react-redux";
 import React from "react";
 // import PropTypes from "prop-types";
 import { Table } from "react-bootstrap";
 import { web3 } from "../blockchain";
 
-function Component(props) {
-    // console.log(props.web3state.accounts);
+const MyAccount = (props) => {
     const accounts = [];
     if (props.web3state && props.web3state.accounts) {
         for (let i = 0; i < props.web3state.accounts.length; i += 1) {
@@ -18,6 +16,7 @@ function Component(props) {
             );
         }
     }
+
     return (
         <div>
             <h2>Accounts:</h2>
@@ -34,22 +33,6 @@ function Component(props) {
             </Table>
         </div>
     );
-}
-
-Component.propTypes = {
-    // web3state: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
-    web3state: state.web3,
-});
-
-const mapDispatchToProps = ({
-});
-
-const MyAccountContainer = connect(
-    mapStateToProps,
-    mapDispatchToProps,
-)(Component);
-
-export default MyAccountContainer;
+export default MyAccount;

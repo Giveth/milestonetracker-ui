@@ -1,21 +1,11 @@
 /**
  * Shows basic details of the campaign
- *
- * Expects following properties:
- * @prop{string} url                      URL of the campaign
- * @prop{string} name                     Campaign's name
- * @prop{string} description              Campaign's description
- * @prop{string} status                   Status of the campaign
- * @prop{string} tokenAddress             Address of the MiniMe Token contract for the campaign
- * @prop{string} vaultAddress             Address of the Vault contract for this campaign
- * @prop{string} milestoneTrackerAddress  Address of the milestonetracker contract
  */
 
 import React from "react";
 import PropTypes from "prop-types";
 
-import { Table } from "react-bootstrap";
-import MilestonesApproved from "./MilestonesApproved";
+import { TableDetails } from "./";
 
 // function calculateTokens(balances) {
 //     if (Array.isArray(balances)) {
@@ -24,37 +14,33 @@ import MilestonesApproved from "./MilestonesApproved";
 //     return 0;
 // }
 
-export default function CampaignDetails(props) {
+const CampaignDetails = (props) => {
+    const general = [
+        {
+            label: "Website",
+            content: (<a
+              href={props.campaign.url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+                {props.campaign.url}
+            </a>),
+        },
+    ];
+
     return (
-        <div to={{ pathname: `${ props.url }` }}>
-            <p>{ props.description }</p>
-            <Table striped bordered condensed hover>
-                <tbody>
-                    <tr>
-                        <td>Website</td>
-                        <td>
-                            <a
-                              href={props.url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                                {props.url}
-                            </a>
-                        </td>
-                    </tr>
-                </tbody>
-            </Table>
-            <MilestonesApproved
-              milestones={props.milestones}
-              header="Approved Milestones"
-              milestoneTrackerAddress={props.milestoneTrackerAddress}
-            />
+        <div>
+            <p>{ props.campaign.description }</p>
+            <TableDetails data={general} />
         </div>
     );
-}
+};
 
 CampaignDetails.propTypes = {
-    url: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    milestoneTrackerAddress: PropTypes.string.isRequired,
+    campaign: PropTypes.shape({
+        description: PropTypes.string.isRequired,
+        url: PropTypes.string.isRequired,
+    }).isRequired,
 };
+
+export default CampaignDetails;
