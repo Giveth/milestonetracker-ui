@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { BlockChainContent, CampaignDetails, CampaignHeader, CampaignVault } from "./";
 
-export default function Component(props) {
+const Campaign = (props) => {
     const id = Number.parseInt(props.match.params.campaignId, 10);
     let content = (
         <div>
@@ -39,9 +39,9 @@ export default function Component(props) {
             { content }
         </BlockChainContent>
     );
-}
+};
 
-Component.propTypes = {
+Campaign.propTypes = {
     campaigns: PropTypes.arrayOf(PropTypes.shape({
         description: PropTypes.string.isRequired,
         extra: PropTypes.string,
@@ -56,6 +56,8 @@ Component.propTypes = {
     loaded: PropTypes.bool.isRequired,
 };
 
-Component.defaultProps = {
+Campaign.defaultProps = {
     campaigns: [],
 };
+
+export default Campaign;

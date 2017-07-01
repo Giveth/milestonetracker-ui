@@ -22,7 +22,11 @@ const TableDetails = (props) => {
 TableDetails.propTypes = {
     data: PropTypes.arrayOf(PropTypes.shape({
         label: PropTypes.string.isRequired,
-        value: PropTypes.element.isRequired,
+        content: PropTypes.oneOfType([
+            PropTypes.element,
+            PropTypes.string,
+            PropTypes.number,
+        ]).isRequired,
     })).isRequired,
 };
 

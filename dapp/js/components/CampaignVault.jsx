@@ -61,7 +61,11 @@ CampaignVault.propTypes = {
         owner: PropTypes.string.isRequired,
         escapeDestination: PropTypes.string.isRequired,
         escapeCaller: PropTypes.string.isRequired,
-        balance: PropTypes.number.isRequired,
+        balance: PropTypes.shape({
+            c: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
+            e: PropTypes.number.isRequired,
+            s: PropTypes.number.isRequired,
+        }).isRequired,
     }).isRequired,
 };
 
