@@ -7,13 +7,6 @@ import PropTypes from "prop-types";
 
 import { TableDetails } from "./";
 
-// function calculateTokens(balances) {
-//     if (Array.isArray(balances)) {
-//         return balances.reduce((total, value) => total + value, 0);
-//     }
-//     return 0;
-// }
-
 const CampaignDetails = (props) => {
     const general = [
         {

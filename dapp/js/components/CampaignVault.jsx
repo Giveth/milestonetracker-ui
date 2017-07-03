@@ -4,6 +4,13 @@ import PropTypes from "prop-types";
 import { network, web3 } from "../blockchain";
 import { TableDetails } from "./";
 
+// function calculateTokens(balances) {
+//     if (Array.isArray(balances)) {
+//         return balances.reduce((total, value) => total + value, 0);
+//     }
+//     return 0;
+// }
+
 const CampaignVault = (props) => {
     const data = [
         {

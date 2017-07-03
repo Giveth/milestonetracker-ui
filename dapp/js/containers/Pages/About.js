@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import About from "./About";
+import { About } from "../../components";
 
 const mapStateToProps = state => ({
     givethDirectoryState: state.givethDirectory,

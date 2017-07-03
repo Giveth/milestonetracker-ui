@@ -5,7 +5,7 @@ const networks = {
     1: {
         title: "Main",
         directory: new GivethDirectory(web3, "0x30e1a463ecf25dbba2f83cb3e4b10045f888e55b"),
-        campaignTrackerAddress: "0x26104cd17cc77e510ef20adf11ecb682ca7760f0",
+        campaignTrackerAddress: "0x30e1a463ecf25dbba2f83cb3e4b10045f888e55b",
         etherscan: "https://etherscan.io/",
     },
     2: {

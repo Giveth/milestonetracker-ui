@@ -1,7 +1,9 @@
 import App from "./App";
+import About from "./About";
 import Campaign from "./Campaign";
 import CampaignSmall from "./CampaignSmall";
 import Campaigns from "./Campaigns";
+import Milestone from "./Milestone";
 import Navigation from "./Navigation";
 import SearchBar from "./SearchBar";
 import BlockChainContent from "./BlockChainContent";
@@ -11,5 +13,5 @@ import CampaignDetails from "./CampaignDetails";
 import CampaignVault from "./CampaignVault";
 import CampaignHeader from "./CampaignHeader";
 
-export { App, Campaign, CampaignSmall, Campaigns, CampaignDetails, CampaignHeader,
-    CampaignVault, Navigation, MyAccount, SearchBar, BlockChainContent, TableDetails };
+export { App, About, Campaign, CampaignSmall, Campaigns, CampaignDetails, CampaignHeader,
+    CampaignVault, Navigation, Milestone, MyAccount, SearchBar, BlockChainContent, TableDetails };
