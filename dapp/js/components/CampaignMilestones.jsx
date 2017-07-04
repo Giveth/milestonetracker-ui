@@ -5,35 +5,84 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import Milestones from "./Milestones";
-// import { ButtonUnproposeMilestones, ButtonAcceptMilestones } from "../containers/Buttons";
-// import MilestonesApproved from "./MilestonesApproved";
-// import MilestonesFormation from "./MilestonesFormation";
+import * as Buttons from "../containers/Buttons/Campaign";
 
 export default function CampaignMilestones(props) {
-    // let proposedMilestonesButtons = [];
-    //
-    // if (props.actions) {
-    //     if (props.milestoneTracker.actions.acceptProposedMilestones) {
-    //         proposedMilestonesButtons.push(<ButtonAcceptMilestones
-    //           key="acceptMilestones"
-    //           milestoneTrackerAddress={props.milestoneTrackerAddress}
-    //           proposalHash={props.proposedMilestonesHash}
-    //           action={props.milestoneTracker.actions.acceptProposedMilestones}
-    //         />);
-    //     }
-    //     if (props.actions.unproposeMilestones) {
-    //         proposedMilestonesButtons.push(<ButtonUnproposeMilestones
-    //           key="unproposeMilestones"
-    //           milestoneTrackerAddress={props.milestoneTrackerAddress}
-    //           action={props.milestoneTracker.actions.unproposeMilestones}
-    //         />);
-    //     }
-    // }
+    const milestones = props.milestoneTracker.milestones.map((milestone, index) => {
+        const mlstn = milestone;
+        mlstn.id = index;
+        return mlstn;
+    });
 
-    const milestonesInProgress = props.milestoneTracker.milestones.filter(milestone => milestone.status === "AcceptedAndInProgress");
-    const milestonesPaid = props.milestoneTracker.milestones.filter(milestone => milestone.status === "AuthorizedForPayment");
-    const milestonesCompleted = props.milestoneTracker.milestones.filter(milestone => milestone.status === "Completed");
-    const milestonesCanceled = props.milestoneTracker.milestones.filter(milestone => milestone.status === "Canceled");
+    const buttonsProposed = [];
+
+    if (props.milestoneTracker.actions) {
+        if (props.milestoneTracker.actions.acceptProposedMilestones) {
+            buttonsProposed.push(
+                <Buttons.AcceptMilestones
+                  key="acceptMilestones"
+                  milestoneTrackerAddress={props.milestoneTrackerAddress}
+                  proposalHash={props.milestoneTracker.proposedMilestonesHash}
+                  action={props.milestoneTracker.actions.acceptProposedMilestones}
+                />);
+        }
+        if (props.milestoneTracker.actions.unproposeMilestones) {
+            buttonsProposed.push(
+                <Buttons.RejectMilestones
+                  key="rejectMilestones"
+                  milestoneTrackerAddress={props.milestoneTrackerAddress}
+                  action={props.milestoneTracker.actions.acceptProposedMilestones}
+                />);
+        }
+    }
+
+    const milestoneCategories = [
+        {
+            title: "New milestones",
+            milestones: [],
+            buttons: "Add new milestone",
+        },
+        {
+            title: "Proposed milestones",
+            milestones: props.milestoneTracker.proposedMilestones ?
+                props.milestoneTracker.proposedMilestones.map((milestone, index) => {
+                    const mlstn = milestone;
+                    mlstn.id = index;
+                    return mlstn;
+                }) : [],
+            buttons: buttonsProposed,
+        },
+        {
+            title: "In Progress",
+            milestones: milestones.filter(milestone => milestone.status === "AcceptedAndInProgress"),
+        },
+        {
+            title: "Completed and in Review",
+            milestones: milestones.filter(milestone => milestone.status === "Completed"),
+        },
+        {
+            title: "Finished",
+            milestones: milestones.filter(milestone => milestone.status === "AuthorizedForPayment"),
+        },
+        {
+            title: "Canceled",
+            milestones: milestones.filter(milestone => milestone.status === "Canceled"),
+        },
+    ];
+
+    const columns = milestoneCategories.map(category => (
+        <td
+          key={category.title}
+          style={{ padding: "5px", width: "200pt", borderCollapse: "collapse", verticalAlign: "top" }}
+        >
+            <Milestones
+              title={category.title}
+              milestones={category.milestones}
+              milestoneTrackerAddress={props.milestoneTrackerAddress}
+              buttons={category.buttons ? category.buttons : ""}
+            />
+        </td>
+    ));
 
     return (
         <div>
@@ -42,73 +91,12 @@ export default function CampaignMilestones(props) {
                 <table style={{ minWidth: "1200pt", tableLayout: "fixed", margin: "40px auto 0px auto" }}>
                     <tbody>
                         <tr>
-                            <td style={{ padding: "5px", width: "200pt", borderCollapse: "collapse", verticalAlign: "top" }}>
-                                <Milestones
-                                  title="New milestones"
-                                  milestones={[]}
-                                />
-                            </td>
-
-                            <td style={{ padding: "5px", width: "200pt", borderCollapse: "collapse", verticalAlign: "top" }}>
-                                <Milestones
-                                  title="Proposed milestones"
-                                  milestones={props.milestoneTracker.proposedMilestones}
-                                />
-                            </td>
-
-                            <td style={{ padding: "5px", width: "200pt", borderCollapse: "collapse", verticalAlign: "top" }}>
-                                <Milestones
-                                  title="In Progress"
-                                  milestones={milestonesInProgress}
-                                />
-                            </td>
-
-                            <td style={{ padding: "5px", width: "200pt", borderCollapse: "collapse", verticalAlign: "top" }}>
-                                <Milestones
-                                  title="Completed and in Review"
-                                  milestones={milestonesCompleted}
-                                />
-                            </td>
-
-                            <td style={{ padding: "5px", width: "200pt", borderCollapse: "collapse", verticalAlign: "top" }}>
-                                <Milestones
-                                  title="Finished"
-                                  milestones={milestonesPaid}
-                                />
-                            </td>
-
-                            <td style={{ padding: "5px", width: "200pt", borderCollapse: "collapse", verticalAlign: "top" }}>
-                                <Milestones
-                                  title="Canceled"
-                                  milestones={milestonesCanceled}
-                                />
-                            </td>
+                            {columns}
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>);
-
-    // return (
-    //     <div>
-    //         <MilestonesApproved
-    //           milestones={props.milestones}
-    //           header="Approved Milestones"
-    //           milestoneTrackerAddress={props.milestoneTrackerAddress}
-    //         />
-    //         <Milestones
-    //           milestones={props.proposedMilestones}
-    //           header="Proposed Milestones"
-    //         >
-    //             <div className="padding">{ proposedMilestonesButtons }</div>
-    //         </Milestones>
-    //         <MilestonesFormation
-    //           newMilestones={props.newMilestones}
-    //           milestoneTrackerAddress={props.milestoneTrackerAddress}
-    //           recipient={props.recipient}
-    //         />
-    //     </div>
-    // );
 }
 
 CampaignMilestones.propTypes = {
@@ -134,6 +122,7 @@ CampaignMilestones.propTypes = {
                 type: PropTypes.string.isRequired,
             })),
         }),
+        proposedMilestonesHash: PropTypes.string,
         proposedMilestones: PropTypes.arrayOf(PropTypes.shape({
             description: PropTypes.string.isRequired,
             url: PropTypes.string,
@@ -141,4 +130,5 @@ CampaignMilestones.propTypes = {
             maxCompletionDate: PropTypes.number.isRequired,
         })),
     }).isRequired,
+    milestoneTrackerAddress: PropTypes.string.isRequired,
 };

@@ -18,8 +18,11 @@ const Milestones = props => (
                 <Milestone
                   key={milestone.payData}
                   milestone={milestone}
+                  milestoneTrackerAddress={props.milestoneTrackerAddress}
+                  editable={props.editable}
                 />
             ))}
+            {props.buttons}
         </Well>
     </div>
 );
@@ -29,10 +32,17 @@ Milestones.propTypes = {
     milestones: PropTypes.arrayOf(PropTypes.shape({
         payDescription: PropTypes.string.isRequired,
     })).isRequired,
+    buttons: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.arrayOf(PropTypes.element),
+    ]),
+    editable: PropTypes.bool,
 };
 
 Milestones.defaultProps = {
     milestones: [],
+    buttons: "",
+    editable: false,
 };
 
 export default Milestones;

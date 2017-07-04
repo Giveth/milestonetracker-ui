@@ -32,6 +32,7 @@ const Campaign = (props) => {
 
                 <CampaignMilestones
                   milestoneTracker={campaign.milestoneTracker}
+                  milestoneTrackerAddress={campaign.milestoneTrackerAddress}
                 />
             </div>
         );

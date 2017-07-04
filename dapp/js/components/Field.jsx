@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from "react";
 import { FormGroup, ControlLabel, FormControl, Col } from "react-bootstrap";
 import { deploymentActions } from "../constants";

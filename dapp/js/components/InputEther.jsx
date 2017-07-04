@@ -103,14 +103,21 @@ class InputEther extends React.Component {
 
 InputEther.propTypes = {
     name: PropTypes.string.isRequired,
-    // placeholder: PropTypes.string,
+    placeholder: PropTypes.string,
     label: PropTypes.string.isRequired,
-    // onChange: PropTypes.func,
-    // setValid: PropTypes.func,
-    // value: PropTypes.oneOfType([
-    //     PropTypes.string,
-    //     PropTypes.number,
-    // ]),
+    onChange: PropTypes.func,
+    setValid: PropTypes.func,
+    value: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number,
+    ]),
+};
+
+InputEther.defaultProps = {
+    placeholder: "",
+    onChange: function onChange() {},
+    setValid: function setValid() {},
+    value: "",
 };
 
 export default InputEther;

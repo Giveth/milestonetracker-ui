@@ -1,9 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Accordion, Panel, ButtonGroup } from "react-bootstrap";
+import { Accordion, Panel } from "react-bootstrap";
 import Form from "../components/Form";
 import MilestoneEdit from "../containers/MilestoneEdit";
-import ButtonCloseMilestone from "../containers/Buttons/CloseMilestone";
 import { ButtonProposeMilestones, ButtonAddMilestone } from "../containers/Buttons";
 
 class MilestonesFormation extends React.Component {
@@ -70,12 +69,6 @@ class MilestonesFormation extends React.Component {
                 const header = <span>{ text } <span className="caret" /></span>;
                 const btns = (<span>
                     {header}
-                    <ButtonGroup bsSize="xsmall" className="pull-right">
-                        <ButtonCloseMilestone
-                          milestoneTrackerAddress={this.props.milestoneTrackerAddress}
-                          index={i}
-                        />
-                    </ButtonGroup>
                 </span>);
                 milestones.push(
                     <Panel

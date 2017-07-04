@@ -4,21 +4,16 @@
 
 import React from "react";
 import PropTypes from "prop-types";
-import { SplitButton, Button } from "react-bootstrap";
-import { ButtonCollectPayment, ButtonMarkMilestoneComplete, RejectCompletedMilestone,
-         ApproveCompletedMilestone, CancelMilestone, ArbitrateApproveCompletedMilestone,
-     } from "../containers/Buttons";
+
+import * as Buttons from "../containers/Buttons/Milestone";
 
 const MilestoneButtons = (props) => {
     const buttons = [];
     Object.keys(props.actions).forEach((propName) => {
-        if (props.actions[ propName ].length < 1) {
-            return;
-        }
         switch (propName) {
         case "markMilestoneComplete":
             buttons.push(
-                <ButtonMarkMilestoneComplete
+                <Buttons.MarkCompleted
                   key={propName}
                   milestoneID={props.milestoneID}
                   milestoneTrackerAddress={props.milestoneTrackerAddress}
@@ -29,7 +24,7 @@ const MilestoneButtons = (props) => {
 
         case "collectMilestone":
             buttons.push(
-                <ButtonCollectPayment
+                <Buttons.Collect
                   key={propName}
                   milestoneID={props.milestoneID}
                   milestoneTrackerAddress={props.milestoneTrackerAddress}
@@ -40,7 +35,7 @@ const MilestoneButtons = (props) => {
 
         case "approveCompletedMilestone":
             buttons.push(
-                <ApproveCompletedMilestone
+                <Buttons.ApproveCompleted
                   key={propName}
                   milestoneID={props.milestoneID}
                   milestoneTrackerAddress={props.milestoneTrackerAddress}
@@ -51,7 +46,7 @@ const MilestoneButtons = (props) => {
 
         case "rejectMilestone":
             buttons.push(
-                <RejectCompletedMilestone
+                <Buttons.RejectCompleted
                   key={propName}
                   milestoneID={props.milestoneID}
                   milestoneTrackerAddress={props.milestoneTrackerAddress}
@@ -62,7 +57,7 @@ const MilestoneButtons = (props) => {
 
         case "arbitrateApproveMilestone":
             buttons.push(
-                <ArbitrateApproveCompletedMilestone
+                <Buttons.ArbitrateApproveCompleted
                   key={propName}
                   milestoneID={props.milestoneID}
                   milestoneTrackerAddress={props.milestoneTrackerAddress}
@@ -73,7 +68,7 @@ const MilestoneButtons = (props) => {
 
         case "cancelMilestone":
             buttons.push(
-                <CancelMilestone
+                <Buttons.Cancel
                   key={propName}
                   milestoneID={props.milestoneID}
                   milestoneTrackerAddress={props.milestoneTrackerAddress}
@@ -86,30 +81,19 @@ const MilestoneButtons = (props) => {
         }
     });
 
-    return (
-        buttons.length ? (
-            <SplitButton
-              bsSize="xsmall"
-              title={props.status}
-              id={`milestone_${ props.milestoneID }_actions`}
-            >
-                { buttons }
-            </SplitButton>
-        )
-        :
-            <Button
-              bsSize="xsmall"
-              id={`milestone_${ props.milestoneID }_actions`}
-            >
-                { props.status }
-            </Button>
-    );
+    return <div>{buttons}</div>;
 };
 
 MilestoneButtons.propTypes = {
-    // actions: PropTypes.object.isRequired,
-    milestoneID: PropTypes.number.isRequired,
-    status: PropTypes.string.isRequired,
+    actions: PropTypes.shape({
+        markMilestoneComplete: PropTypes.arrayOf(PropTypes.shape()),
+    }),
+    // milestoneTrackerAddress: PropTypes.string.isRequired,
+    // milestoneID: PropTypes.number.isRequired,
+};
+
+MilestoneButtons.defaultProps = {
+    actions: {},
 };
 
 export default MilestoneButtons;

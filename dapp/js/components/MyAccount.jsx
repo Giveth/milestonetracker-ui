@@ -1,5 +1,5 @@
 import React from "react";
-// import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import { Table } from "react-bootstrap";
 import { web3 } from "../blockchain";
 
@@ -33,6 +33,12 @@ const MyAccount = (props) => {
             </Table>
         </div>
     );
+};
+
+MyAccount.propTypes = {
+    web3state: PropTypes.shape({
+        accounts: PropTypes.arrayOf(PropTypes.shape({})),
+    }).isRequired,
 };
 
 export default MyAccount;

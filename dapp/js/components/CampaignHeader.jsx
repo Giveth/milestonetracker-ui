@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { Donate } from "../containers/Buttons";
+import * as Buttons from "../containers/Buttons/Campaign";
 
 const CampaignHeader = props => (
     <h2>
@@ -13,7 +13,7 @@ const CampaignHeader = props => (
             {props.campaign.name}
         </a>
         <span className="pull-right">
-            <Donate
+            <Buttons.Donate
               idCampaign={props.id}
               campaignName={props.campaign.name}
               disabled={props.campaign.status !== "Active"}

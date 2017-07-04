@@ -62,13 +62,17 @@ class Component extends React.Component {
 
 Component.propTypes = {
     name: PropTypes.string.isRequired,
-    // placeholder: PropTypes.string,
+    placeholder: PropTypes.string,
     label: PropTypes.string.isRequired,
-    // componentClass: PropTypes.string,
     onChange: PropTypes.func.isRequired,
-    // value: PropTypes.string,
     setValid: PropTypes.func.isRequired,
-    // accounts: PropTypes.array.isRequired,
+    accounts: PropTypes.arrayOf(PropTypes.shape({
+        address: PropTypes.string.isRequired,
+    })).isRequired,
+};
+
+Component.defaultProps = {
+    placeholder: "",
 };
 
 const mapStateToProps = state => ({
