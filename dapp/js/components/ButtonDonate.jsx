@@ -18,7 +18,6 @@ class ButtonDonate extends React.Component {
         this.hideModal = this.hideModal.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSelectChange = this.handleSelectChange.bind(this);
-        this.handleValidityChange = this.handleValidityChange.bind(this);
     }
 
     handleDonate(event) {
@@ -38,30 +37,19 @@ class ButtonDonate extends React.Component {
         this.setState({ show: false });
     }
 
-    handleInputChange(name, value) {
-        this.setState({ [ name ]: value });
+    handleInputChange(name, value, validity) {
+        const validationArray = Object.assign(
+          {}, this.state.inputsValidity, { [ name ]: validity });
+
+        this.setState({
+            [ name ]: value,
+            inputsValidity: validationArray,
+            valid: !Object.values(validationArray).includes(false),
+        });
     }
 
     handleSelectChange(name, account) {
         this.setState({ [ name ]: account.address });
-    }
-
-    handleValidityChange(name, val) {
-        const validationArray = Object.assign({}, this.state.inputsValidity);
-        validationArray[ name ] = val;
-        this.setState({ inputsValidity: validationArray });
-
-        if (val) {
-            Object.keys(validationArray).forEach((key) => {
-                if (!validationArray[ key ]) {
-                    this.setState({ valid: false });
-                    return;
-                }
-                this.setState({ valid: true });
-            });
-        } else {
-            this.setState({ valid: false });
-        }
     }
 
     render() {
@@ -91,14 +79,12 @@ class ButtonDonate extends React.Component {
                           name="amount"
                           label="Donation amount"
                           onChange={this.handleInputChange}
-                          setValid={this.handleValidityChange}
                           value={this.state.amount}
                         />
                         <InputMyAddresses
                           name="from"
                           label="Source address"
                           onChange={this.handleSelectChange}
-                          setValid={this.handleValidityChange}
                           value={this.state.amount}
                         />
                     </Modal.Body>

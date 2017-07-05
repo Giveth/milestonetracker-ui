@@ -29,9 +29,7 @@ const Milestones = props => (
 
 Milestones.propTypes = {
     title: PropTypes.string.isRequired,
-    milestones: PropTypes.arrayOf(PropTypes.shape({
-        payDescription: PropTypes.string.isRequired,
-    })).isRequired,
+    milestones: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
     buttons: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.arrayOf(PropTypes.element),

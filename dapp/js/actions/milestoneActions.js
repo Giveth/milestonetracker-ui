@@ -1,4 +1,5 @@
 import MilestoneTracker from "milestonetracker";
+import * as types from "./actionTypes";
 import { web3 } from "../blockchain";
 
 export const arbitrateApproveCompleted =
@@ -56,3 +57,13 @@ export const collect = (milestoneTrackerAddress, milestoneID, action) => () => {
         },
     );
 };
+
+export const saveMilestone = data => ({
+    type: types.MILESTONE_NEW_SAVE,
+    data,
+});
+
+export const removeMilestone = id => ({
+    type: types.MILESTONE_NEW_REMOVE,
+    id,
+});

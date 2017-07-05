@@ -7,7 +7,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Panel } from "react-bootstrap";
-import { MilestoneDetail, MilestoneDetailEditable } from "./";
+import { MilestoneDetail } from "./";
+import MilestoneDetailEditable from "../containers/MilestoneDetailEditable";
 
 class Milestone extends React.Component {
     constructor(props) {
@@ -41,6 +42,18 @@ class Milestone extends React.Component {
     }
 
     render() {
+        let backgroundColor = "white";
+
+        if (this.state.hover && this.props.milestone.valid !== false) {
+            // Hovered
+            backgroundColor = "#CCC";
+        } else if (this.state.hover && this.props.milestone.valid === false) {
+            // Hovered with error
+            backgroundColor = "#d96666";
+        } else if (this.props.milestone.valid === false) {
+            // With error
+            backgroundColor = "#d99696";
+        }
         return (
             <div>
                 <Panel
@@ -48,7 +61,7 @@ class Milestone extends React.Component {
                   onMouseEnter={this.onMouseEnter}
                   onMouseLeave={this.onMouseLeave}
                   onClick={this.onClick}
-                  style={{ backgroundColor: this.state.hover ? "#CCC" : "white" }}
+                  style={{ backgroundColor }}
                 >
                     {this.props.milestone.payDescription}
                 </Panel>
@@ -74,8 +87,9 @@ class Milestone extends React.Component {
 
 Milestone.propTypes = {
     milestone: PropTypes.shape({
-        payDescription: PropTypes.string.isRequired,
-        payData: PropTypes.string.isRequired,
+        payDescription: PropTypes.string,
+        payData: PropTypes.string,
+        valid: PropTypes.bool,
     }).isRequired,
     milestoneTrackerAddress: PropTypes.string.isRequired,
     editable: PropTypes.bool.isRequired,

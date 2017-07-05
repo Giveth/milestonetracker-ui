@@ -5,10 +5,17 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import Milestones from "./Milestones";
+import ButtonNewMilestone from "./ButtonNewMilestone";
 import * as Buttons from "../containers/Buttons/Campaign";
 
 export default function CampaignMilestones(props) {
     const milestones = props.milestoneTracker.milestones.map((milestone, index) => {
+        const mlstn = milestone;
+        mlstn.id = index;
+        return mlstn;
+    });
+
+    const milestonesNew = props.newMilestones.milestones.map((milestone, index) => {
         const mlstn = milestone;
         mlstn.id = index;
         return mlstn;
@@ -39,8 +46,9 @@ export default function CampaignMilestones(props) {
     const milestoneCategories = [
         {
             title: "New milestones",
-            milestones: [],
-            buttons: "Add new milestone",
+            milestones: milestonesNew,
+            buttons: [ <ButtonNewMilestone key="NewMilestone" /> ],
+            editable: true,
         },
         {
             title: "Proposed milestones",
@@ -80,6 +88,7 @@ export default function CampaignMilestones(props) {
               milestones={category.milestones}
               milestoneTrackerAddress={props.milestoneTrackerAddress}
               buttons={category.buttons ? category.buttons : ""}
+              editable={category.editable}
             />
         </td>
     ));
@@ -131,4 +140,8 @@ CampaignMilestones.propTypes = {
         })),
     }).isRequired,
     milestoneTrackerAddress: PropTypes.string.isRequired,
+    newMilestones: PropTypes.shape({
+        valid: PropTypes.bool.isRequired,
+        milestones: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+    }).isRequired,
 };

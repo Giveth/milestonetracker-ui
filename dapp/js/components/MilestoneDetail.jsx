@@ -18,7 +18,6 @@ class MilestoneDetail extends React.Component {
 
         this.state = {
             hover: false,
-            modal: false,
         };
     }
 

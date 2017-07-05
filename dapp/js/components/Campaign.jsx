@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { BlockChainContent, CampaignDetails, CampaignHeader, CampaignVault } from "./";
-import CampaignMilestones from "./CampaignMilestones";
+import CampaignMilestones from "../containers/CampaignMilestones";
 
 const Campaign = (props) => {
     const id = Number.parseInt(props.match.params.campaignId, 10);
