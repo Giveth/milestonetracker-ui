@@ -100,7 +100,8 @@ class MilestoneDetail extends React.Component {
             >
                 <Modal.Header closeButton>
                     <Modal.Title>
-                        {this.props.milestone.payDescription}
+                        {this.props.milestone.payDescription !== undefined ?
+                          this.props.milestone.payDescription : "The title could not be read"}
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
@@ -122,16 +123,16 @@ class MilestoneDetail extends React.Component {
 
 MilestoneDetail.propTypes = {
     milestone: PropTypes.shape({
-        payDescription: PropTypes.string.isRequired,
+        payDescription: PropTypes.string,
         description: PropTypes.string.isRequired,
         minCompletionDate: PropTypes.number.isRequired,
         maxCompletionDate: PropTypes.number.isRequired,
-        payDelay: PropTypes.number.isRequired,
+        payDelay: PropTypes.number,
         payValue: PropTypes.shape({
             c: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
             e: PropTypes.number.isRequired,
             s: PropTypes.number.isRequired,
-        }).isRequired,
+        }),
         paymentSource: PropTypes.string.isRequired,
         reviewTime: PropTypes.number.isRequired,
         doneTime: PropTypes.number,

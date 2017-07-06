@@ -43,11 +43,25 @@ export default function CampaignMilestones(props) {
         }
     }
 
+    const newMilestonesButtons = [ <ButtonNewMilestone key="NewMilestone" /> ];
+
+    if (props.newMilestones.milestones.length > 0 &&
+        props.accounts.filter(account => account.address === props.milestoneTracker.recipient)) {
+        newMilestonesButtons.push(
+            <Buttons.ProposeNewMilestones
+              key="proposeMilestones"
+              action={[ { account: props.milestoneTracker.recipient } ]}
+              milestoneTrackerAddress={props.milestoneTrackerAddress}
+              milestones={milestonesNew}
+              disabled={props.newMilestones.valid !== true}
+            />);
+    }
+
     const milestoneCategories = [
         {
             title: "New milestones",
             milestones: milestonesNew,
-            buttons: [ <ButtonNewMilestone key="NewMilestone" /> ],
+            buttons: newMilestonesButtons,
             editable: true,
         },
         {
@@ -144,4 +158,7 @@ CampaignMilestones.propTypes = {
         valid: PropTypes.bool.isRequired,
         milestones: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
     }).isRequired,
+    accounts: PropTypes.arrayOf(PropTypes.shape({
+        address: PropTypes.string.isRequired,
+    })).isRequired,
 };

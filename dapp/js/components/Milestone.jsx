@@ -63,7 +63,8 @@ class Milestone extends React.Component {
                   onClick={this.onClick}
                   style={{ backgroundColor }}
                 >
-                    {this.props.milestone.payDescription}
+                    {this.props.milestone.payDescription !== undefined ?
+                      this.props.milestone.payDescription : "The title could not be read"}
                 </Panel>
                 {this.props.editable ?
                     <MilestoneDetailEditable

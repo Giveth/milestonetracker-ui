@@ -7,9 +7,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Modal, Button } from "react-bootstrap";
-// import moment from "moment";
-import * as validator from "../validators";
+import moment from "moment";
+import MomentTypes from "react-moment-proptypes";
 
+import * as validator from "../validators";
 import Input from "./Input";
 import InputDate from "./InputDate";
 import InputDuration from "./InputDuration";
@@ -104,11 +105,11 @@ class MilestoneDetailEditable extends React.Component {
                     valid: false,
                 },
                 minCompletionDate: {
-                    value: undefined,
+                    value: moment(),
                     valid: false,
                 },
                 maxCompletionDate: {
-                    value: undefined,
+                    value: moment().add(3, "months"),
                     valid: false,
                 },
                 reviewer: {
@@ -274,14 +275,8 @@ MilestoneDetailEditable.propTypes = {
     milestone: PropTypes.shape({
         payDescription: PropTypes.string,
         description: PropTypes.string,
-        minCompletionDate: PropTypes.oneOfType([
-            PropTypes.number,
-            PropTypes.string,
-        ]),
-        maxCompletionDate: PropTypes.oneOfType([
-            PropTypes.number,
-            PropTypes.string,
-        ]),
+        minCompletionDate: MomentTypes.momentObj.isRequired,
+        maxCompletionDate: MomentTypes.momentObj.isRequired,
         payDelay: PropTypes.oneOfType([
             PropTypes.number,
             PropTypes.string,

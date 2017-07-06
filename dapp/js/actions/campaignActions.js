@@ -20,3 +20,12 @@ export const rejectMilestones = (milestoneTrackerAddress, action) => () => {
 
     milestoneTracker.unproposeMilestones({ from: action[ 0 ].account });
 };
+
+export const proposeNewMilestones = (milestoneTrackerAddress, milestones, action) => () => {
+    const milestoneTracker = new MilestoneTracker(web3, milestoneTrackerAddress);
+    milestoneTracker.proposeMilestones(
+        {
+            newMilestones: Object.assign({}, milestones),
+            from: action[ 0 ].account,
+        });
+};

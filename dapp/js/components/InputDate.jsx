@@ -42,6 +42,9 @@ class InputDate extends React.Component {
                   placeholder={this.props.placeholder}
                   onChange={this.onChange}
                   value={this.props.value}
+                  dateFormat={"YYYY-MM-DD"}
+                  timeFormat={"HH:mm:ss"}
+                  input={false}
                 />
             </FormGroup>
         );
@@ -53,11 +56,7 @@ InputDate.propTypes = {
     placeholder: PropTypes.string,
     label: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
-    value: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.number,
-        MomentTypes.momentObj,
-    ]),
+    value: MomentTypes.momentObj.isRequired,
 };
 
 InputDate.defaultProps = {

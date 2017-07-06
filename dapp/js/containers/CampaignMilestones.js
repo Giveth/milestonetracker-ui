@@ -3,6 +3,7 @@ import Component from "../components/CampaignMilestones";
 
 const mapStateToProps = state => ({
     newMilestones: state.newMilestones,
+    accounts: state.web3.accounts,
 });
 
 const mapDispatchToProps = ({

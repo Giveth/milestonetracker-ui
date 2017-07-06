@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "react-bootstrap";
+import moment from "moment";
 import MilestoneDetailEditable from "../containers/MilestoneDetailEditable";
 
 class ButtonNewMilestone extends React.Component {
@@ -25,7 +26,7 @@ class ButtonNewMilestone extends React.Component {
         return (
             <div>
                 <Button
-                  bsStyle="success"
+                  bsStyle="link"
                   onClick={this.showModal}
                 >
                     Add new milestone
@@ -33,6 +34,10 @@ class ButtonNewMilestone extends React.Component {
                 <MilestoneDetailEditable
                   show={this.state.show}
                   onHide={this.hideModal}
+                  milestone={{
+                      minCompletionDate: moment(),
+                      maxCompletionDate: moment().add(3, "months"),
+                  }}
                 />
             </div>
         );

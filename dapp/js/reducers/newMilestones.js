@@ -36,7 +36,10 @@ const newMilestones = (state = initialState, action) => {
             mlstns.push(milestone);
         }
 
-        return Object.assign({}, state, { milestones: mlstns });
+        return Object.assign({}, state, {
+            milestones: mlstns,
+            valid: mlstns.reduce((sum, value) => (sum && value.valid), true),
+        });
     }
 
     case types.MILESTONE_NEW_REMOVE: {
@@ -44,7 +47,10 @@ const newMilestones = (state = initialState, action) => {
             const mlstns = state.milestones.slice();
             mlstns.splice(action.id, 1);
 
-            return Object.assign({}, state, { milestones: mlstns });
+            return Object.assign({}, state, {
+                milestones: mlstns,
+                valid: mlstns.reduce((sum, value) => (sum && value.valid), true),
+            });
         }
         return state;
     }
