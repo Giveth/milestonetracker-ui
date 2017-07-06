@@ -6,43 +6,38 @@ class Input extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: props.value,
             validationState: null,
         };
-        this.change = this.change.bind(this);
+        this.onChange = this.onChange.bind(this);
     }
 
     componentWillMount() {
-        this.props.setValid(this.props.name, false);
+        this.inputChanged(this.props.value, true);
     }
 
-    change(event) {
-        if (this.props.validate(event.target.value)) {
-            this.props.onChange(this.props.name, event.target.value);
-            this.props.setValid(this.props.name, true);
-            this.setState({
-                value: event.target.value,
-                validationState: "success",
-            });
-        } else {
-            this.props.setValid(this.props.name, false);
-            this.setState({
-                value: event.target.value,
-                validationState: "error",
-            });
-        }
+    onChange(event) {
+        this.inputChanged(event.target.value);
+    }
+
+    inputChanged(value) {
+        const valid = this.props.validate(value);
+        this.props.onChange(this.props.name, value, valid);
+
+        this.setState({
+            validationState: valid ? "success" : "error",
+        });
     }
 
     render() {
         return (
             <FormGroup validationState={this.state.validationState}>
-                <ControlLabel>{this.props.label}</ControlLabel>
+                {this.props.label ? <ControlLabel>{this.props.label}</ControlLabel> : ""}
                 <FormControl
                   name={this.props.name}
                   componentClass={this.props.componentClass}
                   placeholder={this.props.placeholder}
-                  onChange={this.change}
-                  value={this.value}
+                  onChange={this.onChange}
+                  value={this.props.value}
                 />
             </FormGroup>
         );
@@ -51,13 +46,22 @@ class Input extends React.Component {
 
 Input.propTypes = {
     name: PropTypes.string.isRequired,
-    // placeholder: PropTypes.string,
-    label: PropTypes.string.isRequired,
-    // componentClass: PropTypes.string,
+    placeholder: PropTypes.string,
+    label: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.bool,
+    ]),
+    componentClass: PropTypes.string,
     onChange: PropTypes.func.isRequired,
-    // value: PropTypes.string,
-    setValid: PropTypes.func.isRequired,
+    value: PropTypes.string,
     validate: PropTypes.func.isRequired,
+};
+
+Input.defaultProps = {
+    placeholder: "",
+    value: "",
+    componentClass: "input",
+    label: false,
 };
 
 export default Input;

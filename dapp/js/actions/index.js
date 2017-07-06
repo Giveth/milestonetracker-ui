@@ -1,4 +1,3 @@
-// import { web3, MilestoneTracker } from "../blockchain";
 import * as c from "../constants";
 
 export const newWeb3State = state => ({
