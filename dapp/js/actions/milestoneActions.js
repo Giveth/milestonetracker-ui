@@ -58,6 +58,16 @@ export const collect = (milestoneTrackerAddress, milestoneID, action) => () => {
     );
 };
 
+export const requestPayment = (milestoneTrackerAddress, milestoneID, action) => () => {
+    const milestoneTracker = new MilestoneTracker(web3, milestoneTrackerAddress);
+    milestoneTracker.requestMilestonePayment(
+        {
+            idMilestone: milestoneID,
+            from: action[ 0 ].account,
+        },
+    );
+};
+
 export const saveMilestone = data => ({
     type: types.MILESTONE_NEW_SAVE,
     data,

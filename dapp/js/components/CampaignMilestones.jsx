@@ -15,65 +15,7 @@ export default function CampaignMilestones(props) {
         return mlstn;
     });
 
-    const milestonesNew = props.newMilestones.milestones.map((milestone, index) => {
-        const mlstn = milestone;
-        mlstn.id = index;
-        return mlstn;
-    });
-
-    const buttonsProposed = [];
-
-    if (props.milestoneTracker.actions) {
-        if (props.milestoneTracker.actions.acceptProposedMilestones) {
-            buttonsProposed.push(
-                <Buttons.AcceptMilestones
-                  key="acceptMilestones"
-                  milestoneTrackerAddress={props.milestoneTrackerAddress}
-                  proposalHash={props.milestoneTracker.proposedMilestonesHash}
-                  action={props.milestoneTracker.actions.acceptProposedMilestones}
-                />);
-        }
-        if (props.milestoneTracker.actions.unproposeMilestones) {
-            buttonsProposed.push(
-                <Buttons.RejectMilestones
-                  key="rejectMilestones"
-                  milestoneTrackerAddress={props.milestoneTrackerAddress}
-                  action={props.milestoneTracker.actions.acceptProposedMilestones}
-                />);
-        }
-    }
-
-    const newMilestonesButtons = [ <ButtonNewMilestone key="NewMilestone" /> ];
-
-    if (props.newMilestones.milestones.length > 0 &&
-        props.accounts.filter(account => account.address === props.milestoneTracker.recipient)) {
-        newMilestonesButtons.push(
-            <Buttons.ProposeNewMilestones
-              key="proposeMilestones"
-              action={[ { account: props.milestoneTracker.recipient } ]}
-              milestoneTrackerAddress={props.milestoneTrackerAddress}
-              milestones={milestonesNew}
-              disabled={props.newMilestones.valid !== true}
-            />);
-    }
-
     const milestoneCategories = [
-        {
-            title: "New milestones",
-            milestones: milestonesNew,
-            buttons: newMilestonesButtons,
-            editable: true,
-        },
-        {
-            title: "Proposed milestones",
-            milestones: props.milestoneTracker.proposedMilestones ?
-                props.milestoneTracker.proposedMilestones.map((milestone, index) => {
-                    const mlstn = milestone;
-                    mlstn.id = index;
-                    return mlstn;
-                }) : [],
-            buttons: buttonsProposed,
-        },
         {
             title: "In Progress",
             milestones: milestones.filter(milestone => milestone.status === "AcceptedAndInProgress"),
@@ -88,9 +30,84 @@ export default function CampaignMilestones(props) {
         },
         {
             title: "Canceled",
-            milestones: milestones.filter(milestone => milestone.status === "Canceled"),
+            milestones: milestones
+                          .filter(milestone => milestone.status === "Canceled")
+                          .map((milestone) => {
+                              const mlstn = milestone;
+                              mlstn.valid = false;
+                              return mlstn;
+                          }),
         },
     ];
+
+    // Only show proposed milestones if there are any
+    if (Array.isArray(props.milestoneTracker.proposedMilestones) &&
+        props.milestoneTracker.proposedMilestones.length > 0) {
+        const buttonsProposed = [];
+
+        if (props.milestoneTracker.actions) {
+            if (props.milestoneTracker.actions.acceptProposedMilestones) {
+                buttonsProposed.push(
+                    <Buttons.AcceptMilestones
+                      key="acceptMilestones"
+                      milestoneTrackerAddress={props.milestoneTrackerAddress}
+                      proposalHash={props.milestoneTracker.proposedMilestonesHash}
+                      action={props.milestoneTracker.actions.acceptProposedMilestones}
+                    />);
+            }
+            if (props.milestoneTracker.actions.unproposeMilestones) {
+                buttonsProposed.push(
+                    <Buttons.RejectMilestones
+                      key="rejectMilestones"
+                      milestoneTrackerAddress={props.milestoneTrackerAddress}
+                      action={props.milestoneTracker.actions.acceptProposedMilestones}
+                    />);
+            }
+        }
+
+        // Add the proposed milestones to the beginning of the category list
+        milestoneCategories.unshift({
+            title: "Proposed milestones",
+            milestones: props.milestoneTracker.proposedMilestones ?
+                props.milestoneTracker.proposedMilestones.map((milestone, index) => {
+                    const mlstn = milestone;
+                    mlstn.id = index;
+                    return mlstn;
+                }) : [],
+            buttons: buttonsProposed,
+        });
+    }
+
+    // Only add proposing milestones if the user can propose milestones
+    if (props.accounts.filter(account => account.address === props.milestoneTracker.recipient)
+          .length > 0) {
+        const newMilestonesButtons = [ <ButtonNewMilestone key="NewMilestone" /> ];
+        const milestonesNew = props.newMilestones.milestones.map((milestone, index) => {
+            const mlstn = milestone;
+            mlstn.id = index;
+            return mlstn;
+        });
+
+        if (props.newMilestones.milestones.length > 0) {
+            newMilestonesButtons.push(
+                <Buttons.ProposeNewMilestones
+                  key="proposeMilestones"
+                  action={[ { account: props.milestoneTracker.recipient } ]}
+                  milestoneTrackerAddress={props.milestoneTrackerAddress}
+                  milestones={milestonesNew}
+                  disabled={props.newMilestones.valid !== true}
+                />);
+        }
+
+        // Add new milestones to the beginning of the category list
+        milestoneCategories.unshift(
+            {
+                title: "New milestones",
+                milestones: milestonesNew,
+                buttons: newMilestonesButtons,
+                editable: true,
+            });
+    }
 
     const columns = milestoneCategories.map(category => (
         <td
@@ -111,7 +128,7 @@ export default function CampaignMilestones(props) {
         <div>
             <h3>Milestones:</h3>
             <div style={{ width: "100%", overflowX: "scroll" }}>
-                <table style={{ minWidth: "1200pt", tableLayout: "fixed", margin: "40px auto 0px auto" }}>
+                <table style={{ minWidth: `${ columns.length * 200 }pt`, tableLayout: "fixed", margin: "40px auto 0px auto" }}>
                     <tbody>
                         <tr>
                             {columns}

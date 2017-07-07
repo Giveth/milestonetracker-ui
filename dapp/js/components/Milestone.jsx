@@ -44,16 +44,27 @@ class Milestone extends React.Component {
     render() {
         let backgroundColor = "white";
 
-        if (this.state.hover && this.props.milestone.valid !== false) {
-            // Hovered
-            backgroundColor = "#CCC";
-        } else if (this.state.hover && this.props.milestone.valid === false) {
-            // Hovered with error
-            backgroundColor = "#d96666";
+        if (this.state.hover) {
+            if (this.props.milestone.paymentInfo &&
+                this.props.milestone.paymentInfo.paid === true) {
+                // Hovered paid
+                backgroundColor = "#66d966";
+            } else if (this.props.milestone.valid === false) {
+                // Hovered normal
+                backgroundColor = "#CCC";
+            } else if (this.props.milestone.valid === false) {
+                // Hovered with error
+                backgroundColor = "#d96666";
+            }
+        } else if (this.props.milestone.paymentInfo &&
+                   this.props.milestone.paymentInfo.paid === true) {
+            // Paid
+            backgroundColor = "#96d996";
         } else if (this.props.milestone.valid === false) {
             // With error
             backgroundColor = "#d99696";
         }
+
         return (
             <div>
                 <Panel
@@ -91,6 +102,9 @@ Milestone.propTypes = {
         payDescription: PropTypes.string,
         payData: PropTypes.string,
         valid: PropTypes.bool,
+        paymentInfo: PropTypes.shape({
+            paid: PropTypes.bool,
+        }),
     }).isRequired,
     milestoneTrackerAddress: PropTypes.string.isRequired,
     editable: PropTypes.bool.isRequired,
