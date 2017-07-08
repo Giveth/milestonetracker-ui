@@ -1,128 +1,181 @@
 /**
  * Show milestones of the campaign and possible action based on access level
- *
- * Expects following properties:
- * @prop{string} recipient                Address of the recipient for the milestones
- * @prop{string} donor                    Donor's address
- * @prop{string} arbitrator               Arbitrator's address
- * @prop{bool}   changingMilestones       Flag to indicate if there are milestones to be approved
- * @prop{bool}   campaignCanceled         Flag to indicate if the campaign has been cancelled
- * @prop{array}  milestones               Array of approved milestones
- * @prop{string} milestoneTrackerAddress  Address of the MilestoneTracker contract
- * @prop{string} proposedMilestonesHash   Hash of the milestone proposal
- * @prop{array}  proposedMilestones       Array of proposed milestones to be approved
  */
 import React from "react";
 import PropTypes from "prop-types";
-import { Table } from "react-bootstrap";
 
-import { ButtonUnproposeMilestones, ButtonAcceptMilestones } from "../containers/Buttons";
 import Milestones from "./Milestones";
-import MilestonesApproved from "./MilestonesApproved";
-import MilestonesFormation from "./MilestonesFormation";
+import ButtonNewMilestone from "./ButtonNewMilestone";
+import * as Buttons from "../containers/Buttons/Campaign";
 
 export default function CampaignMilestones(props) {
-    let proposedMilestonesButtons = [];
+    const milestones = props.milestoneTracker.milestones.map((milestone, index) => {
+        const mlstn = milestone;
+        mlstn.id = index;
+        return mlstn;
+    });
 
-    if (props.actions) {
-        if (props.actions.acceptProposedMilestones) {
-            proposedMilestonesButtons.push(<ButtonAcceptMilestones
-              key="acceptMilestones"
-              milestoneTrackerAddress={props.milestoneTrackerAddress}
-              proposalHash={props.proposedMilestonesHash}
-              action={props.actions.acceptProposedMilestones}
-            />);
+    const milestoneCategories = [
+        {
+            title: "In Progress",
+            milestones: milestones.filter(milestone => milestone.status === "AcceptedAndInProgress"),
+        },
+        {
+            title: "Completed and in Review",
+            milestones: milestones.filter(milestone => milestone.status === "Completed"),
+        },
+        {
+            title: "Finished",
+            milestones: milestones.filter(milestone => milestone.status === "AuthorizedForPayment"),
+        },
+        {
+            title: "Canceled",
+            milestones: milestones
+                          .filter(milestone => milestone.status === "Canceled")
+                          .map((milestone) => {
+                              const mlstn = milestone;
+                              mlstn.valid = false;
+                              return mlstn;
+                          }),
+        },
+    ];
+
+    // Only show proposed milestones if there are any
+    if (Array.isArray(props.milestoneTracker.proposedMilestones) &&
+        props.milestoneTracker.proposedMilestones.length > 0) {
+        const buttonsProposed = [];
+
+        if (props.milestoneTracker.actions) {
+            if (props.milestoneTracker.actions.acceptProposedMilestones) {
+                buttonsProposed.push(
+                    <Buttons.AcceptMilestones
+                      key="acceptMilestones"
+                      milestoneTrackerAddress={props.milestoneTrackerAddress}
+                      proposalHash={props.milestoneTracker.proposedMilestonesHash}
+                      action={props.milestoneTracker.actions.acceptProposedMilestones}
+                    />);
+            }
+            if (props.milestoneTracker.actions.unproposeMilestones) {
+                buttonsProposed.push(
+                    <Buttons.RejectMilestones
+                      key="rejectMilestones"
+                      milestoneTrackerAddress={props.milestoneTrackerAddress}
+                      action={props.milestoneTracker.actions.acceptProposedMilestones}
+                    />);
+            }
         }
-        if (props.actions.unproposeMilestones) {
-            proposedMilestonesButtons.push(<ButtonUnproposeMilestones
-              key="unproposeMilestones"
-              milestoneTrackerAddress={props.milestoneTrackerAddress}
-              action={props.actions.unproposeMilestones}
-            />);
-        }
+
+        // Add the proposed milestones to the beginning of the category list
+        milestoneCategories.unshift({
+            title: "Proposed milestones",
+            milestones: props.milestoneTracker.proposedMilestones ?
+                props.milestoneTracker.proposedMilestones.map((milestone, index) => {
+                    const mlstn = milestone;
+                    mlstn.id = index;
+                    return mlstn;
+                }) : [],
+            buttons: buttonsProposed,
+        });
     }
+
+    // Only add proposing milestones if the user can propose milestones
+    if (props.accounts.filter(account => account.address === props.milestoneTracker.recipient)
+          .length > 0) {
+        const newMilestonesButtons = [ <ButtonNewMilestone key="NewMilestone" /> ];
+        const milestonesNew = props.newMilestones.milestones.map((milestone, index) => {
+            const mlstn = milestone;
+            mlstn.id = index;
+            return mlstn;
+        });
+
+        if (props.newMilestones.milestones.length > 0) {
+            newMilestonesButtons.push(
+                <Buttons.ProposeNewMilestones
+                  key="proposeMilestones"
+                  action={[ { account: props.milestoneTracker.recipient } ]}
+                  milestoneTrackerAddress={props.milestoneTrackerAddress}
+                  milestones={milestonesNew}
+                  disabled={props.newMilestones.valid !== true}
+                />);
+        }
+
+        // Add new milestones to the beginning of the category list
+        milestoneCategories.unshift(
+            {
+                title: "New milestones",
+                milestones: milestonesNew,
+                buttons: newMilestonesButtons,
+                editable: true,
+            });
+    }
+
+    const columns = milestoneCategories.map(category => (
+        <td
+          key={category.title}
+          style={{ padding: "5px", width: "200pt", borderCollapse: "collapse", verticalAlign: "top" }}
+        >
+            <Milestones
+              title={category.title}
+              milestones={category.milestones}
+              milestoneTrackerAddress={props.milestoneTrackerAddress}
+              buttons={category.buttons ? category.buttons : ""}
+              editable={category.editable}
+            />
+        </td>
+    ));
 
     return (
         <div>
-            <Table striped bordered condensed hover>
-                <tbody>
-                    <tr>
-                        <td>Recipient&apos;s Address</td>
-                        <td>
-                            <a
-                              href={`${ props.domain }address/${ props.recipient }`}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                                {props.recipient}
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Donor&apos;s Address</td>
-                        <td>
-                            <a
-                              href={`${ props.domain }address/${ props.donor }`}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                                {props.donor}
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Arbitrator&apos;s Address</td>
-                        <td>
-                            <a
-                              href={`${ props.domain }address/${ props.arbitrator }`}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                                {props.arbitrator}
-                            </a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Milestones to review</td>
-                        <td>{ props.changingMilestones ? "yes" : "no" }</td>
-                    </tr>
-                    <tr>
-                        <td>Campaign cancelled</td>
-                        <td>{ props.campaignCanceled ? "yes" : "no" }</td>
-                    </tr>
-                </tbody>
-            </Table>
-            <MilestonesApproved
-              milestones={props.milestones}
-              header="Approved Milestones"
-              milestoneTrackerAddress={props.milestoneTrackerAddress}
-            />
-            <Milestones
-              milestones={props.proposedMilestones}
-              header="Proposed Milestones"
-            >
-                <div className="padding">{ proposedMilestonesButtons }</div>
-            </Milestones>
-            <MilestonesFormation
-              newMilestones={props.newMilestones}
-              milestoneTrackerAddress={props.milestoneTrackerAddress}
-              recipient={props.recipient}
-            />
-        </div>
-    );
+            <h3>Milestones:</h3>
+            <div style={{ width: "100%", overflowX: "scroll" }}>
+                <table style={{ minWidth: `${ columns.length * 200 }pt`, tableLayout: "fixed", margin: "40px auto 0px auto" }}>
+                    <tbody>
+                        <tr>
+                            {columns}
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>);
 }
 
 CampaignMilestones.propTypes = {
-    recipient: PropTypes.string.isRequired,
-    donor: PropTypes.string.isRequired,
-    arbitrator: PropTypes.string.isRequired,
-    changingMilestones: PropTypes.bool.isRequired,
-    campaignCanceled: PropTypes.bool.isRequired,
-    // milestones: PropTypes.array.isRequired,
+    milestoneTracker: PropTypes.shape({
+        recipient: PropTypes.string.isRequired,
+        donor: PropTypes.string.isRequired,
+        arbitrator: PropTypes.string.isRequired,
+        campaignCanceled: PropTypes.bool.isRequired,
+        changingMilestones: PropTypes.bool.isRequired,
+        milestones: PropTypes.arrayOf(PropTypes.shape({
+            description: PropTypes.string.isRequired,
+            url: PropTypes.string,
+            minCompletionDate: PropTypes.number.isRequired,
+            maxCompletionDate: PropTypes.number.isRequired,
+        })).isRequired,
+        actions: PropTypes.shape({
+            acceptProposedMilestones: PropTypes.arrayOf(PropTypes.shape({
+                account: PropTypes.string.isRequired,
+                type: PropTypes.string.isRequired,
+            })),
+            unproposeMilestones: PropTypes.arrayOf(PropTypes.shape({
+                account: PropTypes.string.isRequired,
+                type: PropTypes.string.isRequired,
+            })),
+        }),
+        proposedMilestonesHash: PropTypes.string,
+        proposedMilestones: PropTypes.arrayOf(PropTypes.shape({
+            description: PropTypes.string.isRequired,
+            url: PropTypes.string,
+            minCompletionDate: PropTypes.number.isRequired,
+            maxCompletionDate: PropTypes.number.isRequired,
+        })),
+    }).isRequired,
     milestoneTrackerAddress: PropTypes.string.isRequired,
-    // proposedMilestonesHash: PropTypes.string,
-    // proposedMilestones: PropTypes.array,
-    // newMilestones: PropTypes.object,
-    // vaultAddress: PropTypes.string.isRequired,
-    // actions: PropTypes.object,
+    newMilestones: PropTypes.shape({
+        valid: PropTypes.bool.isRequired,
+        milestones: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+    }).isRequired,
+    accounts: PropTypes.arrayOf(PropTypes.shape({
+        address: PropTypes.string.isRequired,
+    })).isRequired,
 };
