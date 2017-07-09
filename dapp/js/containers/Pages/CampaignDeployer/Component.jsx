@@ -116,6 +116,10 @@ export default class Deployer extends Component {
     this.props.reset();
   }
 
+  handleAlertDismiss() {
+    this.props.removeError();
+  }
+
   render() {
     const { campaignValues, userAccount, deploymentStatus, deploymentResults, currentDeploymentStep, error } = this.props;
     return(
@@ -129,7 +133,7 @@ export default class Deployer extends Component {
             <Col md={ 8 } mdOffset={ 2 }>
               {
                 error &&
-                <Alert bsStyle="danger">
+                <Alert bsStyle="danger"  onDismiss={this.handleAlertDismiss.bind(this)}>
                   <h2>Oops! There was an error!</h2>
                   <h4>{ error.message }</h4>
                   <p>{ error.stacktrace }</p>
