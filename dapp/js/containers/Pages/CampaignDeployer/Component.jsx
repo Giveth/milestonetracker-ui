@@ -19,7 +19,11 @@ export default class Deployer extends Component {
   }
 
   componentDidMount() {
-    this.props.setAccount(web3.eth.accounts[0]);
+    if (web3.eth.accounts.length === 0) {
+      this.props.showError('No accounts found. You may need to unlock your MetaMask vault.');
+    } else {
+      this.props.setAccount(web3.eth.accounts[0]);
+    }
     //set default account to user current account if they are not set
     let campaignValues = Object.assign({}, this.props.campaignValues);
     let accountTypes = ['escapeCaller', 'securityGuard', 'donor', 'recipient']
@@ -47,7 +51,12 @@ export default class Deployer extends Component {
 
   //begin the deployment chain.
   runDeployment() {
-    this.props.runDeployment(this.props.userAccount, this.props.campaignValues);
+    if (!this.props.userAccount) {
+      this.props.showError('No accounts found. You must have an unlocked account to be able to deploy a campaign.' +
+        ' You may need to unlock your MetaMask vault.');
+    } else {
+      this.props.runDeployment(this.props.userAccount, this.props.campaignValues);
+    }
   }
 
   cancel() {
