@@ -30,7 +30,12 @@ const networks = {
 
 // FIXME: Remake this to asynchronous action with listener on network change.
 const nt = web3.version.network;
-const ntID = nt < 4 ? nt : 4;
+let ntID = nt < 4 ? nt : 4;
+
+// On production we always want Main network instead of Testrpc
+if (ntID === 4 && !window.location.hostname.includes("localhost")) {
+    ntID = 1;
+}
 
 const network = networks[ ntID ];
 

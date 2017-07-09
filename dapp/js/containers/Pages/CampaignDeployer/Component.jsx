@@ -6,22 +6,14 @@ import DeploymentResults from '../../../components/DeploymentResults';
 import Field from '../../../components/Field';
 import { deploymentActions } from '../../../constants';
 import { Form, FormGroup, ControlLabel, FormControl, Col, Row, Button, ProgressBar, Alert } from 'react-bootstrap';
-import w3 from 'web3';
-
-const provider_endpoint = process.argv[2] ? process.argv[2].substr(2) : "http://localhost:8545";
-let web3;
-if (typeof window.web3 !== "undefined") {
-    web3 = new w3(window.web3.currentProvider);
-} else {
-    web3 = new w3(new w3.providers.HttpProvider(provider_endpoint));
-}
+import { web3, network } from "../../../blockchain";
 
 export default class Deployer extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
       edited: false,
-      domain: null,
+      domain: network.etherscan,
       cancelOpen: false
     }
   }
@@ -37,30 +29,6 @@ export default class Deployer extends Component {
         }
     }
     this.props.updateCampaignValues(campaignValues);
-
-    let currentNetwork;
-    let _campaignTrackerAddress
-    let domain;
-    const networks = {
-        1: 'Main',
-        2: 'Morden',
-        3: 'Ropsten',
-        4: 'Testrpc'
-    };
-    const campaignTrackerContractLocations = {
-        'Main': '0x26104cd17cc77e510ef20adf11ecb682ca7760f0',
-        'Morden': '0x0',
-        'Ropsten': '0x53fc022DD190F0b37A5501FeE92171Ed1C7CD4Eb',
-        'Testrpc': '0xe78a0f7e598cc8b0bb87894b0f60dd2a88d6a8ab' //enter your own for testing
-    };
-
-    web3.version.getNetwork((e, result) => {
-        currentNetwork = result < 4 ? networks[result] : networks[4];
-        _campaignTrackerAddress = campaignTrackerContractLocations[currentNetwork];
-        console.log(`Connected to the ${currentNetwork} network.  Campaign Tracker is at ${_campaignTrackerAddress}`);
-        domain = currentNetwork == 'Main' ? 'https://etherscan.io/tx/' : currentNetwork == 'Ropsten' ? 'https://ropsten.etherscan.io/tx/' : '';
-        this.setState({ domain });
-    });
   }
 
   //update values to the campaign fields.
@@ -71,8 +39,8 @@ export default class Deployer extends Component {
     this.props.updateCampaignValues(campaignValues);
   }
 
-  //FIXME: CHECK INPUT
-  //update the user's account (source of funds)
+  // FIXME: CHECK INPUT
+  // update the user's account (source of funds)
   updateUser(caller) {
     this.props.setAccount(caller.currentTarget.value);
   }
