@@ -28,6 +28,16 @@ export default class Deployer extends Component {
 
   componentDidMount() {
     this.props.setAccount(web3.eth.accounts[0]);
+    //set default account to user current account if they are not set
+    let campaignValues = Object.assign({}, this.props.campaignValues);
+    let accountTypes = ['escapeCaller', 'securityGuard', 'donor', 'recipient']
+    for(let i=0; i<accountTypes.length; i++) {
+        if(!campaignValues[accountTypes[i]]){
+            campaignValues[accountTypes[i]] = web3.eth.accounts[0];
+        }
+    }
+    this.props.updateCampaignValues(campaignValues);
+
     let currentNetwork;
     let _campaignTrackerAddress
     let domain;
