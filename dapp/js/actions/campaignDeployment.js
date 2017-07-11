@@ -55,7 +55,7 @@ export function removeError() {
 }
 
 //show errors on the UI
-function showError(message, stacktrace) {
+export function showError(message, stacktrace) {
     return {
         type: deploymentActions.RUN_ERROR,
         payload: { data: { message, stacktrace } }
