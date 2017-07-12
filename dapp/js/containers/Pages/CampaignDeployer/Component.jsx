@@ -188,6 +188,15 @@ export default class Deployer extends Component {
                         onChange={ this.updateUser.bind(this) } />
                     </Col>
                   </FormGroup>
+                   <Row>
+                    <Col md={ 10 } mdOffset={ 2 }>
+                      <Alert bsStyle="info">
+                        To use the Campaign Deployer, click the Metamask icon in your Chrome browser and in the top left, where you can choose the network, select `custom rpc`, 
+                        enter the url `https://mainnet.infura.io/` as your new RPC URL and click `save`. This is a temporary work arounf until MetaMask fixes this issue: https://github.com/MetaMask/metamask-plugin/issues/1361
+                        Special thanks to @rodney757 for chasing this down and finding this work around.
+                      </Alert>
+                    </Col>
+                  </Row>
                   <Field
                     fieldName="escapeCaller"
                     fieldText="Escape Caller"
