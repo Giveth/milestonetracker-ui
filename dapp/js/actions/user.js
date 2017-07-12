@@ -1,9 +1,8 @@
-/* eslint-disable */
-import { userActions } from '../constants';
+import { userActions } from "../constants";
 
-export function setAccount(data) {
+export default function setAccount(data) {
     return {
         type: userActions.SET_ACCOUNT,
-        payload: { data }
-    }
+        payload: { data },
+    };
 }

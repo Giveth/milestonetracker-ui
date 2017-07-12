@@ -1,4 +1,5 @@
 import React from "react";
+// import PropTypes from "prop-types";
 
 export default function Web3InfoComponent(props) {
     let content;
@@ -8,7 +9,7 @@ export default function Web3InfoComponent(props) {
     if (!props.web3state.connected) {
         content = <div> Disconnected </div>;
     } else {
-        accounts = props.web3state.accounts.map((account) =>
+        accounts = props.web3state.accounts.map(account =>
             (<li key={account.address}>
                 <div>
                     {account.address}
@@ -46,5 +47,5 @@ export default function Web3InfoComponent(props) {
 }
 
 Web3InfoComponent.propTypes = {
-    web3state: React.PropTypes.object.isRequired,
+    // web3state: PropTypes.object.isRequired,
 };

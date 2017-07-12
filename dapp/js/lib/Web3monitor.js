@@ -4,20 +4,18 @@ import async from "async";
 export default class extends EventEmitter {
     constructor(web3, listener) {
         super();
-        const self = this;
-        self.web3 = web3;
+        this.web3 = web3;
         if (listener) {
-            self.on("newState", listener);
+            this.on("newState", listener);
         }
-        self.reset();
+        this.reset();
     }
 
     // Starts a background monitor to check the sync.
-    _registerSync(cb) {
-        const self = this;
+    registerSync(cb) {
         let timeout = null;
 
-        self.syncObj = self.web3.eth.isSyncing((err, sync) => {
+        this.syncObj = this.web3.eth.isSyncing((err, sync) => {
             if (err) {
                 // If we are still initializing.
                 if (timeout !== null) {
@@ -26,25 +24,25 @@ export default class extends EventEmitter {
                     cb(err);
                     return;
                 }
-                self.reset(err, 5000);
+                this.reset(err, 5000);
                 return;
             }
             if (sync === true) {
-                self.st.syncing = true;
-                self.st.syncStartingBlock = null;
-                self.st.syncCurrentBlock = null;
-                self.st.syncHighestBlock = null;
+                this.st.syncing = true;
+                this.st.syncStartingBlock = null;
+                this.st.syncCurrentBlock = null;
+                this.st.syncHighestBlock = null;
             } else if (sync) {
-                self.st.syncStartingBlock = sync.startingBlock;
-                self.st.syncCurrentBlock = sync.currentBlock;
-                self.st.syncHighestBlock = sync.highestBlock;
+                this.st.syncStartingBlock = sync.startingBlock;
+                this.st.syncCurrentBlock = sync.currentBlock;
+                this.st.syncHighestBlock = sync.highestBlock;
             } else {
-                self.st.syncing = false;
-                self.st.syncStartingBlock = null;
-                self.st.syncCurrentBlock = null;
-                self.st.syncHighestBlock = null;
+                this.st.syncing = false;
+                this.st.syncStartingBlock = null;
+                this.st.syncCurrentBlock = null;
+                this.st.syncHighestBlock = null;
             }
-            self.updateState();
+            this.updateState();
         });
         // Wait 200ms to see if ther have been some error;
         timeout = setTimeout(() => {
@@ -53,13 +51,12 @@ export default class extends EventEmitter {
         }, 200);
     }
 
-    _readAccounts(cb) {
-        const self = this;
+    readAccounts(cb) {
         let addresses;
         const accounts = [];
         async.series([
             (cb1) => {
-                self.web3.eth.getAccounts((err, _accounts) => {
+                this.web3.eth.getAccounts((err, _accounts) => {
                     if (err) {
                         cb1(err);
                         return;
@@ -70,7 +67,7 @@ export default class extends EventEmitter {
             },
             (cb1) => {
                 async.eachSeries(addresses, (address, cb2) => {
-                    self.web3.eth.getBalance(address, (err, balance) => {
+                    this.web3.eth.getBalance(address, (err, balance) => {
                         if (err) {
                             cb1(err);
                             return;
@@ -84,115 +81,110 @@ export default class extends EventEmitter {
                 }, cb1);
             },
             (cb1) => {
-                self.st.accounts = accounts;
+                this.st.accounts = accounts;
                 cb1();
             },
         ], cb);
     }
 
     connect(cb) {
-        const self = this;
-/*        self.blockFilter = self.web3.eth.filter("latest", () => {
-            self._invalidateBlock();
+/*        this.blockFilter = this.web3.eth.filter("latest", () => {
+            this._invalidateBlock();
         }); */
-        self.checkConnectionInterval = setInterval(() => {
-            self.web3.eth.getBlockNumber((err, bn) => {
+        this.checkConnectionInterval = setInterval(() => {
+            this.web3.eth.getBlockNumber((err, bn) => {
                 if (err) {
-                    self.reset(err, 5000);
+                    this.reset(err, 5000);
                     return;
                 }
-                if (bn !== self.st.block.number) {
-                    self._invalidateBlock();
+                if (bn !== this.st.block.number) {
+                    this.invalidateBlock();
                 }
             });
         }, 1000);
 
         async.series([
             (cb1) => {
-                self._registerSync(cb1);
+                this.registerSync(cb1);
             },
             (cb1) => {
-                self._readAccounts(cb1);
+                this.readAccounts(cb1);
             },
             (cb1) => {
-                self._invalidateBlock();
+                this.invalidateBlock();
                 cb1();
             },
         ], cb);
     }
 
     reset(err = null, retry = 1) {
-        const self = this;
-        self.st = {
+        this.st = {
             accounts: [],
             block: {},
             connected: false,
             error: err,
         };
-        if (self.syncObj) {
-            self.syncObj.stopWatching();
-            self.syncObj = null;
+        if (this.syncObj) {
+            this.syncObj.stopWatching();
+            this.syncObj = null;
         }
-        if (self.checkConnectionInterval) {
-            clearInterval(self.checkConnectionInterval);
-            self.checkConnectionInterval = null;
+        if (this.checkConnectionInterval) {
+            clearInterval(this.checkConnectionInterval);
+            this.checkConnectionInterval = null;
         }
-        if (!self.retrying) {
-            self.retrying = true;
+        if (!this.retrying) {
+            this.retrying = true;
             setTimeout(() => {
-                self.connect((errConnect) => {
-                    self.retrying = false;
+                this.connect((errConnect) => {
+                    this.retrying = false;
                     if (errConnect) {
-                        self.reset(errConnect, 10000);
+                        this.reset(errConnect, 10000);
                         return;
                     }
-                    self.st.connected = true;
-                    self.updateState();
+                    this.st.connected = true;
+                    this.updateState();
                 });
             }, retry);
         }
-        self.updateState();
+        this.updateState();
     }
 
     processBlock(cb) {
-        const self = this;
         async.series([
             (cb1) => {
-                self.web3.eth.getBlock("latest", true, (err, block) => {
+                this.web3.eth.getBlock("latest", true, (err, block) => {
                     if (err) {
-                        self.reset(err, 5000);
+                        this.reset(err, 5000);
                         return;
                     }
-                    self.st.block = block;
+                    this.st.block = block;
                     cb1();
                 });
             },
             (cb1) => {
-                self._readAccounts(cb1);
+                this.readAccounts(cb1);
             },
         ], cb);
     }
 
-    _invalidateBlock() {
-        const self = this;
-        self.invalidBlock = true;
-        if (!self.processingBlock) {
-            self.invalidBlock = false;
-            self.processingBlock = true;
-            self.processBlock(() => {
-                self.processingBlock = false;
-                if (self.invalidBlock) {
-                    self._invalidateBlock();
+    invalidateBlock() {
+        this.invalidBlock = true;
+        if (!this.processingBlock) {
+            this.invalidBlock = false;
+            this.processingBlock = true;
+            this.processBlock(() => {
+                this.processingBlock = false;
+                if (this.invalidBlock) {
+                    this.invalidateBlock();
                 } else {
-                    self.updateState();
+                    this.updateState();
                 }
             });
         }
     }
 
     updateState() {
-        const self = this;
-        self.emit("newState", self.st);
+        this.emit("newState", this.st);
     }
 
 }

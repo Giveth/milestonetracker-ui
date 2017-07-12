@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { FormGroup, FormControl, ControlLabel, DropdownButton,
          MenuItem, InputGroup } from "react-bootstrap";
 
@@ -16,58 +17,55 @@ const timeUnits = [
 class InputDuration extends React.Component {
     constructor(props) {
         super(props);
-        const val = props.value ? props.value / timeUnits[ 3 ].unit : props.value;
         this.state = {
-            unit: timeUnits[ 3 ].unit,
-            title: timeUnits[ 3 ].title,
-            value: val,
+            unit: timeUnits[ 3 ],
             validationState: null,
         };
-        this.hangleOnChange = this.hangleOnChange.bind(this);
+        this.onChange = this.onChange.bind(this);
     }
 
     componentWillMount() {
-        this.props.setValid(this.props.name, false);
+        this.inputChanged(this.props.value);
     }
 
-    hangleOnChange(event) {
-        let newState;
+    onChange(event) {
+        this.inputChanged(event.target.value);
+    }
 
-        if (isNumeric(event.target.value)) {
-            this.props.onChange(this.props.name, event.target.value * this.state.unit);
-            newState = {
-                value: event.target.value,
-                validationState: "success",
-            };
-            this.props.setValid(this.props.name, true);
-        } else {
-            newState = {
-                value: event.target.value,
-                validationState: "error",
-            };
-            this.props.setValid(this.props.name, false);
+    inputChanged(value) {
+        let valid = isNumeric(value);
+        let val = "";
+        if (valid) {
+            val = value * this.state.unit.unit;
+        } else if (value !== "" && isNumeric(this.props.value)) {
+            val = this.props.value;
+            valid = true;
         }
-        this.setState(newState);
+
+        this.props.onChange(this.props.name, val, valid);
+
+        this.setState({
+            validationState: valid ? "success" : "error",
+        });
     }
 
-    unitChanged(i) {
+    unitChanged(unit) {
         return function changeUnit() {
-            this.setState({
-                unit: timeUnits[ i ].unit,
-                title: timeUnits[ i ].title,
-            });
-            this.props.onChange(this.props.name, this.state.value * timeUnits[ i ].unit);
+            this.setState({ unit });
+            this.inputChanged(this.props.value / this.state.unit.unit);
         }.bind(this);
     }
 
     render() {
-        const durationButtons = [ ];
-        for (let i = 0; i < timeUnits.length; ++i) {
-            durationButtons.push(<MenuItem
-              key={i}
-              onClick={ this.unitChanged(i) }
-            >{ timeUnits[ i ].title }</MenuItem>);
-        }
+        const durationButtons = timeUnits.map(unit => (
+            <MenuItem
+              key={unit.title}
+              onClick={this.unitChanged(unit)}
+            >
+                { unit.title }
+            </MenuItem>
+        ));
+
         return (
             <FormGroup validationState={this.state.validationState}>
                 <ControlLabel>{this.props.label}</ControlLabel>
@@ -75,14 +73,14 @@ class InputDuration extends React.Component {
                     <FormControl
                       name={this.props.name}
                       placeholder={this.props.placeholder}
-                      onChange={this.hangleOnChange}
-                      value={this.state.value}
+                      onChange={this.onChange}
+                      value={isNumeric(this.props.value) ? this.props.value / this.state.unit.unit : ""}
                     />
                     <FormControl.Feedback />
                     <DropdownButton
                       componentClass={InputGroup.Button}
                       id="input-dropdown-addon"
-                      title={ this.state.title }
+                      title={this.state.unit.title}
                     >
                         { durationButtons }
                     </DropdownButton>
@@ -93,15 +91,19 @@ class InputDuration extends React.Component {
 }
 
 InputDuration.propTypes = {
-    name: React.PropTypes.string.isRequired,
-    placeholder: React.PropTypes.string,
-    label: React.PropTypes.string.isRequired,
-    onChange: React.PropTypes.func,
-    setValid: React.PropTypes.func,
-    value: React.PropTypes.oneOfType([
-        React.PropTypes.string,
-        React.PropTypes.number,
+    name: PropTypes.string.isRequired,
+    placeholder: PropTypes.string,
+    label: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired,
+    value: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number,
     ]),
+};
+
+InputDuration.defaultProps = {
+    placeholder: "",
+    value: "",
 };
 
 export default InputDuration;

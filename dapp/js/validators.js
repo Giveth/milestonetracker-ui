@@ -15,7 +15,7 @@ const websiteValidator = new RegExp([
  *
  * @return{bool} True if value is a valid website, otherwise false
  */
-export const website = (value) => websiteValidator.test(value);
+export const website = value => websiteValidator.test(value);
 
 /**
  * Checks if the value is nonepmty
@@ -39,4 +39,4 @@ export const any = (value) => {
  *
  * @return{bool} True if value is a valid ethereum address, otherwise false
  */
-export const ethereumAddress = (value) => web3.isAddress(value);
+export const ethereumAddress = value => web3.isAddress(value);

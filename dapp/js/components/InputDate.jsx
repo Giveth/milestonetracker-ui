@@ -1,41 +1,35 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { FormGroup, ControlLabel } from "react-bootstrap";
 import DateTimeField from "react-datetime";
 import moment from "moment";
+import MomentTypes from "react-moment-proptypes";
 import "react-datetime/css/react-datetime.css";
 
 class InputDate extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: props.value,
             validationState: null,
         };
-        this.hangleOnChange = this.hangleOnChange.bind(this);
+        this.onChange = this.onChange.bind(this);
     }
 
     componentWillMount() {
-        this.props.setValid(this.props.name, false);
+        this.inputChanged(this.props.value);
     }
 
-    hangleOnChange(date) {
-        let newState;
+    onChange(date) {
+        this.inputChanged(date);
+    }
 
-        if (date instanceof moment && date.isValid()) {
-            this.props.onChange(this.props.name, date.unix());
-            newState = {
-                value: date,
-                validationState: "success",
-            };
-            this.props.setValid(this.props.name, true);
-        } else {
-            newState = {
-                value: date,
-                validationState: "error",
-            };
-            this.props.setValid(this.props.name, false);
-        }
-        this.setState(newState);
+    inputChanged(date) {
+        const valid = date instanceof moment && date.isValid();
+        this.props.onChange(this.props.name, date, valid);
+
+        this.setState({
+            validationState: valid ? "success" : "error",
+        });
     }
 
     render() {
@@ -46,8 +40,11 @@ class InputDate extends React.Component {
                   id={this.props.name}
                   name={this.props.name}
                   placeholder={this.props.placeholder}
-                  onChange={this.hangleOnChange}
-                  value={this.state.value}
+                  onChange={this.onChange}
+                  value={this.props.value}
+                  dateFormat={"YYYY-MM-DD"}
+                  timeFormat={"HH:mm:ss"}
+                  input={false}
                 />
             </FormGroup>
         );
@@ -55,15 +52,16 @@ class InputDate extends React.Component {
 }
 
 InputDate.propTypes = {
-    name: React.PropTypes.string.isRequired,
-    placeholder: React.PropTypes.string,
-    label: React.PropTypes.string.isRequired,
-    onChange: React.PropTypes.func,
-    value: React.PropTypes.oneOfType([
-        React.PropTypes.string,
-        React.PropTypes.number,
-    ]),
-    setValid: React.PropTypes.func.isRequired,
+    name: PropTypes.string.isRequired,
+    placeholder: PropTypes.string,
+    label: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired,
+    value: MomentTypes.momentObj.isRequired,
+};
+
+InputDate.defaultProps = {
+    placeholder: "",
+    value: "",
 };
 
 export default InputDate;

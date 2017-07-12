@@ -1,20 +1,20 @@
 /* eslint-disable */
-import React, { Component } from 'react';
+import React from 'react';
+import PropTypes from "prop-types";
 import { connect } from 'react-redux';
 import { Button, Panel } from 'react-bootstrap';
 
-class DeploymentResults extends Component {
+class DeploymentResults extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = {};
   }
 
   render() {
-    const { deploymentResults, domain } = this.props;
     return (
       <div className="well deployment-results">
         {
-          deploymentResults.map((result) => {
+          this.props.deploymentResults.map((result) => {
             return(
               <div>
                 {
@@ -22,10 +22,10 @@ class DeploymentResults extends Component {
                   <p key={ result.contract }>
                     <span>{ result.contract }</span><br />
                     <span> Contract Address:
-                      <a href={ `${ domain }${ result.address }` } target="_blank">{ result.address }</a>
+                      <a href={ `${ this.props.domain }${ result.address }` } target="_blank">{ result.address }</a>
                     </span><br />
                     <span> Transaction Hash:
-                      <a href={ `${ domain }${ result.transactionHash }` } target="_blank">{ result.transactionHash }</a>
+                      <a href={ `${ this.props.domain }${ result.transactionHash }` } target="_blank">{ result.transactionHash }</a>
                     </span><br />
                     <span>
                       {
@@ -49,6 +49,11 @@ class DeploymentResults extends Component {
     );
   }
 }
+
+DeploymentResults.propTypes = {
+    deploymentResults: PropTypes.bool.array,
+    deploymentResults: PropTypes.bool.string,
+};
 
 const mapStateToProps = ({ deploymentResults }) => ({ deploymentResults });
 

@@ -8,6 +8,7 @@
  */
 
 import React from "react";
+import PropTypes from "prop-types";
 import { FormGroup, FormControl } from "react-bootstrap";
 
 export default class SearchBar extends React.Component {
@@ -37,8 +38,8 @@ export default class SearchBar extends React.Component {
             <FormGroup>
                 <FormControl
                   type="text"
-                  placeholder={ this.props.placeholder }
-                  value={ this.state.filterText }
+                  placeholder={this.props.placeholder}
+                  value={this.state.filterText}
                   onChange={this.handleChange}
                 />
             </FormGroup>
@@ -47,7 +48,7 @@ export default class SearchBar extends React.Component {
 }
 
 SearchBar.propTypes = {
-    filterText: React.PropTypes.string.isRequired,
-    placeholder: React.PropTypes.string.isRequired,
-    onUserInput: React.PropTypes.func.isRequired,
+    filterText: PropTypes.string.isRequired,
+    placeholder: PropTypes.string.isRequired,
+    onUserInput: PropTypes.func.isRequired,
 };

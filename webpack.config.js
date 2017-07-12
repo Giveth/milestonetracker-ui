@@ -1,15 +1,70 @@
 const path = require("path");
+const webpack = require("webpack");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
-    entry: path.resolve(__dirname, "dapp/js/main"),
+    context: path.resolve(__dirname, "./dapp"),
     devServer: {
-        outputPath: path.join(__dirname, "build"),
+        contentBase: path.join(__dirname, "build"),
     },
-    resolve: {
-        extensions: [ "", ".js", ".jsx" ],
+    devtool: "source-map",
+    entry: path.resolve(__dirname, "./dapp/js/main"),
+
+    module: {
+        rules: [
+            {
+                enforce: "pre",
+                test: /\.jsx?$/,
+                exclude: /(node_modules|bower_components)/,
+                loaders: "eslint-loader",
+            },
+            {
+                test: /.woff$|.woff2$|.ttf$|.eot$|.svg$/,
+                loaders: "url-loader",
+            },
+            {
+                test: /\.sol$/,
+                loaders: "solc-loader",
+            },
+            {
+                test: /\.json$/,
+                loaders: "json-loader",
+            },
+            {
+                test: /\.jsx?$/,
+                exclude: /(node_modules|bower_components)/,
+                loaders: "babel-loader",
+            },
+            {
+                test: /\.css$/,
+                exclude: /\.module\.css$/,
+                use: [
+                    "style-loader",
+                    "css-loader",
+                ],
+            },
+            {
+                test: /\.module\.css$/,
+                use: [
+                    "style-loader",
+                    "css-loader",
+                    "modules",
+                ],
+            },
+            {
+                test: /\.(gif|png|jpg)$/,
+                loaders: "file-loader",
+            },
+        ],
     },
+    node: {
+        console: false,
+        fs: "empty",
+        net: "empty",
+        tls: "empty",
+    },
+
     output: {
         path: path.resolve(__dirname, "build/js"),
         publicPath: "/js/",
@@ -17,6 +72,7 @@ module.exports = {
     },
     plugins: [
         new CleanWebpackPlugin([ "build" ]),
+        new webpack.DefinePlugin({ "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV) }),
         new CopyWebpackPlugin([
             {
                 context: path.resolve(__dirname, "dapp/static"),
@@ -25,46 +81,7 @@ module.exports = {
             },
         ]),
     ],
-    devtool: "source-map",
-    module: {
-        preLoaders: [
-            {
-                test: /\.jsx?$/,
-                exclude: /(node_modules|bower_components)/,
-                loaders: [ "eslint" ],
-            },
-        ],
-        loaders: [
-            {
-                test: /.woff$|.woff2$|.ttf$|.eot$|.svg$/,
-                loader: "url-loader",
-            },
-            {
-                test: /\.sol$/,
-                loaders: [ "solc" ],
-            },
-            {
-                test: /\.json$/,
-                loaders: [ "json" ],
-            },
-            {
-                test: /\.jsx?$/,
-                exclude: /(node_modules|bower_components)/,
-                loaders: [ "babel" ],
-            },
-            {
-                test: /\.css$/,
-                exclude: /\.module\.css$/,
-                loader: "style-loader!css-loader",
-            },
-            {
-                test: /\.module\.css$/,
-                loader: "style-loader!css-loader?modules",
-            },
-            {
-                test: /\.(gif|png|jpg)$/,
-                loader: "file-loader",
-            },
-        ],
+    resolve: {
+        extensions: [ ".js", ".jsx" ],
     },
 };

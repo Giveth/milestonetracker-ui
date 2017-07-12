@@ -1,17 +1,17 @@
-const nodeExternals = require('webpack-node-externals');
-const config = require('./webpack.config.js');
+import nodeExternals from "webpack-node-externals";
+import config from "./webpack.config";
 
 config.output = {
-  devtoolModuleFilenameTemplate: '[absolute-resource-path]',
-  devtoolFallbackModuleFilenameTemplate: '[absolute-resource-path]?[hash]',
+    devtoolModuleFilenameTemplate: "[absolute-resource-path]",
+    devtoolFallbackModuleFilenameTemplate: "[absolute-resource-path]?[hash]",
 };
 
 // Set target to node to be runable within Mocha
-config.target = 'node';
+config.target = "node";
 
-config.externals = [nodeExternals()];
+config.externals = [ nodeExternals() ];
 
 // Enable source maps
-config.devtool = 'cheap-module-source-map';
+config.devtool = "cheap-module-source-map";
 
 module.exports = config;

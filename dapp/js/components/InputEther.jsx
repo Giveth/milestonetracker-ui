@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { FormGroup, ControlLabel, FormControl, InputGroup,
          DropdownButton, MenuItem } from "react-bootstrap";
 import { web3 } from "../blockchain";
@@ -23,58 +24,54 @@ const etherUnits = [
 class InputEther extends React.Component {
     constructor(props) {
         super(props);
-        const val = props.value ? web3.fromWei(props.value, etherUnits[ 5 ].unit) : props.value;
         this.state = {
-            unit: etherUnits[ 5 ].unit,
-            title: etherUnits[ 5 ].title,
-            value: val,
+            unit: etherUnits[ 5 ],
             validationState: null,
         };
-        this.hangleOnChange = this.hangleOnChange.bind(this);
+        this.onChange = this.onChange.bind(this);
     }
 
     componentWillMount() {
-        this.props.setValid(this.props.name, false);
+        this.inputChanged(this.props.value);
     }
 
-    hangleOnChange(event) {
-        let newState;
-        if (isNumeric(event.target.value)) {
-            this.props.onChange(this.props.name, web3.toWei(event.target.value, this.state.unit));
-            newState = {
-                value: event.target.value,
-                validationState: "success",
-            };
-            this.props.setValid(this.props.name, true);
-        } else {
-            newState = {
-                value: event.target.value,
-                validationState: "error",
-            };
-            this.props.setValid(this.props.name, false);
+    onChange(event) {
+        this.inputChanged(event.target.value);
+    }
+
+    inputChanged(value) {
+        let valid = isNumeric(value);
+        let val = "";
+        if (valid) {
+            val = web3.toWei(value, this.state.unit.unit);
+        } else if (value !== "" && isNumeric(this.props.value)) {
+            val = this.props.value;
+            valid = true;
         }
-        this.setState(newState);
+
+        this.props.onChange(this.props.name, val, valid);
+
+        this.setState({
+            validationState: valid ? "success" : "error",
+        });
     }
 
-    unitChanged(i) {
+    unitChanged(unit) {
         return function changeUnit() {
-            this.setState({
-                unit: etherUnits[ i ].unit,
-                title: etherUnits[ i ].title,
-            });
-            this.props.onChange(this.props.name,
-                web3.toWei(this.state.value, etherUnits[ i ].unit));
+            this.setState({ unit });
+            this.inputChanged(web3.fromWei(this.props.value, this.state.unit.unit));
         }.bind(this);
     }
 
     render() {
-        const unitsButtons = [ ];
-        for (let i = 0; i < etherUnits.length; ++i) {
-            unitsButtons.push(<MenuItem
-              key={i}
-              onClick={ this.unitChanged(i) }
-            >{ etherUnits[ i ].title }</MenuItem>);
-        }
+        const unitsButtons = etherUnits.map(unit => (
+            <MenuItem
+              key={unit.title}
+              onClick={this.unitChanged(unit)}
+            >
+                { unit.title }
+            </MenuItem>
+        ));
 
         return (
             <FormGroup validationState={this.state.validationState}>
@@ -83,14 +80,14 @@ class InputEther extends React.Component {
                     <FormControl
                       name={this.props.name}
                       placeholder={this.props.placeholder}
-                      onChange={this.hangleOnChange}
-                      value={this.state.value}
+                      onChange={this.onChange}
+                      value={isNumeric(this.props.value) ? web3.fromWei(this.props.value, this.state.unit.unit) : ""}
                     />
                     <FormControl.Feedback />
                     <DropdownButton
                       componentClass={InputGroup.Button}
                       id="input-dropdown-addon"
-                      title={ this.state.title }
+                      title={this.state.unit.title}
                     >
                         { unitsButtons }
                     </DropdownButton>
@@ -101,15 +98,20 @@ class InputEther extends React.Component {
 }
 
 InputEther.propTypes = {
-    name: React.PropTypes.string.isRequired,
-    placeholder: React.PropTypes.string,
-    label: React.PropTypes.string.isRequired,
-    onChange: React.PropTypes.func,
-    setValid: React.PropTypes.func,
-    value: React.PropTypes.oneOfType([
-        React.PropTypes.string,
-        React.PropTypes.number,
+    name: PropTypes.string.isRequired,
+    placeholder: PropTypes.string,
+    label: PropTypes.string.isRequired,
+    onChange: PropTypes.func,
+    value: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.number,
     ]),
+};
+
+InputEther.defaultProps = {
+    placeholder: "",
+    onChange: function onChange() {},
+    value: "",
 };
 
 export default InputEther;
