@@ -28,19 +28,21 @@ const networks = {
     },
 };
 
-// FIXME: Remake this to asynchronous action with listener on network change.
-const nt = web3.version.network;
-let ntID = nt < 4 ? nt : 4;
+// default to Main
+let network = networks[1];
 
-// On production we always want Main network instead of Testrpc
-if (ntID === 4 && !window.location.hostname.includes("localhost")) {
-    ntID = 1;
-}
+web3.version.getNetwork((error, networkID) => {
+  if (error) {
+    console.log(error);
+    return
+  }
 
-const network = networks[ ntID ];
-
-// web3.version.getNetwork((error, networkID) => {
-//     network = networkID < 4 ? networks[ networkID ] : networks[ 4 ];
-// });
+  // On production we always want Main network instead of Testrpc
+  if (networkID === 4 && !window.location.hostname.includes("localhost")) {
+    networkID = 1;
+  }
+  
+  network = networkID < 4 ? networks[ networkID ] : networks[ 4 ];
+});
 
 export default network;
