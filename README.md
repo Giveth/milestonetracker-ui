@@ -42,7 +42,18 @@ The application is written in React, interfaces directly with the Ethereum block
   .load env.js
   ```
 
-3. Start the dev server from the milestonetracker-ui directory.
+3. Update dapp/js/blockchain/Network.js 'Testrpc' network object GivethDirectory address from the ouput of the previous step.
+
+```json
+  4: {
+      title: "Testrpc",
+      directory: new GivethDirectory(web3, "{update me}");
+      campaignTrackerAddress: "0xe78a0f7e598cc8b0bb87894b0f60dd2a88d6a8ab",
+      etherscan: "",
+  },
+```
+
+4. Start the dev server from the milestonetracker-ui directory.
 
   ```bash
   npm start
