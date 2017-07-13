@@ -19,9 +19,7 @@ export default class Deployer extends Component {
   }
 
   componentDidMount() {
-    if (web3.eth.accounts.length === 0) {
-      this.props.showError('No accounts found. You may need to unlock your MetaMask vault.');
-    } else {
+    if (web3.eth.accounts.length > 0) {
       this.props.setAccount(web3.eth.accounts[0]);
     }
     //set default account to user current account if they are not set
