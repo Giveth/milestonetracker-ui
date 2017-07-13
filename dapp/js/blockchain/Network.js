@@ -29,20 +29,23 @@ const networks = {
 };
 
 // default to Main
-let network = networks[1];
+let internalNetwork = networks[ 1 ];
 
-web3.version.getNetwork((error, networkID) => {
-  if (error) {
-    console.log(error);
-    return
-  }
+web3.version.getNetwork((error, id) => {
+    let networkID = id;
 
-  // On production we always want Main network instead of Testrpc
-  if (networkID === 4 && !window.location.hostname.includes("localhost")) {
-    networkID = 1;
-  }
-  
-  network = networkID < 4 ? networks[ networkID ] : networks[ 4 ];
+    if (error) {
+        console.log(error);
+        return;
+    }
+
+    // On production we always want Main network instead of Testrpc
+    if (networkID === 4 && !window.location.hostname.includes("localhost")) {
+        networkID = 1;
+    }
+
+    internalNetwork = networkID < 4 ? networks[ networkID ] : networks[ 4 ];
 });
 
+const network = internalNetwork;
 export default network;
