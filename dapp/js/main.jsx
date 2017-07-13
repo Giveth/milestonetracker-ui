@@ -16,7 +16,8 @@ web3monitor.on("newState", (state) => {
     store.dispatch(newWeb3State(state));
     network.directory.getState((err, givethDirectoryState) => {
         if (err) {
-            web3monitor.reset();
+            console.log("Possible invalid GivethDirectory address?:", err); // eslint-disable-line no-console
+            web3monitor.reset(null, 1000);
             return;
         }
         store.dispatch(newGivethDirectoryState(givethDirectoryState));
