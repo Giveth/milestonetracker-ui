@@ -22,7 +22,7 @@ const networks = {
     },
     4: {
         title: "Testrpc",
-        directory: new GivethDirectory(web3, "0x2612af3a521c2df9eaf28422ca335b04adf3ac66"),
+        directory: new GivethDirectory(web3, "0xe78a0f7e598cc8b0bb87894b0f60dd2a88d6a8ab"),
         campaignTrackerAddress: "0xe78a0f7e598cc8b0bb87894b0f60dd2a88d6a8ab",
         etherscan: "",
     },
