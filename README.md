@@ -42,7 +42,15 @@ The application is written in React, interfaces directly with the Ethereum block
   .load env.js
   ```
 
-3. Update dapp/js/blockchain/Network.js 'Testrpc' network object GivethDirectory address from the ouput of the previous step.
+3. Start the dev server from the milestonetracker-ui directory.
+
+  ```bash
+  npm start
+  ```
+
+  Load [http://localhost:8080/](http://localhost:8080/) on your web browser.
+  
+Note that if you did not run the JSON-RPC in dtereministic mode, you will have to update dapp/js/blockchain/Network.js 'Testrpc' network object with the GivethDirectory address from the ouput of step 2.
 
 ```json
   4: {
@@ -52,14 +60,6 @@ The application is written in React, interfaces directly with the Ethereum block
       etherscan: "",
   },
 ```
-
-4. Start the dev server from the milestonetracker-ui directory.
-
-  ```bash
-  npm start
-  ```
-
-  Load [http://localhost:8080/](http://localhost:8080/) on your web browser.
 
 ### Production deployment
 1. Run `npm run build` and upload `build/` to your server.
