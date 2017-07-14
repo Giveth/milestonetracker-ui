@@ -7,6 +7,9 @@ function NoAccountWarning() {
         bottom: "0px",
         textAlign: "center",
         position: "fixed",
+        margin: {0},
+        left: "50%",
+        transform: "translate(-50%, 0%)",
     };
 
     // Some accounts
@@ -14,8 +17,11 @@ function NoAccountWarning() {
 
     return (
         <Alert bsStyle="danger" style={style}>
-            <h3>No accounts found. Please check you have unlocked your MetaMask vault
-                and refresh the page.</h3>
+            <p>
+                <strong>No Ethereum accounts found.</strong>
+                To be able to interact with the Giveth Dapp,
+                you have to unlocked your MetaMask vault and refresh the page.
+            </p>
         </Alert>
     );
 }
