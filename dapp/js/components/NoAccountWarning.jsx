@@ -3,18 +3,19 @@ import { Alert } from "react-bootstrap";
 import { web3 } from "../blockchain";
 
 function NoAccountWarning() {
-    const unlocked = web3.eth.accounts.length > 0;
-    let style = {
-        marginTop: "20px",
+    const style = {
+        bottom: "0px",
         textAlign: "center",
+        position: "fixed",
     };
 
-    if (unlocked) return null;
+    // Some accounts
+    if (web3.eth.accounts.length > 0) return null;
 
     return (
         <Alert bsStyle="danger" style={style}>
-            <h4>No accounts found. You may need to unlock you MetaMask vault and refresh the
-                page.</h4>
+            <h3>No accounts found. Please check you have unlocked your MetaMask vault
+                and refresh the page.</h3>
         </Alert>
     );
 }
