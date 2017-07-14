@@ -7,7 +7,7 @@ function NoAccountWarning() {
         bottom: "0px",
         textAlign: "center",
         position: "fixed",
-        margin: {0},
+        margin: 0,
         left: "50%",
         transform: "translate(-50%, 0%)",
     };
@@ -16,7 +16,7 @@ function NoAccountWarning() {
     if (web3.eth.accounts.length > 0) return null;
 
     return (
-        <Alert bsStyle="danger" style={style}>
+        <Alert bsStyle="warning" style={style}>
             <p>
                 <strong>No Ethereum accounts found.</strong>
                 To be able to interact with the Giveth Dapp,
