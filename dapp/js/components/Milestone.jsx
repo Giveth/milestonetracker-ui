@@ -43,7 +43,7 @@ class Milestone extends React.Component {
 
     render() {
         let backgroundColor = "white";
-        let marginLeft = "5";
+        const marginLeft = "5";
 
         if (this.state.hover) {
             if (this.props.milestone.paymentInfo &&
@@ -77,7 +77,9 @@ class Milestone extends React.Component {
                 >
                     {this.props.milestone.payDescription !== undefined ?
                       this.props.milestone.payDescription : "The title could not be read"}
-                    <Badge style={{ marginLeft }}>{Object.keys(this.props.milestone.actions).length}</Badge>
+                    <Badge style={{ marginLeft }}>
+                        {Object.keys(this.props.milestone.actions).length}
+                    </Badge>
                 </Panel>
                 {this.props.editable ?
                     <MilestoneDetailEditable
