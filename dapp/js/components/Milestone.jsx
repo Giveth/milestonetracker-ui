@@ -6,7 +6,7 @@
 
 import React from "react";
 import PropTypes from "prop-types";
-import { Panel } from "react-bootstrap";
+import { Panel, Badge } from "react-bootstrap";
 import { MilestoneDetail } from "./";
 import MilestoneDetailEditable from "../containers/MilestoneDetailEditable";
 
@@ -43,6 +43,7 @@ class Milestone extends React.Component {
 
     render() {
         let backgroundColor = "white";
+        let marginLeft = "5";
 
         if (this.state.hover) {
             if (this.props.milestone.paymentInfo &&
@@ -76,6 +77,7 @@ class Milestone extends React.Component {
                 >
                     {this.props.milestone.payDescription !== undefined ?
                       this.props.milestone.payDescription : "The title could not be read"}
+                    <Badge style={{ marginLeft }}>{Object.keys(this.props.milestone.actions).length}</Badge>
                 </Panel>
                 {this.props.editable ?
                     <MilestoneDetailEditable
@@ -105,6 +107,7 @@ Milestone.propTypes = {
         paymentInfo: PropTypes.shape({
             paid: PropTypes.bool,
         }),
+        actions: PropTypes.shape(),
     }).isRequired,
     milestoneTrackerAddress: PropTypes.string.isRequired,
     editable: PropTypes.bool.isRequired,
