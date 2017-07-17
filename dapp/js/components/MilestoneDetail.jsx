@@ -28,6 +28,8 @@ class MilestoneDetail extends React.Component {
           moment.unix(this.props.milestone.doneTime).format("YYYY-MM-DD, h:mm:ss") : "-";
         const reviewTime = moment.duration(this.props.milestone.reviewTime, "s");
         const payDelay = moment.duration(this.props.milestone.payDelay, "s");
+        const earliestPayTime = this.props.milestone.paymentInfo ?
+            moment.unix(this.props.milestone.paymentInfo.earliestPayTime) : null;
 
         const data = [
             {
@@ -56,6 +58,21 @@ class MilestoneDetail extends React.Component {
                     >
                         {this.props.milestone.paymentSource}
                     </a>),
+            },
+            {
+                label: "Payment Recipient",
+                content: (
+                    <a
+                      href={`${ network.etherscan }address/${ this.props.milestone.payRecipient }`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                        {this.props.milestone.paymentSource}
+                    </a>),
+            },
+            {
+                label: "Earliest Payment Time",
+                content: earliestPayTime ? earliestPayTime.format("YYYY-MM-DD, h:mm:ss") : "",
             },
             {
                 label: "Time to Review",
@@ -140,7 +157,9 @@ MilestoneDetail.propTypes = {
         url: PropTypes.string.isRequired,
         paymentInfo: PropTypes.shape({
             paid: PropTypes.bool,
+            earliestPayTime: PropTypes.number,
         }),
+        payRecipient: PropTypes.string,
         actions: PropTypes.shape(),
         id: PropTypes.number.isRequired,
     }).isRequired,

@@ -47,8 +47,15 @@ function updateCurrentDeploymentStep(data) {
     }
 }
 
+//remove errors on the UI
+export function removeError() {
+    return {
+        type: deploymentActions.REMOVE_ERROR,
+    }
+}
+
 //show errors on the UI
-function showError(message, stacktrace) {
+export function showError(message, stacktrace) {
     return {
         type: deploymentActions.RUN_ERROR,
         payload: { data: { message, stacktrace } }

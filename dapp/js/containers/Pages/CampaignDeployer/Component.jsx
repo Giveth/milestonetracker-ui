@@ -6,28 +6,22 @@ import DeploymentResults from '../../../components/DeploymentResults';
 import Field from '../../../components/Field';
 import { deploymentActions } from '../../../constants';
 import { Form, FormGroup, ControlLabel, FormControl, Col, Row, Button, ProgressBar, Alert } from 'react-bootstrap';
-import w3 from 'web3';
-
-const provider_endpoint = process.argv[2] ? process.argv[2].substr(2) : "http://localhost:8545";
-let web3;
-if (typeof window.web3 !== "undefined") {
-    web3 = new w3(window.web3.currentProvider);
-} else {
-    web3 = new w3(new w3.providers.HttpProvider(provider_endpoint));
-}
+import { web3, network } from "../../../blockchain";
 
 export default class Deployer extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
       edited: false,
-      domain: null,
+      domain: network.etherscan,
       cancelOpen: false
     }
   }
 
   componentDidMount() {
-    this.props.setAccount(web3.eth.accounts[0]);
+    if (web3.eth.accounts.length > 0) {
+      this.props.setAccount(web3.eth.accounts[0]);
+    }
     //set default account to user current account if they are not set
     let campaignValues = Object.assign({}, this.props.campaignValues);
     let accountTypes = ['escapeCaller', 'securityGuard', 'donor', 'recipient']
@@ -37,30 +31,6 @@ export default class Deployer extends Component {
         }
     }
     this.props.updateCampaignValues(campaignValues);
-
-    let currentNetwork;
-    let _campaignTrackerAddress
-    let domain;
-    const networks = {
-        1: 'Main',
-        2: 'Morden',
-        3: 'Ropsten',
-        4: 'Testrpc'
-    };
-    const campaignTrackerContractLocations = {
-        'Main': '0x26104cd17cc77e510ef20adf11ecb682ca7760f0',
-        'Morden': '0x0',
-        'Ropsten': '0x53fc022DD190F0b37A5501FeE92171Ed1C7CD4Eb',
-        'Testrpc': '0xe78a0f7e598cc8b0bb87894b0f60dd2a88d6a8ab' //enter your own for testing
-    };
-
-    web3.version.getNetwork((e, result) => {
-        currentNetwork = result < 4 ? networks[result] : networks[4];
-        _campaignTrackerAddress = campaignTrackerContractLocations[currentNetwork];
-        console.log(`Connected to the ${currentNetwork} network.  Campaign Tracker is at ${_campaignTrackerAddress}`);
-        domain = currentNetwork == 'Main' ? 'https://etherscan.io/tx/' : currentNetwork == 'Ropsten' ? 'https://ropsten.etherscan.io/tx/' : '';
-        this.setState({ domain });
-    });
   }
 
   //update values to the campaign fields.
@@ -71,15 +41,20 @@ export default class Deployer extends Component {
     this.props.updateCampaignValues(campaignValues);
   }
 
-  //FIXME: CHECK INPUT
-  //update the user's account (source of funds)
+  // FIXME: CHECK INPUT
+  // update the user's account (source of funds)
   updateUser(caller) {
     this.props.setAccount(caller.currentTarget.value);
   }
 
   //begin the deployment chain.
   runDeployment() {
-    this.props.runDeployment(this.props.userAccount, this.props.campaignValues);
+    if (!this.props.userAccount) {
+      this.props.showError('No accounts found. You must have an unlocked account to be able to deploy a campaign.' +
+        ' You may need to unlock your MetaMask vault.');
+    } else {
+      this.props.runDeployment(this.props.userAccount, this.props.campaignValues);
+    }
   }
 
   cancel() {
@@ -116,6 +91,10 @@ export default class Deployer extends Component {
     this.props.reset();
   }
 
+  handleAlertDismiss() {
+    this.props.removeError();
+  }
+
   render() {
     const { campaignValues, userAccount, deploymentStatus, deploymentResults, currentDeploymentStep, error } = this.props;
     return(
@@ -127,9 +106,14 @@ export default class Deployer extends Component {
         <div>
           <Row>
             <Col md={ 8 } mdOffset={ 2 }>
+              <Alert bsStyle="info">
+                To use the Campaign Deployer, click the Metamask icon in your Chrome browser and in the top left, where you can choose the network, select `custom rpc`,
+                enter the url `https://mainnet.infura.io/` as your new RPC URL and click `save`. This is a temporary work arounf until MetaMask fixes this issue: https://github.com/MetaMask/metamask-plugin/issues/1361
+                Special thanks to @rodney757 for chasing this down and finding this work around.
+              </Alert>
               {
                 error &&
-                <Alert bsStyle="danger">
+                <Alert bsStyle="danger"  onDismiss={this.handleAlertDismiss.bind(this)}>
                   <h2>Oops! There was an error!</h2>
                   <h4>{ error.message }</h4>
                   <p>{ error.stacktrace }</p>

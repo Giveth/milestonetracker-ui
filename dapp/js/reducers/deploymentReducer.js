@@ -81,12 +81,14 @@ export function completedDeployments(state = {}, action) {
 // show errors in the deployment process to the user.
 export function error(state = false, action) {
     switch (action.type) {
+    case deploymentActions.REMOVE_ERROR:
+        return false;
     case deploymentActions.RUN_ERROR:
         return action.payload.data;
     case deploymentActions.RESET:
         return false;
     case deploymentActions.CANCEL:
         return false;
-    default: return false;
+    default: return state;
     }
 }
