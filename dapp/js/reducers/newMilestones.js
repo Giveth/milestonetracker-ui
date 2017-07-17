@@ -1,4 +1,3 @@
-import crypto from "crypto";
 import * as types from "../actions/actionTypes";
 
 const initialState = {
