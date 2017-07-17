@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { network } from "../blockchain";
 
 const NavigationComponent = (props) => {
-    const syncing = props.web3state.syncing;
+    const web3state = props.web3state;
     return (
         <Navbar>
             <Navbar.Header>
@@ -32,10 +32,10 @@ const NavigationComponent = (props) => {
                     { network.title }
                 </NavItem>
                 {
-                    syncing ?
+                    web3state.syncing ?
                         <NavItem href="#">
-                            { syncing.currentBlock }
-                            /{ syncing.highestBlock }
+                            { web3state.syncCurrentBlock }
+                            /{ web3state.syncHighestBlock }
                         </NavItem>
                         :
                         <NavItem href="#">
@@ -48,9 +48,7 @@ const NavigationComponent = (props) => {
 };
 
 NavigationComponent.propTypes = {
-    web3state: PropTypes.shape({
-        syncing: PropTypes.arrayOf(PropTypes.shape({})),
-    }).isRequired,
+    web3state: PropTypes.shape({}).isRequired,
 };
 
 export default NavigationComponent;
