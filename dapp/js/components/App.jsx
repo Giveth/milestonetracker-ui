@@ -4,7 +4,7 @@
 import React from "react";
 import { Grid, Row, Col } from "react-bootstrap";
 
-import { Navigation } from "./";
+import Navigation from "../containers/Navigation";
 import NoAccountWarning from "./NoAccountWarning";
 
 const App = props => (
