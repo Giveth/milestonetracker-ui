@@ -64,6 +64,7 @@ class MilestoneDetailEditable extends React.Component {
         this.onInputChange = this.onInputChange.bind(this);
         this.onSave = this.onSave.bind(this);
         this.onRemove = this.onRemove.bind(this);
+        this.onCancel = this.onCancel.bind(this);
     }
 
     onInputChange(name, value, valid) {
@@ -91,59 +92,9 @@ class MilestoneDetailEditable extends React.Component {
     onSave() {
         this.props.save(this.state);
         if (this.props.milestone.id === undefined) {
-            this.setState({
-                payDescription: {
-                    value: undefined,
-                    valid: false,
-                },
-                description: {
-                    value: undefined,
-                    valid: false,
-                },
-                url: {
-                    value: undefined,
-                    valid: false,
-                },
-                minCompletionDate: {
-                    value: moment(),
-                    valid: false,
-                },
-                maxCompletionDate: {
-                    value: moment().add(3, "months"),
-                    valid: false,
-                },
-                reviewer: {
-                    value: undefined,
-                    valid: false,
-                },
-                milestoneLeadLink: {
-                    value: undefined,
-                    valid: false,
-                },
-                reviewTime: {
-                    value: undefined,
-                    valid: false,
-                },
-                paymentSource: {
-                    value: undefined,
-                    valid: false,
-                },
-                payRecipient: {
-                    value: undefined,
-                    valid: false,
-                },
-                payValue: {
-                    value: undefined,
-                    valid: false,
-                },
-                payDelay: {
-                    value: undefined,
-                    valid: false,
-                },
-                payData: undefined,
-                valid: false,
-            });
+            this.clearProposalState();
         }
+        this.props.onHide();
     }
 
     onRemove() {
@@ -153,12 +104,71 @@ class MilestoneDetailEditable extends React.Component {
         }
     }
 
+    onCancel() {
+        this.clearProposalState();
+        this.props.onHide();
+    }
+
+    clearProposalState() {
+        this.setState({
+            payDescription: {
+                value: undefined,
+                valid: false,
+            },
+            description: {
+                value: undefined,
+                valid: false,
+            },
+            url: {
+                value: undefined,
+                valid: false,
+            },
+            minCompletionDate: {
+                value: moment(),
+                valid: false,
+            },
+            maxCompletionDate: {
+                value: moment().add(3, "months"),
+                valid: false,
+            },
+            reviewer: {
+                value: undefined,
+                valid: false,
+            },
+            milestoneLeadLink: {
+                value: undefined,
+                valid: false,
+            },
+            reviewTime: {
+                value: undefined,
+                valid: false,
+            },
+            paymentSource: {
+                value: undefined,
+                valid: false,
+            },
+            payRecipient: {
+                value: undefined,
+                valid: false,
+            },
+            payValue: {
+                value: undefined,
+                valid: false,
+            },
+            payDelay: {
+                value: undefined,
+                valid: false,
+            },
+            payData: undefined,
+            valid: false,
+        });
+    }
+
     render() {
         return (
             <Modal
               show={this.props.show}
               onHide={this.props.onHide}
-              onExiting={this.onSave}
             >
                 <Modal.Header closeButton>
                     <Modal.Title>
@@ -264,7 +274,10 @@ class MilestoneDetailEditable extends React.Component {
                         )
                         : ""
                     }
-                    <Button onClick={this.props.onHide}>Close</Button>
+                    {this.props.milestone.id === undefined &&
+                    <Button bsStyle="danger" className="pull-left" onClick={this.onCancel}>Cancel</Button>
+                    }
+                    <Button onClick={this.onSave}>Save</Button>
                 </Modal.Footer>
             </Modal>
         );
