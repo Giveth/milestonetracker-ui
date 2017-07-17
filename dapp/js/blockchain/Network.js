@@ -29,7 +29,7 @@ const networks = {
 };
 
 // default to Main
-let internalNetwork = networks[ 1 ];
+const network = networks[ 1 ];
 
 web3.version.getNetwork((error, id) => {
     let networkID = id;
@@ -44,8 +44,7 @@ web3.version.getNetwork((error, id) => {
         networkID = 1;
     }
 
-    internalNetwork = networkID < 4 ? networks[ networkID ] : networks[ 4 ];
+    Object.assign(network, networkID < 4 ? networks[ networkID ] : networks[ 4 ]);
 });
 
-const network = internalNetwork;
 export default network;
