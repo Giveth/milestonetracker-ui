@@ -14,7 +14,7 @@ export default class extends EventEmitter {
     // Starts a background monitor to check the sync.
     registerSync(cb) {
         let timeout = null;
-        this.syncObj = this.web3.eth.isSyncing((err, sync) => {
+        this.syncObj = this.web3.eth.getSyncing((err, sync) => {
             if (err) {
                 // If we are still initializing.
                 if (timeout !== null) {
