@@ -1,13 +1,19 @@
 import { connect } from "react-redux";
 import Component from "../components/CampaignMilestones";
 
-const mapStateToProps = state => ({
-    newMilestones: state.newMilestones,
+const getCampaignMilestones = (milestones, milestoneTrackerAddress) => {
+    return milestones[ milestoneTrackerAddress ] || { valid: true, milestones: [] };
+};
+
+const mapStateToProps = (state, props) => ({
+    newMilestones: getCampaignMilestones(
+        state.newMilestones.milestones,
+        props.milestoneTrackerAddress,
+    ),
     accounts: state.web3.accounts,
 });
 
-const mapDispatchToProps = ({
-});
+const mapDispatchToProps = ({});
 
 const CampaignMilestones = connect(
     mapStateToProps,

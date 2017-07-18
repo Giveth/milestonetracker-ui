@@ -81,7 +81,12 @@ export default function CampaignMilestones(props) {
     // Only add proposing milestones if the user can propose milestones
     if (props.accounts.filter(account => account.address === props.milestoneTracker.recipient)
           .length > 0) {
-        const newMilestonesButtons = [ <ButtonNewMilestone key="NewMilestone" /> ];
+        const newMilestonesButtons = [
+            <ButtonNewMilestone
+              key="NewMilestone"
+              milestoneTrackerAddress={props.milestoneTrackerAddress}
+            />,
+        ];
         const milestonesNew = props.newMilestones.milestones.map((milestone, index) => {
             const mlstn = milestone;
             mlstn.id = index;
