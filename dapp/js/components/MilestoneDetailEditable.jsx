@@ -90,7 +90,9 @@ class MilestoneDetailEditable extends React.Component {
     }
 
     onSave() {
-        this.props.save(this.state);
+        const data = Object.assign({ milestoneTrackerAddress: this.props.milestoneTrackerAddress},
+            this.state);
+        this.props.save(data);
         if (this.props.milestone.id === undefined) {
             this.clearProposalState();
         }
@@ -99,7 +101,7 @@ class MilestoneDetailEditable extends React.Component {
 
     onRemove() {
         if (this.props.milestone.id !== undefined) {
-            this.props.remove(this.props.milestone.id);
+            this.props.remove(this.props.milestoneTrackerAddress, this.props.milestone.id);
             this.props.onHide();
         }
     }
@@ -311,6 +313,7 @@ MilestoneDetailEditable.propTypes = {
         ]),
         payData: PropTypes.string,
     }),
+    milestoneTrackerAddress: PropTypes.string.isRequired,
     onHide: PropTypes.func.isRequired,
     show: PropTypes.bool.isRequired,
     save: PropTypes.func.isRequired,
