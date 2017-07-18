@@ -1,13 +1,10 @@
 import * as types from "../actions/actionTypes";
 
-const initialState = {
-    milestones: {},
-};
-
-const newMilestones = (state = initialState, action) => {
+const newMilestones = (state = {}, action) => {
     switch (action.type) {
 
     case types.MILESTONE_NEW_SAVE: {
+        const milestoneTrackerAddress = action.data.milestoneTrackerAddress;
         const milestone = {
             description: action.data.description.value,
             maxCompletionDate: action.data.maxCompletionDate.value,
@@ -24,7 +21,7 @@ const newMilestones = (state = initialState, action) => {
             valid: action.data.valid,
         };
 
-        const campaignMilestones = state.milestones[ action.data.milestoneTrackerAddress ] || {};
+        const campaignMilestones = state[ milestoneTrackerAddress ] || {};
 
         if (!campaignMilestones.milestones) {
             campaignMilestones.milestones = [];
@@ -40,28 +37,26 @@ const newMilestones = (state = initialState, action) => {
         campaignMilestones.valid = campaignMilestones.milestones.reduce(
             (sum, value) => (sum && value.valid), true);
 
-        const milestones = state.milestones;
-        milestones[ action.data.milestoneTrackerAddress ] = campaignMilestones;
+        const mutation = {};
+        mutation[ milestoneTrackerAddress ] = campaignMilestones;
 
-        return Object.assign({}, state, {
-            milestones,
-        });
+        return Object.assign({}, state, mutation);
     }
 
     case types.MILESTONE_NEW_REMOVE: {
-        const campaignMilestones = state.milestones[ action.milestoneTrackerAddress ];
+        const milestoneTrackerAddress = action.milestoneTrackerAddress;
+        const campaignMilestones = state[ milestoneTrackerAddress ];
+
         if (campaignMilestones && action.id < campaignMilestones.milestones.length) {
             campaignMilestones.milestones.splice(action.id, 1);
-
-            const milestones = state.milestones;
-            milestones[ action.milestoneTrackerAddress ] = campaignMilestones;
 
             campaignMilestones.valid = campaignMilestones.milestones.reduce(
                 (sum, value) => (sum && value.valid), true);
 
-            return Object.assign({}, state, {
-                milestones,
-            });
+            const mutation = {};
+            mutation[ milestoneTrackerAddress ] = campaignMilestones;
+
+            return Object.assign({}, state, mutation);
         }
         return state;
     }

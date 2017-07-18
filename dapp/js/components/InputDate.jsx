@@ -16,7 +16,14 @@ class InputDate extends React.Component {
     }
 
     componentWillMount() {
-        this.inputChanged(this.props.value);
+        let date = this.props.value;
+
+        // moment objects get serialized as strings. try and instantiate a new moment
+        if (date && !(date instanceof moment)) {
+            date = moment(date);
+        }
+
+        this.inputChanged(date);
     }
 
     onChange(date) {

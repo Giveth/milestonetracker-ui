@@ -90,7 +90,7 @@ class MilestoneDetailEditable extends React.Component {
     }
 
     onSave() {
-        const data = Object.assign({ milestoneTrackerAddress: this.props.milestoneTrackerAddress},
+        const data = Object.assign({ milestoneTrackerAddress: this.props.milestoneTrackerAddress },
             this.state);
         this.props.save(data);
         if (this.props.milestone.id === undefined) {
