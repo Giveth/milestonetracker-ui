@@ -34,8 +34,14 @@ const newMilestones = (state = {}, action) => {
             campaignMilestones.milestones.push(milestone);
         }
 
-        campaignMilestones.valid = campaignMilestones.milestones.reduce(
-            (sum, value) => (sum && value.valid), true);
+        campaignMilestones.valid = true;
+
+        for (let i = 0; i < campaignMilestones.milestones.length; i += 1) {
+            if (!campaignMilestones.milestones[ i ].valid) {
+                campaignMilestones.valid = false;
+                break;
+            }
+        }
 
         const mutation = {};
         mutation[ milestoneTrackerAddress ] = campaignMilestones;
