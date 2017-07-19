@@ -57,7 +57,6 @@ class MilestoneDetailEditable extends React.Component {
             payDelay: {
                 value: props.milestone.payDelay,
             },
-            payData: props.milestone.payData,
             id: props.milestone.id,
         };
 
@@ -71,14 +70,18 @@ class MilestoneDetailEditable extends React.Component {
         const test = Object.assign({}, this.state);
         test[ name ] = { value, valid };
 
-        const isValid = Object.values(test)
-            .filter(record => record !== undefined)
-            .reduce((sum, record) => {
-                if (Object.prototype.hasOwnProperty.call(record, "valid")) {
-                    return sum && record.valid;
+        let isValid = valid;
+
+        // if this input is valid, we need to check the rest
+        if (valid) {
+            const values = Object.values(test);
+            for (let i = 0; i < values.length; i += 1) {
+                if (values[ i ] && !Object.prototype.hasOwnProperty.call(values[ i ], "valid")) {
+                    isValid = false;
+                    break;
                 }
-                return sum;
-            });
+            }
+        }
 
         this.setState({
             [ name ]: {
@@ -161,7 +164,6 @@ class MilestoneDetailEditable extends React.Component {
                 value: undefined,
                 valid: false,
             },
-            payData: undefined,
             valid: false,
         });
     }
@@ -311,7 +313,6 @@ MilestoneDetailEditable.propTypes = {
             PropTypes.number,
             PropTypes.string,
         ]),
-        payData: PropTypes.string,
     }),
     milestoneTrackerAddress: PropTypes.string.isRequired,
     onHide: PropTypes.func.isRequired,
