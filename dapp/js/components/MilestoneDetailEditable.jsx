@@ -76,7 +76,9 @@ class MilestoneDetailEditable extends React.Component {
         if (valid) {
             const values = Object.values(test);
             for (let i = 0; i < values.length; i += 1) {
-                if (values[ i ] && !Object.prototype.hasOwnProperty.call(values[ i ], "valid")) {
+                // instanceof check is to ignore the case of state.id
+                if (values[ i ] && values[ i ] instanceof Object
+                    && !Object.prototype.hasOwnProperty.call(values[ i ], "valid")) {
                     isValid = false;
                     break;
                 }
