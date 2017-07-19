@@ -87,20 +87,22 @@ export default function CampaignMilestones(props) {
               milestoneTrackerAddress={props.milestoneTrackerAddress}
             />,
         ];
-        const milestonesNew = props.newMilestones.milestones.map((milestone, index) => {
-            const mlstn = milestone;
-            mlstn.id = index;
-            return mlstn;
-        });
+        const milestonesNew = props.newMilestones[ props.milestoneTrackerAddress ].milestones.map(
+            (milestone, index) => {
+                const mlstn = milestone;
+                mlstn.id = index;
+                return mlstn;
+            },
+        );
 
-        if (props.newMilestones.milestones.length > 0) {
+        if (milestonesNew.length > 0) {
             newMilestonesButtons.push(
                 <Buttons.ProposeNewMilestones
                   key="proposeMilestones"
                   action={[ { account: props.milestoneTracker.recipient } ]}
                   milestoneTrackerAddress={props.milestoneTrackerAddress}
                   milestones={milestonesNew}
-                  disabled={props.newMilestones.valid !== true}
+                  disabled={!milestonesNew.valid}
                 />);
         }
 
