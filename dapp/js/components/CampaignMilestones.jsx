@@ -87,7 +87,8 @@ export default function CampaignMilestones(props) {
               milestoneTrackerAddress={props.milestoneTrackerAddress}
             />,
         ];
-        const milestonesNew = props.newMilestones[ props.milestoneTrackerAddress ].milestones.map(
+        const campaignMilestones = props.newMilestones[ props.milestoneTrackerAddress ];
+        const milestonesNew = campaignMilestones.milestones.map(
             (milestone, index) => {
                 const mlstn = milestone;
                 mlstn.id = index;
@@ -102,7 +103,7 @@ export default function CampaignMilestones(props) {
                   action={[ { account: props.milestoneTracker.recipient } ]}
                   milestoneTrackerAddress={props.milestoneTrackerAddress}
                   milestones={milestonesNew}
-                  disabled={!milestonesNew.valid}
+                  disabled={!campaignMilestones.valid}
                 />);
         }
 
@@ -178,10 +179,7 @@ CampaignMilestones.propTypes = {
         })),
     }).isRequired,
     milestoneTrackerAddress: PropTypes.string.isRequired,
-    newMilestones: PropTypes.shape({
-        valid: PropTypes.bool.isRequired,
-        milestones: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-    }).isRequired,
+    newMilestones: PropTypes.shape({}).isRequired,
     accounts: PropTypes.arrayOf(PropTypes.shape({
         address: PropTypes.string.isRequired,
     })).isRequired,
