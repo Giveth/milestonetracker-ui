@@ -87,7 +87,8 @@ export default function CampaignMilestones(props) {
               milestoneTrackerAddress={props.milestoneTrackerAddress}
             />,
         ];
-        const campaignMilestones = props.newMilestones[ props.milestoneTrackerAddress ];
+        const campaignMilestones = props.newMilestones[ props.milestoneTrackerAddress ] ||
+            { valid: true, milestones: [] };
         const milestonesNew = campaignMilestones.milestones.map(
             (milestone, index) => {
                 const mlstn = milestone;
