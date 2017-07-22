@@ -104,7 +104,7 @@ export default function CampaignMilestones(props) {
                   action={[ { account: props.milestoneTracker.recipient } ]}
                   milestoneTrackerAddress={props.milestoneTrackerAddress}
                   milestones={milestonesNew}
-                  disabled={!campaignMilestones.valid}
+                  disabled={!(campaignMilestones.valid && props.givethDirectoryLoaded)}
                 />);
         }
 
@@ -181,6 +181,7 @@ CampaignMilestones.propTypes = {
     }).isRequired,
     milestoneTrackerAddress: PropTypes.string.isRequired,
     newMilestones: PropTypes.shape({}).isRequired,
+    givethDirectoryLoaded: PropTypes.bool.isRequired,
     accounts: PropTypes.arrayOf(PropTypes.shape({
         address: PropTypes.string.isRequired,
     })).isRequired,
