@@ -1,8 +1,11 @@
 import React from "react";
 import { Navbar, NavItem, Nav } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
+import PropTypes from "prop-types";
+import { network } from "../blockchain";
 
-export default function Navigation() {
+const NavigationComponent = (props) => {
+    const web3state = props.web3state;
     return (
         <Navbar>
             <Navbar.Header>
@@ -24,6 +27,28 @@ export default function Navigation() {
                     <NavItem href="#">About</NavItem>
                 </LinkContainer>
             </Nav>
+            <Nav pullRight>
+                <NavItem eventKey={1} href="#">
+                    { network.title }
+                </NavItem>
+                {
+                    web3state.syncing ?
+                        <NavItem href="#">
+                            { web3state.syncCurrentBlock }
+                            /{ web3state.syncHighestBlock }
+                        </NavItem>
+                        :
+                        <NavItem href="#">
+                            Synced
+                        </NavItem>
+                }
+            </Nav>
         </Navbar>
     );
-}
+};
+
+NavigationComponent.propTypes = {
+    web3state: PropTypes.shape({}).isRequired,
+};
+
+export default NavigationComponent;

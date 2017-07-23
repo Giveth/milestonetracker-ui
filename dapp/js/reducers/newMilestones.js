@@ -1,4 +1,3 @@
-import crypto from "crypto";
 import * as types from "../actions/actionTypes";
 
 const initialState = {
@@ -10,13 +9,11 @@ const newMilestones = (state = initialState, action) => {
     switch (action.type) {
 
     case types.MILESTONE_NEW_SAVE: {
-        const payData = action.data.payData ? action.data.payData : crypto.randomBytes(20).toString("hex");
         const milestone = {
             description: action.data.description.value,
             maxCompletionDate: action.data.maxCompletionDate.value,
             milestoneLeadLink: action.data.milestoneLeadLink.value,
             minCompletionDate: action.data.minCompletionDate.value,
-            payData,
             payDelay: action.data.payDelay.value,
             payDescription: action.data.payDescription.value,
             payRecipient: action.data.payRecipient.value,

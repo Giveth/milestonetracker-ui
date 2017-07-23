@@ -32,7 +32,6 @@ class InputEther extends React.Component {
     }
 
     componentWillMount() {
-        this.inputChanged(this.props.value);
     }
 
     onChange(event) {
