@@ -1,6 +1,6 @@
 # More on milestone-tracker-ui dapp
 
-## folder structure
+### folder structure
   ```
   dapp
   |____js
@@ -20,5 +20,5 @@
   |____contract
   ```
 
-## diagrams
+### diagrams
 [contracts diagram](contracts_diagram.png?raw=true)
