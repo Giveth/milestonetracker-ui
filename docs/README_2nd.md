@@ -21,4 +21,4 @@
   ```
 
 ## diagrams
-[contracts diagram](docs/contracts_diagram.png)
+[contracts diagram](contracts_diagram.png)
