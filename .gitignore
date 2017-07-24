@@ -30,3 +30,9 @@ node_modules
 # JetBrains IDE config files
 .idea
 *.iml
+
+# mac file system dot file
+.DS_Store
+
+# generated dependency file
+package-lock.json
