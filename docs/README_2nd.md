@@ -1,5 +1,7 @@
 # More on milestone-tracker-ui dapp
 
+### diagrams
+![contracts diagram](contracts_diagram.png?raw=true)
 ### folder structure
   ```
   dapp
@@ -16,9 +18,91 @@
   | |____lib
   | |____reducers
   |____static
+  |     |____img
   test
   |____contract
   ```
 
-### diagrams
-[contracts diagram](contracts_diagram.png?raw=true)
+### folder notes
+*dapp/js* - all content and actions are in javascript or jsx  
+*dapp/js/blockchain* - determine network for campaign directory and http provider for web3
+*dapp/js/blockchain* - jsx ui components
+*dapp/static* - index.html, style.css, logo, and spinner  
+*test/contract* - contract test  
+
+### root config files
+*.babelrc* - config to transform JSX into createElement calls [more](https://babeljs.io/docs/plugins/preset-react/)  
+*.editorconfig* - defines consistent coding styles between different editors and IDEs. [more](http://editorconfig.org/)  
+*.eslintrc* - configs for javascript linter [more](http://eslint.org/docs/user-guide/configuring)  
+*.gitignore* -  determine which files and directories to ignore [more](https://help.github.com/articles/ignoring-files/)  
+*.travis.yml* - continuous integration service for projects hosted at GitHub [more](https://docs.travis-ci.com/user/getting-started/)  
+*LICENSE* - GNU General Public License v3.0 [more](https://www.gnu.org/licenses/gpl-3.0.en.html)  
+*README.md* - documentation for installing dapp [more](https://help.github.com/categories/writing-on-github/)  
+*mocha-webpack.opts* - precompiles your server-side webpack bundles before running mocha [more](https://www.npmjs.com/package/mocha-webpack)  
+*package.json* - list of imported software dependencies [more](https://docs.npmjs.com/files/package.json)  
+*webpack.config.js* -  takes dependencies and bundles them into static assets [more](https://webpack.github.io/docs/what-is-webpack.html)  
+*webpack.config.test.js* - a good way to run unit tests [more](https://blog.threatstack.com/unit-testing-with-webpack-mocha)  
+
+
+### js file notes
+*dapp/js/actions/actionTypes.js* - constants for MILESTONE_NEW_SAVE and MILESTONE_NEW_REMOVE  
+*dapp/js/actions/campaignActions.js* - export campaign directory.donate as donate and MilestoneTracker functions acceptMilestones, rejectMilestones, proposeNewMilestones as constants    
+*dapp/js/actions/campaignDeployments.js* - export deployment action functions from constants, export thunks, get and set gas price, create and deploy minime token factory contract, create and deploy minime token contract, create and deploy vault contract,  create and deploy campaign contract, change token controller, create and deploy milestone tracker contract, authorize spender, get giveth directory instance, and add campaign to tracker  
+*dapp/js/actions/index.js* - export new web3 and new giveth directory state
+*dapp/js/actions/milestoneActions.js* - export milestone functions that instantiate new MilestoneTracker and call single function for arbitrate approve completed, cancel, mark completed, approve completed, reject completed, collect, request payment, save milestone, and remove milestone  
+*dapp/js/actions/user.js* - export default function to set account using user actions from constants  
+
+*dapp/js/blockchain/index.js* - export web3 and network
+*dapp/js/blockchain/Network.js* - determine network blockchain network and use same address for giveth directory and campaign tracker
+*dapp/js/blockchain/Web3.js* - determine http server for w3
+
+*dapp/js/containers/Buttons/Campaign/AcceptMilestones.js* - map campaign action to on accept milestones handler and declare accept milestones to connect props to button accept milestones  
+*dapp/js/containers/Buttons/Campaign/Donate.js* - map campaign action to on donate handler and declare donate to connect props to button donate  
+*dapp/js/containers/Buttons/Campaign/index.js* - export accept milestones, donate, propose new milestones, and reject milestones
+*dapp/js/containers/Buttons/Campaign/ProposeNewMilestones.js* - map campaign action to propose new milestone handler and declare propose new milestones to connect props to component
+*dapp/js/containers/Buttons/Campaign/RejectMilestones.js* - map campaign action to on un-propose milestone handler and declare reject milestone to connect props to button reject milestones  
+
+*dapp/js/containers/Buttons/Milestones/ApproveCompleted.js* - map milestone action to click action property and declare approve completed to connect props to milestone button  
+*dapp/js/containers/Buttons/Milestones/ArbitrateApproveCompleted.js* - map milestone action to click action property and declare arbitrate approved completed to connect props to milestone button  
+*dapp/js/containers/Buttons/Milestones/Cancel.js* - map milestone action to click action property and declare cancel to connect props to milestone button  
+*dapp/js/containers/Buttons/Milestones/Collect.js* - map milestone action to click action property and declare collect to connect props to milestone button  
+*dapp/js/containers/Buttons/Milestones/index.js* - export approve completed, arbitrate approve completed, cancel, collect, mark completed, reject completed, request payment  
+*dapp/js/containers/Buttons/Milestones/MarkCompleted.js* - map milestone action to click action property and declare mark completed to connect props to milestone button  
+*dapp/js/containers/Buttons/Milestones/RejectCompleted.js* - map milestone action to click action property and declare reject completed to connect props to milestone button  
+*dapp/js/containers/Buttons/Milestones/RequestPayment.js* - map milestone action to click action property and declare request payment to connect props to milestone button  
+
+*dapp/js/containers/Pages/CampaignDeployer/Component.jsx* - export class deployer, render campaign deployer, declare run deployment function and others  
+*dapp/js/containers/Pages/CampaignDeployer/index.js* - map campaign deployment actions as parameters to bind action creators and declare campaign deployer to connect props to component  
+
+*dapp/js/containers/Pages/About.js* - map state to giveth directory state property and declare page about to connect props to about   
+*dapp/js/containers/Pages/Campaign.js* - map state to campaigns property and declare page campaign to connect props to campaign   
+*dapp/js/containers/Pages/Campaigns.js* - map state to campaigns property and declare page campaigns to connect props to campaigns  
+*dapp/js/containers/Pages/Home.js* - map state to full state property and declare page home to connect props to home  
+*dapp/js/containers/Pages/index.js* - export page about, page campaign, page campaigns, page my account, page home, page campaign deployer  
+*dapp/js/containers/Pages/MyAccount.js* - map state to giveth directory state and web3 state properties and declare page my account to connect props to my account  
+
+*dapp/js/containers/CampaignMilestones.js* - map state to new milestones and accounts properties and declare campaign milestones to connect props to campaign milestones component  
+*dapp/js/containers/index.jsx* - export my account container, web3 info, web3 error popup  
+*dapp/js/containers/InputMyAddresses.jsx* - map state to accounts properties and declare input my address to connect props to input my addresses component  
+*dapp/js/containers/MilestoneDetailEditable.js* - map milestone actions to save and remove properties and declare milestone detail editable to connect props to milestone detail editable component  
+*dapp/js/containers/MilestoneEdit.jsx* - declare class milestone edit component and render input fields  
+*dapp/js/containers/MyAccountContainer.js* - map state to giveth directory state property and declare my account container to connect props to web3 info  
+*dapp/js/containers/Navigation.jsx* - map state to web3 state property and declare navigation to connect props to navigation component  
+*dapp/js/containers/Web3ErrorPopup.js* - map false state to visible property and declare web3 error popup to connect props to error popup component  
+*dapp/js/containers/Web3Info.js* - map state to web3 state property and declare web3 info to connect props to web3 info component  
+
+*dapp/js/lib/Web3monitor.js* - declare default class which extends event emitter from events  
+
+*dapp/js/reducers/deploymentReducer.js* - export functions with state and action parameters for campaign values, deployment status, current deployment step, deployment results, completed deployments, and error  
+*dapp/js/reducers/givethdirectory.js* - giveth directory function which takes empty state object and action to return state  
+*dapp/js/reducers/index.js* - export reducers as combined reducers for campaign values, deployment results, deployment status, completed deployments, current deployment step, error, user account, web3, giveth directory, and new milestones  
+*dapp/js/reducers/newMilestones.js* - export new milestones which takes initial state and action parameters and uses action type to determine behavior  
+*dapp/js/reducers/newMilestones.js* - export default function for user account which take empty string state and action parameters and uses action type to set account  
+*dapp/js/reducers/web3.js* - web3 function which takes connected false state and action parameters and uses action type to return state  
+
+*dapp/js/contants.js* - export string constants  
+*dapp/js/initialState.js* - module exports function returns object with keys for user account, error, campaign values, deployment status, current deployment step, completed deployments, deployment results  
+*dapp/js/main.jsx* - declare web3 monitor with web3 from blockchain and render provider and routes  
+*dapp/js/routes.jsx* - declare routes and define switch component linking paths to pages  
+*dapp/js/store.js* - declare middleware with thunk and logger parameters, and declare store with reducer, initial state, and middleware parameters  
+*dapp/js/validator.js* - defines website validator using regex and ethereum address validator using web3
