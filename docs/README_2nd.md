@@ -2,6 +2,8 @@
 
 ## diagrams
 ![contracts diagram](contracts_diagram.png?raw=true)
+[edit](https://docs.google.com/drawings/d/1OVnJWXs_-AKqcXxHwuioFdAbaPUok7I_brWMFGPRUDg/edit?usp=sharing)
+
 ## folder structure
   ```
   dapp
