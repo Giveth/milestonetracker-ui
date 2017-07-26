@@ -33,6 +33,3 @@ node_modules
 
 # mac file system dot file
 .DS_Store
-
-# generated dependency file
-package-lock.json
