@@ -47,11 +47,11 @@
 
 ## js file notes
 ### dapp/js/actions/...
-* **actionTypes.js** - constants for MILESTONE_NEW_SAVE and MILESTONE_NEW_REMOVE  
-* **campaignActions.js** - export campaign directory.donate as donate and MilestoneTracker functions acceptMilestones, rejectMilestones, * proposeNewMilestones as constants    
-* **campaignDeployments.js** - export deployment action functions from constants, export thunks, get and set gas price, create and deploy * minime token factory contract, create and deploy minime token contract, create and deploy vault contract,  create and deploy campaign * contract, change token controller, create and deploy milestone tracker contract, authorize spender, get giveth directory instance, and add * campaign to tracker  
+* **actionTypes.js** - constants for milestone new save and milestone new remove  
+* **campaignActions.js** - export campaign directory donate as donate and milestone tracker functions accept milestones, reject milestones, propose new milestones as constants    
+* **campaignDeployments.js** - export deployment action functions from constants, export thunks, get and set gas price, create and deploy minime token factory contract, create and deploy minime token contract, create and deploy vault contract,  create and deploy campaign contract, change token controller, create and deploy milestone tracker contract, authorize spender, get giveth directory instance, and add campaign to tracker  
 * **index.js** - export new web3 and new giveth directory state  
-* **milestoneActions.js** - export milestone functions that instantiate new MilestoneTracker and call single function for arbitrate approve * completed, cancel, mark completed, approve completed, reject completed, collect, request payment, save milestone, and remove milestone  
+* **milestoneActions.js** - export milestone functions that instantiate new milestone tracker and call single function for arbitrate approve completed, cancel, mark completed, approve completed, reject completed, collect, request payment, save milestone, and remove milestone  
 * **user.js** - export default function to set account using user actions from constants  
 
 ### dapp/js/blockchain/...
@@ -60,15 +60,15 @@
 * **Web3.js** - determine http server for w3
 
 ### dapp/js/containers/Buttons/Campaign/...
-* **AcceptMilestones.js** - map campaign action to on accept milestones handler and declare accept milestones to connect props to button * accept milestones  
+* **AcceptMilestones.js** - map campaign action to on accept milestones handler and declare accept milestones to connect props to button accept milestones  
 * **Donate.js** - map campaign action to on donate handler and declare donate to connect props to button donate  
 * **index.js** - export accept milestones, donate, propose new milestones, and reject milestones  
-* **ProposeNewMilestones.js** - map campaign action to propose new milestone handler and declare propose new milestones to connect props to * button propose new milestones component  
-* **RejectMilestones.js** - map campaign action to on un-propose milestone handler and declare reject milestone to connect props to button * reject milestones  
+* **ProposeNewMilestones.js** - map campaign action to propose new milestone handler and declare propose new milestones to connect props to button propose new milestones component  
+* **RejectMilestones.js** - map campaign action to on un-propose milestone handler and declare reject milestone to connect props to button reject milestones  
 
 ### dapp/js/containers/Buttons/Milestones/...
 * **ApproveCompleted.js** - map milestone action to click action property and declare approve completed to connect props to milestone button  
-* **ArbitrateApproveCompleted.js** - map milestone action to click action property and declare arbitrate approved completed to connect props * to milestone button  
+* **ArbitrateApproveCompleted.js** - map milestone action to click action property and declare arbitrate approved completed to connect props to milestone button  
 * **Cancel.js** - map milestone action to click action property and declare cancel to connect props to milestone button  
 * **Collect.js** - map milestone action to click action property and declare collect to connect props to milestone button  
 * **index.js** - export approve completed, arbitrate approve completed, cancel, collect, mark completed, reject completed, request payment  
@@ -78,7 +78,7 @@
 
 ### dapp/js/containers/Pages/CampaignDeployer/...
 * **Component.jsx** - export class deployer, render campaign deployer, declare run deployment function and others  
-* **index.js** - map campaign deployment actions as parameters to bind action creators and declare campaign deployer to connect props to * component  
+* **index.js** - map campaign deployment actions as parameters to bind action creators and declare campaign deployer to connect props to component  
 
 ### dapp/js/containers/Pages/...
 * **About.js** - map state to giveth directory state property and declare page about to connect props to about   
@@ -89,10 +89,10 @@
 * **MyAccount.js** - map state to giveth directory state and web3 state properties and declare page my account to connect props to my account  
 
 ### dapp/js/containers/...
-* **CampaignMilestones.js** - map state to new milestones and accounts properties and declare campaign milestones to connect props to campaign * milestones component  
+* **CampaignMilestones.js** - map state to new milestones and accounts properties and declare campaign milestones to connect props to campaign milestones component  
 * **index.jsx** - export my account container, web3 info, web3 error popup  
 * **InputMyAddresses.jsx** - map state to accounts properties and declare input my address to connect props to input my addresses component  
-* **MilestoneDetailEditable.js** - map milestone actions to save and remove properties and declare milestone detail editable to connect props * to milestone detail editable component  
+* **MilestoneDetailEditable.js** - map milestone actions to save and remove properties and declare milestone detail editable to connect props to milestone detail editable component  
 * **MilestoneEdit.jsx** - declare class milestone edit component and render input fields  
 * **MyAccountContainer.js** - map state to giveth directory state property and declare my account container to connect props to web3 info  
 * **Navigation.jsx** - map state to web3 state property and declare navigation to connect props to navigation component  
@@ -103,17 +103,17 @@
 * **Web3monitor.js** - declare default class which extends event emitter from events  
 
 ### dapp/js/reducers/...
-* **deploymentReducer.js** - export functions with state and action parameters for campaign values, deployment status, current deployment * step, deployment results, completed deployments, and error  
+* **deploymentReducer.js** - export functions with state and action parameters for campaign values, deployment status, current deployment step, deployment results, completed deployments, and error  
 * **givethdirectory.js** - giveth directory function which takes empty state object and action to return state  
-* **index.js** - export reducers as combined reducers for campaign values, deployment results, deployment status, completed deployments, * current deployment step, error, user account, web3, giveth directory, and new milestones  
+* **index.js** - export reducers as combined reducers for campaign values, deployment results, deployment status, completed deployments, current deployment step, error, user account, web3, giveth directory, and new milestones  
 * **newMilestones.js** - export new milestones which takes initial state and action parameters and uses action type to determine behavior  
-* **newMilestones.js** - export default function for user account which take empty string state and action parameters and uses action type to * set account  
+* **newMilestones.js** - export default function for user account which take empty string state and action parameters and uses action type to set account  
 * **web3.js** - web3 function which takes connected false state and action parameters and uses action type to return state  
 
 ### dapp/js/...
 * **contants.js** - export string constants  
-* **initialState.js** - module exports function returns object with keys for user account, error, campaign values, deployment status, current * deployment step, completed deployments, deployment results  
+* **initialState.js** - module exports function returns object with keys for user account, error, campaign values, deployment status, current deployment step, completed deployments, deployment results  
 * **main.jsx** - declare web3 monitor with web3 from blockchain and render provider and routes  
 * **routes.jsx** - declare routes and define switch component linking paths to pages  
-* **store.js** - declare middleware with thunk and logger parameters, and declare store with reducer, initial state, and middleware * parameters  
+* **store.js** - declare middleware with thunk and logger parameters, and declare store with reducer, initial state, and middleware parameters  
 * **validator.js** - defines website validator using regex and ethereum address validator using web3
