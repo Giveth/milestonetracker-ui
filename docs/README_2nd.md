@@ -118,4 +118,4 @@
 * **main.jsx** - declare web3 monitor with web3 from blockchain and render provider and routes  
 * **routes.jsx** - declare routes and define switch component linking paths to pages  
 * **store.js** - declare middleware with thunk and logger parameters, and declare store with reducer, initial state, and middleware parameters  
-* **validator.js** - defines website validator using regex and ethereum address validator using web3
+* **validator.js** - defines website validator using regex and ethereum address validator using web3  
