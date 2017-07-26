@@ -54,7 +54,7 @@ NOTE: For contributing code use the "develop" branch of this project repository.
 
 Note that if you did not run the JSON-RPC in dtereministic mode, you will have to update dapp/js/blockchain/Network.js 'Testrpc' network object with the GivethDirectory address from the ouput of step 2.
 
-```json
+```
   4: {
       title: "Testrpc",
       directory: new GivethDirectory(web3, "{update me}");
