@@ -1,8 +1,8 @@
 # Milestone Tracker User Interface
 
-The MilestoneTracker UI is a user interface for the [MilestoneTracker](https://github.com/Giveth/milestonetracker) contract and in future will be extended to cover the whole functionality of [Giveth DCO](https://github.com/Giveth/MVP) (Decantralised Charitable Organisation).
+The MilestoneTracker UI is a user interface for the [MilestoneTracker](https://github.com/Giveth/milestonetracker) contract and in future will be extended to cover the whole functionality of [Giveth DAC](https://github.com/Giveth/MVP) (Decentralized Altruistic Community).
 
-The application is written in React, interfaces directly with the Ethereum blockchain and the Giveth smart contracts. You can find the production version of this decentralized application (Dapp) and more information on the [Giveth website](https://giveth.io).
+The application is written in React and interfaces directly with the Ethereum blockchain via the Giveth smart contracts. You can find the production version of this decentralized application (Dapp) and more information on the [Giveth website](https://giveth.io).
 
 ## How to run developer version
 ### Installing dependencies
