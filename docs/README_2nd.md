@@ -39,7 +39,7 @@
 * **.travis.yml** - continuous integration service for projects hosted at GitHub [more](https://docs.travis-ci.com/user/getting-started/)  
 * **LICENSE** - GNU General Public License v3.0 [more](https://www.gnu.org/licenses/gpl-3.0.en.html)  
 * **README.md** - documentation for installing dapp [more](https://help.github.com/categories/writing-on-github/)  
-* **mocha-webpack.opts** - precompiles your server-side webpack bundles before running mocha [more](https://www.npmjs.com/package/* mocha-webpack)  
+* **mocha-webpack.opts** - precompiles your server-side webpack bundles before running mocha [more](https://www.npmjs.com/package/mocha-webpack)  
 * **package.json** - list of imported software dependencies [more](https://docs.npmjs.com/files/package.json)  
 * **webpack.config.js** -  takes dependencies and bundles them into static assets [more](https://webpack.github.io/docs/what-is-webpack.html)  
 * **webpack.config.test.js** - a good way to run unit tests [more](https://blog.threatstack.com/unit-testing-with-webpack-mocha)  
