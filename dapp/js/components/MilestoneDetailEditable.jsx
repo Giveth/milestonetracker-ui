@@ -70,20 +70,17 @@ class MilestoneDetailEditable extends React.Component {
         const test = Object.assign({}, this.state);
         test[ name ] = { value, valid };
 
-        let isValid = valid;
-
         // if this input is valid, we need to check the rest
-        if (valid) {
-            const values = Object.values(test);
-            for (let i = 0; i < values.length; i += 1) {
-                // instanceof check is to ignore the case of state.id
-                if (values[ i ] !== undefined && values[ i ] instanceof Object
-                    && !Object.prototype.hasOwnProperty.call(values[ i ], "valid")) {
-                    isValid = false;
-                    break;
-                }
+        const isValid = valid && Object.values(test)
+        // instanceof check is to ignore the case of state.id
+        .filter(record => record !== undefined && record instanceof Object)
+        .reduce((sum, record) => {
+            if (Object.prototype.hasOwnProperty.call(record, "valid")) {
+                return sum && record.valid;
             }
-        }
+
+            return sum;
+        });
 
         this.setState({
             [ name ]: {
