@@ -72,7 +72,12 @@ class Milestone extends React.Component {
             float: "right",
             marginLeft: "5",
         };
-
+        let actionsNumber = 0;
+        Object.keys(this.props.milestone.actions).forEach((actionName) => {
+            if (this.props.milestone.actions[ actionName ].length > 0) {
+                actionsNumber += 1;
+            }
+        });
         return (
             <div>
                 <Panel
@@ -82,9 +87,12 @@ class Milestone extends React.Component {
                   onClick={this.onClick}
                   style={panelStyle}
                 >
-                    <Badge style={badgeStyle}>
-                        {Object.keys(this.props.milestone.actions).length}
-                    </Badge>
+                    {
+                        actionsNumber > 0 &&
+                        <Badge style={badgeStyle}>
+                            <span>{{ actionsNumber }}</span>
+                        </Badge>
+                    }
                     {this.props.milestone.payDescription !== undefined ?
                       this.props.milestone.payDescription : "The title could not be read"}
                 </Panel>
