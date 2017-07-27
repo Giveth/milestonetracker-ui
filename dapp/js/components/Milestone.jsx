@@ -43,7 +43,6 @@ class Milestone extends React.Component {
 
     render() {
         let backgroundColor = "white";
-        const marginLeft = "5";
 
         if (this.state.hover) {
             if (this.props.milestone.paymentInfo &&
@@ -65,6 +64,14 @@ class Milestone extends React.Component {
             // With error
             backgroundColor = "#d99696";
         }
+        const panelStyle = {
+            backgroundColor,
+            position: "relative",
+        };
+        const badgeStyle = {
+            float: "right",
+            marginLeft: "5",
+        };
 
         return (
             <div>
@@ -73,13 +80,13 @@ class Milestone extends React.Component {
                   onMouseEnter={this.onMouseEnter}
                   onMouseLeave={this.onMouseLeave}
                   onClick={this.onClick}
-                  style={{ backgroundColor }}
+                  style={panelStyle}
                 >
-                    {this.props.milestone.payDescription !== undefined ?
-                      this.props.milestone.payDescription : "The title could not be read"}
-                    <Badge style={{ marginLeft }}>
+                    <Badge style={badgeStyle}>
                         {Object.keys(this.props.milestone.actions).length}
                     </Badge>
+                    {this.props.milestone.payDescription !== undefined ?
+                      this.props.milestone.payDescription : "The title could not be read"}
                 </Panel>
                 {this.props.editable ?
                     <MilestoneDetailEditable
