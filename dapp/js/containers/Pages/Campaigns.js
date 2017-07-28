@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import { Campaigns } from "../../components";
 
 const mapStateToProps = state => ({
-    loaded: Object.keys(state.givethDirectory).length !== 0,
+    loaded: state.givethDirectory.loaded,
     campaigns: state.givethDirectory.campaigns,
 });
 
