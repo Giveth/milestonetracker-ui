@@ -4,7 +4,9 @@ The MilestoneTracker UI is a user interface for the [MilestoneTracker](https://g
 
 The application is written in React, interfaces directly with the Ethereum blockchain and the Giveth smart contracts. You can find the production version of this decentralized application (Dapp) and more information on the [Giveth website](https://giveth.io).
 
-NOTE: For contributing code use the "develop" branch of this project repository. The develop branch is deployed here: https://develop--milestonetracker.netlify.com/#/
+NOTE: For contributing code use the "develop" branch of this project repository. The develop branch is deployed here: https://develop--milestonetracker.netlify.com/#/ 
+
+We also use [ZenHub](https://www.zenhub.com/) to provide a trello like interface for managing our github issues. Picking issues from the `Backlog` lane would be the best place to start contributing.
 
 ## How to run developer version
 ### Installing dependencies
