@@ -25,19 +25,25 @@ function debounce(func, wait, immediate) {
 
 // only persist newMilestones for now
 const persistedState = () => {
-    const newMilestones = localStorage.getItem("newMilestones") ?
-        JSON.parse(localStorage.getItem("newMilestones")) : {};
+    const givethState = localStorage.getItem("giveth-state") ?
+        JSON.parse(localStorage.getItem("giveth-state")) : {};
 
-    Object.keys(newMilestones).forEach((key) => {
-        const milestones = newMilestones[ key ].milestones;
-        for (let i = 0; i < milestones.length; i += 1) {
-            const m = milestones[ i ];
-            m.minCompletionDate = moment(m.minCompletionDate);
-            m.maxCompletionDate = moment(m.maxCompletionDate);
-        }
-    });
+    if (givethState.givethDirectory) {
+        givethState.givethDirectory.loaded = false;
+    }
 
-    return { newMilestones };
+    if (givethState.newMilestones) {
+        Object.keys(givethState.newMilestones).forEach((key) => {
+            const milestones = givethState.newMilestones[ key ].milestones;
+            for (let i = 0; i < milestones.length; i += 1) {
+                const m = milestones[ i ];
+                m.minCompletionDate = moment(m.minCompletionDate);
+                m.maxCompletionDate = moment(m.maxCompletionDate);
+            }
+        });
+    }
+
+    return givethState;
 };
 
 const store = createStore(
@@ -48,7 +54,12 @@ const store = createStore(
 
 store.subscribe(debounce(() => {
     const milestones = store.getState().newMilestones;
-    localStorage.setItem("newMilestones", JSON.stringify(milestones));
+    const givethDirectory = store.getState().givethDirectory;
+
+    localStorage.setItem("giveth-state", JSON.stringify({
+        newMilestones: milestones,
+        givethDirectory,
+    }));
 }, 250, false));
 
 export default store;

@@ -3,7 +3,9 @@ import { connect } from "react-redux";
 import ButtonAcceptMilestones from "../../../components/ButtonAcceptMilestones";
 import * as CampaignActions from "../../../actions/campaignActions";
 
-const mapStateToProps = () => ({});
+const mapStateToProps = state => ({
+    disabled: !state.givethDirectory.loaded,
+});
 
 function mapDispatchToProps(dispatch) {
     return bindActionCreators(

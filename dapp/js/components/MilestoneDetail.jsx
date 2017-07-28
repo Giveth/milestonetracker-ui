@@ -70,7 +70,7 @@ class MilestoneDetail extends React.Component {
                       rel="noopener noreferrer"
                       style={{ wordBreak }}
                     >
-                        {this.props.milestone.paymentSource}
+                        {this.props.milestone.payRecipient}
                     </a>),
             },
             {

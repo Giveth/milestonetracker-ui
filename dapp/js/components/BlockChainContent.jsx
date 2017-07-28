@@ -6,16 +6,17 @@ import { ProgressBar } from "react-bootstrap";
 import PropTypes from "prop-types";
 
 const loading = (
-    <div>
-        <h2>Loading data from blockchain...</h2>
+    <div className="chain-progress-bar">
+        <h3 className="title">Loading new data from blockchain...</h3>
         <ProgressBar active now={100} />
-        <p>This may take up to a few minutes depending on the ethereum network load.</p>
+        <p className="small">This may take up to a few minutes depending on the ethereum network load.</p>
     </div>
 );
 
 const BlockChainContent = props => (
-    <div className="app">
-        { props.loaded ? props.children : loading }
+    <div className="app" >
+        { props.loaded ? null : loading }
+        { props.children }
     </div>
 );
 
