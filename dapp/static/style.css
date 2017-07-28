@@ -81,3 +81,8 @@ CAMPAIGN DEPLOYER STYLES
 .next-steps {
   margin-top: 20px;
 }
+
+/* bs-notifications*/
+.body-0-19 {
+    max-width: 42em;
+}
