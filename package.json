@@ -43,7 +43,7 @@
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.4",
     "eslint": "^3.19.0",
-    "eslint-config-airbnb": "^15.0.1",
+    "eslint-config-airbnb": "15.0.1",
     "eslint-loader": "^1.8.0",
     "eslint-plugin-jsx-a11y": "^5.0.3",
     "eslint-plugin-import": "^2.3.0",
