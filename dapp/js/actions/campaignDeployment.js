@@ -1,5 +1,6 @@
 /* eslint-disable */
 import { deploymentActions } from '../constants';
+import { newTransaction, transactionMined } from '../actions/transactions';
 import { web3, network } from "../blockchain";
 
 let fromAccount, _escapeCaller, _escapeDestination, _securityGuard, _arbitrator, _donor, _recipient, _tokenName, _tokenSymbol, _campaignTracker, _campaignName, _campaignDescription, _campaignUrl, _campaignExtra, _gasPrice;
@@ -178,6 +179,8 @@ const deployMiniMeTokenFactoryContract = (miniMeTokenFactoryContract, dispatch) 
                     console.log("Error", e);
                     dispatch(showError('Mini Me Token Factory Contract Deployment Failed',  e.message));
                     reject(e);
+                } else if (contract.transactionHash && !contract.address) {
+                    dispatch(newTransaction(contract.transactionHash));
                 } else if (typeof contract.address !== 'undefined') {
                     console.log('MiniMe Token Factory Contract mined! address: ' + contract.address + ' transactionHash: ' + contract.transactionHash);
                     instances['miniMeTokenFactoryInstance'] = miniMeTokenFactoryContract.at(contract.address);
@@ -186,7 +189,8 @@ const deployMiniMeTokenFactoryContract = (miniMeTokenFactoryContract, dispatch) 
                         address: contract.address,
                         transactionHash: contract.transactionHash,
                         ABI: minimetokenfactoryContractAbi
-                    })
+                    });
+                    dispatch(transactionMined(contract.transactionHash));
                     dispatch(deploymentComplete('miniMeTokenFactoryContract'));
                     dispatch(updateCurrentDeploymentStep('miniMeTokenContract'));
                     resolve('Mini Me Token Factory Complete!');
@@ -241,6 +245,8 @@ const deployMiniMeTokenContract = (...args) => {
                     console.log("Error", e);
                     dispatch(showError('Mini Me Token Contract Deployment Failed',  e.message));
                     reject(e);
+                } else if (contract.transactionHash && !contract.address) {
+                    dispatch(newTransaction(contract.transactionHash));
                 } else if (typeof contract.address !== 'undefined') {
                     console.log('MiniMe Token Contract mined! address: ' + contract.address + ' transactionHash: ' + contract.transactionHash);
                     instances['minimetokenContractInstance'] = data.contract.at(contract.address);
@@ -250,6 +256,7 @@ const deployMiniMeTokenContract = (...args) => {
                         transactionHash: contract.transactionHash,
                         ABI: miniMeTokenContractAbi
                     });
+                    dispatch(transactionMined(contract.transactionHash));
                     dispatch(deploymentComplete('miniMeTokenContract'));
                     dispatch(updateCurrentDeploymentStep('vaultContract'));
                     resolve('Mini Me Contract Complete.');
@@ -299,8 +306,9 @@ const deployVaultContract = (...args) => {
                     console.log("Error", e);
                     dispatch(showError('Vault Contract Deployment Failed',  e.message));
                     reject(e)
-                }
-                if (typeof contract.address !== 'undefined') {
+                } else if (contract.transactionHash && !contract.address) {
+                    dispatch(newTransaction(contract.transactionHash));
+                } else if (typeof contract.address !== 'undefined') {
                     console.log('Vault Contract mined! address: ' + contract.address + ' transactionHash: ' + contract.transactionHash);
                     instances['vaultContractInstance'] = data.contract.at(contract.address);
                     response.push({
@@ -309,6 +317,7 @@ const deployVaultContract = (...args) => {
                         transactionHash: contract.transactionHash,
                         ABI: vaultContractAbi
                     });
+                    dispatch(transactionMined(contract.transactionHash));
                     dispatch(deploymentComplete('vaultContract'));
                     dispatch(updateCurrentDeploymentStep('campaignContract'));
                     resolve('Vault Complete.');
@@ -361,6 +370,8 @@ const deployCampaignContract = (...args) => {
                     console.log("Error", e);
                     dispatch(showError('Campaign Contract Deployment Failed',  e.message));
                     reject(e);
+                } else if (contract.transactionHash && !contract.address) {
+                    dispatch(newTransaction(contract.transactionHash));
                 } else if (typeof contract.address !== 'undefined') {
                     console.log('Campaign Contract mined! address: ' + contract.address + ' transactionHash: ' + contract.transactionHash);
                     instances['campaignContractInstance'] = data.contract.at(contract.address);
@@ -370,6 +381,7 @@ const deployCampaignContract = (...args) => {
                         transactionHash: contract.transactionHash,
                         ABI: campaignContractAbi
                     });
+                    dispatch(transactionMined(contract.transactionHash));
                     dispatch(deploymentComplete('campaignContract'));
                     dispatch(updateCurrentDeploymentStep('controllerUpdate'));
                     resolve('Campaign Complete.');
@@ -433,6 +445,8 @@ const deployMilestoneTrackerContract = (...args) => {
                     console.log("Error", e);
                     dispatch(showError('Mini Me Token Controller Update Failed',  e.message));
                     reject(e);
+                } else if (contract.transactionHash && !contract.address) {
+                    dispatch(newTransaction(contract.transactionHash));
                 } else if (typeof contract.address !== 'undefined') {
                     console.log('Milestone Tracker Contract mined! address: ' + contract.address + ' transactionHash: ' + contract.transactionHash);
                     instances['milestoneTrackerContractInstance'] = data.contract.at(contract.address);
@@ -442,6 +456,7 @@ const deployMilestoneTrackerContract = (...args) => {
                         transactionHash: contract.transactionHash,
                         ABI: milestoneTrackerContractAbi
                     });
+                    dispatch(transactionMined(contract.transactionHash));
                     dispatch(deploymentComplete('milestoneTrackerContract'));
                     resolve('Milestone Tracker Complete!');
                 }
@@ -461,6 +476,11 @@ const authorizeSpender = (dispatch) => {
                 reject(e);
             } else {
                 console.log(`${instances['milestoneTrackerContractInstance'].address} is now an Authorized Spender`);
+                dispatch(newTransaction(result));
+
+                web3.eth.getTransactionReceiptMined(result)
+                    .then(dispatch(transactionMined(result)));
+
                 dispatch(deploymentComplete('spenderAuthorization'));
                 dispatch(updateCurrentDeploymentStep('spenderAuthorization'));
                 resolve('SPENDER AUTHORIZED');

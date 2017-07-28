@@ -2,6 +2,7 @@ import { combineReducers } from "redux";
 import web3 from "./web3";
 import givethDirectory from "./givethdirectory";
 import newMilestones from "./newMilestones";
+import transactions from "./transactions";
 import {
   campaignValues,
   deploymentResults,
@@ -23,6 +24,7 @@ const reducers = combineReducers({
     web3,
     givethDirectory,
     newMilestones,
+    transactions,
 });
 
 export default reducers;
