@@ -28,6 +28,7 @@ const Campaign = (props) => {
 
                 <CampaignVault
                   vault={campaign.vault}
+                  vaultAddress={campaign.vaultAddress}
                 />
 
                 <CampaignMilestones
