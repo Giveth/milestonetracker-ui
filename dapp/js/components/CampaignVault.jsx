@@ -14,6 +14,18 @@ import { TableDetails } from "./";
 const CampaignVault = (props) => {
     const data = [
         {
+            label: "Vault Address",
+            content: (
+                <a
+                  href={`${ network.etherscan }address/${ props.vaultAddress }`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                    {props.vaultAddress}
+                </a>
+            ),
+        },
+        {
             label: "Owner",
             content: (
                 <a
@@ -64,6 +76,7 @@ const CampaignVault = (props) => {
 };
 
 CampaignVault.propTypes = {
+    vaultAddress: PropTypes.string.isRequired,
     vault: PropTypes.shape({
         owner: PropTypes.string.isRequired,
         escapeDestination: PropTypes.string.isRequired,
