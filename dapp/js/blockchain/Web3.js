@@ -13,4 +13,40 @@ if (!w3.isConnected()) {
 }
 const web3 = w3;
 
+web3.eth.getTransactionReceiptMined = (txHash, blockLimit = 15) => new Promise(
+    (resolve, reject) => {
+        web3.eth.getTransactionReceipt(txHash, (err, res) => {
+            if (err) {
+                reject(err);
+            }
+
+            // tx already mined
+            if (res) {
+                resolve(res);
+            }
+
+            let blockCounter = blockLimit;
+            const listener = web3.eth.filter("latest").watch((blockErr) => {
+                if (blockErr) {
+                    reject(blockErr);
+                }
+
+                if (blockCounter <= 0) {
+                    listener.stopWatching();
+                    console.warn(`${ txHash } not mined in last ${ blockLimit } blocks`); // eslint-disable-line no-console
+
+                    reject("blockLimit reached");
+                }
+
+                web3.eth.getTransactionReceipt(txHash, (receiptErr, receiptRes) => {
+                    blockCounter -= 1;
+
+                    if (receiptRes) {
+                        resolve(receiptRes);
+                    }
+                });
+            });
+        });
+    });
+
 export default web3;
