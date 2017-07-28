@@ -17,7 +17,10 @@ NotificationList.propTypes = {
             PropTypes.string,
             PropTypes.number,
         ]).isRequired,
-        message: PropTypes.string.isRequired,
+        message: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.object,
+        ]).isRequired,
         headline: PropTypes.string,
         type: PropTypes.oneOf([ "info", "warning", "danger", "success" ]),
     })).isRequired,
