@@ -10,7 +10,7 @@ const mapDispatchToProps = dispatch => bindActionCreators(
     {
         onDonate: CampaignActions.donate,
     },
-    dispatch
+    dispatch,
 );
 
 const Donate = connect(
