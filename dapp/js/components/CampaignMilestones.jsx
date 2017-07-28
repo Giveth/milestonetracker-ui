@@ -81,21 +81,30 @@ export default function CampaignMilestones(props) {
     // Only add proposing milestones if the user can propose milestones
     if (props.accounts.filter(account => account.address === props.milestoneTracker.recipient)
           .length > 0) {
-        const newMilestonesButtons = [ <ButtonNewMilestone key="NewMilestone" /> ];
-        const milestonesNew = props.newMilestones.milestones.map((milestone, index) => {
-            const mlstn = milestone;
-            mlstn.id = index;
-            return mlstn;
-        });
+        const newMilestonesButtons = [
+            <ButtonNewMilestone
+              key="NewMilestone"
+              milestoneTrackerAddress={props.milestoneTrackerAddress}
+            />,
+        ];
+        const campaignMilestones = props.newMilestones[ props.milestoneTrackerAddress ] ||
+            { valid: true, milestones: [] };
+        const milestonesNew = campaignMilestones.milestones.map(
+            (milestone, index) => {
+                const mlstn = milestone;
+                mlstn.id = index;
+                return mlstn;
+            },
+        );
 
-        if (props.newMilestones.milestones.length > 0) {
+        if (milestonesNew.length > 0) {
             newMilestonesButtons.push(
                 <Buttons.ProposeNewMilestones
                   key="proposeMilestones"
                   action={[ { account: props.milestoneTracker.recipient } ]}
                   milestoneTrackerAddress={props.milestoneTrackerAddress}
                   milestones={milestonesNew}
-                  disabled={props.newMilestones.valid !== true}
+                  disabled={!campaignMilestones.valid}
                 />);
         }
 
@@ -171,10 +180,7 @@ CampaignMilestones.propTypes = {
         })),
     }).isRequired,
     milestoneTrackerAddress: PropTypes.string.isRequired,
-    newMilestones: PropTypes.shape({
-        valid: PropTypes.bool.isRequired,
-        milestones: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-    }).isRequired,
+    newMilestones: PropTypes.shape({}).isRequired,
     accounts: PropTypes.arrayOf(PropTypes.shape({
         address: PropTypes.string.isRequired,
     })).isRequired,

@@ -73,7 +73,13 @@ export const saveMilestone = data => ({
     data,
 });
 
-export const removeMilestone = id => ({
+export const removeMilestone = (milestoneTrackerAddress, id) => ({
     type: types.MILESTONE_NEW_REMOVE,
     id,
+    milestoneTrackerAddress,
+});
+
+export const clearMilestones = milestoneTrackerAddress => ({
+    type: types.MILESTONE_NEW_CLEAR,
+    milestoneTrackerAddress,
 });

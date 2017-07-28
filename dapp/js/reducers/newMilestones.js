@@ -1,22 +1,15 @@
-import crypto from "crypto";
 import * as types from "../actions/actionTypes";
 
-const initialState = {
-    valid: false,
-    milestones: [],
-};
-
-const newMilestones = (state = initialState, action) => {
+const newMilestones = (state = {}, action) => {
     switch (action.type) {
 
     case types.MILESTONE_NEW_SAVE: {
-        const payData = action.data.payData ? action.data.payData : crypto.randomBytes(20).toString("hex");
+        const milestoneTrackerAddress = action.data.milestoneTrackerAddress;
         const milestone = {
             description: action.data.description.value,
             maxCompletionDate: action.data.maxCompletionDate.value,
             milestoneLeadLink: action.data.milestoneLeadLink.value,
             minCompletionDate: action.data.minCompletionDate.value,
-            payData,
             payDelay: action.data.payDelay.value,
             payDescription: action.data.payDescription.value,
             payRecipient: action.data.payRecipient.value,
@@ -28,31 +21,54 @@ const newMilestones = (state = initialState, action) => {
             valid: action.data.valid,
         };
 
-        const mlstns = state.milestones.slice();
-        if (Object.prototype.hasOwnProperty.call(action.data, "id") &&
-            action.data.id < mlstns.length) {
-            mlstns[ action.data.id ] = milestone;
-        } else {
-            mlstns.push(milestone);
+        const campaignMilestones = state[ milestoneTrackerAddress ] || {};
+
+        if (!campaignMilestones.milestones) {
+            campaignMilestones.milestones = [];
         }
 
-        return Object.assign({}, state, {
-            milestones: mlstns,
-            valid: mlstns.reduce((sum, value) => (sum && value.valid), true),
-        });
+        if (Object.prototype.hasOwnProperty.call(action.data, "id") &&
+            action.data.id < campaignMilestones.milestones.length) {
+            campaignMilestones.milestones[ action.data.id ] = milestone;
+        } else {
+            campaignMilestones.milestones.push(milestone);
+        }
+
+        campaignMilestones.valid = campaignMilestones.milestones
+            .reduce((sum, record) => sum && record.valid, true);
+
+        const mutation = {};
+        mutation[ milestoneTrackerAddress ] = campaignMilestones;
+
+        return Object.assign({}, state, mutation);
     }
 
     case types.MILESTONE_NEW_REMOVE: {
-        if (action.id < state.milestones.length) {
-            const mlstns = state.milestones.slice();
-            mlstns.splice(action.id, 1);
+        const milestoneTrackerAddress = action.milestoneTrackerAddress;
+        const campaignMilestones = state[ milestoneTrackerAddress ];
 
-            return Object.assign({}, state, {
-                milestones: mlstns,
-                valid: mlstns.reduce((sum, value) => (sum && value.valid), true),
-            });
+        if (campaignMilestones && action.id < campaignMilestones.milestones.length) {
+            campaignMilestones.milestones.splice(action.id, 1);
+
+            campaignMilestones.valid = campaignMilestones.milestones.reduce(
+                (sum, value) => (sum && value.valid), true);
+
+            const mutation = {};
+            mutation[ milestoneTrackerAddress ] = campaignMilestones;
+
+            return Object.assign({}, state, mutation);
         }
         return state;
+    }
+
+    case types.MILESTONE_NEW_CLEAR: {
+        const mutation = {};
+        mutation[ action.milestoneTrackerAddress ] = {
+            milestones: [],
+            valid: true,
+        };
+
+        return Object.assign({}, state, mutation);
     }
 
     default:

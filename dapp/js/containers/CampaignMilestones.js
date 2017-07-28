@@ -6,8 +6,7 @@ const mapStateToProps = state => ({
     accounts: state.web3.accounts,
 });
 
-const mapDispatchToProps = ({
-});
+const mapDispatchToProps = ({});
 
 const CampaignMilestones = connect(
     mapStateToProps,

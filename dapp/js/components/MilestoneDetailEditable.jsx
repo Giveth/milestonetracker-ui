@@ -57,27 +57,30 @@ class MilestoneDetailEditable extends React.Component {
             payDelay: {
                 value: props.milestone.payDelay,
             },
-            payData: props.milestone.payData,
             id: props.milestone.id,
         };
 
         this.onInputChange = this.onInputChange.bind(this);
         this.onSave = this.onSave.bind(this);
         this.onRemove = this.onRemove.bind(this);
+        this.onCancel = this.onCancel.bind(this);
     }
 
     onInputChange(name, value, valid) {
         const test = Object.assign({}, this.state);
         test[ name ] = { value, valid };
 
-        const isValid = Object.values(test)
-            .filter(record => record !== undefined)
-            .reduce((sum, record) => {
-                if (Object.prototype.hasOwnProperty.call(record, "valid")) {
-                    return sum && record.valid;
-                }
-                return sum;
-            });
+        // if this input is valid, we need to check the rest
+        const isValid = valid && Object.values(test)
+        // instanceof check is to ignore the case of state.id
+        .filter(record => record !== undefined && record instanceof Object)
+        .reduce((sum, record) => {
+            if (Object.prototype.hasOwnProperty.call(record, "valid")) {
+                return sum && record.valid;
+            }
+
+            return sum;
+        });
 
         this.setState({
             [ name ]: {
@@ -89,68 +92,79 @@ class MilestoneDetailEditable extends React.Component {
     }
 
     onSave() {
-        this.props.save(this.state);
+        const data = Object.assign({ milestoneTrackerAddress: this.props.milestoneTrackerAddress },
+            this.state);
+        this.props.save(data);
         if (this.props.milestone.id === undefined) {
-            this.setState({
-                payDescription: {
-                    value: undefined,
-                    valid: false,
-                },
-                description: {
-                    value: undefined,
-                    valid: false,
-                },
-                url: {
-                    value: undefined,
-                    valid: false,
-                },
-                minCompletionDate: {
-                    value: moment(),
-                    valid: false,
-                },
-                maxCompletionDate: {
-                    value: moment().add(3, "months"),
-                    valid: false,
-                },
-                reviewer: {
-                    value: undefined,
-                    valid: false,
-                },
-                milestoneLeadLink: {
-                    value: undefined,
-                    valid: false,
-                },
-                reviewTime: {
-                    value: undefined,
-                    valid: false,
-                },
-                paymentSource: {
-                    value: undefined,
-                    valid: false,
-                },
-                payRecipient: {
-                    value: undefined,
-                    valid: false,
-                },
-                payValue: {
-                    value: undefined,
-                    valid: false,
-                },
-                payDelay: {
-                    value: undefined,
-                    valid: false,
-                },
-                payData: undefined,
-                valid: false,
-            });
+            this.clearProposalState();
         }
+        this.props.onHide();
     }
 
     onRemove() {
         if (this.props.milestone.id !== undefined) {
-            this.props.remove(this.props.milestone.id);
+            this.props.remove(this.props.milestoneTrackerAddress, this.props.milestone.id);
             this.props.onHide();
         }
+    }
+
+    onCancel() {
+        this.clearProposalState();
+        this.props.onHide();
+    }
+
+    clearProposalState() {
+        this.setState({
+            payDescription: {
+                value: undefined,
+                valid: false,
+            },
+            description: {
+                value: undefined,
+                valid: false,
+            },
+            url: {
+                value: undefined,
+                valid: false,
+            },
+            minCompletionDate: {
+                value: moment(),
+                valid: false,
+            },
+            maxCompletionDate: {
+                value: moment().add(3, "months"),
+                valid: false,
+            },
+            reviewer: {
+                value: undefined,
+                valid: false,
+            },
+            milestoneLeadLink: {
+                value: undefined,
+                valid: false,
+            },
+            reviewTime: {
+                value: undefined,
+                valid: false,
+            },
+            paymentSource: {
+                value: undefined,
+                valid: false,
+            },
+            payRecipient: {
+                value: undefined,
+                valid: false,
+            },
+            payValue: {
+                value: undefined,
+                valid: false,
+            },
+            payDelay: {
+                value: undefined,
+                valid: false,
+            },
+            valid: false,
+        });
     }
 
     render() {
@@ -158,7 +172,6 @@ class MilestoneDetailEditable extends React.Component {
             <Modal
               show={this.props.show}
               onHide={this.props.onHide}
-              onExiting={this.onSave}
             >
                 <Modal.Header closeButton>
                     <Modal.Title>
@@ -264,7 +277,10 @@ class MilestoneDetailEditable extends React.Component {
                         )
                         : ""
                     }
-                    <Button onClick={this.props.onHide}>Close</Button>
+                    {this.props.milestone.id === undefined &&
+                    <Button bsStyle="danger" className="pull-left" onClick={this.onCancel}>Cancel</Button>
+                    }
+                    <Button onClick={this.onSave}>Save</Button>
                 </Modal.Footer>
             </Modal>
         );
@@ -296,8 +312,8 @@ MilestoneDetailEditable.propTypes = {
             PropTypes.number,
             PropTypes.string,
         ]),
-        payData: PropTypes.string,
     }),
+    milestoneTrackerAddress: PropTypes.string.isRequired,
     onHide: PropTypes.func.isRequired,
     show: PropTypes.bool.isRequired,
     save: PropTypes.func.isRequired,

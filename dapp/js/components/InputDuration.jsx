@@ -25,7 +25,8 @@ class InputDuration extends React.Component {
     }
 
     componentWillMount() {
-        this.inputChanged(this.props.value);
+        const val = this.props.value;
+        this.props.onChange(this.props.name, val, isNumeric(val));
     }
 
     onChange(event) {

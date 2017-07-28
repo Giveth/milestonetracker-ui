@@ -30,6 +30,7 @@ class MilestoneDetail extends React.Component {
         const payDelay = moment.duration(this.props.milestone.payDelay, "s");
         const earliestPayTime = this.props.milestone.paymentInfo ?
             moment.unix(this.props.milestone.paymentInfo.earliestPayTime) : null;
+        const wordBreak = "break-all";
 
         const data = [
             {
@@ -55,6 +56,7 @@ class MilestoneDetail extends React.Component {
                       href={`${ network.etherscan }address/${ this.props.milestone.paymentSource }`}
                       target="_blank"
                       rel="noopener noreferrer"
+                      style={{ wordBreak }}
                     >
                         {this.props.milestone.paymentSource}
                     </a>),
@@ -66,6 +68,7 @@ class MilestoneDetail extends React.Component {
                       href={`${ network.etherscan }address/${ this.props.milestone.payRecipient }`}
                       target="_blank"
                       rel="noopener noreferrer"
+                      style={{ wordBreak }}
                     >
                         {this.props.milestone.paymentSource}
                     </a>),
@@ -89,6 +92,7 @@ class MilestoneDetail extends React.Component {
                       href={`${ network.etherscan }address/${ this.props.milestone.reviewer }`}
                       target="_blank"
                       rel="noopener noreferrer"
+                      style={{ wordBreak }}
                     >
                         {this.props.milestone.reviewer}
                     </a>),
@@ -100,6 +104,7 @@ class MilestoneDetail extends React.Component {
                       href={this.props.milestone.url}
                       target="_blank"
                       rel="noopener noreferrer"
+                      style={{ wordBreak }}
                     >
                         {this.props.milestone.url}
                     </a>),

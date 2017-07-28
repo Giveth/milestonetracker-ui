@@ -2,12 +2,15 @@ import { connect } from "react-redux";
 import Component from "../components/MilestoneDetailEditable";
 import * as actions from "../actions/milestoneActions";
 
-const mapStateToProps = () => ({
-});
+const mapStateToProps = () => ({});
 
 const mapDispatchToProps = dispatch => ({
-    save: (data) => { dispatch(actions.saveMilestone(data)); },
-    remove: (id) => { dispatch(actions.removeMilestone(id)); },
+    save: (data) => {
+        dispatch(actions.saveMilestone(data));
+    },
+    remove: (milestoneTrackerAddress, id) => {
+        dispatch(actions.removeMilestone(milestoneTrackerAddress, id));
+    },
 });
 
 const MilestoneDetailEditable = connect(

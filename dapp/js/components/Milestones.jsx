@@ -16,7 +16,7 @@ const Milestones = props => (
         <Well style={{ padding: "5pt" }}>
             {props.milestones.map(milestone => (
                 <Milestone
-                  key={milestone.payData}
+                  key={milestone.id}
                   milestone={milestone}
                   milestoneTrackerAddress={props.milestoneTrackerAddress}
                   editable={props.editable}
