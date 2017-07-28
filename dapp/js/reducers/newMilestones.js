@@ -61,6 +61,16 @@ const newMilestones = (state = {}, action) => {
         return state;
     }
 
+    case types.MILESTONE_NEW_CLEAR: {
+        const mutation = {};
+        mutation[ action.milestoneTrackerAddress ] = {
+            milestones: [],
+            valid: true,
+        };
+
+        return Object.assign({}, state, mutation);
+    }
+
     default:
         return state;
     }

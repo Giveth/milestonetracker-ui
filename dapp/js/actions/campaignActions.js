@@ -1,5 +1,7 @@
 import MilestoneTracker from "milestonetracker";
 import { network, web3 } from "../blockchain";
+import { clearMilestones } from "./milestoneActions";
+import store from "../store";
 
 export const donate = (idCampaign, owner, value) => () => {
     network.directory.donate({ idCampaign, owner, value });
@@ -21,11 +23,12 @@ export const rejectMilestones = (milestoneTrackerAddress, action) => () => {
     milestoneTracker.unproposeMilestones({ from: action[ 0 ].account });
 };
 
-export const proposeNewMilestones = (milestoneTrackerAddress, milestones, action) => () => {
+export const proposeNewMilestones = (milestoneTrackerAddress, milestones, action) => {
     const milestoneTracker = new MilestoneTracker(web3, milestoneTrackerAddress);
     milestoneTracker.proposeMilestones(
         {
             newMilestones: Object.assign({}, milestones),
             from: action[ 0 ].account,
         });
+    store.dispatch(clearMilestones(milestoneTrackerAddress));
 };

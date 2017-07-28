@@ -78,3 +78,8 @@ export const removeMilestone = (milestoneTrackerAddress, id) => ({
     id,
     milestoneTrackerAddress,
 });
+
+export const clearMilestones = milestoneTrackerAddress => ({
+    type: types.MILESTONE_NEW_CLEAR,
+    milestoneTrackerAddress,
+});
