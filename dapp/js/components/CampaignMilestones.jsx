@@ -69,11 +69,31 @@ export default function CampaignMilestones(props) {
         milestoneCategories.unshift({
             title: "Proposed milestones",
             milestones: props.milestoneTracker.proposedMilestones ?
-                props.milestoneTracker.proposedMilestones.map((milestone, index) => {
-                    const mlstn = milestone;
-                    mlstn.id = index;
-                    return mlstn;
-                }) : [],
+                // filter out inProgressMilestones. We currently add the inProgress
+                // milestones to the proposal as there is no way to add new milestones
+                // to the milestone tracker w/o canceling the current inProgress milestones.
+                // this is a hack to get around that, but we don't want to display this in
+                // the ui
+                props.milestoneTracker.proposedMilestones
+                    .filter(milestone => milestoneCategories[ 0 ].milestones.findIndex(m =>
+                        milestone.payData === m.payData &&
+                        milestone.payDescription === m.payDescription &&
+                        milestone.payRecipient === m.payRecipient &&
+                        milestone.payDelay === m.payDelay &&
+                        milestone.description === m.description &&
+                        milestone.doneTime === m.doneTime &&
+                        milestone.minCompletionDate === m.minCompletionDate &&
+                        milestone.maxCompletionDate === m.maxCompletionDate &&
+                        milestone.milestoneLeadLink === m.milestoneLeadLink &&
+                        milestone.paymentSource === m.paymentSource &&
+                        milestone.url === m.url &&
+                        milestone.reviewer === m.reviewer &&
+                        milestone.reviewTime === m.reviewTime))
+                    .map((milestone, index) => {
+                        const mlstn = milestone;
+                        mlstn.id = index;
+                        return mlstn;
+                    }) : [],
             buttons: buttonsProposed,
         });
     }
@@ -104,6 +124,7 @@ export default function CampaignMilestones(props) {
                   action={[ { account: props.milestoneTracker.recipient } ]}
                   milestoneTrackerAddress={props.milestoneTrackerAddress}
                   milestones={milestonesNew}
+                  inProgressMilestones={milestoneCategories.find(m => m.title === "In Progress").milestones || []}
                   disabled={!(campaignMilestones.valid && props.givethDirectoryLoaded)}
                 />);
         }

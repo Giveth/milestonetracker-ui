@@ -40,19 +40,23 @@ export const rejectMilestones = (milestoneTrackerAddress, action) => (dispatch) 
     });
 };
 
-export const proposeNewMilestones = (milestoneTrackerAddress, milestones, action) => (dispatch) => {
-    const milestoneTracker = new MilestoneTracker(web3, milestoneTrackerAddress);
-    milestoneTracker.proposeMilestones(
-        {
-            newMilestones: Object.assign({}, milestones),
-            from: action[ 0 ].account,
-        },
-    ).then((txHash) => {
-        dispatch(newTransaction(txHash));
+export const proposeNewMilestones =
+    (milestoneTrackerAddress, milestones, inProgressMilestones, action) => (dispatch) => {
+        const milestoneTracker = new MilestoneTracker(web3, milestoneTrackerAddress);
 
-        web3.eth.getTransactionReceiptMined(txHash)
-            .then(dispatch(transactionMined(txHash)));
-    });
+        // a hack to allow a recipient to add new milestones w/o canceling current
+        // inProcess milestones
+        milestoneTracker.proposeMilestones(
+            {
+                newMilestones: Object.assign({}, [ ...milestones, ...inProgressMilestones ]),
+                from: action[ 0 ].account,
+            },
+        ).then((txHash) => {
+            dispatch(newTransaction(txHash));
 
-    dispatch(clearMilestones(milestoneTrackerAddress));
-};
+            web3.eth.getTransactionReceiptMined(txHash)
+                .then(dispatch(transactionMined(txHash)));
+        });
+
+        dispatch(clearMilestones(milestoneTrackerAddress));
+    };

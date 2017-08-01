@@ -13,7 +13,7 @@ export default function ButtonProposeNewMilestones(props) {
             return mlstn;
         });
         props.proposeNewMilestones(
-            props.milestoneTrackerAddress, mlstns, props.action,
+            props.milestoneTrackerAddress, mlstns, props.inProgressMilestones, props.action,
         );
     };
     return (
@@ -27,34 +27,37 @@ export default function ButtonProposeNewMilestones(props) {
     );
 }
 
+const milestone = PropTypes.shape({
+    payDescription: PropTypes.string,
+    description: PropTypes.string,
+    minCompletionDate: MomentTypes.momentObj.isRequired,
+    maxCompletionDate: MomentTypes.momentObj.isRequired,
+    payDelay: PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.string,
+    ]),
+    paymentSource: PropTypes.string,
+    reviewTime: PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.string,
+    ]),
+    doneTime: PropTypes.number,
+    reviewer: PropTypes.string,
+    url: PropTypes.string,
+    id: PropTypes.number,
+    milestoneLeadLink: PropTypes.string,
+    payRecipient: PropTypes.string,
+    payValue: PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.string,
+    ]),
+});
+
 ButtonProposeNewMilestones.propTypes = {
     proposeNewMilestones: PropTypes.func.isRequired,
     milestoneTrackerAddress: PropTypes.string.isRequired,
-    milestones: PropTypes.arrayOf(PropTypes.shape({
-        payDescription: PropTypes.string,
-        description: PropTypes.string,
-        minCompletionDate: MomentTypes.momentObj.isRequired,
-        maxCompletionDate: MomentTypes.momentObj.isRequired,
-        payDelay: PropTypes.oneOfType([
-            PropTypes.number,
-            PropTypes.string,
-        ]),
-        paymentSource: PropTypes.string,
-        reviewTime: PropTypes.oneOfType([
-            PropTypes.number,
-            PropTypes.string,
-        ]),
-        doneTime: PropTypes.number,
-        reviewer: PropTypes.string,
-        url: PropTypes.string,
-        id: PropTypes.number,
-        milestoneLeadLink: PropTypes.string,
-        payRecipient: PropTypes.string,
-        payValue: PropTypes.oneOfType([
-            PropTypes.number,
-            PropTypes.string,
-        ]),
-    })).isRequired,
+    milestones: PropTypes.arrayOf(milestone).isRequired,
+    inProgressMilestones: PropTypes.arrayOf(milestone).isRequired,
     disabled: PropTypes.bool,
     action: PropTypes.arrayOf(PropTypes.shape({
         account: PropTypes.string.isRequired,
