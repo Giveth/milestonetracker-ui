@@ -76,19 +76,18 @@ export default function CampaignMilestones(props) {
                 // the ui
                 props.milestoneTracker.proposedMilestones
                     .filter(milestone => milestoneCategories[ 0 ].milestones.findIndex(m =>
-                        milestone.payData === m.payData &&
-                        milestone.payDescription === m.payDescription &&
-                        milestone.payRecipient === m.payRecipient &&
-                        milestone.payDelay === m.payDelay &&
-                        milestone.description === m.description &&
-                        milestone.doneTime === m.doneTime &&
-                        milestone.minCompletionDate === m.minCompletionDate &&
-                        milestone.maxCompletionDate === m.maxCompletionDate &&
-                        milestone.milestoneLeadLink === m.milestoneLeadLink &&
-                        milestone.paymentSource === m.paymentSource &&
-                        milestone.url === m.url &&
-                        milestone.reviewer === m.reviewer &&
-                        milestone.reviewTime === m.reviewTime))
+                            milestone.payData === m.payData &&
+                            milestone.payDescription === m.payDescription &&
+                            milestone.payRecipient === m.payRecipient &&
+                            milestone.payDelay === m.payDelay &&
+                            milestone.description === m.description &&
+                            milestone.minCompletionDate === m.minCompletionDate &&
+                            milestone.maxCompletionDate === m.maxCompletionDate &&
+                            milestone.milestoneLeadLink === m.milestoneLeadLink &&
+                            milestone.paymentSource === m.paymentSource &&
+                            milestone.url === m.url &&
+                            milestone.reviewer === m.reviewer &&
+                            milestone.reviewTime === m.reviewTime) === -1)
                     .map((milestone, index) => {
                         const mlstn = milestone;
                         mlstn.id = index;
