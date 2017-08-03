@@ -14,7 +14,9 @@ export const arbitrateApproveCompleted =
         ).then((txHash) => {
             dispatch(newTransaction(txHash));
             web3.eth.getTransactionReceiptMined(txHash)
-                .then(dispatch(transactionMined(txHash)));
+                .then(() => {
+                    dispatch(transactionMined(txHash));
+                });
         });
     };
 
@@ -28,7 +30,9 @@ export const cancel = (milestoneTrackerAddress, milestoneID, action) => (dispatc
     ).then((txHash) => {
         dispatch(newTransaction(txHash));
         web3.eth.getTransactionReceiptMined(txHash)
-            .then(dispatch(transactionMined(txHash)));
+            .then(() => {
+                dispatch(transactionMined(txHash));
+            });
     });
 };
 
@@ -42,7 +46,9 @@ export const markCompleted = (milestoneTrackerAddress, milestoneID, action) => (
     ).then((txHash) => {
         dispatch(newTransaction(txHash));
         web3.eth.getTransactionReceiptMined(txHash)
-            .then(dispatch(transactionMined(txHash)));
+            .then(() => {
+                dispatch(transactionMined(txHash));
+            });
     });
 };
 
@@ -56,7 +62,9 @@ export const approveCompleted = (milestoneTrackerAddress, milestoneID, action) =
     ).then((txHash) => {
         dispatch(newTransaction(txHash));
         web3.eth.getTransactionReceiptMined(txHash)
-            .then(dispatch(transactionMined(txHash)));
+            .then(() => {
+                dispatch(transactionMined(txHash));
+            });
     });
 };
 
@@ -70,7 +78,9 @@ export const rejectCompleted = (milestoneTrackerAddress, milestoneID, action) =>
     ).then((txHash) => {
         dispatch(newTransaction(txHash));
         web3.eth.getTransactionReceiptMined(txHash)
-            .then(dispatch(transactionMined(txHash)));
+            .then(() => {
+                dispatch(transactionMined(txHash));
+            });
     });
 };
 
@@ -84,7 +94,9 @@ export const collect = (milestoneTrackerAddress, milestoneID, action) => (dispat
     ).then((txHash) => {
         dispatch(newTransaction(txHash));
         web3.eth.getTransactionReceiptMined(txHash)
-            .then(dispatch(transactionMined(txHash)));
+            .then(() => {
+                dispatch(transactionMined(txHash));
+            });
     });
 };
 
@@ -98,7 +110,9 @@ export const requestPayment = (milestoneTrackerAddress, milestoneID, action) => 
     ).then((txHash) => {
         dispatch(newTransaction(txHash));
         web3.eth.getTransactionReceiptMined(txHash)
-            .then(dispatch(transactionMined(txHash)));
+            .then(() => {
+                dispatch(transactionMined(txHash));
+            });
     });
 };
 

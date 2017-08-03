@@ -9,7 +9,9 @@ export const donate = (idCampaign, owner, value) => (dispatch) => {
     ).then((txHash) => {
         dispatch(newTransaction(txHash));
         web3.eth.getTransactionReceiptMined(txHash)
-            .then(dispatch(transactionMined(txHash)));
+            .then(() => {
+                dispatch(transactionMined(txHash));
+            });
     });
 };
 
@@ -24,7 +26,9 @@ export const acceptMilestones = (milestoneTrackerAddress, hashOfTheProposal, act
         ).then((txHash) => {
             dispatch(newTransaction(txHash));
             web3.eth.getTransactionReceiptMined(txHash)
-                .then(dispatch(transactionMined(txHash)));
+                .then(() => {
+                    dispatch(transactionMined(txHash));
+                });
         });
     };
 
@@ -36,7 +40,9 @@ export const rejectMilestones = (milestoneTrackerAddress, action) => (dispatch) 
     ).then((txHash) => {
         dispatch(newTransaction(txHash));
         web3.eth.getTransactionReceiptMined(txHash)
-            .then(dispatch(transactionMined(txHash)));
+            .then(() => {
+                dispatch(transactionMined(txHash));
+            });
     });
 };
 
