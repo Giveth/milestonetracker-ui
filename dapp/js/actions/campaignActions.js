@@ -51,8 +51,9 @@ export const proposeNewMilestones = (milestoneTrackerAddress, milestones, action
         dispatch(newTransaction(txHash));
 
         web3.eth.getTransactionReceiptMined(txHash)
-            .then(dispatch(transactionMined(txHash)));
+            .then(() => {
+                dispatch(transactionMined(txHash));
+                dispatch(clearMilestones(milestoneTrackerAddress));
+            });
     });
-
-    dispatch(clearMilestones(milestoneTrackerAddress));
 };
