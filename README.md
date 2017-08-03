@@ -39,11 +39,8 @@ We also use [ZenHub](https://www.zenhub.com/) to provide a trello like interface
   ```bash
   cd node_modules/givethdirectory
 
-  # Start Node.js
-  node
-
-  # Load the env.js script which automatically creates example data in the blockchain
-  .load env.js
+  # run env.js script which automatically creates example data in the blockchain
+  node env.js
   ```
 
 3. Start the dev server from the milestonetracker-ui directory.
