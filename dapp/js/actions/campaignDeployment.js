@@ -479,7 +479,9 @@ const authorizeSpender = (dispatch) => {
                 dispatch(newTransaction(result));
 
                 web3.eth.getTransactionReceiptMined(result)
-                    .then(dispatch(transactionMined(result)));
+                    .then(() => {
+                        dispatch(transactionMined(result));
+                    });
 
                 dispatch(deploymentComplete('spenderAuthorization'));
                 dispatch(updateCurrentDeploymentStep('spenderAuthorization'));
