@@ -13,7 +13,6 @@ const Vault = require("vaultcontract");
 const MiniMeToken = require("minimetoken");
 const MilestoneTracker = require("milestonetracker");
 const GivethCampaign = require("givethcampaign");
-const Multisig = require("multisigwallet");
 
 const gcb = (err, res) => {
     if (err) {
@@ -28,13 +27,12 @@ const vault = [];
 const miniMeToken = [];
 const milestoneTracker = [];
 const givethCampaign = [];
-let multisig;
 
 const now = Math.floor(new Date().getTime() / 1000);
 
 // Where all the addresses are defined... if you want to show off this test, you better have these addresses
-const escapeCaller = eth.accounts[ 1 ];
-const escapeDestination = eth.accounts[ 2 ];
+const escapeHatchCaller = eth.accounts[ 1 ];
+const escapeHatchDestination = eth.accounts[ 2 ];
 const securityGuard = eth.accounts[ 3 ];
 const arbitrator = eth.accounts[ 4 ];
 const donor = eth.accounts[ 5 ];
@@ -59,8 +57,8 @@ function deployCampaign(opts, _cb) {
                     tokenName: opts.tokenName || "MiniMe Test Token",
                     decimalUnits: 18,
                     tokenSymbol: opts.tokenSymbol || "MMT",
-                    escapeCaller,
-                    escapeDestination,
+                    escapeHatchCaller,
+                    escapeHatchDestination,
                     securityGuard,
                     startFundingTime: now - 86400,
                     endFundingTime: now + (86400 * 365 * 30),
@@ -138,32 +136,6 @@ function deployCampaign(opts, _cb) {
     ], cb);
 }
 
-function deployExample(_cb) {
-    const cb = _cb || gcb;
-    async.series([
-        (cb1) => {
-            GivethDirectory.deploy(web3, {}, (err, _givethDirectory) => {
-                if (err) {
-                    cb1(err);
-                    return;
-                }
-                givethDirectory = _givethDirectory;
-                console.log(`Giveth Directory: ${ givethDirectory.contract.address }`);
-                cb1();
-            });
-        },
-        (cb1) => {
-            deployCampaign({
-                tokenName: "MiniMe Test Token 0",
-                tokenSymbol: "MM0",
-                campaignName: "Global Campaign 0",
-                campaignDescription: "Kind of a Big Deal :-D",
-                campaignWeb: "http://www.giveth.io",
-            }, cb1);
-        },
-    ], cb);
-}
-
 function getRef(idx) {
     let ref = new BigNumber(idx).toString(16);
     while (ref.length < 64) ref = `0${ ref }`;
@@ -183,25 +155,6 @@ function deployExample2(_cb) {
                 }
                 givethDirectory = _givethDirectory;
                 console.log(`Giveth Directory: ${ givethDirectory.contract.address }`);
-                cb1();
-            });
-        },
-        (cb1) => {
-            Multisig.deploy(web3, {
-                owners: [
-                    eth.accounts[ 0 ],
-                    eth.accounts[ 1 ],
-                    eth.accounts[ 2 ],
-                ],
-                required: 2,
-                from: eth.accounts[ 1 ],
-            }, (err, _multisig) => {
-                if (err) {
-                    cb1(err);
-                    return;
-                }
-                multisig = _multisig;
-                console.log(`Multisig: ${ _multisig.contract.address }`);
                 cb1();
             });
         },
@@ -258,6 +211,7 @@ function deployExample2(_cb) {
                     milestoneLeadLink,
                     reviewTime: 86400 * 2,
                     paymentSource: vault[ 0 ].contract.address,
+                    payData: vault[ 0 ].contract.authorizePayment.getData("First Website", getRef(1), recipient, web3.toWei(5), 0),
                     payDescription: "First Website",
                     payRecipient: recipient,
                     payValue: new BigNumber(web3.toWei(5)),
@@ -272,6 +226,7 @@ function deployExample2(_cb) {
                     milestoneLeadLink,
                     reviewTime: 86400 * 2,
                     paymentSource: vault[ 0 ].contract.address,
+                    payData: vault[ 0 ].contract.authorizePayment.getData("Double Donations", getRef(2), recipient, web3.toWei(100), 0),
                     payDescription: "Double Donations",
                     payRecipient: recipient,
                     payValue: new BigNumber(web3.toWei(100)),
@@ -286,6 +241,7 @@ function deployExample2(_cb) {
                     milestoneLeadLink,
                     reviewTime: 86400 * 2,
                     paymentSource: vault[ 0 ].contract.address,
+                    payData: vault[ 0 ].contract.authorizePayment.getData("Hire a Brand Manager", getRef(3), recipient, web3.toWei(100), 0),
                     payDescription: "Hire a Brand Manager",
                     payRecipient: recipient,
                     payValue: new BigNumber(web3.toWei(100)),
@@ -300,6 +256,7 @@ function deployExample2(_cb) {
                     milestoneLeadLink,
                     reviewTime: 86400 * 2,
                     paymentSource: vault[ 0 ].contract.address,
+                    payData: vault[ 0 ].contract.authorizePayment.getData("Brand Manager Salary", getRef(4), recipient, web3.toWei(100), 0),
                     payDescription: "Brand Manager Salary",
                     payRecipient: recipient,
                     payValue: new BigNumber(web3.toWei(100)),
