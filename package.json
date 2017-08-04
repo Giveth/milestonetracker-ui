@@ -64,7 +64,7 @@
     "async": "^2.4.1",
     "babel-polyfill": "^6.23.0",
     "bootstrap": "^3.3.7",
-    "givethdirectory": "^0.2.1",
+    "givethdirectory": "^0.2.4",
     "milestonetracker": "^0.1.42",
     "moment": "^2.18.1",
     "multisigwallet": "0.0.3",
