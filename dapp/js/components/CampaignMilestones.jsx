@@ -46,7 +46,7 @@ export default function CampaignMilestones(props) {
         const buttonsProposed = [];
 
         if (props.milestoneTracker.actions) {
-            if (props.milestoneTracker.actions.acceptProposedMilestones) {
+            if (props.milestoneTracker.actions.acceptProposedMilestones.length > 0) {
                 buttonsProposed.push(
                     <Buttons.AcceptMilestones
                       key="acceptMilestones"
@@ -55,7 +55,7 @@ export default function CampaignMilestones(props) {
                       action={props.milestoneTracker.actions.acceptProposedMilestones}
                     />);
             }
-            if (props.milestoneTracker.actions.unproposeMilestones) {
+            if (props.milestoneTracker.actions.unproposeMilestones.length > 0) {
                 buttonsProposed.push(
                     <Buttons.RejectMilestones
                       key="rejectMilestones"
