@@ -1,5 +1,16 @@
 import Web3 from "web3";
 
+// hack to reduce metamask race conditions
+function waitForWeb3Injection(timeout) {
+    const now = new Date().getTime();
+
+    while (typeof window.web3 === "undefined" && new Date().getTime() < now + timeout) {
+        /* do nothing */
+    }
+}
+
+waitForWeb3Injection(2000);
+
 let w3;
 if ((window) && (window.web3)) {
     w3 = new Web3(window.web3.currentProvider);
