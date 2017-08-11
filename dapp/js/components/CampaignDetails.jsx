@@ -11,14 +11,14 @@ import { network } from "../blockchain";
 const CampaignDetails = (props) => {
     const general = [
         {
-            label: "Donation / Campaign Controller Address",
+            label: "Donation / Token Contract Address",
             content: (
                 <a
-                  href={`${ network.etherscan }address/${ props.campaign.token.controller }`}
+                  href={`${ network.etherscan }address/${ props.campaign.tokenAddress }`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                    {props.campaign.token.controller}
+                    {props.campaign.tokenAddress}
                 </a>
             ),
         },
@@ -35,14 +35,38 @@ const CampaignDetails = (props) => {
             ),
         },
         {
-            label: "Token Contract Address",
+            label: "Donor",
             content: (
                 <a
-                  href={`${ network.etherscan }address/${ props.campaign.tokenAddress }`}
+                  href={`${ network.etherscan }address/${ props.campaign.milestoneTracker.donor }`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                    {props.campaign.tokenAddress }
+                    {props.campaign.milestoneTracker.donor}
+                </a>
+            ),
+        },
+        {
+            label: "Recipient",
+            content: (
+                <a
+                  href={`${ network.etherscan }address/${ props.campaign.milestoneTracker.recipient }`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                    {props.campaign.milestoneTracker.recipient}
+                </a>
+            ),
+        },
+        {
+            label: "Arbitrator",
+            content: (
+                <a
+                  href={`${ network.etherscan }address/${ props.campaign.milestoneTracker.arbitrator }`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                    {props.campaign.milestoneTracker.arbitrator}
                 </a>
             ),
         },

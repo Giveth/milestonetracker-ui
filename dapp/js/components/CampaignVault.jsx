@@ -38,26 +38,26 @@ const CampaignVault = (props) => {
             ),
         },
         {
-            label: "Escape Caller's Address",
+            label: "Escape Hatch Caller's Address",
             content: (
                 <a
-                  href={`${ network.etherscan }address/${ props.vault.escapeCaller }`}
+                  href={`${ network.etherscan }address/${ props.vault.escapeHatchCaller }`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                    {props.vault.escapeCaller}
+                    {props.vault.escapeHatchCaller}
                 </a>
             ),
         },
         {
-            label: "Escape Destination",
+            label: "Escape Hatch Destination",
             content: (
                 <a
-                  href={`${ network.etherscan }address/${ props.vault.escapeDestination }`}
+                  href={`${ network.etherscan }address/${ props.vault.escapeHatchDestination }`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                    {props.vault.escapeDestination}
+                    {props.vault.escapeHatchDestination}
                 </a>
             ),
         },
