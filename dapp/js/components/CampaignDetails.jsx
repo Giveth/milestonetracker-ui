@@ -103,6 +103,11 @@ CampaignDetails.propTypes = {
             name: PropTypes.string.isRequired,
             controller: PropTypes.string.isRequired,
         }),
+        milestoneTracker: PropTypes.shape({
+            arbitrator: PropTypes.string.isRequired,
+            recipient: PropTypes.string.isRequired,
+            donor: PropTypes.string.isRequired,
+        }),
         milestoneTrackerAddress: PropTypes.string.isRequired,
     }).isRequired,
 };

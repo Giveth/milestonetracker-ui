@@ -1,5 +1,5 @@
 import React from "react";
-// import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 
 export default function Web3InfoComponent(props) {
     let content;
@@ -47,5 +47,18 @@ export default function Web3InfoComponent(props) {
 }
 
 Web3InfoComponent.propTypes = {
-    // web3state: PropTypes.object.isRequired,
+    web3state: PropTypes.shape({
+        connected: PropTypes.bool.isRequired,
+        accounts: PropTypes.arrayOf(PropTypes.shape({
+            address: PropTypes.string.isRequired,
+            balance: PropTypes.shape({}),
+        })),
+        syncing: PropTypes.bool,
+        syncStartingBlock: PropTypes.number,
+        syncCurrentBlock: PropTypes.number,
+        syncHighestBlock: PropTypes.number,
+        block: PropTypes.shape({
+            number: PropTypes.number,
+        }),
+    }).isRequired,
 };

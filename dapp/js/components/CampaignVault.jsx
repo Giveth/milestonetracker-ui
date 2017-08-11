@@ -79,13 +79,13 @@ CampaignVault.propTypes = {
     vaultAddress: PropTypes.string.isRequired,
     vault: PropTypes.shape({
         owner: PropTypes.string.isRequired,
-        escapeDestination: PropTypes.string.isRequired,
-        escapeCaller: PropTypes.string.isRequired,
-        balance: PropTypes.shape({
+        escapeHatchDestination: PropTypes.string.isRequired,
+        escapeHatchCaller: PropTypes.string.isRequired,
+        balance: PropTypes.oneOfType([ PropTypes.shape({
             c: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
             e: PropTypes.number.isRequired,
             s: PropTypes.number.isRequired,
-        }).isRequired,
+        }), PropTypes.string ]).isRequired,
     }).isRequired,
 };
 
