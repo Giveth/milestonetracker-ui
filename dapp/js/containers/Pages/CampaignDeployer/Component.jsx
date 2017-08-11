@@ -1,12 +1,11 @@
 /* eslint-disable */
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import fileDownload from 'react-file-download';
 import DeploymentResults from '../../../components/DeploymentResults';
 import Field from '../../../components/Field';
 import { deploymentActions } from '../../../constants';
 import { Form, FormGroup, ControlLabel, FormControl, Col, Row, Button, ProgressBar, Alert } from 'react-bootstrap';
-import { web3, network } from "../../../blockchain";
+import { network } from "../../../blockchain";
 
 export default class Deployer extends Component {
   constructor(props, context) {
@@ -19,18 +18,35 @@ export default class Deployer extends Component {
   }
 
   componentDidMount() {
-    if (web3.eth.accounts.length > 0) {
-      this.props.setAccount(web3.eth.accounts[0]);
-    }
-    //set default account to user current account if they are not set
-    let campaignValues = Object.assign({}, this.props.campaignValues);
-    let accountTypes = ['escapeCaller', 'securityGuard', 'donor', 'recipient']
-    for(let i=0; i<accountTypes.length; i++) {
-        if(!campaignValues[accountTypes[i]]){
-            campaignValues[accountTypes[i]] = web3.eth.accounts[0];
-        }
-    }
-    this.props.updateCampaignValues(campaignValues);
+      this.setDefaultAccounts();
+  }
+
+  componentWillReceiveProps(nextProps) {
+      const accountsChanged = this.props.accounts.length !== nextProps.accounts.length ||
+          nextProps.accounts.some((newAccount, index) => {
+              const account = this.props.accounts[ index ];
+              return newAccount.address !== account.address;
+          });
+
+      this.props = nextProps;
+      if (accountsChanged) this.setDefaultAccounts();
+  }
+
+  setDefaultAccounts() {
+      if (this.props.userAccount) return;
+
+      if (this.props.accounts && this.props.accounts.length > 0) {
+          this.props.setAccount(this.props.accounts[0].address);
+      }
+      //set default account to user current account if they are not set
+      let campaignValues = Object.assign({}, this.props.campaignValues);
+      let accountTypes = ['escapeCaller', 'securityGuard', 'donor', 'recipient'];
+      for(let i=0; i<accountTypes.length; i++) {
+          if(!campaignValues[accountTypes[i]] && this.props.accounts.length > 0){
+              campaignValues[accountTypes[i]] = this.props.accounts[0].address;
+          }
+      }
+      this.props.updateCampaignValues(campaignValues);
   }
 
   //update values to the campaign fields.
