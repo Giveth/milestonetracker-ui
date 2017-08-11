@@ -1,6 +1,8 @@
 import { EventEmitter } from "events";
 import async from "async";
 
+const BigNumber = require("bignumber.js");
+
 export default class extends EventEmitter {
     constructor(web3, listener) {
         super();
@@ -102,6 +104,22 @@ export default class extends EventEmitter {
             });
         }, 1000);
 
+        this.checkAccountsInterval = setInterval(() => {
+            const currentAccounts = this.st.accounts;
+            this.readAccounts.bind(this)((err) => {
+                if (err) return;
+
+                const update = this.st.accounts.length !== currentAccounts.length ||
+                    this.st.accounts.some((newAccount, index) => {
+                        const account = currentAccounts[ index ];
+                        return newAccount.address !== account.address ||
+                            !newAccount.balance.equals(account.balance);
+                    });
+
+                if (update) this.updateState();
+            });
+        }, 1000);
+
         async.series([
             (cb1) => {
                 this.registerSync(cb1);
@@ -116,9 +134,16 @@ export default class extends EventEmitter {
         ], cb);
     }
 
+    getAccountAddresses() {
+        return this.web3.eth.accounts.map(addr => ({
+            address: addr,
+            balance: new BigNumber(0),
+        }));
+    }
+
     reset(err = null, retry = 1) {
         this.st = {
-            accounts: [],
+            accounts: this.getAccountAddresses(),
             block: {},
             connected: false,
             error: err,
@@ -130,6 +155,10 @@ export default class extends EventEmitter {
         if (this.checkConnectionInterval) {
             clearInterval(this.checkConnectionInterval);
             this.checkConnectionInterval = null;
+        }
+        if (this.checkAccountsInterval) {
+            clearInterval(this.checkAccountsInterval);
+            this.checkAccountsInterval = null;
         }
         if (!this.retrying) {
             this.retrying = true;
