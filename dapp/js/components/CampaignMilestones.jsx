@@ -88,6 +88,19 @@ export default function CampaignMilestones(props) {
                             milestone.url === m.url &&
                             milestone.reviewer === m.reviewer &&
                             milestone.reviewTime === m.reviewTime) === -1)
+                    .filter(milestone => milestoneCategories[ 1 ].milestones.findIndex(m =>
+                        milestone.payData === m.payData &&
+                        milestone.payDescription === m.payDescription &&
+                        milestone.payRecipient === m.payRecipient &&
+                        milestone.payDelay === m.payDelay &&
+                        milestone.description === m.description &&
+                        milestone.minCompletionDate === m.minCompletionDate &&
+                        milestone.maxCompletionDate === m.maxCompletionDate &&
+                        milestone.milestoneLeadLink === m.milestoneLeadLink &&
+                        milestone.paymentSource === m.paymentSource &&
+                        milestone.url === m.url &&
+                        milestone.reviewer === m.reviewer &&
+                        milestone.reviewTime === m.reviewTime) === -1)
                     .map((milestone, index) => {
                         const mlstn = milestone;
                         mlstn.id = index;
@@ -116,6 +129,13 @@ export default function CampaignMilestones(props) {
             },
         );
 
+        const currentMilestones = milestoneCategories.reduce((mlstns, mt) => {
+            if (mt.title === "In Progress" || mt.title === "Completed and in Review") {
+                return [ ...mlstns, ...mt.milestones ];
+            }
+            return mlstns;
+        }, []);
+
         if (milestonesNew.length > 0) {
             newMilestonesButtons.push(
                 <Buttons.ProposeNewMilestones
@@ -123,7 +143,7 @@ export default function CampaignMilestones(props) {
                   action={[ { account: props.milestoneTracker.recipient } ]}
                   milestoneTrackerAddress={props.milestoneTrackerAddress}
                   milestones={milestonesNew}
-                  inProgressMilestones={milestoneCategories.find(m => m.title === "In Progress").milestones || []}
+                  currentMilestones={currentMilestones}
                   disabled={!(campaignMilestones.valid && props.givethDirectoryLoaded)}
                 />);
         }

@@ -47,14 +47,14 @@ export const rejectMilestones = (milestoneTrackerAddress, action) => (dispatch) 
 };
 
 export const proposeNewMilestones =
-    (milestoneTrackerAddress, milestones, inProgressMilestones, action) => (dispatch) => {
+    (milestoneTrackerAddress, milestones, currentMilestones, action) => (dispatch) => {
         const milestoneTracker = new MilestoneTracker(web3, milestoneTrackerAddress);
 
         // a hack to allow a recipient to add new milestones w/o canceling current
         // inProcess milestones
         milestoneTracker.proposeMilestones(
             {
-                newMilestones: Object.assign({}, [ ...milestones, ...inProgressMilestones ]),
+                newMilestones: Object.assign({}, [ ...milestones, ...currentMilestones ]),
                 from: action[ 0 ].account,
             },
         ).then((txHash) => {

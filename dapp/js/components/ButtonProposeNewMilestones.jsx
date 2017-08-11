@@ -13,7 +13,7 @@ export default function ButtonProposeNewMilestones(props) {
             return mlstn;
         });
         props.proposeNewMilestones(
-            props.milestoneTrackerAddress, mlstns, props.inProgressMilestones, props.action,
+            props.milestoneTrackerAddress, mlstns, props.currentMilestones, props.action,
         );
     };
     return (
@@ -57,7 +57,7 @@ ButtonProposeNewMilestones.propTypes = {
     proposeNewMilestones: PropTypes.func.isRequired,
     milestoneTrackerAddress: PropTypes.string.isRequired,
     milestones: PropTypes.arrayOf(milestone).isRequired,
-    inProgressMilestones: PropTypes.arrayOf(milestone).isRequired,
+    currentMilestones: PropTypes.arrayOf(milestone).isRequired,
     disabled: PropTypes.bool,
     action: PropTypes.arrayOf(PropTypes.shape({
         account: PropTypes.string.isRequired,
