@@ -1,8 +1,9 @@
 import React from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import { Alert } from "react-bootstrap";
-import { web3 } from "../blockchain";
 
-function NoAccountWarning() {
+const NoAccountWarning = (props) => {
     const style = {
         bottom: "0px",
         textAlign: "center",
@@ -13,7 +14,7 @@ function NoAccountWarning() {
     };
 
     // Some accounts
-    if (web3.eth.accounts.length > 0) return null;
+    if (props.accounts.length > 0) return null;
 
     return (
         <Alert bsStyle="warning" style={style}>
@@ -24,6 +25,16 @@ function NoAccountWarning() {
             </p>
         </Alert>
     );
-}
+};
 
-export default NoAccountWarning;
+NoAccountWarning.propTypes = {
+    accounts: PropTypes.arrayOf(PropTypes.shape({
+        address: PropTypes.string.isRequired,
+    })).isRequired,
+};
+
+const mapStateToProps = state => ({
+    accounts: state.web3.accounts,
+});
+
+export default connect(mapStateToProps)(NoAccountWarning);

@@ -115,7 +115,7 @@
 ### dapp/js/...
 * **contants.js** - export string constants  
 * **initialState.js** - module exports function returns object with keys for user account, error, campaign values, deployment status, current deployment step, completed deployments, deployment results  
-* **main.jsx** - declare web3 monitor with web3 from blockchain and render provider and routes  
+* **main.jsx** - main entry point for the dapp. declare web3 monitor with web3 from blockchain and render provider and routes  
 * **routes.jsx** - declare routes and define switch component linking paths to pages  
 * **store.js** - declare middleware with thunk and logger parameters, and declare store with reducer, initial state, and middleware parameters  
 * **validator.js** - defines website validator using regex and ethereum address validator using web3  

@@ -18,3 +18,8 @@ export const deploymentActions = {
 export const userActions = {
     SET_ACCOUNT: "SET_ACCOUNT",
 };
+export const transactionActions = {
+    NEW_TRANSATION: "NEW_TRANSACTION",
+    TRANSACTION_MINED: "TRANSACTION_MINED",
+    DISMISS_TRANSACTION: "DISMISS_TRANSACTION",
+};

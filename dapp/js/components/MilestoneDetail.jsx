@@ -70,7 +70,7 @@ class MilestoneDetail extends React.Component {
                       rel="noopener noreferrer"
                       style={{ wordBreak }}
                     >
-                        {this.props.milestone.paymentSource}
+                        {this.props.milestone.payRecipient}
                     </a>),
             },
             {
@@ -150,11 +150,11 @@ MilestoneDetail.propTypes = {
         minCompletionDate: PropTypes.number.isRequired,
         maxCompletionDate: PropTypes.number.isRequired,
         payDelay: PropTypes.number,
-        payValue: PropTypes.shape({
+        payValue: PropTypes.oneOfType([ PropTypes.shape({
             c: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
             e: PropTypes.number.isRequired,
             s: PropTypes.number.isRequired,
-        }),
+        }), PropTypes.string ]),
         paymentSource: PropTypes.string.isRequired,
         reviewTime: PropTypes.number.isRequired,
         doneTime: PropTypes.number,

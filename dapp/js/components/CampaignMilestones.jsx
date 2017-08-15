@@ -46,7 +46,7 @@ export default function CampaignMilestones(props) {
         const buttonsProposed = [];
 
         if (props.milestoneTracker.actions) {
-            if (props.milestoneTracker.actions.acceptProposedMilestones) {
+            if (props.milestoneTracker.actions.acceptProposedMilestones.length > 0) {
                 buttonsProposed.push(
                     <Buttons.AcceptMilestones
                       key="acceptMilestones"
@@ -55,7 +55,7 @@ export default function CampaignMilestones(props) {
                       action={props.milestoneTracker.actions.acceptProposedMilestones}
                     />);
             }
-            if (props.milestoneTracker.actions.unproposeMilestones) {
+            if (props.milestoneTracker.actions.unproposeMilestones.length > 0) {
                 buttonsProposed.push(
                     <Buttons.RejectMilestones
                       key="rejectMilestones"
@@ -69,11 +69,43 @@ export default function CampaignMilestones(props) {
         milestoneCategories.unshift({
             title: "Proposed milestones",
             milestones: props.milestoneTracker.proposedMilestones ?
-                props.milestoneTracker.proposedMilestones.map((milestone, index) => {
-                    const mlstn = milestone;
-                    mlstn.id = index;
-                    return mlstn;
-                }) : [],
+                // filter out inProgressMilestones. We currently add the inProgress
+                // milestones to the proposal as there is no way to add new milestones
+                // to the milestone tracker w/o canceling the current inProgress milestones.
+                // this is a hack to get around that, but we don't want to display this in
+                // the ui
+                props.milestoneTracker.proposedMilestones
+                    .filter(milestone => milestoneCategories[ 0 ].milestones.findIndex(m =>
+                            milestone.payData === m.payData &&
+                            milestone.payDescription === m.payDescription &&
+                            milestone.payRecipient === m.payRecipient &&
+                            milestone.payDelay === m.payDelay &&
+                            milestone.description === m.description &&
+                            milestone.minCompletionDate === m.minCompletionDate &&
+                            milestone.maxCompletionDate === m.maxCompletionDate &&
+                            milestone.milestoneLeadLink === m.milestoneLeadLink &&
+                            milestone.paymentSource === m.paymentSource &&
+                            milestone.url === m.url &&
+                            milestone.reviewer === m.reviewer &&
+                            milestone.reviewTime === m.reviewTime) === -1)
+                    .filter(milestone => milestoneCategories[ 1 ].milestones.findIndex(m =>
+                        milestone.payData === m.payData &&
+                        milestone.payDescription === m.payDescription &&
+                        milestone.payRecipient === m.payRecipient &&
+                        milestone.payDelay === m.payDelay &&
+                        milestone.description === m.description &&
+                        milestone.minCompletionDate === m.minCompletionDate &&
+                        milestone.maxCompletionDate === m.maxCompletionDate &&
+                        milestone.milestoneLeadLink === m.milestoneLeadLink &&
+                        milestone.paymentSource === m.paymentSource &&
+                        milestone.url === m.url &&
+                        milestone.reviewer === m.reviewer &&
+                        milestone.reviewTime === m.reviewTime) === -1)
+                    .map((milestone, index) => {
+                        const mlstn = milestone;
+                        mlstn.id = index;
+                        return mlstn;
+                    }) : [],
             buttons: buttonsProposed,
         });
     }
@@ -97,6 +129,13 @@ export default function CampaignMilestones(props) {
             },
         );
 
+        const currentMilestones = milestoneCategories.reduce((mlstns, mt) => {
+            if (mt.title === "In Progress" || mt.title === "Completed and in Review") {
+                return [ ...mlstns, ...mt.milestones ];
+            }
+            return mlstns;
+        }, []);
+
         if (milestonesNew.length > 0) {
             newMilestonesButtons.push(
                 <Buttons.ProposeNewMilestones
@@ -104,7 +143,8 @@ export default function CampaignMilestones(props) {
                   action={[ { account: props.milestoneTracker.recipient } ]}
                   milestoneTrackerAddress={props.milestoneTrackerAddress}
                   milestones={milestonesNew}
-                  disabled={!campaignMilestones.valid}
+                  currentMilestones={currentMilestones}
+                  disabled={!(campaignMilestones.valid && props.givethDirectoryLoaded)}
                 />);
         }
 
@@ -181,6 +221,7 @@ CampaignMilestones.propTypes = {
     }).isRequired,
     milestoneTrackerAddress: PropTypes.string.isRequired,
     newMilestones: PropTypes.shape({}).isRequired,
+    givethDirectoryLoaded: PropTypes.bool.isRequired,
     accounts: PropTypes.arrayOf(PropTypes.shape({
         address: PropTypes.string.isRequired,
     })).isRequired,

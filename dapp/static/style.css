@@ -55,7 +55,11 @@ CAMPAIGN DEPLOYER STYLES
 }
 
 .progress {
-  margin: 20px 0px;
+  margin: 10px 0;
+}
+
+.chain-progress-bar {
+    margin-bottom: 20px;
 }
 
 .cancel-confirmation {
@@ -76,4 +80,9 @@ CAMPAIGN DEPLOYER STYLES
 
 .next-steps {
   margin-top: 20px;
+}
+
+/* bs-notifications*/
+.body-0-19 {
+    max-width: 42em;
 }

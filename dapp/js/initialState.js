@@ -1,6 +1,9 @@
 module.exports = () => (
     {
         userAccount: "",
+        givethDirectory: {
+            loaded: false,
+        },
         error: null,
         campaignValues: {
             escapeCaller: "",

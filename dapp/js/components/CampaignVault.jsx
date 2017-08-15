@@ -38,26 +38,26 @@ const CampaignVault = (props) => {
             ),
         },
         {
-            label: "Escape Caller's Address",
+            label: "Escape Hatch Caller's Address",
             content: (
                 <a
-                  href={`${ network.etherscan }address/${ props.vault.escapeCaller }`}
+                  href={`${ network.etherscan }address/${ props.vault.escapeHatchCaller }`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                    {props.vault.escapeCaller}
+                    {props.vault.escapeHatchCaller}
                 </a>
             ),
         },
         {
-            label: "Escape Destination",
+            label: "Escape Hatch Destination",
             content: (
                 <a
-                  href={`${ network.etherscan }address/${ props.vault.escapeDestination }`}
+                  href={`${ network.etherscan }address/${ props.vault.escapeHatchDestination }`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                    {props.vault.escapeDestination}
+                    {props.vault.escapeHatchDestination}
                 </a>
             ),
         },
@@ -79,13 +79,13 @@ CampaignVault.propTypes = {
     vaultAddress: PropTypes.string.isRequired,
     vault: PropTypes.shape({
         owner: PropTypes.string.isRequired,
-        escapeDestination: PropTypes.string.isRequired,
-        escapeCaller: PropTypes.string.isRequired,
-        balance: PropTypes.shape({
+        escapeHatchDestination: PropTypes.string.isRequired,
+        escapeHatchCaller: PropTypes.string.isRequired,
+        balance: PropTypes.oneOfType([ PropTypes.shape({
             c: PropTypes.arrayOf(PropTypes.number.isRequired).isRequired,
             e: PropTypes.number.isRequired,
             s: PropTypes.number.isRequired,
-        }).isRequired,
+        }), PropTypes.string ]).isRequired,
     }).isRequired,
 };
 

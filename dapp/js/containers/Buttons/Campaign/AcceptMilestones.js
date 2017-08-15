@@ -1,15 +1,20 @@
+import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import ButtonAcceptMilestones from "../../../components/ButtonAcceptMilestones";
 import * as CampaignActions from "../../../actions/campaignActions";
 
-const mapStateToProps = () => ({
+const mapStateToProps = state => ({
+    disabled: !state.givethDirectory.loaded,
 });
 
-const mapDispatchToProps = (
-    {
-        onAcceptMilestones: CampaignActions.acceptMilestones,
-    }
-);
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators(
+        {
+            onAcceptMilestones: CampaignActions.acceptMilestones,
+        },
+        dispatch,
+    );
+}
 
 const AcceptMilestones = connect(
     mapStateToProps,
