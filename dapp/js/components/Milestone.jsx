@@ -6,7 +6,7 @@
 
 import React from "react";
 import PropTypes from "prop-types";
-import { Panel } from "react-bootstrap";
+import { Panel, Badge } from "react-bootstrap";
 import { MilestoneDetail } from "./";
 import MilestoneDetailEditable from "../containers/MilestoneDetailEditable";
 
@@ -64,7 +64,20 @@ class Milestone extends React.Component {
             // With error
             backgroundColor = "#d99696";
         }
-
+        const panelStyle = {
+            backgroundColor,
+            position: "relative",
+        };
+        const badgeStyle = {
+            float: "right",
+            marginLeft: "5",
+        };
+        let actionsNumber = 0;
+        Object.keys(this.props.milestone.actions).forEach((actionName) => {
+            if (this.props.milestone.actions[ actionName ].length > 0) {
+                actionsNumber += 1;
+            }
+        });
         return (
             <div>
                 <Panel
@@ -72,8 +85,14 @@ class Milestone extends React.Component {
                   onMouseEnter={this.onMouseEnter}
                   onMouseLeave={this.onMouseLeave}
                   onClick={this.onClick}
-                  style={{ backgroundColor }}
+                  style={panelStyle}
                 >
+                    {
+                        actionsNumber > 0 &&
+                        <Badge style={badgeStyle}>
+                            <span>{{ actionsNumber }}</span>
+                        </Badge>
+                    }
                     {this.props.milestone.payDescription !== undefined ?
                       this.props.milestone.payDescription : "The title could not be read"}
                 </Panel>
@@ -105,6 +124,7 @@ Milestone.propTypes = {
         paymentInfo: PropTypes.shape({
             paid: PropTypes.bool,
         }),
+        actions: PropTypes.shape(),
     }).isRequired,
     milestoneTrackerAddress: PropTypes.string.isRequired,
     editable: PropTypes.bool.isRequired,
