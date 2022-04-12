@@ -64,7 +64,7 @@
     "webpack-node-externals": "^1.6.0"
   },
   "dependencies": {
-    "async": "^2.4.1",
+    "async": "^3.2.2",
     "babel-polyfill": "^6.23.0",
     "bignumber.js": "^4.0.2",
     "bootstrap": "^3.3.7",
